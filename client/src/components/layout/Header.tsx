@@ -95,15 +95,14 @@ const Header = () => {
             } md:flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 mt-4 md:mt-0 absolute md:relative top-10 md:top-0 left-0 right-0 bg-white md:bg-transparent z-50 shadow-md md:shadow-none p-4 md:p-0`}
           >
             <li>
-              <Link href="/">
-                <a
-                  className={`nav-link font-medium hover:text-secondary transition-colors ${
-                    isActive("/") ? "text-secondary" : "text-primary"
-                  }`}
-                  onClick={closeMenu}
-                >
-                  Home
-                </a>
+              <Link 
+                href="/" 
+                onClick={closeMenu}
+                className={`nav-link font-medium hover:text-secondary transition-colors ${
+                  isActive("/") ? "text-secondary" : "text-primary"
+                }`}
+              >
+                Home
               </Link>
             </li>
             
@@ -149,54 +148,50 @@ const Header = () => {
             </li>
             
             <li>
-              <Link href="/events">
-                <a
-                  className={`nav-link font-medium hover:text-secondary transition-colors ${
-                    isActive("/events") ? "text-secondary" : "text-primary"
-                  }`}
-                  onClick={closeMenu}
-                >
-                  Events
-                </a>
+              <Link 
+                href="/events"
+                onClick={closeMenu}
+                className={`nav-link font-medium hover:text-secondary transition-colors ${
+                  isActive("/events") ? "text-secondary" : "text-primary"
+                }`}
+              >
+                Events
               </Link>
             </li>
             
             <li>
-              <Link href="/resources">
-                <a
-                  className={`nav-link font-medium hover:text-secondary transition-colors ${
-                    isActive("/resources") ? "text-secondary" : "text-primary"
-                  }`}
-                  onClick={closeMenu}
-                >
-                  Resources
-                </a>
+              <Link 
+                href="/resources"
+                onClick={closeMenu}
+                className={`nav-link font-medium hover:text-secondary transition-colors ${
+                  isActive("/resources") ? "text-secondary" : "text-primary"
+                }`}
+              >
+                Resources
               </Link>
             </li>
             
             <li>
-              <Link href="/news">
-                <a
-                  className={`nav-link font-medium hover:text-secondary transition-colors ${
-                    isActive("/news") ? "text-secondary" : "text-primary"
-                  }`}
-                  onClick={closeMenu}
-                >
-                  News
-                </a>
+              <Link 
+                href="/news"
+                onClick={closeMenu}
+                className={`nav-link font-medium hover:text-secondary transition-colors ${
+                  isActive("/news") ? "text-secondary" : "text-primary"
+                }`}
+              >
+                News
               </Link>
             </li>
             
             <li>
-              <Link href="/contact">
-                <a
-                  className={`nav-link font-medium hover:text-secondary transition-colors ${
-                    isActive("/contact") ? "text-secondary" : "text-primary"
-                  }`}
-                  onClick={closeMenu}
-                >
-                  Contact
-                </a>
+              <Link 
+                href="/contact"
+                onClick={closeMenu}
+                className={`nav-link font-medium hover:text-secondary transition-colors ${
+                  isActive("/contact") ? "text-secondary" : "text-primary"
+                }`}
+              >
+                Contact
               </Link>
             </li>
           </ul>
