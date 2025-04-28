@@ -624,12 +624,12 @@ const EventsPage = () => {
               </CardContent>
             </Card>
 
-            {/* Past Event 2 */}
-            <Card className="overflow-hidden">
+            {/* Past Event 2 - MoU Signing */}
+            <Card className="overflow-hidden card-3d" id="mou-signing">
               <div className="relative h-48 bg-black">
                 <img
-                  src="https://images.unsplash.com/photo-1526629342323-f96ab18a2cec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                  alt="Youth Entrepreneurship Bootcamp"
+                  src="/src/assets/images/BTV08537.JPG"
+                  alt="MoU Signing with Factor-Y CbaaS"
                   className="w-full h-full object-cover opacity-80"
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -640,26 +640,26 @@ const EventsPage = () => {
               </div>
               <CardContent className="p-4">
                 <h3 className="text-lg font-bold text-primary mb-1">
-                  Youth Entrepreneurship Bootcamp
+                  MoU Signing with Factor-Y CbaaS
                 </h3>
-                <p className="text-sm text-neutral-500 mb-2">June 5-9, 2023</p>
+                <p className="text-sm text-neutral-500 mb-2">February 17, 2025</p>
                 <div className="flex justify-between">
-                  <Link href="/events/youth-bootcamp-2023" className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors">
-                    View Highlights
+                  <Link href="/events/mou-signing-2025" className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors">
+                    View Details
                   </Link>
-                  <Link href="/resources#bootcamp-2023-resources" className="text-primary font-medium text-sm hover:text-primary/80 transition-colors">
+                  <Link href="/resources#partnerships" className="text-primary font-medium text-sm hover:text-primary/80 transition-colors">
                     Access Resources
                   </Link>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Past Event 3 */}
-            <Card className="overflow-hidden">
+            {/* Past Event 3 - Hackathon */}
+            <Card className="overflow-hidden card-3d" id="hackathon-2025">
               <div className="relative h-48 bg-black">
                 <img
-                  src="https://images.unsplash.com/photo-1559223607-a43c990c692c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                  alt="Startup Pitch Competition"
+                  src="/src/assets/images/BTV08784.JPG"
+                  alt="Innovation Hackathon 2025"
                   className="w-full h-full object-cover opacity-80"
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -670,14 +670,14 @@ const EventsPage = () => {
               </div>
               <CardContent className="p-4">
                 <h3 className="text-lg font-bold text-primary mb-1">
-                  Startup Pitch Competition
+                  Innovation Hackathon 2025
                 </h3>
-                <p className="text-sm text-neutral-500 mb-2">May 20, 2023</p>
+                <p className="text-sm text-neutral-500 mb-2">March 15-17, 2025</p>
                 <div className="flex justify-between">
-                  <Link href="/events/pitch-competition-2023" className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors">
+                  <Link href="/events/hackathon-2025" className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors">
                     View Winners
                   </Link>
-                  <Link href="/resources#pitch-2023-resources" className="text-primary font-medium text-sm hover:text-primary/80 transition-colors">
+                  <Link href="/resources#hackathon-2025-resources" className="text-primary font-medium text-sm hover:text-primary/80 transition-colors">
                     Access Resources
                   </Link>
                 </div>
@@ -700,29 +700,29 @@ const EventsPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            {/* Community Event 1 */}
-            <Card>
+            {/* Community Event 1 - NACOSTI */}
+            <Card className="card-3d">
               <CardContent className="p-4">
                 <div className="flex items-start gap-4">
                   <img
-                    src="https://kenia.go.ke/wp-content/uploads/2021/01/cropped-KENIA-Blue-Logo-Only-1.png"
-                    alt="KENIA"
+                    src="/src/assets/images/nnovat.png"
+                    alt="NACOSTI"
                     className="w-16 h-16 object-contain"
                   />
                   <div className="flex-1">
                     <h3 className="text-lg font-bold text-primary mb-1">
-                      Kenya Innovation Week
+                      NACOSTI Multisectoral Conference and Exhibition
                     </h3>
                     <p className="text-sm text-neutral-500 mb-2">
-                      December 5-9, 2023 | Nairobi, Kenya
+                      May 19-22, 2025 | Nairobi, Kenya
                     </p>
                     <p className="text-neutral-600 text-sm mb-2">
-                      A national celebration of innovation, bringing together
-                      stakeholders from across the innovation ecosystem to
-                      showcase, learn, and collaborate.
+                      Connect with researchers, innovators, and policymakers from across Kenya
+                      at this major national exhibition showcasing innovations across sectors.
+                      UEAB will be participating.
                     </p>
                     <a
-                      href="https://kenyainnovationweek.com/"
+                      href="https://www.nacosti.go.ke/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors"
@@ -734,28 +734,30 @@ const EventsPage = () => {
               </CardContent>
             </Card>
 
-            {/* Community Event 2 */}
-            <Card>
+            {/* Community Event 2 - Kenya Innovation Week */}
+            <Card className="card-3d">
               <CardContent className="p-4">
                 <div className="flex items-start gap-4">
                   <img
-                    src="https://strathmore.edu/wp-content/uploads/2018/03/Official-Strathmore-University-Logo-1.png"
-                    alt="Strathmore University"
+                    src="https://kenia.go.ke/wp-content/uploads/2021/01/cropped-KENIA-Blue-Logo-Only-1.png"
+                    alt="KENIA"
                     className="w-16 h-16 object-contain"
                   />
                   <div className="flex-1">
                     <h3 className="text-lg font-bold text-primary mb-1">
-                      Strathmore Innovation Showcase
+                      Kenya Innovation Week 2025
                     </h3>
                     <p className="text-sm text-neutral-500 mb-2">
-                      November 15, 2023 | Strathmore University, Nairobi
+                      December 1-5, 2025 | Nairobi, Kenya
                     </p>
                     <p className="text-neutral-600 text-sm mb-2">
-                      An exhibition of innovative projects and startups from
-                      Strathmore University and its partners.
+                      A national celebration of innovation, bringing together
+                      stakeholders from across the innovation ecosystem to
+                      showcase, learn, and collaborate. UEAB IEC will be exhibiting 
+                      student innovations.
                     </p>
                     <a
-                      href="https://ilabafrica.strathmore.edu/events/"
+                      href="https://kenyainnovationweek.co.ke/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors"
@@ -819,9 +821,9 @@ const EventsPage = () => {
             </div>
             <div className="md:w-1/2">
               <img
-                src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                src="/src/assets/images/IMG_3457.HEIC"
                 alt="Event space at the Innovation Hub"
-                className="rounded-lg shadow-lg w-full"
+                className="rounded-lg shadow-lg w-full h-full object-cover"
               />
             </div>
           </div>
