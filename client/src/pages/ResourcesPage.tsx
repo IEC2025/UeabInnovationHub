@@ -730,126 +730,7 @@ const ResourcesPage = () => {
               </div>
             </div>
 
-            {/* Success Story 2 */}
-            <div id="learnconnect" className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row">
-              <div className="md:w-2/5">
-                <img
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                  alt="Success Story"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="md:w-3/5 p-6">
-                <span className="bg-secondary text-white text-xs py-1 px-2 rounded-full">
-                  EdTech
-                </span>
-                <h3 className="text-xl font-bold text-primary mt-3 mb-2">
-                  LearnConnect
-                </h3>
-                <p className="text-neutral-600 mb-4">
-                  An educational platform connecting students with local tutors and
-                  providing personalized learning resources tailored to the Kenyan
-                  curriculum. The platform now has over 5,000 active users and 200
-                  tutors.
-                </p>
-                <div className="flex items-center mb-4">
-                  <img
-                    src="https://randomuser.me/api/portraits/men/32.jpg"
-                    alt="Founder"
-                    className="w-10 h-10 rounded-full mr-3"
-                  />
-                  <div>
-                    <div className="font-semibold text-primary">David Kimani</div>
-                    <div className="text-sm text-neutral-500">
-                      Education, Class of 2020
-                    </div>
-                  </div>
-                </div>
-                <Button variant="secondary" size="sm">
-                  Read Full Case Study <ArrowRight className="ml-1 h-4 w-4" />
-                </Button>
-              </div>
-            </div>
 
-            {/* Success Story 3 */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row">
-              <div className="md:w-2/5">
-                <img
-                  src="https://images.unsplash.com/photo-1536939459926-301728717817?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                  alt="Success Story"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="md:w-3/5 p-6">
-                <span className="bg-secondary text-white text-xs py-1 px-2 rounded-full">
-                  HealthTech
-                </span>
-                <h3 className="text-xl font-bold text-primary mt-3 mb-2">
-                  MediConnect
-                </h3>
-                <p className="text-neutral-600 mb-4">
-                  A telemedicine platform that connects rural patients with healthcare 
-                  professionals. The startup was developed by medical students at UEAB 
-                  and has facilitated over 2,000 consultations.
-                </p>
-                <div className="flex items-center mb-4">
-                  <img
-                    src="https://randomuser.me/api/portraits/women/68.jpg"
-                    alt="Founder"
-                    className="w-10 h-10 rounded-full mr-3"
-                  />
-                  <div>
-                    <div className="font-semibold text-primary">Sarah Otieno</div>
-                    <div className="text-sm text-neutral-500">
-                      Medicine, Class of 2021
-                    </div>
-                  </div>
-                </div>
-                <Button variant="secondary" size="sm">
-                  Read Full Case Study <ArrowRight className="ml-1 h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-
-            {/* Success Story 4 */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row">
-              <div className="md:w-2/5">
-                <img
-                  src="https://images.unsplash.com/photo-1587613864521-85a9a6dddb4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                  alt="Success Story"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="md:w-3/5 p-6">
-                <span className="bg-secondary text-white text-xs py-1 px-2 rounded-full">
-                  CleanTech
-                </span>
-                <h3 className="text-xl font-bold text-primary mt-3 mb-2">
-                  EcoWaste Solutions
-                </h3>
-                <p className="text-neutral-600 mb-4">
-                  An innovative waste management company that converts organic waste 
-                  into affordable, eco-friendly fertilizer for farmers. The company now 
-                  processes 5 tons of waste daily.
-                </p>
-                <div className="flex items-center mb-4">
-                  <img
-                    src="https://randomuser.me/api/portraits/men/45.jpg"
-                    alt="Founder"
-                    className="w-10 h-10 rounded-full mr-3"
-                  />
-                  <div>
-                    <div className="font-semibold text-primary">John Omondi</div>
-                    <div className="text-sm text-neutral-500">
-                      Environmental Science, Class of 2018
-                    </div>
-                  </div>
-                </div>
-                <Button variant="secondary" size="sm">
-                  Read Full Case Study <ArrowRight className="ml-1 h-4 w-4" />
-                </Button>
-              </div>
-            </div>
           </div>
 
           <div className="text-center mt-12">
@@ -875,7 +756,7 @@ const ResourcesPage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {/* Partner Resource 1 */}
             <Card>
               <CardHeader className="pb-2">
@@ -885,7 +766,7 @@ const ResourcesPage = () => {
               <CardContent>
                 <div className="flex items-center justify-center mb-4">
                   <img
-                    src="https://kenia.go.ke/wp-content/uploads/2021/01/cropped-KENIA-Blue-Logo-Only-1.png"
+                    src="/src/assets/images/20241127_112142.jpg"
                     alt="KENIA"
                     className="h-16 object-contain"
                   />
@@ -911,7 +792,7 @@ const ResourcesPage = () => {
               <CardContent>
                 <div className="flex items-center justify-center mb-4">
                   <img
-                    src="https://nacosti.go.ke/wp-content/themes/nacosti-theme/images/logo-footer.png"
+                    src="/src/assets/images/NACOSTI-Logo-.webp"
                     alt="NACOSTI"
                     className="h-16 object-contain"
                   />
@@ -923,32 +804,6 @@ const ResourcesPage = () => {
                 <Button variant="outline" className="w-full" asChild>
                   <a href="https://nacosti.go.ke/" target="_blank" rel="noopener noreferrer">
                     Access Database <ExternalLink className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Partner Resource 3 */}
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-xl">iLab Africa Resources</CardTitle>
-                <CardDescription>Strathmore University</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-center mb-4">
-                  <img
-                    src="https://strathmore.edu/wp-content/uploads/2018/03/Official-Strathmore-University-Logo-1.png"
-                    alt="Strathmore University"
-                    className="h-16 object-contain"
-                  />
-                </div>
-                <p className="text-neutral-600 text-sm mb-4">
-                  Educational resources, research papers, and case studies from 
-                  Strathmore University's innovation and entrepreneurship center.
-                </p>
-                <Button variant="outline" className="w-full" asChild>
-                  <a href="https://ilabafrica.strathmore.edu/resources/" target="_blank" rel="noopener noreferrer">
-                    View Resources <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
               </CardContent>

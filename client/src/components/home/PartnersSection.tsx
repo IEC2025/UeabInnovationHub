@@ -1,11 +1,11 @@
 // Import partner logos
 import universityLogo from "/src/assets/images/logos/university-logo.png";
-import keniaLogo from "/src/assets/images/logos/kenia-logo.webp";
+import keniaImage from "/src/assets/images/20241127_112142.jpg";
 import huaweiLogo from "/src/assets/images/logos/huawei-logo.jpg";
 import factoryLogo from "/src/assets/images/logos/factory-logo.jpeg";
 import microsoftLogo from "/src/assets/images/logos/microsoft-logo.png";
 import kipiLogo from "/src/assets/images/logos/kipi-logo.webp";
-import nacostiLogo from "/src/assets/images/logos/nacosti-logo.webp";
+import nacostiImage from "/src/assets/images/NACOSTI-Logo-.webp";
 
 const PartnersSection = () => {
   return (
@@ -37,7 +37,7 @@ const PartnersSection = () => {
           {/* Partner: KeNIA */}
           <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
             <img
-              src={keniaLogo}
+              src={keniaImage}
               alt="Kenya National Innovation Agency"
               className="max-h-16 object-contain"
             />
@@ -82,7 +82,7 @@ const PartnersSection = () => {
           {/* Partner: NACOSTI */}
           <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
             <img
-              src={nacostiLogo}
+              src={nacostiImage}
               alt="National Commission for Science, Technology and Innovation"
               className="max-h-16 object-contain"
             />
