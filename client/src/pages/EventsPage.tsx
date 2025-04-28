@@ -335,10 +335,10 @@ const EventsPage = () => {
                   id="design-thinking-workshop"
                   title="Design Thinking Workshop"
                   type="Workshop"
-                  date="September 15, 2023"
+                  date="October 2, 2025"
                   time="2:00 PM - 5:00 PM"
                   location="Innovation Hub, UEAB Main Campus"
-                  image="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                  image="/src/assets/images/kiw-image2.jpg"
                   description="Learn how to apply design thinking principles to solve real-world problems and create innovative solutions."
                   tags={["Design Thinking", "Innovation", "Problem Solving"]}
                   attendees="20 spots left"
@@ -349,10 +349,10 @@ const EventsPage = () => {
                   id="funding-opportunities"
                   title="Funding Opportunities for Startups"
                   type="Seminar"
-                  date="September 22, 2023"
+                  date="October 10, 2025"
                   time="10:00 AM - 12:00 PM"
                   location="Virtual Event (Zoom)"
-                  image="https://images.unsplash.com/photo-1565514020179-026bfa35c1d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                  image="/src/assets/images/b13e6371-2321-4999-8c72-b9605fc3d954.jpg"
                   description="Discover various funding options available for early-stage startups and how to prepare winning grant applications."
                   tags={["Funding", "Grants", "Startup Finance"]}
                   attendees="Unlimited"
@@ -363,10 +363,10 @@ const EventsPage = () => {
                   id="business-model-canvas"
                   title="Business Model Canvas Workshop"
                   type="Workshop"
-                  date="October 5, 2023"
+                  date="October 15, 2025"
                   time="1:00 PM - 4:00 PM"
                   location="Business School, Room 205"
-                  image="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                  image="/src/assets/images/755356b5-7392-4d66-bf4a-c28d811a7bef.jpg"
                   description="A hands-on workshop to help entrepreneurs develop and refine their business models using the Business Model Canvas framework."
                   tags={["Business Model", "Startup", "Strategic Planning"]}
                   attendees="15 spots left"
@@ -377,11 +377,11 @@ const EventsPage = () => {
                   id="mentorship-kickoff"
                   title="Mentorship Program Kickoff"
                   type="Networking"
-                  date="October 12, 2023"
+                  date="October 20, 2025"
                   time="3:00 PM - 5:00 PM"
                   location="Innovation Hub, UEAB Main Campus"
-                  image="https://images.unsplash.com/photo-1475506631979-72412c606f4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                  description="The official launch of our fall mentorship program, bringing together mentors and mentees for an introduction and networking session."
+                  image="/src/assets/images/9b7a2b45-2f5c-4113-9691-a7cec187e26e.jpg"
+                  description="The official launch of our mentorship program, bringing together mentors and mentees for an introduction and networking session."
                   tags={["Mentorship", "Networking", "Professional Development"]}
                   attendees="By invitation only"
                 />
@@ -391,10 +391,10 @@ const EventsPage = () => {
                   id="digital-marketing"
                   title="Digital Marketing for Startups"
                   type="Workshop"
-                  date="October 18, 2023"
+                  date="October 30, 2025"
                   time="2:00 PM - 5:00 PM"
                   location="Innovation Hub, UEAB Main Campus"
-                  image="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                  image="/src/assets/images/slide8-550x500.jpg"
                   description="Learn effective digital marketing strategies tailored for startups with limited budgets. Covers social media, content marketing, and analytics."
                   tags={["Digital Marketing", "Startup Growth", "Social Media"]}
                   attendees="25 spots left"
@@ -405,10 +405,10 @@ const EventsPage = () => {
                   id="product-development"
                   title="From Idea to Product: Development Workshop"
                   type="Workshop"
-                  date="October 25, 2023"
+                  date="November 5, 2025"
                   time="9:00 AM - 4:00 PM"
                   location="Engineering Building, Lab 3"
-                  image="https://images.unsplash.com/photo-1581092160607-ee22621dd758?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                  image="/src/assets/images/BTV08793.JPG"
                   description="A full-day workshop on product development, from concept validation to prototyping and testing. Includes hands-on activities."
                   tags={["Product Development", "Prototyping", "Innovation"]}
                   attendees="12 spots left"
@@ -594,12 +594,12 @@ const EventsPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Past Event 1 */}
-            <Card className="overflow-hidden">
+            {/* Past Event 1 - Innovation Week 2024 */}
+            <Card className="overflow-hidden card-3d" id="innovation-week-2024">
               <div className="relative h-48 bg-black">
                 <img
-                  src="https://images.unsplash.com/photo-1540317580384-e5d43867caa6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                  alt="Innovation Summit 2022"
+                  src="/src/assets/images/BTV08785.JPG"
+                  alt="1st Innovation Week 2024"
                   className="w-full h-full object-cover opacity-80"
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -610,14 +610,14 @@ const EventsPage = () => {
               </div>
               <CardContent className="p-4">
                 <h3 className="text-lg font-bold text-primary mb-1">
-                  Innovation Summit 2022
+                  1st Innovation and Entrepreneurship Week
                 </h3>
-                <p className="text-sm text-neutral-500 mb-2">August 12-13, 2022</p>
+                <p className="text-sm text-neutral-500 mb-2">November 4-7, 2024</p>
                 <div className="flex justify-between">
-                  <Link href="/events/innovation-summit-2022" className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors">
+                  <Link href="/events/innovation-week-2024" className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors">
                     View Highlights
                   </Link>
-                  <Link href="/resources#summit-2022-resources" className="text-primary font-medium text-sm hover:text-primary/80 transition-colors">
+                  <Link href="/resources#innovation-week-2024-resources" className="text-primary font-medium text-sm hover:text-primary/80 transition-colors">
                     Access Resources
                   </Link>
                 </div>
