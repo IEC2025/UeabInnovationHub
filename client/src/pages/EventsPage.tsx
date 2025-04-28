@@ -126,12 +126,12 @@ const EventsPage = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Featured Event 1 */}
-            <Card className="overflow-hidden" id="design-thinking">
+            {/* Featured Event 1 - 2nd Innovation and Entrepreneurship Week */}
+            <Card className="overflow-hidden card-3d" id="innovation-week-2025">
               <div className="relative h-60">
                 <img
                   src="https://images.unsplash.com/photo-1540317580384-e5d43867caa6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-                  alt="Annual Innovation Summit"
+                  alt="2nd Innovation and Entrepreneurship Week"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
@@ -139,9 +139,9 @@ const EventsPage = () => {
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
                   <h3 className="text-white text-xl font-bold">
-                    Annual Innovation Summit 2023
+                    2nd Innovation and Entrepreneurship Week 2025
                   </h3>
-                  <p className="text-white/80">A gathering of innovators and industry leaders</p>
+                  <p className="text-white/80">A week of innovation, workshops, and networking</p>
                 </div>
               </div>
               <CardContent className="p-6">
@@ -151,82 +151,9 @@ const EventsPage = () => {
                       <Calendar className="h-5 w-5" />
                     </div>
                     <div>
-                      <div className="font-medium">October 15-16, 2023</div>
+                      <div className="font-medium">September 25-29, 2025</div>
                       <div className="text-sm text-neutral-500 flex items-center">
-                        <Clock className="h-3 w-3 mr-1" /> 8:00 AM - 5:00 PM
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="bg-secondary/10 text-secondary rounded-lg p-3 mr-3">
-                      <MapPin className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <div className="font-medium">UEAB Main Auditorium</div>
-                      <div className="text-sm text-neutral-500">On-campus</div>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-neutral-600 mb-4">
-                  Join us for our flagship event bringing together innovators,
-                  entrepreneurs, investors, and industry leaders for two days of
-                  inspiration, learning, and networking. Features keynote
-                  speeches, panel discussions, startup showcases, and workshops.
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full">
-                    Innovation
-                  </span>
-                  <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full">
-                    Entrepreneurship
-                  </span>
-                  <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full">
-                    Networking
-                  </span>
-                  <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full">
-                    Industry Insights
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center">
-                    <Users className="h-5 w-5 text-neutral-500 mr-2" />
-                    <span className="text-neutral-500">Limited to 200 attendees</span>
-                  </div>
-                  <Button className="bg-primary hover:bg-primary/90">
-                    Register Now
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Featured Event 2 */}
-            <Card className="overflow-hidden" id="entrepreneur-mixer">
-              <div className="relative h-60">
-                <img
-                  src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-                  alt="Entrepreneur Mixer"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
-                  Featured
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                  <h3 className="text-white text-xl font-bold">
-                    Entrepreneur Mixer: Connect & Collaborate
-                  </h3>
-                  <p className="text-white/80">Build valuable relationships with fellow entrepreneurs</p>
-                </div>
-              </div>
-              <CardContent className="p-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
-                  <div className="flex items-center">
-                    <div className="bg-primary/10 text-primary rounded-lg p-3 mr-3">
-                      <Calendar className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <div className="font-medium">September 30, 2023</div>
-                      <div className="text-sm text-neutral-500 flex items-center">
-                        <Clock className="h-3 w-3 mr-1" /> 4:00 PM - 7:00 PM
+                        <Clock className="h-3 w-3 mr-1" /> All Day Events
                       </div>
                     </div>
                   </div>
@@ -241,30 +168,105 @@ const EventsPage = () => {
                   </div>
                 </div>
                 <p className="text-neutral-600 mb-4">
-                  Connect with fellow entrepreneurs, investors, and industry
-                  experts in this networking event designed to build valuable
-                  relationships. The evening will include structured networking
-                  activities, lightning pitches, and opportunities for meaningful
-                  connections.
+                  Join us for a week-long celebration of innovation and entrepreneurship. 
+                  This flagship event brings together students, faculty, industry leaders, 
+                  and investors for workshops, panel discussions, startup showcases, and 
+                  networking opportunities designed to foster innovation and collaboration.
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full">
+                    Innovation
+                  </span>
+                  <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full">
+                    Entrepreneurship
+                  </span>
                   <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full">
                     Networking
                   </span>
                   <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full">
-                    Collaboration
-                  </span>
-                  <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full">
-                    Business Development
+                    Workshops
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <div className="flex items-center">
                     <Users className="h-5 w-5 text-neutral-500 mr-2" />
-                    <span className="text-neutral-500">50 spots available</span>
+                    <span className="text-neutral-500">Registration opening soon</span>
                   </div>
-                  <Button className="bg-primary hover:bg-primary/90">
-                    Register Now
+                  <Button className="bg-primary hover:bg-primary/90 rotate-3d">
+                    Register Interest
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Featured Event 2 - NACOSTI Conference */}
+            <Card className="overflow-hidden card-3d" id="nacosti-conference-2025">
+              <div className="relative h-60">
+                <img
+                  src="https://images.unsplash.com/photo-1591115765373-5207764f72e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                  alt="NACOSTI Multisectoral Conference"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
+                  Featured
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                  <h3 className="text-white text-xl font-bold">
+                    NACOSTI Multisectoral Conference and Exhibition
+                  </h3>
+                  <p className="text-white/80">National exhibition showcasing cross-sector innovations</p>
+                </div>
+              </div>
+              <CardContent className="p-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                  <div className="flex items-center">
+                    <div className="bg-primary/10 text-primary rounded-lg p-3 mr-3">
+                      <Calendar className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <div className="font-medium">May 19-22, 2025</div>
+                      <div className="text-sm text-neutral-500 flex items-center">
+                        <Clock className="h-3 w-3 mr-1" /> 8:00 AM - 5:00 PM
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="bg-secondary/10 text-secondary rounded-lg p-3 mr-3">
+                      <MapPin className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <div className="font-medium">Nairobi, Kenya</div>
+                      <div className="text-sm text-neutral-500">Location TBA</div>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-neutral-600 mb-4">
+                  Connect with researchers, innovators, and policymakers from across Kenya
+                  at this major national exhibition. UEAB Innovation & Entrepreneurship Centre
+                  will be participating and showcasing student innovations. Join us to network
+                  with industry leaders and explore collaboration opportunities.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full">
+                    Exhibition
+                  </span>
+                  <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full">
+                    Research
+                  </span>
+                  <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full">
+                    Networking
+                  </span>
+                  <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full">
+                    National Event
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center">
+                    <Users className="h-5 w-5 text-neutral-500 mr-2" />
+                    <span className="text-neutral-500">Open to public</span>
+                  </div>
+                  <Button className="bg-primary hover:bg-primary/90 rotate-3d">
+                    Learn More
                   </Button>
                 </div>
               </CardContent>
