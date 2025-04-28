@@ -607,10 +607,8 @@ const EventsPage = () => {
                 </h3>
                 <p className="text-sm text-neutral-500 mb-2">August 12-13, 2022</p>
                 <div className="flex justify-between">
-                  <Link href="/events/innovation-summit-2022">
-                    <a className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors">
-                      View Highlights
-                    </a>
+                  <Link href="/events/innovation-summit-2022" className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors">
+                    View Highlights
                   </Link>
                   <Link href="/resources#summit-2022-resources">
                     <a className="text-primary font-medium text-sm hover:text-primary/80 transition-colors">

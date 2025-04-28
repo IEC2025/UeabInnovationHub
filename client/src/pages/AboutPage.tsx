@@ -149,7 +149,7 @@ const AboutPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 perspective-container">
             {/* Team Member 1 */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:-translate-y-2">
+            <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 card-3d">
               <img
                 src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
                 alt="Dr. David Nyangau"
@@ -187,7 +187,7 @@ const AboutPage = () => {
             </div>
 
             {/* Team Member 2 */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:-translate-y-2">
+            <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 card-3d">
               <img
                 src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
                 alt="Prof. Elizabeth Wangai"
@@ -225,7 +225,7 @@ const AboutPage = () => {
             </div>
 
             {/* Team Member 3 */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:-translate-y-2">
+            <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 card-3d">
               <img
                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
                 alt="Mr. James Mwangi"
@@ -263,7 +263,7 @@ const AboutPage = () => {
             </div>
 
             {/* Team Member 4 */}
-            <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:-translate-y-2">
+            <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 card-3d">
               <img
                 src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80"
                 alt="Ms. Grace Ochieng"
