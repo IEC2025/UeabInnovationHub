@@ -132,8 +132,8 @@ const NewsPage = () => {
             <Card className="overflow-hidden">
               <div className="relative h-60">
                 <img
-                  src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-                  alt="UEAB Innovators Win at National Competition"
+                  src="/src/assets/images/BTV08785.JPG"
+                  alt="1st Baraton Innovation and Entrepreneurship Week"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
@@ -143,30 +143,29 @@ const NewsPage = () => {
               <CardContent className="p-6">
                 <div className="flex flex-wrap gap-2 mb-3">
                   <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full flex items-center gap-1">
-                    <Tag className="h-3 w-3" /> Success Stories
+                    <Tag className="h-3 w-3" /> Events
                   </span>
                   <span className="text-neutral-500 text-xs py-1 flex items-center gap-1">
-                    <Calendar className="h-3 w-3" /> August 15, 2023
+                    <Calendar className="h-3 w-3" /> November 7, 2024
                   </span>
                 </div>
                 <h3 className="text-xl font-bold text-primary mb-3">
-                  UEAB Innovators Win at National Competition
+                  1st Baraton Innovation and Entrepreneurship Week Concludes Successfully
                 </h3>
                 <p className="text-neutral-600 mb-4">
-                  A team of students from the Innovation & Entrepreneurship Centre
-                  has won first place at the National Innovation Competition held
-                  in Nairobi. Their project, a mobile app that connects farmers
-                  with markets, impressed the judges with its potential impact.
+                  The first Baraton Innovation and Entrepreneurship Week (BIEW) featured collaboration 
+                  with Microsoft, resulting in 8 innovative ideas and 16 prototypes being developed by students 
+                  across various disciplines. The event has set a strong foundation for future innovation initiatives.
                 </p>
                 <div className="flex justify-between items-center">
                   <div className="flex items-center">
                     <User className="h-4 w-4 text-neutral-500 mr-2" />
-                    <span className="text-neutral-500 text-sm">By Admin</span>
+                    <span className="text-neutral-500 text-sm">By IEC Committee</span>
                   </div>
-                  <Link href="/news/ueab-innovators-win-national-competition">
-                    <a className="text-secondary font-semibold hover:text-secondary/80 transition-colors inline-flex items-center">
+                  <Link href="/news/baraton-innovation-week-concludes">
+                    <Button variant="link" className="p-0 h-auto text-secondary font-semibold hover:text-secondary/80 transition-colors inline-flex items-center">
                       Read More <ArrowRight className="ml-1 h-4 w-4" />
-                    </a>
+                    </Button>
                   </Link>
                 </div>
               </CardContent>
@@ -176,8 +175,8 @@ const NewsPage = () => {
             <Card className="overflow-hidden">
               <div className="relative h-60">
                 <img
-                  src="https://images.unsplash.com/photo-1561489413-985b06da5bee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
-                  alt="New Partnership with Microsoft"
+                  src="/src/assets/images/BTV08537.JPG"
+                  alt="MoU Signing with CBaaS"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-4 left-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
@@ -187,30 +186,29 @@ const NewsPage = () => {
               <CardContent className="p-6">
                 <div className="flex flex-wrap gap-2 mb-3">
                   <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full flex items-center gap-1">
-                    <Tag className="h-3 w-3" /> Announcements
+                    <Tag className="h-3 w-3" /> Partnerships
                   </span>
                   <span className="text-neutral-500 text-xs py-1 flex items-center gap-1">
-                    <Calendar className="h-3 w-3" /> July 28, 2023
+                    <Calendar className="h-3 w-3" /> February 17, 2025
                   </span>
                 </div>
                 <h3 className="text-xl font-bold text-primary mb-3">
-                  New Partnership with Microsoft to Boost Tech Innovation
+                  University Signs MoU with CBaaS to Accelerate Student Innovation
                 </h3>
                 <p className="text-neutral-600 mb-4">
-                  The Innovation & Entrepreneurship Centre has established a
-                  partnership with Microsoft to provide students with access to
-                  cutting-edge technology, training programs, and mentorship
-                  opportunities to drive innovation.
+                  The University of Eastern Africa, Baraton has signed a Memorandum of Understanding with CBaaS, 
+                  a major step towards strengthening student entrepreneurship. This partnership will provide funding 
+                  opportunities, incubation support, and access to venture capital networks.
                 </p>
                 <div className="flex justify-between items-center">
                   <div className="flex items-center">
                     <User className="h-4 w-4 text-neutral-500 mr-2" />
-                    <span className="text-neutral-500 text-sm">By Dr. Sarah Kimani</span>
+                    <span className="text-neutral-500 text-sm">By IEC Committee</span>
                   </div>
-                  <Link href="/news/microsoft-partnership">
-                    <a className="text-secondary font-semibold hover:text-secondary/80 transition-colors inline-flex items-center">
+                  <Link href="/news/cbaas-partnership">
+                    <Button variant="link" className="p-0 h-auto text-secondary font-semibold hover:text-secondary/80 transition-colors inline-flex items-center">
                       Read More <ArrowRight className="ml-1 h-4 w-4" />
-                    </a>
+                    </Button>
                   </Link>
                 </div>
               </CardContent>
@@ -236,33 +234,33 @@ const NewsPage = () => {
             <Card>
               <div className="aspect-video overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                  alt="Workshop Series"
+                  src="/src/assets/images/BTV08784.JPG"
+                  alt="Presidential Innovation Award Finalists"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </div>
               <CardHeader className="pb-2">
                 <div className="flex flex-wrap gap-2 mb-2">
                   <span className="bg-neutral-100 text-neutral-800 text-xs py-1 px-2 rounded-full flex items-center gap-1">
-                    <Tag className="h-3 w-3" /> Events
+                    <Tag className="h-3 w-3" /> Recognition
                   </span>
                   <span className="text-neutral-500 text-xs py-1 flex items-center gap-1">
-                    <Calendar className="h-3 w-3" /> August 5, 2023
+                    <Calendar className="h-3 w-3" /> March 5, 2025
                   </span>
                 </div>
-                <CardTitle className="text-lg">New Workshop Series on Digital Marketing</CardTitle>
+                <CardTitle className="text-lg">UEAB Students Shortlisted for Presidential Innovation Award</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-neutral-600 text-sm">
-                  The centre is launching a new workshop series focused on digital
-                  marketing strategies for startups, beginning September 2023.
+                  A group of students from the Innovation & Entrepreneurship Centre were shortlisted for the 
+                  2024/2025 Presidential Innovation Award, marking a significant milestone in IEC's national recognition.
                 </p>
               </CardContent>
               <CardFooter className="pt-0">
-                <Link href="/news/digital-marketing-workshops">
-                  <a className="text-secondary font-semibold text-sm hover:text-secondary/80 transition-colors inline-flex items-center">
+                <Link href="/news/presidential-award-shortlist">
+                  <Button variant="link" className="p-0 h-auto text-secondary font-semibold hover:text-secondary/80 transition-colors inline-flex items-center">
                     Read More <ArrowRight className="ml-1 h-4 w-4" />
-                  </a>
+                  </Button>
                 </Link>
               </CardFooter>
             </Card>

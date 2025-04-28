@@ -11,7 +11,7 @@ const NewsSection = () => {
       category: "Events",
       date: "November 7, 2024",
       imageUrl: "/src/assets/images/BTV08785.JPG",
-      summary: "The first Innovation and Entrepreneurship Week concluded successfully with over 300 participants, 25 exhibitors, and 10 keynote speakers discussing innovation and entrepreneurship trends."
+      summary: "The first Baraton Innovation and Entrepreneurship Week (BIEW) concluded successfully with collaboration from Microsoft, resulting in 8 innovative ideas and 16 prototypes being developed by students."
     },
     {
       id: 2,
@@ -19,15 +19,15 @@ const NewsSection = () => {
       category: "Partnerships",
       date: "February 17, 2025",
       imageUrl: "/src/assets/images/BTV08537.JPG",
-      summary: "The Innovation & Entrepreneurship Centre has signed a Memorandum of Understanding with Factor-Y CbaaS to provide incubation support for student startups."
+      summary: "The university successfully signed a Memorandum of Understanding with CBaaS, providing funding opportunities, incubation support, and capacity-building programs for students working on innovative projects."
     },
     {
       id: 3,
-      title: "Innovative Solutions Showcased at Hackathon 2025",
-      category: "Events",
-      date: "March 17, 2025",
+      title: "UEAB Students Shortlisted for Presidential Innovation Award",
+      category: "Recognition",
+      date: "March 5, 2025",
       imageUrl: "/src/assets/images/BTV08784.JPG",
-      summary: "Students demonstrated their problem-solving skills at our annual hackathon with innovative solutions addressing real-world challenges faced by local communities."
+      summary: "A group of students from the Innovation & Entrepreneurship Centre were shortlisted for the 2024/2025 Presidential Innovation Award, marking a significant milestone in IEC's national recognition."
     }
   ];
 
