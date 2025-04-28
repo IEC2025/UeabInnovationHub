@@ -79,11 +79,9 @@ const AboutSection = () => {
                 </div>
               </div>
             </div>
-            <Link href="/about">
-              <a className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
-                Learn more about our mission
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
+            <Link href="/about" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
+              Learn more about our mission
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </div>
         </div>
