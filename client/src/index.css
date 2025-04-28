@@ -4,6 +4,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .perspective-container {
+    perspective: 1000px;
+  }
+  
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+  }
+  
+  .card-3d:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .rotate-3d {
+    transition: transform 0.3s ease;
+  }
+  
+  .rotate-3d:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(5deg);
+  }
+}
+
 :root {
   --background: 210 50% 98%;
   --foreground: 222 47% 11%;

@@ -147,7 +147,7 @@ const AboutPage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 perspective-container">
             {/* Team Member 1 */}
             <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:-translate-y-2">
               <img
@@ -392,12 +392,12 @@ const AboutPage = () => {
           <div className="flex flex-wrap gap-4 justify-center">
             <Button asChild className="bg-white text-primary hover:bg-white/90">
               <Link href="/programs">
-                <a>Explore Our Programs</a>
+                Explore Our Programs
               </Link>
             </Button>
             <Button asChild className="bg-secondary hover:bg-secondary/80">
               <Link href="/contact">
-                <a>Contact Us</a>
+                Contact Us
               </Link>
             </Button>
           </div>
