@@ -20,82 +20,82 @@ const SuccessStoriesSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Success Story 1 - mKiondo */}
+          {/* Success Story 1 - Meule Overmars Wafula */}
           <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-3d">
             <div className="md:w-2/5">
               <img
-                src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                alt="mKiondo Innovation"
+                src="/src/assets/images/Screenshot 2025-03-23 110152.png"
+                alt="Meule Overmars Wafula at Presidential Innovation Challenge"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="md:w-3/5 p-6">
               <span className="bg-secondary text-white text-xs py-1 px-2 rounded-full">
-                Innovation
+                Agriculture Innovation
               </span>
               <h3 className="text-xl font-bold text-primary mt-3 mb-2">
-                mKiondo - Digital Marketplace
+                O3en - Digital Farming Solution
               </h3>
               <p className="text-neutral-600 mb-4">
-                A revolutionary digital marketplace connecting local artisans directly with 
-                international buyers, helping to preserve cultural heritage while providing 
-                sustainable income for rural communities.
+                An innovative agricultural monitoring system that helps farmers track soil health, 
+                weather conditions, and crop development through a mobile application, enabling 
+                data-driven farming decisions to improve yields and sustainability.
               </p>
               <div className="flex items-center mb-4">
-                <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80"
-                  alt="Founder"
-                  className="w-10 h-10 rounded-full mr-3"
-                />
+                <div className="w-10 h-10 rounded-full mr-3 bg-primary flex items-center justify-center text-white font-bold">
+                  MW
+                </div>
                 <div>
-                  <div className="font-semibold text-primary">James Kiprop</div>
+                  <div className="font-semibold text-primary">Meule Overmars Wafula</div>
                   <div className="text-sm text-neutral-500">
-                    Information Technology, Class of 2022
+                    Computer Science & Student Coordinator, IEC
                   </div>
                 </div>
               </div>
-              <Link href="/resources#mkiondo" className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
+              <a href="https://thekenyatimes.com/o3en" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
                 Read Their Story <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
+              </a>
             </div>
           </div>
 
-          {/* Success Story 2 - Renewable Energy Innovation */}
+          {/* Success Story 2 - Presidential Innovation Award */}
           <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-3d">
             <div className="md:w-2/5">
               <img
-                src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                alt="Success Story"
+                src="/src/assets/images/BTV08784.JPG"
+                alt="Presidential Innovation Award Finalists"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="md:w-3/5 p-6">
               <span className="bg-secondary text-white text-xs py-1 px-2 rounded-full">
-                Clean Energy
+                Recognition
               </span>
               <h3 className="text-xl font-bold text-primary mt-3 mb-2">
-                SolarFlow Solutions
+                Presidential Innovation Award Finalists
               </h3>
               <p className="text-neutral-600 mb-4">
-                An innovative low-cost solar energy solution designed to provide reliable 
-                electricity to rural communities. The project was developed through the 
-                Innovation & Entrepreneurship Centre's incubation program.
+                A group of students from the IEC were shortlisted for the prestigious 
+                Presidential Innovation Award 2024/2025, recognizing their contributions 
+                to solving national challenges through innovative technology solutions.
               </p>
               <div className="flex items-center mb-4">
                 <img
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80"
-                  alt="Founder"
-                  className="w-10 h-10 rounded-full mr-3"
+                  src="/src/assets/images/BTV08785.JPG"
+                  alt="UEAB Innovation Team"
+                  className="w-10 h-10 rounded-full mr-3 object-cover"
                 />
                 <div>
-                  <div className="font-semibold text-primary">Sarah Otieno</div>
+                  <div className="font-semibold text-primary">UEAB Innovation Team</div>
                   <div className="text-sm text-neutral-500">
-                    Electrical Engineering, Class of 2023
+                    Innovation & Entrepreneurship Centre
                   </div>
                 </div>
               </div>
-              <Link href="/resources#solarflow" className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
-                Read Their Story <ArrowRight className="ml-1 h-4 w-4" />
+              <Link href="/news/presidential-award-shortlist">
+                <span className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
+                  Read Their Story <ArrowRight className="ml-1 h-4 w-4" />
+                </span>
               </Link>
             </div>
           </div>
