@@ -5,6 +5,7 @@ import StatsSection from "@/components/home/StatsSection";
 import EventsSection from "@/components/home/EventsSection";
 import SuccessStoriesSection from "@/components/home/SuccessStoriesSection";
 import TeamSection from "@/components/home/TeamSection";
+import NewsSection from "@/components/home/NewsSection";
 import PartnersSection from "@/components/home/PartnersSection";
 import NewsletterSection from "@/components/home/NewsletterSection";
 import ContactSection from "@/components/home/ContactSection";
@@ -23,6 +24,7 @@ const HomePage = () => {
       <ProgramsSection />
       <StatsSection />
       <EventsSection />
+      <NewsSection />
       <SuccessStoriesSection />
       <TeamSection />
       <PartnersSection />

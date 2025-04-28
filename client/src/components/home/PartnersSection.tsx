@@ -1,3 +1,12 @@
+// Import partner logos
+import universityLogo from "/src/assets/images/logos/university-logo.png";
+import keniaLogo from "/src/assets/images/logos/kenia-logo.webp";
+import huaweiLogo from "/src/assets/images/logos/huawei-logo.jpg";
+import factoryLogo from "/src/assets/images/logos/factory-logo.jpeg";
+import microsoftLogo from "/src/assets/images/logos/microsoft-logo.png";
+import kipiLogo from "/src/assets/images/logos/kipi-logo.webp";
+import nacostiLogo from "/src/assets/images/logos/nacosti-logo.webp";
+
 const PartnersSection = () => {
   return (
     <section className="py-12 bg-white">
@@ -15,65 +24,67 @@ const PartnersSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {/* Partner: UEAB */}
           <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
             <img
-              src="https://ueab.ac.ke/wp-content/uploads/2019/10/WEBLOGO.png"
+              src={universityLogo}
               alt="University of Eastern Africa, Baraton"
-              className="max-h-16"
+              className="max-h-16 object-contain"
             />
           </div>
           
           {/* Partner: KeNIA */}
           <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
             <img
-              src="https://kenia.go.ke/wp-content/uploads/2021/01/cropped-KENIA-Blue-Logo-Only-1.png"
-              alt="KeNIA"
-              className="max-h-16"
-            />
-          </div>
-          
-          {/* Partner: NACOSTI */}
-          <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
-            <img
-              src="https://nacosti.go.ke/wp-content/themes/nacosti-theme/images/logo-footer.png"
-              alt="NACOSTI"
-              className="max-h-16"
-            />
-          </div>
-          
-          {/* Partner: Factor-Y */}
-          <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
-            <div className="h-16 flex items-center justify-center font-bold text-xl text-primary">
-              Factor-Y CbaaS
-            </div>
-          </div>
-          
-          {/* Partner: KIPI */}
-          <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
-            <img
-              src="https://kipi.go.ke/templates/kipi_r_v2/images/kipi_logo.png"
-              alt="KIPI"
-              className="max-h-16"
+              src={keniaLogo}
+              alt="Kenya National Innovation Agency"
+              className="max-h-16 object-contain"
             />
           </div>
           
           {/* Partner: Huawei */}
           <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
             <img
-              src="https://www.huawei.com/-/media/corporate/images/home/logo/new-logo.png"
+              src={huaweiLogo}
               alt="Huawei"
-              className="max-h-16"
+              className="max-h-16 object-contain"
+            />
+          </div>
+          
+          {/* Partner: Factor-Y */}
+          <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
+            <img
+              src={factoryLogo}
+              alt="Factor-Y CbaaS"
+              className="max-h-16 object-contain"
             />
           </div>
           
           {/* Partner: Microsoft */}
           <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png"
+              src={microsoftLogo}
               alt="Microsoft"
-              className="max-h-16"
+              className="max-h-16 object-contain"
+            />
+          </div>
+          
+          {/* Partner: KIPI */}
+          <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
+            <img
+              src={kipiLogo}
+              alt="Kenya Industrial Property Institute"
+              className="max-h-16 object-contain"
+            />
+          </div>
+          
+          {/* Partner: NACOSTI */}
+          <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
+            <img
+              src={nacostiLogo}
+              alt="National Commission for Science, Technology and Innovation"
+              className="max-h-16 object-contain"
             />
           </div>
         </div>
