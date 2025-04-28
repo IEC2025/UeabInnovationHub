@@ -130,7 +130,7 @@ const EventsPage = () => {
             <Card className="overflow-hidden card-3d" id="innovation-week-2025">
               <div className="relative h-60">
                 <img
-                  src="https://images.unsplash.com/photo-1540317580384-e5d43867caa6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                  src="/src/assets/images/kiw-image1.jpg"
                   alt="2nd Innovation and Entrepreneurship Week"
                   className="w-full h-full object-cover"
                 />
@@ -190,11 +190,18 @@ const EventsPage = () => {
                 <div className="flex justify-between items-center">
                   <div className="flex items-center">
                     <Users className="h-5 w-5 text-neutral-500 mr-2" />
-                    <span className="text-neutral-500">Registration opening soon</span>
+                    <span className="text-neutral-500">Limited spaces available</span>
                   </div>
-                  <Button className="bg-primary hover:bg-primary/90 rotate-3d">
-                    Register Interest
-                  </Button>
+                  <a 
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=sf_link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block"
+                  >
+                    <Button className="bg-primary hover:bg-primary/90 rotate-3d">
+                      Register Now
+                    </Button>
+                  </a>
                 </div>
               </CardContent>
             </Card>
@@ -203,7 +210,7 @@ const EventsPage = () => {
             <Card className="overflow-hidden card-3d" id="nacosti-conference-2025">
               <div className="relative h-60">
                 <img
-                  src="https://images.unsplash.com/photo-1591115765373-5207764f72e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                  src="/src/assets/images/kiw-presentation.jpg"
                   alt="NACOSTI Multisectoral Conference"
                   className="w-full h-full object-cover"
                 />

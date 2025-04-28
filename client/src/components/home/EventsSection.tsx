@@ -2,6 +2,9 @@ import { Link } from "wouter";
 import { ArrowRight, Clock, MapPin } from "lucide-react";
 
 const EventsSection = () => {
+  // Google Form registration link for the mentorship program and innovation week
+  const registrationFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=sf_link";
+
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
@@ -48,9 +51,14 @@ const EventsSection = () => {
                 <MapPin className="h-4 w-4 mr-2" /> Innovation Hub, UEAB Main
                 Campus
               </div>
-              <Link href="/events#innovation-week-2025" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
+              <a 
+                href={registrationFormUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors"
+              >
                 Register Now <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -92,29 +100,29 @@ const EventsSection = () => {
             <div className="p-6">
               <div className="flex items-center mb-4">
                 <div className="bg-secondary text-white text-center rounded p-2 mr-4">
-                  <div className="text-xl font-bold">17</div>
-                  <div className="text-xs uppercase">Feb</div>
+                  <div className="text-xl font-bold">4-7</div>
+                  <div className="text-xs uppercase">Nov</div>
                 </div>
                 <div>
                   <span className="bg-neutral-600 text-white text-xs py-1 px-2 rounded-full">
                     Past Event
                   </span>
                   <span className="text-neutral-500 text-sm ml-2 flex items-center">
-                    <Clock className="h-3 w-3 mr-1" /> 10:00 AM
+                    <Clock className="h-3 w-3 mr-1" /> All Day
                   </span>
                 </div>
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">
-                MoU Signing with Factor-Y CbaaS
+                1st Innovation and Entrepreneurship Week 2024
               </h3>
               <p className="text-neutral-600 mb-4">
-                A strategic partnership formed between UEAB and Factor-Y CbaaS to 
-                enhance innovation and entrepreneurship opportunities for students.
+                The inaugural Innovation and Entrepreneurship Week showcased student projects, 
+                workshops, and connected students with industry partners.
               </p>
               <div className="flex items-center text-neutral-500 text-sm mb-4">
                 <MapPin className="h-4 w-4 mr-2" /> UEAB Main Campus
               </div>
-              <Link href="/events#mou-signing" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
+              <Link href="/events#innovation-week-2024" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
                 View Details <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
