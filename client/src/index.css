@@ -214,4 +214,92 @@
   .rotate-3d:hover {
     transform: rotate3d(0, 1, 0.5, 15deg);
   }
+  
+  /* Parallax slider and advanced animation effects */
+  .parallax-slide {
+    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+  }
+  
+  .parallax-slide img {
+    transition: transform 0.7s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  
+  .parallax-slide:hover img {
+    transform: scale(1.08) rotate(2deg);
+  }
+  
+  .rotate-scale-effect {
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-origin: center;
+  }
+  
+  .rotate-scale-effect:hover {
+    transform: scale(1.05) rotate(2deg);
+  }
+  
+  .rotate-scale-down-effect {
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-origin: center;
+  }
+  
+  .rotate-scale-down-effect:hover {
+    transform: scale(0.95) rotate(-1deg);
+  }
+  
+  /* Animated slogan for parallax slider */
+  .slogan-animation {
+    animation: slogan-fade 8s ease-in-out infinite;
+  }
+  
+  @keyframes slogan-fade {
+    0%, 100% {
+      opacity: 0.9;
+      letter-spacing: normal;
+    }
+    50% {
+      opacity: 1;
+      letter-spacing: 0.15em;
+    }
+  }
+  
+  /* 3D parallax effect */
+  .parallax-3d {
+    transform-style: preserve-3d;
+    perspective: 1200px;
+  }
+  
+  .parallax-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+  
+  .parallax-layer-0 {
+    transform: translateZ(0);
+  }
+  
+  .parallax-layer-1 {
+    transform: translateZ(50px);
+  }
+  
+  .parallax-layer-2 {
+    transform: translateZ(100px);
+  }
+  
+  .parallax-layer-3 {
+    transform: translateZ(150px);
+  }
+  
+  /* Artistic transition for slider */
+  .artistic-transition {
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .artistic-transition:hover {
+    filter: saturate(1.2) contrast(1.1);
+    transform: scale(1.03) translateY(-5px);
+  }
 }

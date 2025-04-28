@@ -3,12 +3,39 @@ import { useCallback, useEffect, useState, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
 const HeroSection = () => {
+  // Images and logos
+  const images = {
+    ueabLogo: "https://ueab.ac.ke/wp-content/uploads/2019/10/WEBLOGO.png",
+    iecLogo: "/src/assets/images/iec-logo.png",
+    kiwSign: "/src/assets/images/kiw-sign.jpg",
+    ueabFlags: "/src/assets/images/ueab-flags.jpg",
+    ukPavilion: "/src/assets/images/uk-pavilion.jpg",
+    kiwImage: "/src/assets/images/kiw-image3.jpg"
+  };
+
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: true, 
     dragFree: true,
   });
   const [currentSlide, setCurrentSlide] = useState(0);
   const parallaxRef = useRef<HTMLDivElement>(null);
+  const sloganRef = useRef<HTMLDivElement>(null);
+
+  // Mouse-triggered 3D parallax effect
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!sloganRef.current) return;
+      
+      const { clientX, clientY } = e;
+      const xPos = (clientX / window.innerWidth - 0.5) * 30; // -15 to 15
+      const yPos = (clientY / window.innerHeight - 0.5) * 15; // -7.5 to 7.5
+      
+      sloganRef.current.style.transform = `translate3d(${xPos}px, ${yPos}px, 0) rotateX(${yPos * 0.2}deg) rotateY(${-xPos * 0.2}deg)`;
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   // Parallax effect on scroll
   useEffect(() => {
@@ -42,7 +69,7 @@ const HeroSection = () => {
       } else {
         emblaApi.scrollTo(0);
       }
-    }, 5000);
+    }, 6000);
     
     return () => {
       emblaApi.off("select", onSelect);
@@ -51,103 +78,97 @@ const HeroSection = () => {
   }, [emblaApi, onSelect]);
   
   const sloganWords = ["Innovate", "Inspire", "Impact"];
+  const sloganFull = "Innovate, Inspire, Impact";
   const [currentWord, setCurrentWord] = useState(0);
 
   // Slogan animation
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWord((prev) => (prev + 1) % sloganWords.length);
-    }, 2000);
+    }, 3000);
     
     return () => clearInterval(interval);
   }, []);
   
+  // Define slides using the images object
   const slides = [
     {
-      image: "https://images.unsplash.com/photo-1530099486328-e021101a494a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      title: "Innovation Hub",
-      description: "Where ideas become reality through collaboration and support"
+      image: images.kiwSign,
+      title: "Kenya Innovation Week",
+      description: "Where ideas become reality through collaboration and support",
+      tag: "Featured Event"
     },
     {
-      image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      title: "Entrepreneurship Week",
-      description: "Annual celebration of innovation, creativity, and business acumen"
+      image: images.ueabFlags,
+      title: "Innovation & Entrepreneurship Center",
+      description: "University of Eastern Africa, Baraton",
+      tag: "Our Center"
     },
     {
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      title: "Student Entrepreneurs", 
-      description: "Tomorrow's business leaders developing their skills today"
+      image: images.ukPavilion,
+      title: "Student Innovators",
+      description: "Award-winning students at Kenya Innovation Week 2024", 
+      tag: "Success Stories"
     },
     {
-      image: "https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      title: "Innovate. Inspire. Impact.",
-      description: "Join our community of innovators and entrepreneurs shaping the future"
+      image: images.kiwImage,
+      title: sloganFull,
+      description: "Join our community of innovators and entrepreneurs shaping the future",
+      tag: "Our Mission"
     }
   ];
 
   return (
-    <section className="relative bg-gradient-to-b from-primary/20 to-transparent pt-16 pb-8">
-      {/* Animated slogan overlay */}
-      <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none overflow-hidden">
-        <div ref={parallaxRef} className="relative">
-          <h2 className="text-6xl md:text-9xl font-black text-primary/5 whitespace-nowrap rotate-12">
-            {sloganWords.map((word, index) => (
-              <span 
-                key={word} 
-                className={`inline-block mx-6 transition-all duration-1000 transform ${
-                  index === currentWord 
-                    ? 'scale-150 text-primary/10' 
-                    : 'scale-100 opacity-25'
-                }`}
-              >
-                {word}
-              </span>
-            ))}
-          </h2>
-        </div>
+    <section className="relative bg-gradient-to-b from-primary/20 to-transparent pt-16 pb-8 overflow-hidden">
+      {/* Large 3D Slogan Overlay - Animated with Mouse Movement */}
+      <div 
+        ref={sloganRef}
+        className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none overflow-hidden transition-transform duration-300 ease-out"
+        style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}
+      >
+        <h2 className="text-8xl md:text-[10rem] font-black text-primary/5 whitespace-nowrap rotate-12 slogan-animation">
+          {sloganWords.map((word, index) => (
+            <span 
+              key={word} 
+              className={`inline-block mx-6 transition-all duration-1000 transform ${
+                index === currentWord 
+                  ? 'scale-150 text-primary/15' 
+                  : 'scale-100 opacity-20'
+              }`}
+              style={{ textShadow: index === currentWord ? '0 10px 30px rgba(0,0,0,0.1)' : 'none' }}
+            >
+              {word}
+            </span>
+          ))}
+        </h2>
       </div>
       
       <div className="container mx-auto px-4 relative z-20">
         <div className="flex flex-col md:flex-row items-center gap-8">
-          {/* Hero Text */}
+          {/* Hero Text Content */}
           <div className="w-full md:w-1/2 text-center md:text-left mb-8 md:mb-0">
-            <div className="flex flex-col items-center md:items-start md:flex-row md:justify-start mb-6">
-              <img 
-                src="https://ueab.ac.ke/wp-content/uploads/2019/10/WEBLOGO.png" 
-                alt="UEAB Logo" 
-                className="h-24 w-auto mb-4 md:mb-0 md:mr-4" 
-              />
+            <div className="flex flex-col items-center md:items-start mb-6">
+              <div className="flex items-center justify-center md:justify-start flex-wrap md:flex-nowrap gap-4 mb-4">
+                <img 
+                  src={images.ueabLogo} 
+                  alt="UEAB Logo" 
+                  className="h-16 w-auto rotate-scale-effect" 
+                />
+                <img 
+                  src={images.iecLogo} 
+                  alt="IEC Logo" 
+                  className="h-16 w-auto rotate-scale-effect" 
+                />
+              </div>
               <div>
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary">
                   Innovation & Entrepreneurship Centre
                 </h1>
-                <div className="text-secondary font-semibold text-lg mt-1 flex gap-2 justify-center md:justify-start">
-                  <span className="relative">
-                    <span className="absolute -left-2 top-0 text-primary/20">
-                      {sloganWords[currentWord]}
-                    </span>
-                    <span className="relative text-secondary">
-                      {sloganWords[currentWord]}
-                    </span>
-                  </span>
-                  <span>•</span>
-                  <span className="relative">
-                    <span className="absolute -left-2 top-0 text-primary/20">
-                      {sloganWords[(currentWord + 1) % 3]}
-                    </span>
-                    <span className="relative text-secondary">
-                      {sloganWords[(currentWord + 1) % 3]}
-                    </span>
-                  </span>
-                  <span>•</span>
-                  <span className="relative">
-                    <span className="absolute -left-2 top-0 text-primary/20">
-                      {sloganWords[(currentWord + 2) % 3]}
-                    </span>
-                    <span className="relative text-secondary">
-                      {sloganWords[(currentWord + 2) % 3]}
-                    </span>
-                  </span>
+                <div className="text-secondary font-semibold text-xl mt-4 flex gap-2 justify-center md:justify-start">
+                  <div className="relative group">
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-secondary/10 to-accent/10 blur-lg opacity-50 group-hover:opacity-75 transition-opacity duration-500"></div>
+                    <span className="relative font-bold tracking-wider">{sloganFull}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -161,35 +182,42 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Link 
                 href="/programs"
-                className="bg-secondary hover:bg-secondary/80 text-white font-bold py-3 px-6 rounded-md transition duration-300 text-center rotate-3d"
+                className="bg-secondary hover:bg-secondary/80 text-white font-bold py-3 px-6 rounded-md transition duration-300 text-center rotate-3d shadow-lg"
               >
                 Our Programs
               </Link>
               <Link 
                 href="/contact"
-                className="bg-white hover:bg-neutral-200 text-primary font-bold py-3 px-6 rounded-md transition duration-300 text-center border border-primary rotate-3d"
+                className="bg-white hover:bg-neutral-100 text-primary font-bold py-3 px-6 rounded-md transition duration-300 text-center border border-primary rotate-3d shadow-lg"
               >
                 Get Involved
               </Link>
             </div>
           </div>
           
-          {/* Carousel */}
-          <div className="w-full md:w-1/2">
-            <div className="overflow-hidden rounded-2xl shadow-xl rotate-3d">
+          {/* Advanced Parallax Carousel */}
+          <div className="w-full md:w-1/2 perspective-container">
+            <div className="overflow-hidden rounded-2xl shadow-xl rotate-3d card-3d">
               <div className="embla overflow-hidden" ref={emblaRef}>
                 <div className="embla__container flex">
                   {slides.map((slide, index) => (
                     <div key={index} className="embla__slide flex-[0_0_100%] min-w-0 relative">
-                      <div className="relative h-[400px]">
+                      <div className="relative h-[500px] parallax-slide">
                         <img 
                           src={slide.image} 
                           alt={slide.title} 
-                          className="h-full w-full object-cover transition-transform duration-700 scale-animation"
+                          className="h-full w-full object-cover artistic-transition"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
-                          <h3 className="text-2xl font-bold text-white mb-2">{slide.title}</h3>
-                          <p className="text-white/90">{slide.description}</p>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
+                          {slide.tag && (
+                            <span className="px-3 py-1 bg-secondary/90 text-white text-sm font-semibold rounded-full mb-4 self-start">
+                              {slide.tag}
+                            </span>
+                          )}
+                          <div className="parallax-layer parallax-layer-1">
+                            <h3 className="text-3xl font-bold text-white mb-2">{slide.title}</h3>
+                            <p className="text-white/90 text-lg">{slide.description}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -197,15 +225,17 @@ const HeroSection = () => {
                 </div>
               </div>
               
-              {/* Dots navigation */}
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+              {/* Enhanced dots navigation */}
+              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
                 {slides.map((_, index) => (
                   <button
                     key={index}
                     type="button"
                     onClick={() => emblaApi?.scrollTo(index)}
-                    className={`w-3 h-3 rounded-full ${
-                      currentSlide === index ? 'bg-white' : 'bg-white/50'
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      currentSlide === index 
+                        ? 'bg-white w-8' 
+                        : 'bg-white/50 hover:bg-white/80'
                     }`}
                     aria-label={`Go to slide ${index + 1}`}
                   />
@@ -216,6 +246,7 @@ const HeroSection = () => {
         </div>
       </div>
       
+      {/* Curved Bottom Edge */}
       <div className="absolute bottom-0 left-0 right-0">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
           <path
