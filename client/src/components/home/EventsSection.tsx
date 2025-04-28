@@ -14,16 +14,14 @@ const EventsSection = () => {
               Upcoming Events
             </h2>
           </div>
-          <Link href="/events">
-            <a className="mt-4 md:mt-0 bg-neutral-100 hover:bg-neutral-200 text-primary font-semibold py-2 px-4 rounded-md transition duration-300 inline-flex items-center">
-              View All Events <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
+          <Link href="/events" className="mt-4 md:mt-0 bg-neutral-100 hover:bg-neutral-200 text-primary font-semibold py-2 px-4 rounded-md transition duration-300 inline-flex items-center">
+            View All Events <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Event 1 */}
-          <div className="bg-neutral-100 rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:-translate-y-2">
+          <div className="bg-neutral-100 rounded-lg overflow-hidden shadow-md card-3d">
             <div className="p-6">
               <div className="flex items-center mb-4">
                 <div className="bg-secondary text-white text-center rounded p-2 mr-4">
@@ -50,16 +48,14 @@ const EventsSection = () => {
                 <MapPin className="h-4 w-4 mr-2" /> Innovation Hub, UEAB Main
                 Campus
               </div>
-              <Link href="/events#design-thinking">
-                <a className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
-                  Register Now <ArrowRight className="ml-1 h-4 w-4" />
-                </a>
+              <Link href="/events#design-thinking" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
+                Register Now <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
           </div>
 
           {/* Event 2 */}
-          <div className="bg-neutral-100 rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:-translate-y-2">
+          <div className="bg-neutral-100 rounded-lg overflow-hidden shadow-md card-3d">
             <div className="p-6">
               <div className="flex items-center mb-4">
                 <div className="bg-secondary text-white text-center rounded p-2 mr-4">
@@ -85,16 +81,14 @@ const EventsSection = () => {
               <div className="flex items-center text-neutral-500 text-sm mb-4">
                 <MapPin className="h-4 w-4 mr-2" /> Virtual Event (Zoom)
               </div>
-              <Link href="/events#funding-opportunities">
-                <a className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
-                  Register Now <ArrowRight className="ml-1 h-4 w-4" />
-                </a>
+              <Link href="/events#funding-opportunities" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
+                Register Now <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
           </div>
 
           {/* Event 3 */}
-          <div className="bg-neutral-100 rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:-translate-y-2">
+          <div className="bg-neutral-100 rounded-lg overflow-hidden shadow-md card-3d">
             <div className="p-6">
               <div className="flex items-center mb-4">
                 <div className="bg-secondary text-white text-center rounded p-2 mr-4">
@@ -122,10 +116,8 @@ const EventsSection = () => {
                 <MapPin className="h-4 w-4 mr-2" /> Innovation Hub, UEAB Main
                 Campus
               </div>
-              <Link href="/events#entrepreneur-mixer">
-                <a className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
-                  Register Now <ArrowRight className="ml-1 h-4 w-4" />
-                </a>
+              <Link href="/events#entrepreneur-mixer" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
+                Register Now <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
           </div>
