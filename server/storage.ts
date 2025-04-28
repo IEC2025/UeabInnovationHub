@@ -9,6 +9,8 @@ import {
   type NewsletterSubscription, 
   type InsertNewsletterSubscription 
 } from "@shared/schema";
+import { eq } from "drizzle-orm";
+import { db } from "./db";
 
 // Interface for storage operations
 export interface IStorage {
@@ -147,5 +149,85 @@ export class MemStorage implements IStorage {
   }
 }
 
-// Export an instance of the storage
-export const storage = new MemStorage();
+// Database Storage implementation
+export class DatabaseStorage implements IStorage {
+  // User operations
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
+    return user;
+  }
+  
+  // Contact message operations
+  async createContactMessage(message: InsertContactMessage): Promise<ContactMessage> {
+    const [contactMessage] = await db
+      .insert(contactMessages)
+      .values(message)
+      .returning();
+    return contactMessage;
+  }
+  
+  async getContactMessages(): Promise<ContactMessage[]> {
+    return await db.select().from(contactMessages);
+  }
+  
+  async getContactMessage(id: number): Promise<ContactMessage | undefined> {
+    const [message] = await db.select().from(contactMessages).where(eq(contactMessages.id, id));
+    return message || undefined;
+  }
+  
+  async markContactMessageAsRead(id: number): Promise<ContactMessage | undefined> {
+    const [message] = await db
+      .update(contactMessages)
+      .set({ isRead: true })
+      .where(eq(contactMessages.id, id))
+      .returning();
+    return message || undefined;
+  }
+  
+  // Newsletter subscription operations
+  async createNewsletterSubscription(subscription: InsertNewsletterSubscription): Promise<NewsletterSubscription> {
+    try {
+      const [newSubscription] = await db
+        .insert(newsletterSubscriptions)
+        .values(subscription)
+        .returning();
+      return newSubscription;
+    } catch (error) {
+      // Check if it's a unique constraint violation
+      if (error instanceof Error && (error.message.includes('unique') || error.message.includes('duplicate'))) {
+        throw new Error("Email already subscribed: unique constraint violation");
+      }
+      throw error;
+    }
+  }
+  
+  async getNewsletterSubscriptions(): Promise<NewsletterSubscription[]> {
+    return await db.select().from(newsletterSubscriptions);
+  }
+  
+  async unsubscribeFromNewsletter(email: string): Promise<boolean> {
+    const result = await db
+      .update(newsletterSubscriptions)
+      .set({ isActive: false })
+      .where(eq(newsletterSubscriptions.email, email))
+      .returning();
+    
+    return result.length > 0;
+  }
+}
+
+// Export an instance of the DatabaseStorage
+export const storage = new DatabaseStorage();
