@@ -610,10 +610,8 @@ const EventsPage = () => {
                   <Link href="/events/innovation-summit-2022" className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors">
                     View Highlights
                   </Link>
-                  <Link href="/resources#summit-2022-resources">
-                    <a className="text-primary font-medium text-sm hover:text-primary/80 transition-colors">
-                      Access Resources
-                    </a>
+                  <Link href="/resources#summit-2022-resources" className="text-primary font-medium text-sm hover:text-primary/80 transition-colors">
+                    Access Resources
                   </Link>
                 </div>
               </CardContent>
@@ -639,15 +637,11 @@ const EventsPage = () => {
                 </h3>
                 <p className="text-sm text-neutral-500 mb-2">June 5-9, 2023</p>
                 <div className="flex justify-between">
-                  <Link href="/events/youth-bootcamp-2023">
-                    <a className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors">
-                      View Highlights
-                    </a>
+                  <Link href="/events/youth-bootcamp-2023" className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors">
+                    View Highlights
                   </Link>
-                  <Link href="/resources#bootcamp-2023-resources">
-                    <a className="text-primary font-medium text-sm hover:text-primary/80 transition-colors">
-                      Access Resources
-                    </a>
+                  <Link href="/resources#bootcamp-2023-resources" className="text-primary font-medium text-sm hover:text-primary/80 transition-colors">
+                    Access Resources
                   </Link>
                 </div>
               </CardContent>
@@ -673,15 +667,11 @@ const EventsPage = () => {
                 </h3>
                 <p className="text-sm text-neutral-500 mb-2">May 20, 2023</p>
                 <div className="flex justify-between">
-                  <Link href="/events/pitch-competition-2023">
-                    <a className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors">
-                      View Winners
-                    </a>
+                  <Link href="/events/pitch-competition-2023" className="text-secondary font-medium text-sm hover:text-secondary/80 transition-colors">
+                    View Winners
                   </Link>
-                  <Link href="/resources#pitch-2023-resources">
-                    <a className="text-primary font-medium text-sm hover:text-primary/80 transition-colors">
-                      Access Resources
-                    </a>
+                  <Link href="/resources#pitch-2023-resources" className="text-primary font-medium text-sm hover:text-primary/80 transition-colors">
+                    Access Resources
                   </Link>
                 </div>
               </CardContent>
@@ -816,7 +806,7 @@ const EventsPage = () => {
               </div>
               <Button asChild className="bg-white text-primary hover:bg-white/90">
                 <Link href="/contact">
-                  <a>Inquire About Hosting</a>
+                  Inquire About Hosting
                 </Link>
               </Button>
             </div>
