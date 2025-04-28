@@ -130,4 +130,64 @@
   .nav-link:hover::after {
     @apply w-full;
   }
+  
+  /* 3D Transitions and Effects */
+  .card-3d {
+    @apply transition-all duration-500 transform;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .card-3d:hover {
+    transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
+    @apply shadow-xl;
+  }
+  
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  .pulse-animation {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+  
+  .scale-animation {
+    @apply transition-transform duration-300;
+  }
+  
+  .scale-animation:hover {
+    transform: scale(1.05);
+  }
+  
+  .rotate-3d {
+    @apply transition-transform duration-500;
+    transform-style: preserve-3d;
+  }
+  
+  .rotate-3d:hover {
+    transform: rotate3d(0, 1, 0.5, 15deg);
+  }
 }

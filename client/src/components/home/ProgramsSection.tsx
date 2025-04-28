@@ -22,7 +22,7 @@ const ProgramsSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Program 1 */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+          <div className="bg-white rounded-lg shadow-md overflow-hidden card-3d">
             <div
               className="h-48 bg-cover bg-center"
               style={{
@@ -59,7 +59,7 @@ const ProgramsSection = () => {
           </div>
 
           {/* Program 2 */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+          <div className="bg-white rounded-lg shadow-md overflow-hidden card-3d">
             <div
               className="h-48 bg-cover bg-center"
               style={{
@@ -96,7 +96,7 @@ const ProgramsSection = () => {
           </div>
 
           {/* Program 3 */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+          <div className="bg-white rounded-lg shadow-md overflow-hidden card-3d">
             <div
               className="h-48 bg-cover bg-center"
               style={{

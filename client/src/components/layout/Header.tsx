@@ -62,14 +62,16 @@ const Header = () => {
       <div className="container mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center">
         <div className="flex items-center mb-4 md:mb-0">
           <Link href="/" className="flex items-center">
-            <img
-              src="https://ueab.ac.ke/wp-content/uploads/2023/01/university-of-eastern-africa-baraton-logo.png"
-              alt="UEAB Logo"
-              className="h-14 mr-3"
-            />
+            <div className="relative mr-3">
+              <img
+                src="/src/assets/iec-logo.png"
+                alt="IEC Logo"
+                className="h-16 float-animation"
+              />
+            </div>
             <div>
               <h1 className="text-xl font-bold text-primary leading-tight">
-                Innovation & Entrepreneurship
+                Innovation & Entrepreneurship Centre
               </h1>
               <p className="text-neutral-600 text-sm">
                 University of Eastern Africa, Baraton

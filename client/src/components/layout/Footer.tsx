@@ -8,11 +8,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="flex items-center mb-6">
-              <img
-                src="https://ueab.ac.ke/wp-content/uploads/2023/01/university-of-eastern-africa-baraton-logo.png"
-                alt="UEAB Logo"
-                className="h-12 mr-3 bg-white p-1 rounded"
-              />
+              <div className="relative mr-3">
+                <img
+                  src="/src/assets/iec-logo.png"
+                  alt="IEC Logo"
+                  className="h-14 bg-white/10 p-1 rounded"
+                />
+              </div>
               <div>
                 <h3 className="text-lg font-bold leading-tight">
                   Innovation &<br />Entrepreneurship Centre
