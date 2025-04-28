@@ -20,104 +20,102 @@ const EventsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Event 1 */}
+          {/* Event 1 - Featured Upcoming Event */}
           <div className="bg-neutral-100 rounded-lg overflow-hidden shadow-md card-3d">
             <div className="p-6">
               <div className="flex items-center mb-4">
                 <div className="bg-secondary text-white text-center rounded p-2 mr-4">
-                  <div className="text-xl font-bold">15</div>
+                  <div className="text-xl font-bold">25-29</div>
                   <div className="text-xs uppercase">Sept</div>
                 </div>
                 <div>
                   <span className="bg-primary text-white text-xs py-1 px-2 rounded-full">
-                    Workshop
+                    Featured
                   </span>
                   <span className="text-neutral-500 text-sm ml-2 flex items-center">
-                    <Clock className="h-3 w-3 mr-1" /> 2:00 PM - 5:00 PM
+                    <Clock className="h-3 w-3 mr-1" /> All Day
                   </span>
                 </div>
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">
-                Design Thinking Workshop
+                2nd Innovation and Entrepreneurship Week
               </h3>
               <p className="text-neutral-600 mb-4">
-                Learn how to apply design thinking principles to solve
-                real-world problems and create innovative solutions.
+                Join us for a week of innovation showcases, workshops, and networking 
+                opportunities with industry experts and fellow entrepreneurs.
               </p>
               <div className="flex items-center text-neutral-500 text-sm mb-4">
                 <MapPin className="h-4 w-4 mr-2" /> Innovation Hub, UEAB Main
                 Campus
               </div>
-              <Link href="/events#design-thinking" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
+              <Link href="/events#innovation-week-2025" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
                 Register Now <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
           </div>
 
-          {/* Event 2 */}
+          {/* Event 2 - Community Event */}
           <div className="bg-neutral-100 rounded-lg overflow-hidden shadow-md card-3d">
             <div className="p-6">
               <div className="flex items-center mb-4">
                 <div className="bg-secondary text-white text-center rounded p-2 mr-4">
-                  <div className="text-xl font-bold">22</div>
-                  <div className="text-xs uppercase">Sept</div>
+                  <div className="text-xl font-bold">19-22</div>
+                  <div className="text-xs uppercase">May</div>
                 </div>
                 <div>
                   <span className="bg-primary text-white text-xs py-1 px-2 rounded-full">
-                    Seminar
+                    Community
                   </span>
                   <span className="text-neutral-500 text-sm ml-2 flex items-center">
-                    <Clock className="h-3 w-3 mr-1" /> 10:00 AM - 12:00 PM
+                    <Clock className="h-3 w-3 mr-1" /> All Day
                   </span>
                 </div>
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">
-                Funding Opportunities for Startups
+                NACOSTI Multisectoral Conference and Exhibition
               </h3>
               <p className="text-neutral-600 mb-4">
-                Discover various funding options available for early-stage
-                startups and how to prepare winning grant applications.
+                Connect with researchers, innovators, and policymakers at this 
+                major national exhibition showcasing innovations across sectors.
               </p>
               <div className="flex items-center text-neutral-500 text-sm mb-4">
-                <MapPin className="h-4 w-4 mr-2" /> Virtual Event (Zoom)
+                <MapPin className="h-4 w-4 mr-2" /> Nairobi, Kenya
               </div>
-              <Link href="/events#funding-opportunities" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
-                Register Now <ArrowRight className="ml-1 h-4 w-4" />
+              <Link href="/events#nacosti-conference-2025" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
+                Learn More <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
           </div>
 
-          {/* Event 3 */}
+          {/* Event 3 - Past Event */}
           <div className="bg-neutral-100 rounded-lg overflow-hidden shadow-md card-3d">
             <div className="p-6">
               <div className="flex items-center mb-4">
                 <div className="bg-secondary text-white text-center rounded p-2 mr-4">
-                  <div className="text-xl font-bold">30</div>
-                  <div className="text-xs uppercase">Sept</div>
+                  <div className="text-xl font-bold">17</div>
+                  <div className="text-xs uppercase">Feb</div>
                 </div>
                 <div>
-                  <span className="bg-primary text-white text-xs py-1 px-2 rounded-full">
-                    Networking
+                  <span className="bg-neutral-600 text-white text-xs py-1 px-2 rounded-full">
+                    Past Event
                   </span>
                   <span className="text-neutral-500 text-sm ml-2 flex items-center">
-                    <Clock className="h-3 w-3 mr-1" /> 4:00 PM - 7:00 PM
+                    <Clock className="h-3 w-3 mr-1" /> 10:00 AM
                   </span>
                 </div>
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">
-                Entrepreneur Mixer
+                MoU Signing with Factor-Y CbaaS
               </h3>
               <p className="text-neutral-600 mb-4">
-                Connect with fellow entrepreneurs, investors, and industry
-                experts in this networking event designed to build valuable
-                relationships.
+                A strategic partnership formed between UEAB and Factor-Y CbaaS to 
+                enhance innovation and entrepreneurship opportunities for students.
               </p>
               <div className="flex items-center text-neutral-500 text-sm mb-4">
-                <MapPin className="h-4 w-4 mr-2" /> Innovation Hub, UEAB Main
-                Campus
+                <MapPin className="h-4 w-4 mr-2" /> UEAB Main Campus
               </div>
-              <Link href="/events#entrepreneur-mixer" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
-                Register Now <ArrowRight className="ml-1 h-4 w-4" />
+              <Link href="/events#mou-signing" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
+                View Details <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
           </div>
