@@ -19,15 +19,17 @@ const HeroSection = () => {
             education, and support
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/programs">
-              <a className="bg-secondary hover:bg-secondary/80 text-white font-bold py-3 px-6 rounded-md transition duration-300 text-center">
-                Our Programs
-              </a>
+            <Link 
+              href="/programs"
+              className="bg-secondary hover:bg-secondary/80 text-white font-bold py-3 px-6 rounded-md transition duration-300 text-center"
+            >
+              Our Programs
             </Link>
-            <Link href="/contact">
-              <a className="bg-white hover:bg-neutral-200 text-primary font-bold py-3 px-6 rounded-md transition duration-300 text-center">
-                Get Involved
-              </a>
+            <Link 
+              href="/contact"
+              className="bg-white hover:bg-neutral-200 text-primary font-bold py-3 px-6 rounded-md transition duration-300 text-center"
+            >
+              Get Involved
             </Link>
           </div>
         </div>

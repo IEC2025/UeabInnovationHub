@@ -66,45 +66,51 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-6">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/about">
-                  <a className="text-neutral-300 hover:text-white transition-colors">
-                    About Us
-                  </a>
+                <Link 
+                  href="/about" 
+                  className="text-neutral-300 hover:text-white transition-colors"
+                >
+                  About Us
                 </Link>
               </li>
               <li>
-                <Link href="/programs">
-                  <a className="text-neutral-300 hover:text-white transition-colors">
-                    Our Programs
-                  </a>
+                <Link 
+                  href="/programs" 
+                  className="text-neutral-300 hover:text-white transition-colors"
+                >
+                  Our Programs
                 </Link>
               </li>
               <li>
-                <Link href="/events">
-                  <a className="text-neutral-300 hover:text-white transition-colors">
-                    Events & Workshops
-                  </a>
+                <Link 
+                  href="/events" 
+                  className="text-neutral-300 hover:text-white transition-colors"
+                >
+                  Events & Workshops
                 </Link>
               </li>
               <li>
-                <Link href="/resources#success-stories">
-                  <a className="text-neutral-300 hover:text-white transition-colors">
-                    Success Stories
-                  </a>
+                <Link 
+                  href="/resources#success-stories" 
+                  className="text-neutral-300 hover:text-white transition-colors"
+                >
+                  Success Stories
                 </Link>
               </li>
               <li>
-                <Link href="/resources">
-                  <a className="text-neutral-300 hover:text-white transition-colors">
-                    Resources
-                  </a>
+                <Link 
+                  href="/resources" 
+                  className="text-neutral-300 hover:text-white transition-colors"
+                >
+                  Resources
                 </Link>
               </li>
               <li>
-                <Link href="/contact">
-                  <a className="text-neutral-300 hover:text-white transition-colors">
-                    Contact Us
-                  </a>
+                <Link 
+                  href="/contact" 
+                  className="text-neutral-300 hover:text-white transition-colors"
+                >
+                  Contact Us
                 </Link>
               </li>
             </ul>
@@ -114,45 +120,51 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-6">Resources</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/resources#startup-toolkit">
-                  <a className="text-neutral-300 hover:text-white transition-colors">
-                    Startup Toolkit
-                  </a>
+                <Link 
+                  href="/resources#startup-toolkit"
+                  className="text-neutral-300 hover:text-white transition-colors"
+                >
+                  Startup Toolkit
                 </Link>
               </li>
               <li>
-                <Link href="/resources#business-plans">
-                  <a className="text-neutral-300 hover:text-white transition-colors">
-                    Business Plan Templates
-                  </a>
+                <Link 
+                  href="/resources#business-plans"
+                  className="text-neutral-300 hover:text-white transition-colors"
+                >
+                  Business Plan Templates
                 </Link>
               </li>
               <li>
-                <Link href="/resources#funding">
-                  <a className="text-neutral-300 hover:text-white transition-colors">
-                    Funding Opportunities
-                  </a>
+                <Link 
+                  href="/resources#funding"
+                  className="text-neutral-300 hover:text-white transition-colors"
+                >
+                  Funding Opportunities
                 </Link>
               </li>
               <li>
-                <Link href="/programs#mentorship">
-                  <a className="text-neutral-300 hover:text-white transition-colors">
-                    Mentorship Program
-                  </a>
+                <Link 
+                  href="/programs#mentorship"
+                  className="text-neutral-300 hover:text-white transition-colors"
+                >
+                  Mentorship Program
                 </Link>
               </li>
               <li>
-                <Link href="/news">
-                  <a className="text-neutral-300 hover:text-white transition-colors">
-                    Entrepreneurship Blog
-                  </a>
+                <Link 
+                  href="/news"
+                  className="text-neutral-300 hover:text-white transition-colors"
+                >
+                  Entrepreneurship Blog
                 </Link>
               </li>
               <li>
-                <Link href="/resources#publications">
-                  <a className="text-neutral-300 hover:text-white transition-colors">
-                    Research Publications
-                  </a>
+                <Link 
+                  href="/resources#publications"
+                  className="text-neutral-300 hover:text-white transition-colors"
+                >
+                  Research Publications
                 </Link>
               </li>
             </ul>
