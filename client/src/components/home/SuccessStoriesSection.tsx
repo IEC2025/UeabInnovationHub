@@ -20,86 +20,82 @@ const SuccessStoriesSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Success Story 1 */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row">
+          {/* Success Story 1 - mKiondo */}
+          <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-3d">
             <div className="md:w-2/5">
               <img
-                src="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                alt="Success Story"
+                src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                alt="mKiondo Innovation"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="md:w-3/5 p-6">
               <span className="bg-secondary text-white text-xs py-1 px-2 rounded-full">
-                AgriTech
+                Innovation
               </span>
               <h3 className="text-xl font-bold text-primary mt-3 mb-2">
-                FarmSense Solutions
+                mKiondo - Digital Marketplace
               </h3>
               <p className="text-neutral-600 mb-4">
-                A student-led startup developing affordable soil sensors and
-                analytics software to help small-scale farmers optimize crop
-                yields.
+                A revolutionary digital marketplace connecting local artisans directly with 
+                international buyers, helping to preserve cultural heritage while providing 
+                sustainable income for rural communities.
               </p>
               <div className="flex items-center mb-4">
                 <img
-                  src="https://randomuser.me/api/portraits/women/42.jpg"
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80"
                   alt="Founder"
                   className="w-10 h-10 rounded-full mr-3"
                 />
                 <div>
-                  <div className="font-semibold text-primary">Jane Mwangi</div>
+                  <div className="font-semibold text-primary">James Kiprop</div>
                   <div className="text-sm text-neutral-500">
-                    Computer Science, Class of 2019
+                    Information Technology, Class of 2022
                   </div>
                 </div>
               </div>
-              <Link href="/resources#farmsense">
-                <a className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
-                  Read Their Story <ArrowRight className="ml-1 h-4 w-4" />
-                </a>
+              <Link href="/resources#mkiondo" className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
+                Read Their Story <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
           </div>
 
-          {/* Success Story 2 */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row">
+          {/* Success Story 2 - Renewable Energy Innovation */}
+          <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-3d">
             <div className="md:w-2/5">
               <img
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
                 alt="Success Story"
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="md:w-3/5 p-6">
               <span className="bg-secondary text-white text-xs py-1 px-2 rounded-full">
-                EdTech
+                Clean Energy
               </span>
               <h3 className="text-xl font-bold text-primary mt-3 mb-2">
-                LearnConnect
+                SolarFlow Solutions
               </h3>
               <p className="text-neutral-600 mb-4">
-                An educational platform connecting students with local tutors and
-                providing personalized learning resources tailored to the Kenyan
-                curriculum.
+                An innovative low-cost solar energy solution designed to provide reliable 
+                electricity to rural communities. The project was developed through the 
+                Innovation & Entrepreneurship Centre's incubation program.
               </p>
               <div className="flex items-center mb-4">
                 <img
-                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80"
                   alt="Founder"
                   className="w-10 h-10 rounded-full mr-3"
                 />
                 <div>
-                  <div className="font-semibold text-primary">David Kimani</div>
+                  <div className="font-semibold text-primary">Sarah Otieno</div>
                   <div className="text-sm text-neutral-500">
-                    Education, Class of 2020
+                    Electrical Engineering, Class of 2023
                   </div>
                 </div>
               </div>
-              <Link href="/resources#learnconnect">
-                <a className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
-                  Read Their Story <ArrowRight className="ml-1 h-4 w-4" />
-                </a>
+              <Link href="/resources#solarflow" className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
+                Read Their Story <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -108,11 +104,11 @@ const SuccessStoriesSection = () => {
         <div className="text-center mt-12">
           <Button
             variant="default"
-            className="bg-primary hover:bg-primary/90"
+            className="bg-primary hover:bg-primary/90 rotate-3d"
             asChild
           >
             <Link href="/resources#success-stories">
-              <a>View All Success Stories</a>
+              View All Success Stories
             </Link>
           </Button>
         </div>
