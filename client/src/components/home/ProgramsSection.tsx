@@ -52,10 +52,8 @@ const ProgramsSection = () => {
                   Networking opportunities
                 </li>
               </ul>
-              <Link href="/programs#incubation">
-                <a className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
-                  Learn more <ArrowRight className="ml-1 h-4 w-4" />
-                </a>
+              <Link href="/programs#incubation" className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
+                Learn more <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -91,10 +89,8 @@ const ProgramsSection = () => {
                   Career development
                 </li>
               </ul>
-              <Link href="/programs#mentorship">
-                <a className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
-                  Learn more <ArrowRight className="ml-1 h-4 w-4" />
-                </a>
+              <Link href="/programs#mentorship" className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
+                Learn more <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -130,10 +126,8 @@ const ProgramsSection = () => {
                   Hands-on learning
                 </li>
               </ul>
-              <Link href="/programs#workshops">
-                <a className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
-                  Learn more <ArrowRight className="ml-1 h-4 w-4" />
-                </a>
+              <Link href="/programs#workshops" className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
+                Learn more <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>
           </div>
@@ -145,9 +139,7 @@ const ProgramsSection = () => {
             className="bg-primary hover:bg-primary/90"
             asChild
           >
-            <Link href="/programs">
-              <a>View All Programs</a>
-            </Link>
+            <Link href="/programs">View All Programs</Link>
           </Button>
         </div>
       </div>
