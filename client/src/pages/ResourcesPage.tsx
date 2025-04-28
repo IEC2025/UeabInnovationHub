@@ -686,45 +686,47 @@ const ResourcesPage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Success Story 1 */}
-            <div id="farmsense" className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row">
+          <div className="grid grid-cols-1 max-w-3xl mx-auto gap-8">
+            {/* Success Story - M-Kiondo ChapChap */}
+            <div id="mkiondo" className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-3d">
               <div className="md:w-2/5">
                 <img
-                  src="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
-                  alt="Success Story"
+                  src="/src/assets/images/Screenshot 2025-03-23 110152.png"
+                  alt="M-Kiondo ChapChap Innovation"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="md:w-3/5 p-6">
                 <span className="bg-secondary text-white text-xs py-1 px-2 rounded-full">
-                  AgriTech
+                  E-Commerce Innovation
                 </span>
                 <h3 className="text-xl font-bold text-primary mt-3 mb-2">
-                  FarmSense Solutions
+                  M-Kiondo ChapChap
                 </h3>
                 <p className="text-neutral-600 mb-4">
-                  A student-led startup developing affordable soil sensors and
-                  analytics software to help small-scale farmers optimize crop
-                  yields. The team participated in our incubation program and secured
-                  $150,000 in seed funding.
+                  A groundbreaking innovation developed by UEAB students that has been shortlisted for the 
+                  Presidential Innovation Award. M-Kiondo ChapChap is a digital marketplace designed to 
+                  connect buyers and sellers, streamlining the shopping experience for essential goods.
                 </p>
                 <div className="flex items-center mb-4">
-                  <img
-                    src="https://randomuser.me/api/portraits/women/42.jpg"
-                    alt="Founder"
-                    className="w-10 h-10 rounded-full mr-3"
-                  />
+                  <div className="w-10 h-10 rounded-full mr-3 bg-primary flex items-center justify-center text-white font-bold">
+                    IEC
+                  </div>
                   <div>
-                    <div className="font-semibold text-primary">Jane Mwangi</div>
+                    <div className="font-semibold text-primary">UEAB Innovation Team</div>
                     <div className="text-sm text-neutral-500">
-                      Computer Science, Class of 2019
+                      Innovation & Entrepreneurship Centre
                     </div>
                   </div>
                 </div>
-                <Button variant="secondary" size="sm">
-                  Read Full Case Study <ArrowRight className="ml-1 h-4 w-4" />
-                </Button>
+                <a 
+                  href="https://ueab.ac.ke/ueab-students-groundbreaking-m-kiondo-chapchap-innovation-shortlisted-for-presidential-innovation-award/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors"
+                >
+                  Read Their Story <ArrowRight className="ml-1 h-4 w-4" />
+                </a>
               </div>
             </div>
 
