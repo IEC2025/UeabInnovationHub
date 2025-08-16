@@ -632,7 +632,7 @@ const ProgramsPage = () => {
             <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
               <div className="flex items-center mb-4">
                 <img
-                  src="https://randomuser.me/api/portraits/women/42.jpg"
+                  src="/src/assets/images/jane-mwangi-portrait.png"
                   alt="Jane Mwangi"
                   className="w-14 h-14 rounded-full mr-4"
                 />
@@ -716,7 +716,7 @@ const ProgramsPage = () => {
             <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
               <div className="flex items-center mb-4">
                 <img
-                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  src="/src/assets/images/male-author-portrait.png"
                   alt="David Kimani"
                   className="w-14 h-14 rounded-full mr-4"
                 />
@@ -798,7 +798,7 @@ const ProgramsPage = () => {
             <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
               <div className="flex items-center mb-4">
                 <img
-                  src="https://randomuser.me/api/portraits/women/68.jpg"
+                  src="/src/assets/images/dr-sarah-kimani-portrait.png"
                   alt="Sarah Otieno"
                   className="w-14 h-14 rounded-full mr-4"
                 />

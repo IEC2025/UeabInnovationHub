@@ -512,7 +512,7 @@ const NewsPage = () => {
                 </p>
                 <div className="flex items-center">
                   <img
-                    src="https://randomuser.me/api/portraits/women/42.jpg"
+                    src="/src/assets/images/dr-sarah-kimani-portrait.png"
                     alt="Author"
                     className="w-8 h-8 rounded-full mr-2"
                   />
@@ -555,7 +555,7 @@ const NewsPage = () => {
                 </p>
                 <div className="flex items-center">
                   <img
-                    src="https://randomuser.me/api/portraits/men/32.jpg"
+                    src="/src/assets/images/male-author-portrait.png"
                     alt="Author"
                     className="w-8 h-8 rounded-full mr-2"
                   />
@@ -598,7 +598,7 @@ const NewsPage = () => {
                 </p>
                 <div className="flex items-center">
                   <img
-                    src="https://randomuser.me/api/portraits/women/68.jpg"
+                    src="/src/assets/images/jane-mwangi-portrait.png"
                     alt="Author"
                     className="w-8 h-8 rounded-full mr-2"
                   />
