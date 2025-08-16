@@ -1,4 +1,4 @@
-modules = ["nodejs-20", "web"]
+modules = ["nodejs-20", "web", "dotnet-10.0", "dotnet-7.0", "dotnet-9.0", "angular-node-20", "bun-1.2", "bun-1.1", "angular-node-24", "bash", "docker", "python-with-prybar-3.10", "nodejs-with-prybar-18", "zig-0.11", "pyright", "pyright-extended", "vue-node-18", "vue-node-20", "swift-5.6", "swift-5.8", "svelte-kit-node-20", "rust-stable", "rust-nightly", "ruby-3.2", "ruby-3.1", "r-4.2", "r-4.5", "qbasic", "python-3.10", "python-3.11", "python-base-3.11", "python-base-3.12", "python-3.8", "postgresql-16", "postgresql-17", "php-8.1", "php-8.4", "nodejs-16", "nodejs-19", "c-clang14", "cpp-clang14", "clojure-1.12", "clojure-1.11", "dart-3.8", "dart-2.18", "deno-2", "deno-1", "elixir-1_15", "go-1.24", "gcloud", "haskell-ghc9.8", "haskell-ghc9.0", "haskell-ghc9.2", "nodejs-22", "nodejs-23", "nix", "lua-5.2", "hermit-0.38.2", "haskell-ghc9.4", "bun-1.0", "go-1.21", "go-1.20", "nodejs-24", "typescript-language-server", "python-base-3.13", "php-8.2", "elixir-1_18", "go-1.19", "java-graalvm22.3", "ruff"]
 run = "npm run dev"
 hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
 
@@ -8,8 +8,7 @@ packages = ["imagemagick", "poppler"]
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["npm", "run", "start"]
-build = ["npm", "run", "build"]
+run = ["sh", "-c", "npm run dev"]
 
 [[ports]]
 localPort = 5000
