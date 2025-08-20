@@ -1,7 +1,7 @@
 import { 
   users, 
   type User, 
-  type InsertUser, 
+  type UpsertUser,
   contactMessages, 
   type ContactMessage, 
   type InsertContactMessage, 
@@ -13,17 +13,43 @@ import {
   type InsertBlogPost,
   events,
   type Event,
-  type InsertEvent
+  type InsertEvent,
+  newsArticles,
+  type NewsArticle,
+  type InsertNewsArticle,
+  resources,
+  type Resource,
+  type InsertResource,
+  eventRegistrations,
+  type EventRegistration,
+  type InsertEventRegistration,
+  mentorProfiles,
+  type MentorProfile,
+  type InsertMentorProfile,
+  mentorshipSessions,
+  type MentorshipSession,
+  type InsertMentorshipSession,
+  notifications,
+  type Notification,
+  type InsertNotification,
+  fileUploads,
+  type FileUpload,
+  type InsertFileUpload,
+  searchHistory,
+  type SearchHistory,
+  type InsertSearchHistory,
+  newsletterCampaigns,
+  type NewsletterCampaign,
+  type InsertNewsletterCampaign
 } from "@shared/schema";
-import { eq, gte } from "drizzle-orm";
+import { eq, gte, desc, and, or, like, ilike } from "drizzle-orm";
 import { db } from "./db";
 
 // Interface for storage operations
 export interface IStorage {
-  // User operations
-  getUser(id: number): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  // User operations (Replit Auth compatible)
+  getUser(id: string): Promise<User | undefined>;
+  upsertUser(user: UpsertUser): Promise<User>;
   
   // Contact message operations
   createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
@@ -52,197 +78,76 @@ export interface IStorage {
   getEvent(id: number): Promise<Event | undefined>;
   updateEvent(id: number, updates: Partial<InsertEvent>): Promise<Event | undefined>;
   deleteEvent(id: number): Promise<boolean>;
-}
-
-// In-memory storage implementation
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private contactMessages: Map<number, ContactMessage>;
-  private newsletterSubscriptions: Map<number, NewsletterSubscription>;
-  private userId: number;
-  private contactMessageId: number;
-  private newsletterSubscriptionId: number;
-
-  constructor() {
-    this.users = new Map();
-    this.contactMessages = new Map();
-    this.newsletterSubscriptions = new Map();
-    this.userId = 1;
-    this.contactMessageId = 1;
-    this.newsletterSubscriptionId = 1;
-  }
-
-  // User operations
-  async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.userId++;
-    const now = new Date();
-    const user: User = { 
-      ...insertUser, 
-      id, 
-      role: "user", 
-      createdAt: now,
-      firstName: insertUser.firstName || null,
-      lastName: insertUser.lastName || null
-    };
-    this.users.set(id, user);
-    return user;
-  }
   
-  // Contact message operations
-  async createContactMessage(message: InsertContactMessage): Promise<ContactMessage> {
-    const id = this.contactMessageId++;
-    const now = new Date();
-    const contactMessage: ContactMessage = {
-      ...message,
-      id,
-      createdAt: now,
-      isRead: false,
-      phone: message.phone || null
-    };
-    this.contactMessages.set(id, contactMessage);
-    return contactMessage;
-  }
+  // News article operations
+  createNewsArticle(article: InsertNewsArticle): Promise<NewsArticle>;
+  getNewsArticles(): Promise<NewsArticle[]>;
+  getPublishedNewsArticles(): Promise<NewsArticle[]>;
+  getNewsArticleBySlug(slug: string): Promise<NewsArticle | undefined>;
+  updateNewsArticle(id: number, updates: Partial<InsertNewsArticle>): Promise<NewsArticle | undefined>;
+  deleteNewsArticle(id: number): Promise<boolean>;
   
-  async getContactMessages(): Promise<ContactMessage[]> {
-    return Array.from(this.contactMessages.values());
-  }
+  // Resource operations
+  createResource(resource: InsertResource): Promise<Resource>;
+  getResources(): Promise<Resource[]>;
+  getPublicResources(): Promise<Resource[]>;
+  getResource(id: number): Promise<Resource | undefined>;
+  updateResource(id: number, updates: Partial<InsertResource>): Promise<Resource | undefined>;
+  deleteResource(id: number): Promise<boolean>;
   
-  async getContactMessage(id: number): Promise<ContactMessage | undefined> {
-    return this.contactMessages.get(id);
-  }
+  // Event registration operations
+  registerForEvent(registration: InsertEventRegistration): Promise<EventRegistration>;
+  getUserEventRegistrations(userId: string): Promise<EventRegistration[]>;
+  getEventRegistrations(eventId: number): Promise<EventRegistration[]>;
+  cancelEventRegistration(userId: string, eventId: number): Promise<boolean>;
   
-  async markContactMessageAsRead(id: number): Promise<ContactMessage | undefined> {
-    const message = this.contactMessages.get(id);
-    if (message) {
-      const updatedMessage = { ...message, isRead: true };
-      this.contactMessages.set(id, updatedMessage);
-      return updatedMessage;
-    }
-    return undefined;
-  }
+  // Mentorship operations
+  createMentorProfile(profile: InsertMentorProfile): Promise<MentorProfile>;
+  getMentorProfiles(): Promise<MentorProfile[]>;
+  getMentorProfile(userId: string): Promise<MentorProfile | undefined>;
+  updateMentorProfile(userId: string, updates: Partial<InsertMentorProfile>): Promise<MentorProfile | undefined>;
   
-  // Newsletter subscription operations
-  async createNewsletterSubscription(subscription: InsertNewsletterSubscription): Promise<NewsletterSubscription> {
-    // Check for existing subscription with the same email
-    const existingSubscription = Array.from(this.newsletterSubscriptions.values()).find(
-      (sub) => sub.email === subscription.email
-    );
-    
-    if (existingSubscription) {
-      throw new Error("Email already subscribed: unique constraint violation");
-    }
-    
-    const id = this.newsletterSubscriptionId++;
-    const now = new Date();
-    const newSubscription: NewsletterSubscription = {
-      ...subscription,
-      id,
-      subscriptionDate: now,
-      isActive: true
-    };
-    this.newsletterSubscriptions.set(id, newSubscription);
-    return newSubscription;
-  }
+  scheduleMentorshipSession(session: InsertMentorshipSession): Promise<MentorshipSession>;
+  getUserMentorshipSessions(userId: string): Promise<MentorshipSession[]>;
+  updateMentorshipSession(id: number, updates: Partial<InsertMentorshipSession>): Promise<MentorshipSession | undefined>;
   
-  async getNewsletterSubscriptions(): Promise<NewsletterSubscription[]> {
-    return Array.from(this.newsletterSubscriptions.values());
-  }
+  // Notification operations
+  createNotification(notification: InsertNotification): Promise<Notification>;
+  getUserNotifications(userId: string): Promise<Notification[]>;
+  markNotificationAsRead(id: number): Promise<boolean>;
   
-  async unsubscribeFromNewsletter(email: string): Promise<boolean> {
-    const subscription = Array.from(this.newsletterSubscriptions.values()).find(
-      (sub) => sub.email === email
-    );
-    
-    if (subscription) {
-      const updatedSubscription = { ...subscription, isActive: false };
-      this.newsletterSubscriptions.set(subscription.id, updatedSubscription);
-      return true;
-    }
-    return false;
-  }
+  // File upload operations
+  createFileUpload(upload: InsertFileUpload): Promise<FileUpload>;
+  getFileUpload(id: number): Promise<FileUpload | undefined>;
   
-  // Blog post operations (stub implementations)
-  async createBlogPost(post: InsertBlogPost): Promise<BlogPost> {
-    throw new Error("Blog post operations not implemented in MemStorage");
-  }
+  // Search operations
+  searchContent(query: string, category?: string): Promise<any[]>;
+  createSearchHistory(search: InsertSearchHistory): Promise<SearchHistory>;
   
-  async getBlogPosts(): Promise<BlogPost[]> {
-    return [];
-  }
-  
-  async getPublishedBlogPosts(): Promise<BlogPost[]> {
-    return [];
-  }
-  
-  async getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
-    return undefined;
-  }
-  
-  async updateBlogPost(id: number, updates: Partial<InsertBlogPost>): Promise<BlogPost | undefined> {
-    return undefined;
-  }
-  
-  async deleteBlogPost(id: number): Promise<boolean> {
-    return false;
-  }
-  
-  // Event operations (stub implementations)
-  async createEvent(event: InsertEvent): Promise<Event> {
-    throw new Error("Event operations not implemented in MemStorage");
-  }
-  
-  async getEvents(): Promise<Event[]> {
-    return [];
-  }
-  
-  async getPublishedEvents(): Promise<Event[]> {
-    return [];
-  }
-  
-  async getUpcomingEvents(): Promise<Event[]> {
-    return [];
-  }
-  
-  async getEvent(id: number): Promise<Event | undefined> {
-    return undefined;
-  }
-  
-  async updateEvent(id: number, updates: Partial<InsertEvent>): Promise<Event | undefined> {
-    return undefined;
-  }
-  
-  async deleteEvent(id: number): Promise<boolean> {
-    return false;
-  }
+  // Newsletter campaign operations
+  createNewsletterCampaign(campaign: InsertNewsletterCampaign): Promise<NewsletterCampaign>;
+  getNewsletterCampaigns(): Promise<NewsletterCampaign[]>;
 }
 
 // Database Storage implementation
 export class DatabaseStorage implements IStorage {
-  // User operations
-  async getUser(id: number): Promise<User | undefined> {
+  // User operations (Replit Auth compatible)
+  async getUser(id: string): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user || undefined;
+    return user;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.username, username));
-    return user || undefined;
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
+  async upsertUser(userData: UpsertUser): Promise<User> {
     const [user] = await db
       .insert(users)
-      .values(insertUser)
+      .values(userData)
+      .onConflictDoUpdate({
+        target: users.id,
+        set: {
+          ...userData,
+          updatedAt: new Date(),
+        },
+      })
       .returning();
     return user;
   }
@@ -257,12 +162,12 @@ export class DatabaseStorage implements IStorage {
   }
   
   async getContactMessages(): Promise<ContactMessage[]> {
-    return await db.select().from(contactMessages);
+    return await db.select().from(contactMessages).orderBy(desc(contactMessages.createdAt));
   }
   
   async getContactMessage(id: number): Promise<ContactMessage | undefined> {
     const [message] = await db.select().from(contactMessages).where(eq(contactMessages.id, id));
-    return message || undefined;
+    return message;
   }
   
   async markContactMessageAsRead(id: number): Promise<ContactMessage | undefined> {
@@ -271,7 +176,7 @@ export class DatabaseStorage implements IStorage {
       .set({ isRead: true })
       .where(eq(contactMessages.id, id))
       .returning();
-    return message || undefined;
+    return message;
   }
   
   // Newsletter subscription operations
@@ -283,7 +188,6 @@ export class DatabaseStorage implements IStorage {
         .returning();
       return newSubscription;
     } catch (error) {
-      // Check if it's a unique constraint violation
       if (error instanceof Error && (error.message.includes('unique') || error.message.includes('duplicate'))) {
         throw new Error("Email already subscribed: unique constraint violation");
       }
@@ -315,16 +219,18 @@ export class DatabaseStorage implements IStorage {
   }
   
   async getBlogPosts(): Promise<BlogPost[]> {
-    return await db.select().from(blogPosts);
+    return await db.select().from(blogPosts).orderBy(desc(blogPosts.createdAt));
   }
   
   async getPublishedBlogPosts(): Promise<BlogPost[]> {
-    return await db.select().from(blogPosts).where(eq(blogPosts.isPublished, true));
+    return await db.select().from(blogPosts)
+      .where(eq(blogPosts.isPublished, true))
+      .orderBy(desc(blogPosts.publishedAt));
   }
   
   async getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
     const [post] = await db.select().from(blogPosts).where(eq(blogPosts.slug, slug));
-    return post || undefined;
+    return post;
   }
   
   async updateBlogPost(id: number, updates: Partial<InsertBlogPost>): Promise<BlogPost | undefined> {
@@ -333,7 +239,7 @@ export class DatabaseStorage implements IStorage {
       .set(updates)
       .where(eq(blogPosts.id, id))
       .returning();
-    return post || undefined;
+    return post;
   }
   
   async deleteBlogPost(id: number): Promise<boolean> {
@@ -351,23 +257,25 @@ export class DatabaseStorage implements IStorage {
   }
   
   async getEvents(): Promise<Event[]> {
-    return await db.select().from(events);
+    return await db.select().from(events).orderBy(desc(events.startDate));
   }
   
   async getPublishedEvents(): Promise<Event[]> {
-    return await db.select().from(events).where(eq(events.isPublished, true));
-  }
-  
-  async getUpcomingEvents(): Promise<Event[]> {
-    const now = new Date();
     return await db.select().from(events)
       .where(eq(events.isPublished, true))
       .orderBy(events.startDate);
   }
   
+  async getUpcomingEvents(): Promise<Event[]> {
+    const now = new Date();
+    return await db.select().from(events)
+      .where(and(eq(events.isPublished, true), gte(events.startDate, now)))
+      .orderBy(events.startDate);
+  }
+  
   async getEvent(id: number): Promise<Event | undefined> {
     const [event] = await db.select().from(events).where(eq(events.id, id));
-    return event || undefined;
+    return event;
   }
   
   async updateEvent(id: number, updates: Partial<InsertEvent>): Promise<Event | undefined> {
@@ -376,12 +284,286 @@ export class DatabaseStorage implements IStorage {
       .set(updates)
       .where(eq(events.id, id))
       .returning();
-    return event || undefined;
+    return event;
   }
   
   async deleteEvent(id: number): Promise<boolean> {
     const result = await db.delete(events).where(eq(events.id, id)).returning();
     return result.length > 0;
+  }
+  
+  // News article operations
+  async createNewsArticle(article: InsertNewsArticle): Promise<NewsArticle> {
+    const [newsArticle] = await db
+      .insert(newsArticles)
+      .values(article)
+      .returning();
+    return newsArticle;
+  }
+  
+  async getNewsArticles(): Promise<NewsArticle[]> {
+    return await db.select().from(newsArticles).orderBy(desc(newsArticles.createdAt));
+  }
+  
+  async getPublishedNewsArticles(): Promise<NewsArticle[]> {
+    return await db.select().from(newsArticles)
+      .where(eq(newsArticles.isPublished, true))
+      .orderBy(desc(newsArticles.publishedAt));
+  }
+  
+  async getNewsArticleBySlug(slug: string): Promise<NewsArticle | undefined> {
+    const [article] = await db.select().from(newsArticles).where(eq(newsArticles.slug, slug));
+    return article;
+  }
+  
+  async updateNewsArticle(id: number, updates: Partial<InsertNewsArticle>): Promise<NewsArticle | undefined> {
+    const [article] = await db
+      .update(newsArticles)
+      .set(updates)
+      .where(eq(newsArticles.id, id))
+      .returning();
+    return article;
+  }
+  
+  async deleteNewsArticle(id: number): Promise<boolean> {
+    const result = await db.delete(newsArticles).where(eq(newsArticles.id, id)).returning();
+    return result.length > 0;
+  }
+  
+  // Resource operations
+  async createResource(resource: InsertResource): Promise<Resource> {
+    const [newResource] = await db
+      .insert(resources)
+      .values(resource)
+      .returning();
+    return newResource;
+  }
+  
+  async getResources(): Promise<Resource[]> {
+    return await db.select().from(resources).orderBy(desc(resources.createdAt));
+  }
+  
+  async getPublicResources(): Promise<Resource[]> {
+    return await db.select().from(resources)
+      .where(eq(resources.isPublic, true))
+      .orderBy(desc(resources.createdAt));
+  }
+  
+  async getResource(id: number): Promise<Resource | undefined> {
+    const [resource] = await db.select().from(resources).where(eq(resources.id, id));
+    return resource;
+  }
+  
+  async updateResource(id: number, updates: Partial<InsertResource>): Promise<Resource | undefined> {
+    const [resource] = await db
+      .update(resources)
+      .set(updates)
+      .where(eq(resources.id, id))
+      .returning();
+    return resource;
+  }
+  
+  async deleteResource(id: number): Promise<boolean> {
+    const result = await db.delete(resources).where(eq(resources.id, id)).returning();
+    return result.length > 0;
+  }
+  
+  // Event registration operations
+  async registerForEvent(registration: InsertEventRegistration): Promise<EventRegistration> {
+    const [newRegistration] = await db
+      .insert(eventRegistrations)
+      .values(registration)
+      .returning();
+    return newRegistration;
+  }
+  
+  async getUserEventRegistrations(userId: string): Promise<EventRegistration[]> {
+    return await db.select().from(eventRegistrations)
+      .where(eq(eventRegistrations.userId, userId))
+      .orderBy(desc(eventRegistrations.registeredAt));
+  }
+  
+  async getEventRegistrations(eventId: number): Promise<EventRegistration[]> {
+    return await db.select().from(eventRegistrations)
+      .where(eq(eventRegistrations.eventId, eventId))
+      .orderBy(desc(eventRegistrations.registeredAt));
+  }
+  
+  async cancelEventRegistration(userId: string, eventId: number): Promise<boolean> {
+    const result = await db
+      .update(eventRegistrations)
+      .set({ status: "cancelled" })
+      .where(and(
+        eq(eventRegistrations.userId, userId),
+        eq(eventRegistrations.eventId, eventId)
+      ))
+      .returning();
+    
+    return result.length > 0;
+  }
+  
+  // Mentorship operations
+  async createMentorProfile(profile: InsertMentorProfile): Promise<MentorProfile> {
+    const [mentorProfile] = await db
+      .insert(mentorProfiles)
+      .values(profile)
+      .returning();
+    return mentorProfile;
+  }
+  
+  async getMentorProfiles(): Promise<MentorProfile[]> {
+    return await db.select().from(mentorProfiles)
+      .where(eq(mentorProfiles.isActive, true))
+      .orderBy(desc(mentorProfiles.createdAt));
+  }
+  
+  async getMentorProfile(userId: string): Promise<MentorProfile | undefined> {
+    const [profile] = await db.select().from(mentorProfiles)
+      .where(eq(mentorProfiles.userId, userId));
+    return profile;
+  }
+  
+  async updateMentorProfile(userId: string, updates: Partial<InsertMentorProfile>): Promise<MentorProfile | undefined> {
+    const [profile] = await db
+      .update(mentorProfiles)
+      .set(updates)
+      .where(eq(mentorProfiles.userId, userId))
+      .returning();
+    return profile;
+  }
+  
+  async scheduleMentorshipSession(session: InsertMentorshipSession): Promise<MentorshipSession> {
+    const [newSession] = await db
+      .insert(mentorshipSessions)
+      .values(session)
+      .returning();
+    return newSession;
+  }
+  
+  async getUserMentorshipSessions(userId: string): Promise<MentorshipSession[]> {
+    return await db.select().from(mentorshipSessions)
+      .where(or(
+        eq(mentorshipSessions.mentorId, userId),
+        eq(mentorshipSessions.menteeId, userId)
+      ))
+      .orderBy(desc(mentorshipSessions.sessionDate));
+  }
+  
+  async updateMentorshipSession(id: number, updates: Partial<InsertMentorshipSession>): Promise<MentorshipSession | undefined> {
+    const [session] = await db
+      .update(mentorshipSessions)
+      .set(updates)
+      .where(eq(mentorshipSessions.id, id))
+      .returning();
+    return session;
+  }
+  
+  // Notification operations
+  async createNotification(notification: InsertNotification): Promise<Notification> {
+    const [newNotification] = await db
+      .insert(notifications)
+      .values(notification)
+      .returning();
+    return newNotification;
+  }
+  
+  async getUserNotifications(userId: string): Promise<Notification[]> {
+    return await db.select().from(notifications)
+      .where(eq(notifications.userId, userId))
+      .orderBy(desc(notifications.createdAt));
+  }
+  
+  async markNotificationAsRead(id: number): Promise<boolean> {
+    const result = await db
+      .update(notifications)
+      .set({ isRead: true })
+      .where(eq(notifications.id, id))
+      .returning();
+    
+    return result.length > 0;
+  }
+  
+  // File upload operations
+  async createFileUpload(upload: InsertFileUpload): Promise<FileUpload> {
+    const [fileUpload] = await db
+      .insert(fileUploads)
+      .values(upload)
+      .returning();
+    return fileUpload;
+  }
+  
+  async getFileUpload(id: number): Promise<FileUpload | undefined> {
+    const [upload] = await db.select().from(fileUploads).where(eq(fileUploads.id, id));
+    return upload;
+  }
+  
+  // Search operations
+  async searchContent(query: string, category?: string): Promise<any[]> {
+    const searchTerm = `%${query}%`;
+    const results = [];
+    
+    // Search events
+    if (!category || category === 'events') {
+      const eventResults = await db.select().from(events)
+        .where(and(
+          eq(events.isPublished, true),
+          or(
+            ilike(events.title, searchTerm),
+            ilike(events.description, searchTerm)
+          )
+        ));
+      results.push(...eventResults.map(e => ({ ...e, type: 'event' })));
+    }
+    
+    // Search news articles
+    if (!category || category === 'news') {
+      const newsResults = await db.select().from(newsArticles)
+        .where(and(
+          eq(newsArticles.isPublished, true),
+          or(
+            ilike(newsArticles.title, searchTerm),
+            ilike(newsArticles.content, searchTerm)
+          )
+        ));
+      results.push(...newsResults.map(n => ({ ...n, type: 'news' })));
+    }
+    
+    // Search resources
+    if (!category || category === 'resources') {
+      const resourceResults = await db.select().from(resources)
+        .where(and(
+          eq(resources.isPublic, true),
+          or(
+            ilike(resources.title, searchTerm),
+            ilike(resources.description, searchTerm)
+          )
+        ));
+      results.push(...resourceResults.map(r => ({ ...r, type: 'resource' })));
+    }
+    
+    return results;
+  }
+  
+  async createSearchHistory(search: InsertSearchHistory): Promise<SearchHistory> {
+    const [searchRecord] = await db
+      .insert(searchHistory)
+      .values(search)
+      .returning();
+    return searchRecord;
+  }
+  
+  // Newsletter campaign operations
+  async createNewsletterCampaign(campaign: InsertNewsletterCampaign): Promise<NewsletterCampaign> {
+    const [newCampaign] = await db
+      .insert(newsletterCampaigns)
+      .values(campaign)
+      .returning();
+    return newCampaign;
+  }
+  
+  async getNewsletterCampaigns(): Promise<NewsletterCampaign[]> {
+    return await db.select().from(newsletterCampaigns)
+      .orderBy(desc(newsletterCampaigns.createdAt));
   }
 }
 
