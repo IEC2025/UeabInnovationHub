@@ -374,6 +374,14 @@ const FullPageAnimatedSlider: React.FC<FullPageAnimatedSliderProps> = ({
             />
           )}
 
+          {/* Black Edge Vignette Effect */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `radial-gradient(ellipse at center, transparent 20%, transparent 40%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.8) 100%)`,
+            }}
+          />
+
           {/* Clean Professional Overlay */}
           {slide.overlay && (
             <div
