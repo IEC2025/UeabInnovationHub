@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import SmartSlider3 from '@/components/sliders/SmartSlider3';
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -25,8 +26,52 @@ const ProgramsPage = () => {
 
   return (
     <div>
-      {/* Page Banner */}
-      <div className="bg-primary py-16 md:py-24 relative">
+      {/* Smart Slider 3 */}
+      <div className="mb-8">
+        <SmartSlider3 
+          slides={[
+            {
+              id: 1,
+              title: "Startup Incubation Program",
+              description: "Comprehensive support for early-stage startups with mentorship, funding opportunities, and workspace access.",
+              image: "/src/assets/images/BTV08785.JPG",
+              link: "/programs#incubation",
+              tags: ["Incubation", "Funding"]
+            },
+            {
+              id: 2,
+              title: "Mentorship Network",
+              description: "Connect with industry experts and successful entrepreneurs for guidance and strategic advice.",
+              image: "/src/assets/images/BTV08537.JPG",
+              link: "/programs#mentorship",
+              tags: ["Mentorship", "Networking"]
+            },
+            {
+              id: 3,
+              title: "Innovation Workshops",
+              description: "Hands-on workshops covering design thinking, business modeling, and technology innovation.",
+              image: "/src/assets/images/kiw-image3.jpg",
+              link: "/programs#workshops",
+              tags: ["Workshops", "Training"]
+            },
+            {
+              id: 4,
+              title: "Funding Opportunities",
+              description: "Access to grants, competitions, and investor networks to fund your innovative ideas.",
+              image: "/src/assets/images/BTV08785.JPG",
+              link: "/programs#funding",
+              tags: ["Funding", "Grants"]
+            }
+          ]}
+          layout="showcase"
+          autoPlay={true}
+          showThumbnails={true}
+          responsiveBreakpoints={{ mobile: 1, tablet: 2, desktop: 3 }}
+        />
+      </div>
+      
+      {/* Page Banner - Hidden now */}
+      <div className="bg-primary py-16 md:py-24 relative" style={{display: 'none'}}>
         <div className="container mx-auto px-4 text-center text-white">
           <h1 className="text-3xl md:text-5xl font-bold mb-4">Our Programs</h1>
           <p className="text-lg max-w-3xl mx-auto">

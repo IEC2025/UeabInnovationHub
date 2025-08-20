@@ -33,6 +33,7 @@ import {
 import { useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import MetaSlider from '@/components/sliders/MetaSlider';
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -90,8 +91,49 @@ const ContactPage = () => {
 
   return (
     <div>
-      {/* Page Banner */}
-      <div className="bg-primary py-16 md:py-24 relative">
+      {/* Meta Slider */}
+      <div className="mb-8">
+        <MetaSlider 
+          slides={[
+            {
+              id: 1,
+              title: "Get In Touch",
+              description: "Ready to start your innovation journey? Contact us today.",
+              image: "/src/assets/images/BTV08785.JPG",
+              caption: "Innovation & Entrepreneurship Centre",
+              alt: "IEC Contact"
+            },
+            {
+              id: 2,
+              title: "Visit Our Centre",
+              description: "Located at the University of Eastern Africa, Baraton campus.",
+              image: "/src/assets/images/BTV08537.JPG",
+              caption: "UEAB Campus",
+              alt: "UEAB Campus"
+            },
+            {
+              id: 3,
+              title: "Join Events", 
+              description: "Participate in our workshops, seminars, and networking events.",
+              image: "/src/assets/images/kiw-image3.jpg",
+              caption: "Innovation Events",
+              alt: "Innovation Events"
+            }
+          ]}
+          sliderType="flex"
+          layout="default"
+          autoPlay={true}
+          autoPlaySpeed={4000}
+          navigation={true}
+          pagination={true}
+          thumbnails={true}
+          captions={true}
+          height={400}
+        />
+      </div>
+      
+      {/* Page Banner - Hidden now */}
+      <div className="bg-primary py-16 md:py-24 relative" style={{display: 'none'}}>
         <div className="container mx-auto px-4 text-center text-white">
           <h1 className="text-3xl md:text-5xl font-bold mb-4">Contact Us</h1>
           <p className="text-lg max-w-3xl mx-auto">

@@ -13,6 +13,7 @@ import {
   Globe,
   HandHeart 
 } from "lucide-react";
+import RevolutionSlider from '@/components/sliders/RevolutionSlider';
 
 const AboutPage = () => {
   // Set document title
@@ -22,8 +23,52 @@ const AboutPage = () => {
 
   return (
     <div>
-      {/* Page Banner */}
-      <div className="bg-primary py-16 md:py-24 relative">
+      {/* Revolution Slider */}
+      <RevolutionSlider 
+        slides={[
+          {
+            id: 1,
+            backgroundImage: "/src/assets/images/BTV08785.JPG",
+            duration: 5000,
+            layers: [
+              {
+                type: 'text',
+                content: 'About Our Centre',
+                style: {
+                  position: { x: 10, y: 20 },
+                  animation: { type: 'slideInLeft', delay: 500, duration: 1000 },
+                },
+                className: 'text-4xl md:text-6xl font-bold text-white'
+              },
+              {
+                type: 'text',
+                content: 'Innovation & Entrepreneurship Centre',
+                style: {
+                  position: { x: 10, y: 35 },
+                  animation: { type: 'slideInRight', delay: 1000, duration: 1000 },
+                },
+                className: 'text-xl text-white/90'
+              },
+              {
+                type: 'button',
+                content: 'Learn More',
+                style: {
+                  position: { x: 10, y: 55 },
+                  animation: { type: 'fadeIn', delay: 1500, duration: 1000 },
+                },
+                className: 'bg-secondary hover:bg-secondary/90 text-white px-6 py-3 rounded-full'
+              }
+            ],
+            transition: { type: 'fade', duration: 800 }
+          }
+        ]}
+        height="500px"
+        autoPlay={false}
+        showNavigation={false}
+      />
+      
+      {/* Page Banner - Hidden now */}
+      <div className="bg-primary py-16 md:py-24 relative" style={{display: 'none'}}>
         <div className="container mx-auto px-4 text-center text-white">
           <h1 className="text-3xl md:text-5xl font-bold mb-4">About Our Centre</h1>
           <p className="text-lg max-w-3xl mx-auto">

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import LayerSlider from '@/components/sliders/LayerSlider';
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,8 +38,75 @@ const EventsPage = () => {
 
   return (
     <div>
-      {/* Page Banner */}
-      <div className="bg-primary py-16 md:py-24 relative">
+      {/* Layer Slider */}
+      <LayerSlider 
+        slides={[
+          {
+            id: 1,
+            name: "Events & Workshops",
+            backgroundImage: "/src/assets/images/BTV08785.JPG",
+            duration: 6000,
+            elements: [
+              {
+                id: 'title',
+                type: 'text',
+                content: 'Events & Workshops',
+                style: {
+                  position: { x: 10, y: 20, z: 10 },
+                  size: { width: 800, height: 100 },
+                  transform: { rotate: 0, scale: 1, skew: { x: 0, y: 0 } },
+                  animation: {
+                    type: 'slide',
+                    direction: 'left',
+                    duration: 1000,
+                    delay: 500,
+                    easing: 'easeOut'
+                  },
+                  appearance: {
+                    opacity: 1,
+                    color: 'white',
+                    fontSize: 48,
+                    fontWeight: 'bold'
+                  }
+                },
+                timeline: { startTime: 500, endTime: 5500 }
+              },
+              {
+                id: 'subtitle',
+                type: 'text',
+                content: 'Join our innovative events and skill-building workshops',
+                style: {
+                  position: { x: 10, y: 35, z: 9 },
+                  size: { width: 600, height: 60 },
+                  transform: { rotate: 0, scale: 1, skew: { x: 0, y: 0 } },
+                  animation: {
+                    type: 'slide',
+                    direction: 'right',
+                    duration: 1000,
+                    delay: 1000,
+                    easing: 'easeOut'
+                  },
+                  appearance: {
+                    opacity: 0.9,
+                    color: 'white',
+                    fontSize: 20
+                  }
+                },
+                timeline: { startTime: 1000, endTime: 5500 }
+              }
+            ],
+            transition: { type: 'fade', duration: 800 }
+          }
+        ]}
+        width="100%"
+        height="500px"
+        autoStart={true}
+        showTimeline={true}
+        showControls={true}
+      />
+      
+      {/* Page Banner - Hidden now */}
+      <div className="bg-primary py-16 md:py-24 relative" style={{display: 'none'}}>
         <div className="container mx-auto px-4 text-center text-white">
           <h1 className="text-3xl md:text-5xl font-bold mb-4">
             Events & Workshops
