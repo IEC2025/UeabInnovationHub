@@ -36,7 +36,7 @@ const AboutPage = () => {
                 content: 'About Our Centre',
                 style: {
                   position: { x: 10, y: 20 },
-                  animation: { type: 'slideInLeft', delay: 500, duration: 1000 },
+                  animation: { type: 'slideInLeft', direction: 'left', delay: 500, duration: 1000, easing: 'easeOut' },
                 },
                 className: 'text-4xl md:text-6xl font-bold text-white'
               },
@@ -45,7 +45,7 @@ const AboutPage = () => {
                 content: 'Innovation & Entrepreneurship Centre',
                 style: {
                   position: { x: 10, y: 35 },
-                  animation: { type: 'slideInRight', delay: 1000, duration: 1000 },
+                  animation: { type: 'slideInRight', direction: 'right', delay: 1000, duration: 1000, easing: 'easeOut' },
                 },
                 className: 'text-xl text-white/90'
               },
@@ -54,7 +54,7 @@ const AboutPage = () => {
                 content: 'Learn More',
                 style: {
                   position: { x: 10, y: 55 },
-                  animation: { type: 'fadeIn', delay: 1500, duration: 1000 },
+                  animation: { type: 'fadeIn', direction: 'up', delay: 1500, duration: 1000, easing: 'easeOut' },
                 },
                 className: 'bg-secondary hover:bg-secondary/90 text-white px-6 py-3 rounded-full'
               }

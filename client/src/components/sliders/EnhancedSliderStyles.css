@@ -1,0 +1,219 @@
+/* Advanced Responsive Slider Styles */
+
+.enhanced-slider {
+  /* CSS Container Queries for advanced responsive design */
+  container-type: inline-size;
+  
+  /* Hardware acceleration for smooth animations */
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Fluid typography system using CSS clamp() */
+.fluid-text-xs { font-size: clamp(0.75rem, 0.7rem + 0.25vw, 1rem); }
+.fluid-text-sm { font-size: clamp(0.875rem, 0.8rem + 0.375vw, 1.125rem); }
+.fluid-text-base { font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem); }
+.fluid-text-lg { font-size: clamp(1.125rem, 1rem + 0.625vw, 1.5rem); }
+.fluid-text-xl { font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem); }
+.fluid-text-2xl { font-size: clamp(1.5rem, 1.3rem + 1vw, 2.25rem); }
+.fluid-text-3xl { font-size: clamp(1.875rem, 1.6rem + 1.375vw, 2.75rem); }
+.fluid-text-4xl { font-size: clamp(2.25rem, 1.9rem + 1.75vw, 3.5rem); }
+.fluid-text-5xl { font-size: clamp(3rem, 2.5rem + 2.5vw, 4.5rem); }
+.fluid-text-6xl { font-size: clamp(3.75rem, 3rem + 3.75vw, 6rem); }
+
+/* Advanced Container Queries for precise responsive control */
+@container (max-width: 320px) {
+  .slider-content {
+    padding: 1rem;
+  }
+  .slider-title {
+    font-size: var(--fluid-text-2xl);
+    line-height: 1.2;
+  }
+  .slider-description {
+    font-size: var(--fluid-text-sm);
+    line-height: 1.4;
+  }
+}
+
+@container (min-width: 321px) and (max-width: 640px) {
+  .slider-content {
+    padding: 1.5rem;
+  }
+  .slider-title {
+    font-size: var(--fluid-text-3xl);
+    line-height: 1.1;
+  }
+  .slider-description {
+    font-size: var(--fluid-text-base);
+    line-height: 1.5;
+  }
+}
+
+@container (min-width: 641px) and (max-width: 1024px) {
+  .slider-content {
+    padding: 2rem;
+  }
+  .slider-title {
+    font-size: var(--fluid-text-4xl);
+    line-height: 1.1;
+  }
+  .slider-description {
+    font-size: var(--fluid-text-lg);
+    line-height: 1.6;
+  }
+}
+
+@container (min-width: 1025px) {
+  .slider-content {
+    padding: 3rem;
+  }
+  .slider-title {
+    font-size: var(--fluid-text-5xl);
+    line-height: 1;
+  }
+  .slider-description {
+    font-size: var(--fluid-text-xl);
+    line-height: 1.7;
+  }
+}
+
+/* Advanced animations with hardware acceleration */
+.slide-enter {
+  opacity: 0;
+  transform: translate3d(50px, 0, 0) scale(0.95);
+  transition: all 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.slide-enter-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.slide-exit {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition: all 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.slide-exit-active {
+  opacity: 0;
+  transform: translate3d(-50px, 0, 0) scale(0.95);
+}
+
+/* Optimized touch interactions */
+.touch-slider {
+  touch-action: pan-y pinch-zoom;
+  -webkit-overflow-scrolling: touch;
+}
+
+.touch-slider .slide-content {
+  pointer-events: auto;
+  user-select: none;
+}
+
+/* Performance optimizations */
+.performance-optimized {
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .slide-enter,
+  .slide-exit {
+    transition-duration: 0.1s;
+  }
+  
+  .auto-play-disabled {
+    animation-play-state: paused;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .slider-overlay {
+    opacity: 0.8 !important;
+  }
+  
+  .slider-text {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  .slider-controls {
+    background-color: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* Advanced network-aware loading */
+.slow-connection .slider-image {
+  filter: blur(2px);
+  transition: filter 0.3s ease-in-out;
+}
+
+.slow-connection .slider-image.loaded {
+  filter: blur(0);
+}
+
+/* Progressive enhancement for modern browsers */
+@supports (backdrop-filter: blur(10px)) {
+  .modern-backdrop {
+    backdrop-filter: blur(10px) saturate(180%);
+    background-color: rgba(255,255,255,0.1);
+  }
+}
+
+@supports (aspect-ratio: 16/9) {
+  .modern-aspect-ratio {
+    aspect-ratio: var(--aspect-ratio);
+    height: auto;
+  }
+}
+
+/* CSS Grid fallback for older browsers */
+@supports not (display: grid) {
+  .slider-layout {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Advanced hover states with 3D transforms */
+.enhanced-hover:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translateZ(50px);
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Intersection Observer optimizations */
+.in-viewport {
+  animation-play-state: running;
+}
+
+.out-of-viewport {
+  animation-play-state: paused;
+}
+
+/* Custom scrollbar for webkit browsers */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.5);
+}
