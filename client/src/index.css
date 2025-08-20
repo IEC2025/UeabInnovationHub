@@ -58,6 +58,47 @@
       transition-duration: 0.01ms !important;
     }
   }
+
+  /* Full-page slider enhancements */
+  .fullpage-hero-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .fullpage-hero-slider .slide-content-stagger {
+    animation: slideContentStagger 1000ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  @keyframes slideContentStagger {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Smooth scrolling for the entire page */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Ensure proper layering */
+  .z-fixed-hero {
+    position: fixed;
+    z-index: 10;
+  }
+
+  .z-content {
+    position: relative;
+    z-index: 20;
+  }
 }
 
 :root {

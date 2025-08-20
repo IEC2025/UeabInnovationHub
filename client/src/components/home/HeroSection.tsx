@@ -1,10 +1,10 @@
 import { Link } from "wouter";
 import { useCallback, useEffect, useState, useRef } from "react";
-import ResponsiveSliderSystem from '@/components/sliders/ResponsiveSliderSystem';
+import FullPageAnimatedSlider from '@/components/sliders/FullPageAnimatedSlider';
 
 const HeroSection = () => {
-  // Enhanced Responsive Slider data with advanced features
-  const responsiveSlides = [
+  // Full-page animated slider data with advanced features
+  const fullPageSlides = [
     {
       id: 1,
       title: "Innovation & Entrepreneurship Centre",
@@ -20,9 +20,14 @@ const HeroSection = () => {
         variant: "primary" as const
       },
       overlay: {
-        opacity: 0.4,
-        color: "rgba(0,0,0,0.4)",
-        gradient: "linear-gradient(135deg, rgba(30,64,175,0.8) 0%, rgba(59,130,246,0.6) 100%)"
+        opacity: 0.5,
+        color: "rgba(0,0,0,0.3)",
+        gradient: "linear-gradient(135deg, rgba(30,64,175,0.8) 0%, rgba(59,130,246,0.6) 50%, rgba(30,64,175,0.9) 100%)"
+      },
+      animation: {
+        type: "parallax" as const,
+        direction: "up" as const,
+        duration: 1200
       },
       contentPosition: "left" as const,
       textAlign: "left" as const
@@ -42,9 +47,14 @@ const HeroSection = () => {
         variant: "secondary" as const
       },
       overlay: {
-        opacity: 0.5,
-        color: "rgba(0,0,0,0.5)",
-        gradient: "linear-gradient(135deg, rgba(139,69,19,0.8) 0%, rgba(255,140,0,0.6) 100%)"
+        opacity: 0.6,
+        color: "rgba(0,0,0,0.4)",
+        gradient: "linear-gradient(135deg, rgba(139,69,19,0.8) 0%, rgba(255,140,0,0.7) 50%, rgba(139,69,19,0.9) 100%)"
+      },
+      animation: {
+        type: "slide" as const,
+        direction: "right" as const,
+        duration: 1000
       },
       contentPosition: "center" as const,
       textAlign: "center" as const
@@ -64,47 +74,85 @@ const HeroSection = () => {
         variant: "outline" as const
       },
       overlay: {
-        opacity: 0.6,
-        color: "rgba(0,0,0,0.6)",
-        gradient: "linear-gradient(135deg, rgba(34,197,94,0.8) 0%, rgba(16,185,129,0.6) 100%)"
+        opacity: 0.7,
+        color: "rgba(0,0,0,0.5)",
+        gradient: "linear-gradient(135deg, rgba(34,197,94,0.8) 0%, rgba(16,185,129,0.7) 50%, rgba(34,197,94,0.9) 100%)"
+      },
+      animation: {
+        type: "zoom" as const,
+        direction: "up" as const,
+        duration: 1400
       },
       contentPosition: "right" as const,
       textAlign: "right" as const
+    },
+    {
+      id: 4,
+      title: "Research & Development",
+      subtitle: "Pioneering Innovation",
+      description: "Leading cutting-edge research in technology, sustainability, and social innovation to address Africa's most pressing challenges while creating global impact.",
+      image: "/src/assets/images/BTV08785.JPG",
+      mobileImage: "/src/assets/images/BTV08785.JPG",
+      tabletImage: "/src/assets/images/BTV08785.JPG",
+      desktopImage: "/src/assets/images/BTV08785.JPG",
+      cta: {
+        text: "Discover Research",
+        link: "/research",
+        variant: "primary" as const
+      },
+      overlay: {
+        opacity: 0.6,
+        color: "rgba(0,0,0,0.4)",
+        gradient: "linear-gradient(135deg, rgba(147,51,234,0.8) 0%, rgba(168,85,247,0.7) 50%, rgba(147,51,234,0.9) 100%)"
+      },
+      animation: {
+        type: "fade" as const,
+        duration: 1100
+      },
+      contentPosition: "center" as const,
+      textAlign: "center" as const
+    },
+    {
+      id: 5,
+      title: "Global Impact Network",
+      subtitle: "Connecting Worldwide",
+      description: "Building a global ecosystem of entrepreneurs, mentors, and investors to amplify the impact of African innovation on the world stage.",
+      image: "/src/assets/images/BTV08537.JPG",
+      mobileImage: "/src/assets/images/BTV08537.JPG",
+      tabletImage: "/src/assets/images/BTV08537.JPG",
+      desktopImage: "/src/assets/images/BTV08537.JPG",
+      cta: {
+        text: "Join Network",
+        link: "/network",
+        variant: "outline" as const
+      },
+      overlay: {
+        opacity: 0.5,
+        color: "rgba(0,0,0,0.3)",
+        gradient: "linear-gradient(135deg, rgba(239,68,68,0.8) 0%, rgba(248,113,113,0.7) 50%, rgba(239,68,68,0.9) 100%)"
+      },
+      animation: {
+        type: "slide" as const,
+        direction: "left" as const,
+        duration: 1300
+      },
+      contentPosition: "left" as const,
+      textAlign: "left" as const
     }
   ];
 
   return (
-    <div className="relative responsive-container">
-      <ResponsiveSliderSystem 
-        slides={responsiveSlides}
-        autoPlay={true}
-        autoPlayInterval={6000}
-        height={{
-          mobile: "100vh",
-          tablet: "80vh", 
-          desktop: "100vh"
-        }}
-        aspectRatio={{
-          mobile: "16/10",
-          tablet: "16/9",
-          desktop: "21/9"
-        }}
-        adaptiveLoading={true}
-        intersectionThreshold={0.1}
-        preloadImages={true}
-      />
-      
-      {/* Curved Bottom Edge with enhanced styling */}
-      <div className="absolute bottom-0 left-0 right-0 z-30">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" className="smooth-transition">
-          <path
-            fill="#ffffff"
-            fillOpacity="1"
-            d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"
-          ></path>
-        </svg>
-      </div>
-    </div>
+    <FullPageAnimatedSlider 
+      slides={fullPageSlides}
+      autoPlay={true}
+      autoPlayInterval={7000}
+      showControls={true}
+      showPagination={true}
+      enableKeyboard={true}
+      enableTouch={true}
+      enableParallax={true}
+      className="fullpage-hero-slider"
+    />
   );
 };
 

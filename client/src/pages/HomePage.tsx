@@ -18,19 +18,26 @@ const HomePage = () => {
   }, []);
 
   return (
-    <>
-      <HeroSection />
-      <AboutSection />
-      <ProgramsSection />
-      <StatsSection />
-      <EventsSection />
-      <NewsSection />
-      <SuccessStoriesSection />
-      <TeamSection />
-      <PartnersSection />
-      <NewsletterSection />
-      <ContactSection />
-    </>
+    <div className="relative">
+      {/* Full-page hero slider that covers entire viewport below header */}
+      <div className="relative w-full h-screen overflow-hidden">
+        <HeroSection />
+      </div>
+      
+      {/* Content sections positioned below the full-page slider */}
+      <div className="relative z-20 bg-white">
+        <AboutSection />
+        <ProgramsSection />
+        <StatsSection />
+        <EventsSection />
+        <NewsSection />
+        <SuccessStoriesSection />
+        <TeamSection />
+        <PartnersSection />
+        <NewsletterSection />
+        <ContactSection />
+      </div>
+    </div>
   );
 };
 
