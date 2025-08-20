@@ -7,9 +7,15 @@ import {
   type InsertContactMessage, 
   newsletterSubscriptions, 
   type NewsletterSubscription, 
-  type InsertNewsletterSubscription 
+  type InsertNewsletterSubscription,
+  blogPosts,
+  type BlogPost,
+  type InsertBlogPost,
+  events,
+  type Event,
+  type InsertEvent
 } from "@shared/schema";
-import { eq } from "drizzle-orm";
+import { eq, gte } from "drizzle-orm";
 import { db } from "./db";
 
 // Interface for storage operations
@@ -29,6 +35,23 @@ export interface IStorage {
   createNewsletterSubscription(subscription: InsertNewsletterSubscription): Promise<NewsletterSubscription>;
   getNewsletterSubscriptions(): Promise<NewsletterSubscription[]>;
   unsubscribeFromNewsletter(email: string): Promise<boolean>;
+  
+  // Blog post operations
+  createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
+  getBlogPosts(): Promise<BlogPost[]>;
+  getPublishedBlogPosts(): Promise<BlogPost[]>;
+  getBlogPostBySlug(slug: string): Promise<BlogPost | undefined>;
+  updateBlogPost(id: number, updates: Partial<InsertBlogPost>): Promise<BlogPost | undefined>;
+  deleteBlogPost(id: number): Promise<boolean>;
+  
+  // Event operations
+  createEvent(event: InsertEvent): Promise<Event>;
+  getEvents(): Promise<Event[]>;
+  getPublishedEvents(): Promise<Event[]>;
+  getUpcomingEvents(): Promise<Event[]>;
+  getEvent(id: number): Promise<Event | undefined>;
+  updateEvent(id: number, updates: Partial<InsertEvent>): Promise<Event | undefined>;
+  deleteEvent(id: number): Promise<boolean>;
 }
 
 // In-memory storage implementation
@@ -147,6 +170,60 @@ export class MemStorage implements IStorage {
     }
     return false;
   }
+  
+  // Blog post operations (stub implementations)
+  async createBlogPost(post: InsertBlogPost): Promise<BlogPost> {
+    throw new Error("Blog post operations not implemented in MemStorage");
+  }
+  
+  async getBlogPosts(): Promise<BlogPost[]> {
+    return [];
+  }
+  
+  async getPublishedBlogPosts(): Promise<BlogPost[]> {
+    return [];
+  }
+  
+  async getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
+    return undefined;
+  }
+  
+  async updateBlogPost(id: number, updates: Partial<InsertBlogPost>): Promise<BlogPost | undefined> {
+    return undefined;
+  }
+  
+  async deleteBlogPost(id: number): Promise<boolean> {
+    return false;
+  }
+  
+  // Event operations (stub implementations)
+  async createEvent(event: InsertEvent): Promise<Event> {
+    throw new Error("Event operations not implemented in MemStorage");
+  }
+  
+  async getEvents(): Promise<Event[]> {
+    return [];
+  }
+  
+  async getPublishedEvents(): Promise<Event[]> {
+    return [];
+  }
+  
+  async getUpcomingEvents(): Promise<Event[]> {
+    return [];
+  }
+  
+  async getEvent(id: number): Promise<Event | undefined> {
+    return undefined;
+  }
+  
+  async updateEvent(id: number, updates: Partial<InsertEvent>): Promise<Event | undefined> {
+    return undefined;
+  }
+  
+  async deleteEvent(id: number): Promise<boolean> {
+    return false;
+  }
 }
 
 // Database Storage implementation
@@ -225,6 +302,85 @@ export class DatabaseStorage implements IStorage {
       .where(eq(newsletterSubscriptions.email, email))
       .returning();
     
+    return result.length > 0;
+  }
+  
+  // Blog post operations
+  async createBlogPost(post: InsertBlogPost): Promise<BlogPost> {
+    const [blogPost] = await db
+      .insert(blogPosts)
+      .values(post)
+      .returning();
+    return blogPost;
+  }
+  
+  async getBlogPosts(): Promise<BlogPost[]> {
+    return await db.select().from(blogPosts);
+  }
+  
+  async getPublishedBlogPosts(): Promise<BlogPost[]> {
+    return await db.select().from(blogPosts).where(eq(blogPosts.isPublished, true));
+  }
+  
+  async getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
+    const [post] = await db.select().from(blogPosts).where(eq(blogPosts.slug, slug));
+    return post || undefined;
+  }
+  
+  async updateBlogPost(id: number, updates: Partial<InsertBlogPost>): Promise<BlogPost | undefined> {
+    const [post] = await db
+      .update(blogPosts)
+      .set(updates)
+      .where(eq(blogPosts.id, id))
+      .returning();
+    return post || undefined;
+  }
+  
+  async deleteBlogPost(id: number): Promise<boolean> {
+    const result = await db.delete(blogPosts).where(eq(blogPosts.id, id)).returning();
+    return result.length > 0;
+  }
+  
+  // Event operations
+  async createEvent(event: InsertEvent): Promise<Event> {
+    const [newEvent] = await db
+      .insert(events)
+      .values(event)
+      .returning();
+    return newEvent;
+  }
+  
+  async getEvents(): Promise<Event[]> {
+    return await db.select().from(events);
+  }
+  
+  async getPublishedEvents(): Promise<Event[]> {
+    return await db.select().from(events).where(eq(events.isPublished, true));
+  }
+  
+  async getUpcomingEvents(): Promise<Event[]> {
+    const now = new Date();
+    return await db.select().from(events)
+      .where(eq(events.isPublished, true))
+      .orderBy(events.startDate);
+  }
+  
+  async getEvent(id: number): Promise<Event | undefined> {
+    const [event] = await db.select().from(events).where(eq(events.id, id));
+    return event || undefined;
+  }
+  
+  async updateEvent(id: number, updates: Partial<InsertEvent>): Promise<Event | undefined> {
+    const [event] = await db
+      .update(events)
+      .set(updates)
+      .where(eq(events.id, id))
+      .returning();
+    return event || undefined;
+  }
+  
+  async deleteEvent(id: number): Promise<boolean> {
+    const result = await db.delete(events).where(eq(events.id, id)).returning();
     return result.length > 0;
   }
 }

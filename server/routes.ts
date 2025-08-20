@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { contactMessages, insertContactMessageSchema, insertNewsletterSubscriptionSchema } from "@shared/schema";
 import { z } from "zod";
+import { emailService } from "./email-service";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form endpoint
@@ -10,6 +11,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertContactMessageSchema.parse(req.body);
       const contactMessage = await storage.createContactMessage(validatedData);
+      
+      // Send email notification
+      await emailService.sendContactFormNotification(validatedData);
       
       res.status(201).json({
         message: "Message sent successfully",
@@ -35,6 +39,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertNewsletterSubscriptionSchema.parse(req.body);
       const subscription = await storage.createNewsletterSubscription(validatedData);
+      
+      // Send email notification
+      await emailService.sendNewsletterSubscriptionNotification(validatedData.email);
       
       res.status(201).json({
         message: "Successfully subscribed to newsletter",

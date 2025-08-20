@@ -187,6 +187,30 @@ const Header = () => {
             
             <li>
               <Link 
+                href="/blog" 
+                onClick={closeMenu}
+                className={`nav-link font-medium hover:text-secondary transition-colors ${
+                  isActive("/blog") ? "text-secondary" : "text-primary"
+                }`}
+              >
+                Blog
+              </Link>
+            </li>
+            
+            <li>
+              <Link 
+                href="/calendar" 
+                onClick={closeMenu}
+                className={`nav-link font-medium hover:text-secondary transition-colors ${
+                  isActive("/calendar") ? "text-secondary" : "text-primary"
+                }`}
+              >
+                Calendar
+              </Link>
+            </li>
+            
+            <li>
+              <Link 
                 href="/contact"
                 onClick={closeMenu}
                 className={`nav-link font-medium hover:text-secondary transition-colors ${

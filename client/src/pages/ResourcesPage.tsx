@@ -825,12 +825,12 @@ const ResourcesPage = () => {
           <div className="flex flex-wrap gap-4 justify-center">
             <Button asChild className="bg-white text-primary hover:bg-white/90">
               <Link href="/contact">
-                <a>Request Resources</a>
+                Request Resources
               </Link>
             </Button>
             <Button asChild variant="outline" className="border-white text-white hover:bg-white/20">
               <Link href="/contact">
-                <a>Contact Our Team</a>
+                Contact Our Team
               </Link>
             </Button>
           </div>
