@@ -351,15 +351,7 @@ const FullPageAnimatedSlider: React.FC<FullPageAnimatedSliderProps> = ({
               playsInline
               poster={getOptimalImage(slide)}
               style={{
-                transform: enableParallax ? `translateY(${scrollY * 0.3}px) scale(1.1)` : 'none',
-                filter: slide.overlay?.colorFilter ? `
-                  hue-rotate(${slide.overlay.colorFilter.hue || 0}deg)
-                  saturate(${slide.overlay.colorFilter.saturation || 100}%)
-                  brightness(${slide.overlay.colorFilter.brightness || 100}%)
-                  contrast(${slide.overlay.colorFilter.contrast || 100}%)
-                  sepia(${slide.overlay.colorFilter.sepia || 0}%)
-                  blur(${slide.overlay.colorFilter.blur || 0}px)
-                ` : 'none',
+                transform: enableParallax ? `translateY(${scrollY * 0.3}px) scale(1.05)` : 'none',
               }}
             >
               <source src={slide.video} type="video/mp4" />
@@ -370,73 +362,28 @@ const FullPageAnimatedSlider: React.FC<FullPageAnimatedSliderProps> = ({
               />
             </video>
           ) : (
-            <div className="absolute inset-0 w-full h-full overflow-hidden">
-              <img
-                src={getOptimalImage(slide)}
-                alt={slide.title}
-                className="absolute inset-0 w-full h-full object-cover transition-all duration-700 hover:scale-105"
-                style={{
-                  transform: enableParallax ? `translateY(${scrollY * 0.3}px) scale(1.1)` : 'scale(1.02)',
-                  filter: slide.overlay?.colorFilter ? `
-                    hue-rotate(${slide.overlay.colorFilter.hue || 0}deg)
-                    saturate(${slide.overlay.colorFilter.saturation || 120}%)
-                    brightness(${slide.overlay.colorFilter.brightness || 110}%)
-                    contrast(${slide.overlay.colorFilter.contrast || 115}%)
-                    sepia(${slide.overlay.colorFilter.sepia || 0}%)
-                    blur(${slide.overlay.colorFilter.blur || 0}px)
-                  ` : 'saturate(120%) brightness(110%) contrast(115%)',
-                }}
-                loading={index === 0 ? 'eager' : 'lazy'}
-                decoding="async"
-              />
-              
-              {/* Dynamic Color Enhancement Layer */}
-              <div
-                className="absolute inset-0 opacity-20 mix-blend-overlay"
-                style={{
-                  background: `radial-gradient(circle at 50% 50%, ${
-                    index === 0 ? '#3B82F6' : 
-                    index === 1 ? '#F59E0B' : 
-                    index === 2 ? '#10B981' : 
-                    index === 3 ? '#8B5CF6' : 
-                    '#EF4444'
-                  }40, transparent 70%)`
-                }}
-              />
-            </div>
+            <img
+              src={getOptimalImage(slide)}
+              alt={slide.title}
+              className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
+              style={{
+                transform: enableParallax ? `translateY(${scrollY * 0.3}px) scale(1.05)` : 'scale(1.02)',
+              }}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
           )}
 
-          {/* Enhanced Overlay with Blend Modes */}
+          {/* Clean Professional Overlay */}
           {slide.overlay && (
             <div
               className="absolute inset-0"
               style={{
                 background: slide.overlay.gradient || slide.overlay.color,
                 opacity: slide.overlay.opacity,
-                mixBlendMode: slide.overlay.blendMode || 'normal',
               }}
             />
           )}
-          
-          {/* Additional Color Enhancement Overlay */}
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              background: `linear-gradient(135deg, 
-                ${index === 0 ? 'rgba(59,130,246,0.8)' : 
-                  index === 1 ? 'rgba(245,158,11,0.8)' : 
-                  index === 2 ? 'rgba(16,185,129,0.8)' : 
-                  index === 3 ? 'rgba(139,92,246,0.8)' : 
-                  'rgba(239,68,68,0.8)'} 0%, 
-                transparent 50%, 
-                ${index === 0 ? 'rgba(30,64,175,0.6)' : 
-                  index === 1 ? 'rgba(217,119,6,0.6)' : 
-                  index === 2 ? 'rgba(5,150,105,0.6)' : 
-                  index === 3 ? 'rgba(124,58,237,0.6)' : 
-                  'rgba(220,38,38,0.6)'} 100%)`,
-              mixBlendMode: 'soft-light',
-            }}
-          />
 
           {/* Content */}
           <div className={`absolute inset-0 flex items-center z-30 ${

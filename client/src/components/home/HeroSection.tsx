@@ -20,18 +20,9 @@ const HeroSection = () => {
         variant: "primary" as const
       },
       overlay: {
-        opacity: 0.5,
-        color: "rgba(0,0,0,0.3)",
-        gradient: "linear-gradient(135deg, rgba(30,64,175,0.8) 0%, rgba(59,130,246,0.6) 50%, rgba(30,64,175,0.9) 100%)",
-        blendMode: "soft-light",
-        colorFilter: {
-          hue: 10,
-          saturation: 130,
-          brightness: 115,
-          contrast: 120,
-          sepia: 0,
-          blur: 0
-        }
+        opacity: 0.4,
+        color: "rgba(0,0,0,0.2)",
+        gradient: "linear-gradient(135deg, rgba(30,64,175,0.6) 0%, rgba(59,130,246,0.4) 50%, rgba(30,64,175,0.7) 100%)"
       },
       animation: {
         type: "parallax" as const,
@@ -56,18 +47,9 @@ const HeroSection = () => {
         variant: "secondary" as const
       },
       overlay: {
-        opacity: 0.6,
-        color: "rgba(0,0,0,0.4)",
-        gradient: "linear-gradient(135deg, rgba(139,69,19,0.8) 0%, rgba(255,140,0,0.7) 50%, rgba(139,69,19,0.9) 100%)",
-        blendMode: "overlay",
-        colorFilter: {
-          hue: -15,
-          saturation: 140,
-          brightness: 120,
-          contrast: 125,
-          sepia: 10,
-          blur: 0
-        }
+        opacity: 0.4,
+        color: "rgba(0,0,0,0.2)",
+        gradient: "linear-gradient(135deg, rgba(30,64,175,0.6) 0%, rgba(59,130,246,0.4) 50%, rgba(30,64,175,0.7) 100%)"
       },
       animation: {
         type: "slide" as const,
@@ -92,18 +74,9 @@ const HeroSection = () => {
         variant: "outline" as const
       },
       overlay: {
-        opacity: 0.7,
-        color: "rgba(0,0,0,0.5)",
-        gradient: "linear-gradient(135deg, rgba(34,197,94,0.8) 0%, rgba(16,185,129,0.7) 50%, rgba(34,197,94,0.9) 100%)",
-        blendMode: "multiply",
-        colorFilter: {
-          hue: 5,
-          saturation: 135,
-          brightness: 112,
-          contrast: 118,
-          sepia: 0,
-          blur: 0
-        }
+        opacity: 0.4,
+        color: "rgba(0,0,0,0.2)",
+        gradient: "linear-gradient(135deg, rgba(30,64,175,0.6) 0%, rgba(59,130,246,0.4) 50%, rgba(30,64,175,0.7) 100%)"
       },
       animation: {
         type: "zoom" as const,
@@ -128,18 +101,9 @@ const HeroSection = () => {
         variant: "primary" as const
       },
       overlay: {
-        opacity: 0.6,
-        color: "rgba(0,0,0,0.4)",
-        gradient: "linear-gradient(135deg, rgba(147,51,234,0.8) 0%, rgba(168,85,247,0.7) 50%, rgba(147,51,234,0.9) 100%)",
-        blendMode: "screen",
-        colorFilter: {
-          hue: 20,
-          saturation: 125,
-          brightness: 108,
-          contrast: 122,
-          sepia: 5,
-          blur: 0
-        }
+        opacity: 0.4,
+        color: "rgba(0,0,0,0.2)",
+        gradient: "linear-gradient(135deg, rgba(30,64,175,0.6) 0%, rgba(59,130,246,0.4) 50%, rgba(30,64,175,0.7) 100%)"
       },
       animation: {
         type: "fade" as const,
@@ -163,18 +127,9 @@ const HeroSection = () => {
         variant: "outline" as const
       },
       overlay: {
-        opacity: 0.5,
-        color: "rgba(0,0,0,0.3)",
-        gradient: "linear-gradient(135deg, rgba(239,68,68,0.8) 0%, rgba(248,113,113,0.7) 50%, rgba(239,68,68,0.9) 100%)",
-        blendMode: "color-burn",
-        colorFilter: {
-          hue: -10,
-          saturation: 150,
-          brightness: 105,
-          contrast: 130,
-          sepia: 8,
-          blur: 0
-        }
+        opacity: 0.4,
+        color: "rgba(0,0,0,0.2)",
+        gradient: "linear-gradient(135deg, rgba(30,64,175,0.6) 0%, rgba(59,130,246,0.4) 50%, rgba(30,64,175,0.7) 100%)"
       },
       animation: {
         type: "slide" as const,
