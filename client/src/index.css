@@ -26,6 +26,38 @@
   .rotate-3d:hover {
     transform: perspective(1000px) rotateX(2deg) rotateY(5deg);
   }
+
+  /* Advanced Responsive Styles */
+  .responsive-container { 
+    container-type: inline-size; 
+    position: relative;
+  }
+  
+  .fluid-heading-xl { 
+    font-size: clamp(2.5rem, 4vw + 1rem, 5rem); 
+    line-height: 1.1; 
+  }
+  
+  .smooth-transition { 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+    will-change: transform, opacity; 
+  }
+
+  .enhanced-hover {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease-out;
+  }
+
+  .enhanced-hover:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(5deg) translateZ(20px);
+  }
+
+  /* Performance optimizations */
+  @media (prefers-reduced-motion: reduce) {
+    .smooth-transition {
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 :root {

@@ -74,7 +74,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <div className="relative">
+    <div className="relative responsive-container">
       <ResponsiveSliderSystem 
         slides={responsiveSlides}
         autoPlay={true}
@@ -94,9 +94,9 @@ const HeroSection = () => {
         preloadImages={true}
       />
       
-      {/* Curved Bottom Edge */}
+      {/* Curved Bottom Edge with enhanced styling */}
       <div className="absolute bottom-0 left-0 right-0 z-30">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" className="smooth-transition">
           <path
             fill="#ffffff"
             fillOpacity="1"
