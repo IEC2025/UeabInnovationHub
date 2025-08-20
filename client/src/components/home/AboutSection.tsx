@@ -1,5 +1,8 @@
 import { Link } from "wouter";
 import { Lightbulb, Users, Rocket, GraduationCap, ArrowRight } from "lucide-react";
+import { EnhancedCard } from "@/components/ui/enhanced-card";
+import { CountUp, ProgressiveImage } from "@/components/ui/micro-interactions";
+import { motion } from "framer-motion";
 
 const AboutSection = () => {
   return (
@@ -34,17 +37,33 @@ const AboutSection = () => {
               transform ideas into impactful ventures.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="flex items-start">
-                <div className="bg-neutral-100 p-3 rounded-lg mr-4">
-                  <Lightbulb className="text-secondary h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg mb-1">Innovation Support</h3>
-                  <p className="text-neutral-600">
-                    Nurturing creative ideas and solutions to real-world problems
-                  </p>
-                </div>
-              </div>
+              <EnhancedCard 
+                className="p-1 rounded-xl"
+                hover3d={true}
+                glowEffect={true}
+              >
+                <motion.div 
+                  className="flex items-start p-4 bg-white rounded-lg h-full"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <motion.div 
+                    className="bg-gradient-to-br from-secondary to-secondary/80 p-3 rounded-lg mr-4"
+                    whileHover={{ rotate: 5, scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <Lightbulb className="text-white h-5 w-5" />
+                  </motion.div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-1">Innovation Support</h3>
+                    <p className="text-neutral-600">
+                      Nurturing creative ideas and solutions to real-world problems
+                    </p>
+                  </div>
+                </motion.div>
+              </EnhancedCard>
               <div className="flex items-start">
                 <div className="bg-neutral-100 p-3 rounded-lg mr-4">
                   <Users className="text-secondary h-5 w-5" />
