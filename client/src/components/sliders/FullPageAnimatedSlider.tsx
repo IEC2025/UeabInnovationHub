@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Pause, Play, Volume2, VolumeX } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Pause, Play, Volume2, VolumeX, Calendar, Users, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { CountdownTimer } from '@/components/ui/countdown-timer';
+import { motion } from 'framer-motion';
 
 interface SlideData {
   id: number;
@@ -38,6 +40,7 @@ interface SlideData {
   };
   contentPosition?: 'left' | 'center' | 'right';
   textAlign?: 'left' | 'center' | 'right';
+  specialContent?: 'countdown' | 'stats' | 'testimonial';
 }
 
 interface FullPageAnimatedSliderProps {
@@ -441,6 +444,49 @@ const FullPageAnimatedSlider: React.FC<FullPageAnimatedSliderProps> = ({
                     {slide.description}
                   </p>
                 </div>
+
+                {/* Special Content - Countdown Timer */}
+                {slide.specialContent === 'countdown' && (
+                  <div className="mb-8 overflow-hidden">
+                    <motion.div
+                      className={`transform transition-all duration-1000 delay-700 ${
+                        index === currentSlide 
+                          ? 'translate-y-0 opacity-100' 
+                          : 'translate-y-8 opacity-0'
+                      }`}
+                    >
+                      <CountdownTimer 
+                        targetDate="2025-09-28T00:00:00"
+                        className="mb-6"
+                      />
+                      
+                      {/* Event Highlights */}
+                      <motion.div
+                        className={`grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto mb-6 transform transition-all duration-1000 delay-900 ${
+                          index === currentSlide 
+                            ? 'translate-y-0 opacity-100' 
+                            : 'translate-y-8 opacity-0'
+                        }`}
+                      >
+                        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+                          <Calendar className="w-6 h-6 mx-auto mb-2 text-white" />
+                          <div className="text-white font-semibold">6 Days</div>
+                          <div className="text-white/80 text-sm">of Innovation</div>
+                        </div>
+                        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+                          <Users className="w-6 h-6 mx-auto mb-2 text-white" />
+                          <div className="text-white font-semibold">500+</div>
+                          <div className="text-white/80 text-sm">Participants</div>
+                        </div>
+                        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
+                          <Trophy className="w-6 h-6 mx-auto mb-2 text-white" />
+                          <div className="text-white font-semibold">$10,000</div>
+                          <div className="text-white/80 text-sm">in Prizes</div>
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  </div>
+                )}
                 
                 {slide.cta && (
                   <div className="overflow-hidden">
@@ -456,12 +502,13 @@ const FullPageAnimatedSlider: React.FC<FullPageAnimatedSliderProps> = ({
                         className={`${
                           slide.cta.variant === 'secondary' ? 'bg-secondary hover:bg-secondary/90' :
                           slide.cta.variant === 'outline' ? 'border-white text-white hover:bg-white hover:text-primary bg-transparent' :
+                          slide.specialContent === 'countdown' ? 'bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 animate-pulse' :
                           'bg-primary hover:bg-primary/90'
                         } text-white px-8 py-4 font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300`}
                         asChild
                       >
                         <a href={slide.cta.link}>
-                          {slide.cta.text}
+                          {slide.specialContent === 'countdown' && '🚀 '}{slide.cta.text}{slide.specialContent === 'countdown' && ' - Limited Spots!'}
                         </a>
                       </Button>
                     </div>

@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { useCallback, useEffect, useState, useRef } from "react";
 import FullPageAnimatedSlider from '@/components/sliders/FullPageAnimatedSlider';
+import { CountdownTimer } from '@/components/ui/countdown-timer';
 
 const HeroSection = () => {
   // Full-page animated slider data with advanced features
@@ -114,6 +115,34 @@ const HeroSection = () => {
     },
     {
       id: 5,
+      title: "Innovation Week & Entrepreneurship Week 2025",
+      subtitle: "September 28 - October 3, 2025",
+      description: "Join us for an exciting week of innovation, entrepreneurship competitions, workshops, networking sessions, and groundbreaking presentations. Don't miss this opportunity to showcase your ideas and connect with industry leaders!",
+      image: "/src/assets/images/ueab-campus-flags.jpg",
+      mobileImage: "/src/assets/images/ueab-campus-flags.jpg",
+      tabletImage: "/src/assets/images/ueab-campus-flags.jpg",
+      desktopImage: "/src/assets/images/ueab-campus-flags.jpg",
+      cta: {
+        text: "Register Now",
+        link: "/events/innovation-week-2025",
+        variant: "primary" as const
+      },
+      overlay: {
+        opacity: 0.5,
+        color: "rgba(0,0,0,0.3)",
+        gradient: "linear-gradient(135deg, rgba(30,64,175,0.7) 0%, rgba(59,130,246,0.5) 50%, rgba(147,51,234,0.8) 100%)"
+      },
+      animation: {
+        type: "parallax" as const,
+        direction: "up" as const,
+        duration: 1500
+      },
+      contentPosition: "center" as const,
+      textAlign: "center" as const,
+      specialContent: "countdown"
+    },
+    {
+      id: 6,
       title: "Global Impact Network",
       subtitle: "Connecting Worldwide",
       description: "Building a global ecosystem of entrepreneurs, mentors, and investors to amplify the impact of African innovation on the world stage.",
