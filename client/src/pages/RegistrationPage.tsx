@@ -1,8 +1,200 @@
-import React from 'react';
-import { ArrowRight, Users, Building, Award, MapPin, Calendar, CheckCircle, Globe, Lightbulb, Target } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, Users, Building, Award, MapPin, Calendar, CheckCircle, Globe, Lightbulb, Target, Shield, Crown, Medal, Star, Sprout, Phone, Mail, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/hooks/useAuth';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const RegistrationPage = () => {
+  const { user, isAuthenticated, isLoading } = useAuth();
+  const [currentStep, setCurrentStep] = useState<'overview' | 'registration'>('overview');
+  const [formData, setFormData] = useState({
+    registrationType: '',
+    organizationName: '',
+    contactPerson: '',
+    email: '',
+    phone: '',
+    participantCount: '',
+    boothRequirements: '',
+    specialRequirements: ''
+  });
+
+  const handleRegistrationClick = () => {
+    if (!isAuthenticated) {
+      window.location.href = '/api/login';
+    } else {
+      setCurrentStep('registration');
+    }
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission here
+    console.log('Registration submitted:', formData);
+  };
+
+  if (currentStep === 'registration') {
+    return (
+      <div className="min-h-screen bg-white">
+        {/* Header */}
+        <section className="bg-primary text-white py-8">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <img
+                  src="/src/assets/images/iec-logo.png"
+                  alt="IEC Logo"
+                  className="h-12"
+                />
+                <div>
+                  <h1 className="text-2xl font-bold">BIEW 2025 Registration</h1>
+                  <p className="text-primary-50">Complete your registration to join us</p>
+                </div>
+              </div>
+              <Button
+                variant="outline"
+                className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
+                onClick={() => setCurrentStep('overview')}
+              >
+                Back to Overview
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Registration Form */}
+        <section className="py-16">
+          <div className="container mx-auto px-4 max-w-2xl">
+            <form onSubmit={handleFormSubmit} className="space-y-8">
+              <div className="bg-gray-50 p-6 rounded-lg">
+                <h2 className="text-2xl font-bold text-primary mb-6">Registration Details</h2>
+                
+                {/* Registration Type */}
+                <div className="space-y-4 mb-6">
+                  <Label className="text-lg font-semibold">Select Registration Type</Label>
+                  <RadioGroup 
+                    value={formData.registrationType} 
+                    onValueChange={(value) => setFormData({...formData, registrationType: value})}
+                  >
+                    <div className="flex items-center space-x-2 p-4 border rounded-lg">
+                      <RadioGroupItem value="delegation" id="delegation" />
+                      <Label htmlFor="delegation" className="flex-1">
+                        <div className="font-semibold">Delegation Registration - KSH 25,000</div>
+                        <div className="text-sm text-gray-600">Full 4-day access to all sessions, VIP networking, meals & delegate kit</div>
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2 p-4 border rounded-lg">
+                      <RadioGroupItem value="exhibition" id="exhibition" />
+                      <Label htmlFor="exhibition" className="flex-1">
+                        <div className="font-semibold">Exhibition Registration - KSH 15,000</div>
+                        <div className="text-sm text-gray-600">Dedicated exhibition space, setup support, branding opportunities</div>
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+
+                {/* Organization Details */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <Label htmlFor="organizationName">Organization Name *</Label>
+                    <Input
+                      id="organizationName"
+                      value={formData.organizationName}
+                      onChange={(e) => setFormData({...formData, organizationName: e.target.value})}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="contactPerson">Contact Person *</Label>
+                    <Input
+                      id="contactPerson"
+                      value={formData.contactPerson}
+                      onChange={(e) => setFormData({...formData, contactPerson: e.target.value})}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="email">Email Address *</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="phone">Phone Number *</Label>
+                    <Input
+                      id="phone"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      required
+                    />
+                  </div>
+                </div>
+
+                {/* Delegation Specific */}
+                {formData.registrationType === 'delegation' && (
+                  <div className="mb-6">
+                    <Label htmlFor="participantCount">Number of Participants</Label>
+                    <Select value={formData.participantCount} onValueChange={(value) => setFormData({...formData, participantCount: value})}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select number of participants" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="1-5">1-5 participants</SelectItem>
+                        <SelectItem value="6-10">6-10 participants</SelectItem>
+                        <SelectItem value="11-20">11-20 participants</SelectItem>
+                        <SelectItem value="21-50">21-50 participants</SelectItem>
+                        <SelectItem value="50+">50+ participants</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
+
+                {/* Exhibition Specific */}
+                {formData.registrationType === 'exhibition' && (
+                  <div className="mb-6">
+                    <Label htmlFor="boothRequirements">Booth Requirements</Label>
+                    <Textarea
+                      id="boothRequirements"
+                      value={formData.boothRequirements}
+                      onChange={(e) => setFormData({...formData, boothRequirements: e.target.value})}
+                      placeholder="Describe your booth setup requirements..."
+                    />
+                  </div>
+                )}
+
+                {/* Special Requirements */}
+                <div className="mb-6">
+                  <Label htmlFor="specialRequirements">Special Requirements (Optional)</Label>
+                  <Textarea
+                    id="specialRequirements"
+                    value={formData.specialRequirements}
+                    onChange={(e) => setFormData({...formData, specialRequirements: e.target.value})}
+                    placeholder="Any special requirements or dietary restrictions..."
+                  />
+                </div>
+
+                <Button 
+                  type="submit" 
+                  className="w-full bg-secondary text-white py-3 text-lg"
+                  disabled={!formData.registrationType || !formData.organizationName}
+                >
+                  Complete Registration
+                </Button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section - CEIL Style */}
@@ -40,184 +232,71 @@ const RegistrationPage = () => {
         </div>
       </section>
 
-      {/* Strategy Pillars - CEIL Style */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="text-center">
-              <img 
-                src="/src/assets/images/BTV08785.JPG" 
-                alt="Innovation Development" 
-                className="w-full h-48 object-cover rounded-lg mb-6"
-              />
-              <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
-                Innovation Development
-              </div>
-              <p className="text-gray-600 mb-6">
-                Gain insights into cutting-edge innovation development, research commercialization, and establishment of sustainable enterprises within the academic environment.
-              </p>
-              <div className="text-sm font-semibold text-secondary mb-2">Strategy</div>
-              <h4 className="text-lg font-bold text-primary">Innovation Development</h4>
-              <button className="mt-4 text-primary hover:text-secondary transition-colors">+</button>
-            </div>
-            <div className="text-center">
-              <img 
-                src="/src/assets/images/BTV08537.JPG" 
-                alt="Entrepreneurship" 
-                className="w-full h-48 object-cover rounded-lg mb-6"
-              />
-              <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
-                Entrepreneurship
-              </div>
-              <p className="text-gray-600 mb-6">
-                Shed light on entrepreneurial opportunities for students, faculty, and the broader community through comprehensive mentorship and resource provision.
-              </p>
-              <div className="text-sm font-semibold text-secondary mb-2">Strategy</div>
-              <h4 className="text-lg font-bold text-primary">Entrepreneurship</h4>
-              <button className="mt-4 text-primary hover:text-secondary transition-colors">+</button>
-            </div>
-            <div className="text-center">
-              <img 
-                src="/src/assets/images/kiw-presentation.jpg" 
-                alt="Impact Creation" 
-                className="w-full h-48 object-cover rounded-lg mb-6"
-              />
-              <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
-                Impact Creation
-              </div>
-              <p className="text-gray-600 mb-6">
-                Showcase and celebrate practical solutions developed by innovators within universities that address job creation and sustainable development.
-              </p>
-              <div className="text-sm font-semibold text-secondary mb-2">Strategy</div>
-              <h4 className="text-lg font-bold text-primary">Impact Creation</h4>
-              <button className="mt-4 text-primary hover:text-secondary transition-colors">+</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About BIEW Section - CEIL Style */}
+      {/* Event Guests Section - CEIL Style */}
       <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <img 
-                src="/src/assets/images/innovation-week-banner.jpg" 
-                alt="BIEW 2025" 
-                className="rounded-lg shadow-lg w-full"
-              />
-            </div>
-            <div>
-              <h2 className="text-4xl font-bold text-primary mb-6">About BIEW</h2>
-              <h3 className="text-2xl font-semibold text-secondary mb-6">Week 2025</h3>
-              <h4 className="text-lg font-medium text-gray-600 mb-6">
-                Hosted By: University of Eastern Africa, Baraton (UEAB)
-              </h4>
-              <p className="text-gray-700 mb-6 leading-relaxed">
-                The theme for BIEW 2025 emphasizes 'Blueprints for Tomorrow: Advancing Learning, Innovation & Enterprise through Design Thinking and Cognitive Mastery' which underscores the importance of robust innovation ecosystems in driving sustainable economic development. It highlights the need for effective industry-academia linkages, strategic institutional frameworks, and resilient funding mechanisms to foster innovation and entrepreneurship across Africa.
-              </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-1">500+</div>
-                  <div className="text-sm text-gray-600">Expected Attendees</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-1">50+</div>
-                  <div className="text-sm text-gray-600">Universities</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-1">25+</div>
-                  <div className="text-sm text-gray-600">Organizations</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-1">4</div>
-                  <div className="text-sm text-gray-600">Action Days</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* BIEW Goals Section - CEIL Style */}
-      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
-              Why Choose Us?
+              Distinguished Speakers
             </div>
-            <h2 className="text-4xl font-bold text-primary mb-6">BIEW 2025 Goals</h2>
+            <h2 className="text-4xl font-bold text-primary mb-6">Meet Our Event Guests</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex items-start gap-6">
-              <div className="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl flex-shrink-0">
-                1
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center bg-white p-6 rounded-lg shadow-lg">
+              <div className="w-32 h-32 bg-gradient-to-br from-primary to-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
+                <Crown className="h-16 w-16 text-white" />
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-primary mb-3">
-                  Celebrate Innovation & Startups
-                </h3>
-                <p className="text-gray-600">
-                  Recognizing and promoting student-led innovations and breakthrough ideas that can transform communities across Africa.
-                </p>
+              <div className="bg-gradient-to-r from-primary to-secondary text-white px-3 py-1 rounded-full text-sm font-semibold mb-2">
+                CHIEF GUEST
               </div>
+              <h4 className="font-bold text-primary text-lg">Prof. Tony Omwansa</h4>
+              <p className="text-sm text-gray-600 mb-2">CEO, KeNIA</p>
+              <p className="text-xs text-gray-500">Innovation Policy & Strategy</p>
             </div>
-            <div className="flex items-start gap-6">
-              <div className="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl flex-shrink-0">
-                2
+            <div className="text-center bg-white p-6 rounded-lg shadow-lg">
+              <div className="w-32 h-32 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <Users className="h-16 w-16 text-primary" />
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-primary mb-3">
-                  Accelerate Research Commercialization
-                </h3>
-                <p className="text-gray-600">
-                  Turning research into market-ready solutions through structured mentorship, funding access, and industry partnerships.
-                </p>
-              </div>
+              <h4 className="font-bold text-primary text-lg">Prof. Msafiri Jackson</h4>
+              <p className="text-sm text-gray-600 mb-2">Vice Chancellor, UEAB</p>
+              <p className="text-xs text-gray-500">Academic Leadership</p>
             </div>
-            <div className="flex items-start gap-6">
-              <div className="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl flex-shrink-0">
-                3
+            <div className="text-center bg-white p-6 rounded-lg shadow-lg">
+              <div className="w-32 h-32 bg-secondary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <Building className="h-16 w-16 text-secondary" />
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-primary mb-3">
-                  Bridge Innovation & Industry
-                </h3>
-                <p className="text-gray-600">
-                  Creating strong partnerships between students, faculty, and industry stakeholders to facilitate career readiness and problem-solving.
-                </p>
-              </div>
+              <h4 className="font-bold text-primary text-lg">Esther Masese</h4>
+              <p className="text-sm text-gray-600 mb-2">CFO, Safaricom</p>
+              <p className="text-xs text-gray-500">Corporate Finance & Strategy</p>
             </div>
-            <div className="flex items-start gap-6">
-              <div className="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl flex-shrink-0">
-                4
+            <div className="text-center bg-white p-6 rounded-lg shadow-lg">
+              <div className="w-32 h-32 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <Award className="h-16 w-16 text-primary" />
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-primary mb-3">
-                  Expand Market Opportunities
-                </h3>
-                <p className="text-gray-600">
-                  Connecting students to regional and global innovation ecosystems and investment networks for sustainable growth.
-                </p>
-              </div>
+              <h4 className="font-bold text-primary text-lg">Dr. Benard Chitunga</h4>
+              <p className="text-sm text-gray-600 mb-2">Innovation Expert</p>
+              <p className="text-xs text-gray-500">Research & Development</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Registration Options - CEIL Style */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
               Registration
             </div>
-            <h2 className="text-4xl font-bold text-primary mb-6">Choose Your Best Registration Plan</h2>
+            <h2 className="text-4xl font-bold text-primary mb-6">Choose Your Registration Plan</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Join us for the most comprehensive innovation and entrepreneurship gathering in East Africa. Register now to secure your spot.
+            </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             
             {/* Delegation Registration */}
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="bg-white border-2 border-gray-200 rounded-lg overflow-hidden hover:border-primary transition-colors">
               <div className="p-8 text-center">
                 <img 
                   src="/src/assets/images/ueab-campus-flags.jpg" 
@@ -225,7 +304,8 @@ const RegistrationPage = () => {
                   className="w-full h-32 object-cover rounded-lg mb-6"
                 />
                 <h3 className="text-2xl font-bold text-primary mb-4">Delegation Registration</h3>
-                <div className="text-4xl font-bold text-secondary mb-6">Ksh25,000 / delegation</div>
+                <div className="text-4xl font-bold text-secondary mb-6">KSH 25,000</div>
+                <div className="text-sm text-gray-500 mb-6">per delegation</div>
                 <ul className="text-left space-y-3 mb-8">
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
@@ -250,15 +330,17 @@ const RegistrationPage = () => {
                 </ul>
                 <Button
                   className="w-full bg-secondary text-white py-3 px-6 rounded-lg font-semibold hover:bg-secondary/90 transition-colors"
-                  onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header', '_blank')}
+                  onClick={handleRegistrationClick}
+                  data-testid="button-register-delegation"
                 >
-                  Select Plan
+                  {isAuthenticated ? 'Register Now' : 'Login to Register'}
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
             </div>
 
             {/* Exhibition Registration */}
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="bg-white border-2 border-gray-200 rounded-lg overflow-hidden hover:border-primary transition-colors">
               <div className="p-8 text-center">
                 <img 
                   src="/src/assets/images/innovation-week-group.jpg" 
@@ -266,7 +348,8 @@ const RegistrationPage = () => {
                   className="w-full h-32 object-cover rounded-lg mb-6"
                 />
                 <h3 className="text-2xl font-bold text-primary mb-4">Exhibition Registration</h3>
-                <div className="text-4xl font-bold text-secondary mb-6">Ksh15,000 / booth</div>
+                <div className="text-4xl font-bold text-secondary mb-6">KSH 15,000</div>
+                <div className="text-sm text-gray-500 mb-6">per booth</div>
                 <ul className="text-left space-y-3 mb-8">
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
@@ -291,131 +374,179 @@ const RegistrationPage = () => {
                 </ul>
                 <Button
                   className="w-full bg-secondary text-white py-3 px-6 rounded-lg font-semibold hover:bg-secondary/90 transition-colors"
-                  onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header', '_blank')}
+                  onClick={handleRegistrationClick}
+                  data-testid="button-register-exhibition"
                 >
-                  Select Plan
+                  {isAuthenticated ? 'Register Now' : 'Login to Register'}
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </div>
             </div>
           </div>
+          
+          {/* Login Prompt */}
+          {!isAuthenticated && !isLoading && (
+            <div className="text-center mt-8 p-4 bg-blue-50 rounded-lg max-w-2xl mx-auto">
+              <User className="h-8 w-8 text-primary mx-auto mb-2" />
+              <p className="text-gray-700 mb-3">
+                Please log in to your account to complete the registration process
+              </p>
+              <Button
+                onClick={() => window.location.href = '/api/login'}
+                className="bg-primary text-white px-6 py-2"
+                data-testid="button-login"
+              >
+                Login to Continue
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Sponsorship Section - CEIL Style */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
-              Sponsorship
-            </div>
-            <h2 className="text-4xl font-bold text-primary mb-6">Become Part of BIEW</h2>
-            <h2 className="text-4xl font-bold text-primary mb-6">Week 2025</h2>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <img 
-                src="/src/assets/images/BTV08784.JPG" 
-                alt="Sponsorship" 
-                className="rounded-lg shadow-lg w-full"
-              />
-            </div>
-            <div className="space-y-6">
-              <div className="bg-gradient-to-br from-primary to-secondary text-white rounded-lg p-6">
-                <h3 className="text-2xl font-bold mb-4">Elite Innovation Package</h3>
-                <div className="text-3xl font-bold mb-4">Ksh 500,000</div>
-                <ul className="space-y-2 text-sm mb-6">
-                  <li>• Premium branding across all materials</li>
-                  <li>• Speaking opportunity in main sessions</li>
-                  <li>• 10 complimentary full-access passes</li>
-                  <li>• VIP networking and deal room access</li>
-                  <li>• Prime exhibition space allocation</li>
-                  <li>• Post-event brand endorsement</li>
-                </ul>
-                <Button
-                  className="w-full bg-white text-primary py-2 px-6 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-                  onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Elite Innovation Package Sponsorship', '_blank')}
-                >
-                  Become sponsor
-                </Button>
-              </div>
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <h3 className="text-2xl font-bold text-primary mb-4">Premium Partnership</h3>
-                <div className="text-3xl font-bold text-secondary mb-4">Ksh 250,000</div>
-                <ul className="space-y-2 text-sm text-gray-600 mb-6">
-                  <li>• Strategic branding on all materials</li>
-                  <li>• Panel participation opportunity</li>
-                  <li>• 6 complimentary full-access passes</li>
-                  <li>• Networking session access</li>
-                  <li>• Dedicated exhibition booth</li>
-                  <li>• Digital marketing inclusion</li>
-                </ul>
-                <Button
-                  className="w-full bg-secondary text-white py-2 px-6 rounded-lg font-semibold hover:bg-secondary/90 transition-colors"
-                  onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Premium Partnership Sponsorship', '_blank')}
-                >
-                  Become sponsor
-                </Button>
-              </div>
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
-                <h3 className="text-2xl font-bold text-primary mb-4">Innovation Supporter</h3>
-                <div className="text-3xl font-bold text-secondary mb-4">Ksh 100,000</div>
-                <ul className="space-y-2 text-sm text-gray-600 mb-6">
-                  <li>• Event material branding</li>
-                  <li>• Opening ceremony recognition</li>
-                  <li>• 3 complimentary passes</li>
-                  <li>• Shared exhibition space</li>
-                  <li>• Social media recognition</li>
-                  <li>• Thank you certificate</li>
-                </ul>
-                <Button
-                  className="w-full bg-primary text-white py-2 px-6 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
-                  onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Innovation Supporter Sponsorship', '_blank')}
-                >
-                  Become sponsor
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Speakers Preview - CEIL Style */}
+      {/* Sponsorship Packages - CEIL Style */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
-              Speakers
+              Partnership Opportunities
             </div>
-            <h2 className="text-4xl font-bold text-primary mb-6">Let's Meet with Our Speakers</h2>
+            <h2 className="text-4xl font-bold text-primary mb-6">Sponsorship Packages</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Partner with us to drive innovation and entrepreneurship across Africa. Choose the sponsorship package that aligns with your organization's goals.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-32 h-32 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Users className="h-16 w-16 text-primary" />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            {/* Title Sponsor */}
+            <div className="bg-gradient-to-br from-yellow-400 to-yellow-600 text-white rounded-lg p-8 relative overflow-hidden transform hover:scale-105 transition-transform">
+              <div className="absolute top-4 right-4">
+                <Crown className="h-8 w-8 text-yellow-200" />
               </div>
-              <h4 className="font-bold text-primary">Prof. Msafiri Jackson</h4>
-              <p className="text-sm text-gray-600">Vice-Chancellor, UEAB</p>
+              <div className="mb-4">
+                <Shield className="h-12 w-12 mb-4" />
+                <h3 className="text-2xl font-bold mb-2">🏆 Title Sponsor</h3>
+                <div className="text-3xl font-bold mb-2">KSH 3,000,000</div>
+              </div>
+              <ul className="space-y-2 text-sm mb-6">
+                <li>• Exclusive naming rights</li>
+                <li>• Premium logo placement</li>
+                <li>• Keynote speaking slot</li>
+                <li>• 2 prime exhibition booths</li>
+                <li>• 10 complimentary delegate passes</li>
+                <li>• Recognition as sole Title Sponsor</li>
+              </ul>
+              <Button
+                className="w-full bg-white text-yellow-600 font-semibold hover:bg-yellow-50"
+                onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Title Sponsor Package - BIEW 2025', '_blank')}
+                data-testid="button-sponsor-title"
+              >
+                Become Title Sponsor
+              </Button>
             </div>
-            <div className="text-center">
-              <div className="w-32 h-32 bg-secondary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Globe className="h-16 w-16 text-secondary" />
+
+            {/* Platinum Sponsor */}
+            <div className="bg-gradient-to-br from-gray-300 to-gray-500 text-white rounded-lg p-8 relative overflow-hidden transform hover:scale-105 transition-transform">
+              <div className="absolute top-4 right-4">
+                <Medal className="h-8 w-8 text-gray-200" />
               </div>
-              <h4 className="font-bold text-primary">Dr. Tonny K. Omwansa</h4>
-              <p className="text-sm text-gray-600">CEO, KeNIA</p>
+              <div className="mb-4">
+                <Award className="h-12 w-12 mb-4" />
+                <h3 className="text-2xl font-bold mb-2">🥇 Platinum Sponsor</h3>
+                <div className="text-3xl font-bold mb-2">KSH 2,000,000</div>
+              </div>
+              <ul className="space-y-2 text-sm mb-6">
+                <li>• Prominent logo placement</li>
+                <li>• Panel speaking opportunity</li>
+                <li>• 1 prime exhibition booth</li>
+                <li>• 7 complimentary passes</li>
+                <li>• Opening/closing recognition</li>
+                <li>• Press release inclusion</li>
+              </ul>
+              <Button
+                className="w-full bg-white text-gray-600 font-semibold hover:bg-gray-50"
+                onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Platinum Sponsor Package - BIEW 2025', '_blank')}
+                data-testid="button-sponsor-platinum"
+              >
+                Become Platinum Sponsor
+              </Button>
             </div>
-            <div className="text-center">
-              <div className="w-32 h-32 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Award className="h-16 w-16 text-primary" />
+
+            {/* Gold Sponsor */}
+            <div className="bg-gradient-to-br from-yellow-500 to-yellow-700 text-white rounded-lg p-8 relative overflow-hidden transform hover:scale-105 transition-transform">
+              <div className="absolute top-4 right-4">
+                <Star className="h-8 w-8 text-yellow-200" />
               </div>
-              <h4 className="font-bold text-primary">Mr. Albert Wakoli</h4>
-              <p className="text-sm text-gray-600">Director, IEC</p>
+              <div className="mb-4">
+                <Target className="h-12 w-12 mb-4" />
+                <h3 className="text-2xl font-bold mb-2">🥈 Gold Sponsor</h3>
+                <div className="text-3xl font-bold mb-2">KSH 1,000,000</div>
+              </div>
+              <ul className="space-y-2 text-sm mb-6">
+                <li>• Logo on website & program</li>
+                <li>• 1 exhibition booth</li>
+                <li>• 5 complimentary passes</li>
+                <li>• Media mentions</li>
+                <li>• Closing ceremony mention</li>
+                <li>• Digital marketing inclusion</li>
+              </ul>
+              <Button
+                className="w-full bg-white text-yellow-600 font-semibold hover:bg-yellow-50"
+                onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Gold Sponsor Package - BIEW 2025', '_blank')}
+                data-testid="button-sponsor-gold"
+              >
+                Become Gold Sponsor
+              </Button>
             </div>
-            <div className="text-center">
-              <div className="w-32 h-32 bg-secondary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Lightbulb className="h-16 w-16 text-secondary" />
+          </div>
+
+          {/* Silver & Bronze Sponsors */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 max-w-4xl mx-auto">
+            <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
+              <div className="flex items-center mb-4">
+                <Medal className="h-8 w-8 text-gray-400 mr-3" />
+                <div>
+                  <h3 className="text-xl font-bold text-primary">🥉 Silver Sponsor</h3>
+                  <div className="text-2xl font-bold text-secondary">KSH 750,000</div>
+                </div>
               </div>
-              <h4 className="font-bold text-primary">KIPI, ARIPO, WIPO</h4>
-              <p className="text-sm text-gray-600">IP Expert Representatives</p>
+              <ul className="space-y-2 text-sm text-gray-600 mb-4">
+                <li>• Logo on website and banners</li>
+                <li>• 1 standard exhibition booth</li>
+                <li>• 3 complimentary passes</li>
+                <li>• Program booklet recognition</li>
+                <li>• Side session mentions</li>
+              </ul>
+              <Button
+                className="w-full bg-secondary text-white"
+                onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Silver Sponsor Package - BIEW 2025', '_blank')}
+                data-testid="button-sponsor-silver"
+              >
+                Become Silver Sponsor
+              </Button>
+            </div>
+
+            <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
+              <div className="flex items-center mb-4">
+                <Sprout className="h-8 w-8 text-green-500 mr-3" />
+                <div>
+                  <h3 className="text-xl font-bold text-primary">🌱 Bronze Sponsor</h3>
+                  <div className="text-2xl font-bold text-secondary">KSH 500,000</div>
+                </div>
+              </div>
+              <ul className="space-y-2 text-sm text-gray-600 mb-4">
+                <li>• Logo on sponsors page</li>
+                <li>• 2 complimentary passes</li>
+                <li>• Closing remarks recognition</li>
+                <li>• Digital acknowledgment</li>
+                <li>• Certificate of partnership</li>
+              </ul>
+              <Button
+                className="w-full bg-primary text-white"
+                onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Bronze Sponsor Package - BIEW 2025', '_blank')}
+                data-testid="button-sponsor-bronze"
+              >
+                Become Bronze Sponsor
+              </Button>
             </div>
           </div>
         </div>
@@ -453,23 +584,38 @@ const RegistrationPage = () => {
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8 text-white" />
+                <Phone className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-bold mb-2">Contact</h3>
               <p className="text-white/80">
-                Email: info@ueab.ac.ke<br />
-                Director: Mr. Wakoli Albert<br />
-                IEC Team
+                <Mail className="inline h-4 w-4 mr-1" />
+                info@ueab.ac.ke<br />
+                Director: Mr. Albert Wakoli<br />
+                Innovation & Entrepreneurship Centre
               </p>
             </div>
           </div>
-          <Button
-            size="lg"
-            className="bg-secondary text-white px-8 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors"
-            onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header', '_blank')}
-          >
-            Register Now <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          <div className="space-y-4">
+            <Button
+              size="lg"
+              className="bg-secondary text-white px-8 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors mr-4"
+              onClick={handleRegistrationClick}
+              data-testid="button-register-main"
+            >
+              {isAuthenticated ? 'Register Now' : 'Login to Register'} <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            <div className="text-sm text-white/70 mt-4">
+              <a 
+                href="https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-secondary hover:text-secondary/80 underline"
+                data-testid="link-innovation-submission"
+              >
+                Have an innovation to showcase? Submit your innovation here
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -477,7 +623,7 @@ const RegistrationPage = () => {
       <footer className="bg-gray-900 text-white py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-gray-400">
-            © 2025 BIEW all rights reserved. Design By Innovation & Entrepreneurship Centre, UEAB.
+            © 2025 BIEW all rights reserved. Designed by Innovation & Entrepreneurship Centre, UEAB.
           </p>
         </div>
       </footer>

@@ -40,7 +40,10 @@ import {
   type InsertSearchHistory,
   newsletterCampaigns,
   type NewsletterCampaign,
-  type InsertNewsletterCampaign
+  type InsertNewsletterCampaign,
+  biewRegistrations,
+  type BiewRegistration,
+  type InsertBiewRegistration
 } from "@shared/schema";
 import { eq, gte, desc, and, or, like, ilike } from "drizzle-orm";
 import { db } from "./db";
@@ -50,6 +53,12 @@ export interface IStorage {
   // User operations (Replit Auth compatible)
   getUser(id: string): Promise<User | undefined>;
   upsertUser(user: UpsertUser): Promise<User>;
+  
+  // BIEW Registration operations
+  createBiewRegistration(registration: InsertBiewRegistration): Promise<BiewRegistration>;
+  getBiewRegistrations(): Promise<BiewRegistration[]>;
+  getBiewRegistrationsByUser(userId: string): Promise<BiewRegistration[]>;
+  updateBiewRegistrationPaymentStatus(id: number, status: string): Promise<BiewRegistration | undefined>;
   
   // Contact message operations
   createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
@@ -564,6 +573,35 @@ export class DatabaseStorage implements IStorage {
   async getNewsletterCampaigns(): Promise<NewsletterCampaign[]> {
     return await db.select().from(newsletterCampaigns)
       .orderBy(desc(newsletterCampaigns.createdAt));
+  }
+
+  // BIEW Registration operations
+  async createBiewRegistration(registration: InsertBiewRegistration): Promise<BiewRegistration> {
+    const [newRegistration] = await db
+      .insert(biewRegistrations)
+      .values(registration)
+      .returning();
+    return newRegistration;
+  }
+
+  async getBiewRegistrations(): Promise<BiewRegistration[]> {
+    return await db.select().from(biewRegistrations)
+      .orderBy(desc(biewRegistrations.createdAt));
+  }
+
+  async getBiewRegistrationsByUser(userId: string): Promise<BiewRegistration[]> {
+    return await db.select().from(biewRegistrations)
+      .where(eq(biewRegistrations.userId, userId))
+      .orderBy(desc(biewRegistrations.createdAt));
+  }
+
+  async updateBiewRegistrationPaymentStatus(id: number, status: string): Promise<BiewRegistration | undefined> {
+    const [updatedRegistration] = await db
+      .update(biewRegistrations)
+      .set({ paymentStatus: status, updatedAt: new Date() })
+      .where(eq(biewRegistrations.id, id))
+      .returning();
+    return updatedRegistration;
   }
 }
 

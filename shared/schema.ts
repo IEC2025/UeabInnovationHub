@@ -7,7 +7,8 @@ import {
   timestamp, 
   varchar,
   jsonb,
-  index
+  index,
+  decimal
 } from "drizzle-orm/pg-core";
 import { relations, sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
@@ -447,3 +448,30 @@ export type FileUpload = typeof fileUploads.$inferSelect;
 
 export type InsertSearchHistory = z.infer<typeof insertSearchHistorySchema>;
 export type SearchHistory = typeof searchHistory.$inferSelect;
+
+// BIEW 2025 Registration table
+export const biewRegistrations = pgTable("biew_registrations", {
+  id: serial("id").primaryKey(),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  registrationType: varchar("registration_type").notNull(), // 'delegation' or 'exhibition'
+  organizationName: text("organization_name").notNull(),
+  contactPerson: text("contact_person").notNull(),
+  email: varchar("email").notNull(),
+  phone: varchar("phone").notNull(),
+  participantCount: varchar("participant_count"), // for delegation
+  boothRequirements: text("booth_requirements"), // for exhibition
+  specialRequirements: text("special_requirements"),
+  paymentStatus: varchar("payment_status").default("pending"), // pending, confirmed, failed
+  amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const insertBiewRegistrationSchema = createInsertSchema(biewRegistrations).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type InsertBiewRegistration = z.infer<typeof insertBiewRegistrationSchema>;
+export type BiewRegistration = typeof biewRegistrations.$inferSelect;
