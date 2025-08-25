@@ -7,15 +7,21 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useToast } from '@/hooks/use-toast';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { apiRequest } from '@/lib/queryClient';
+import { isUnauthorizedError } from '@/lib/authUtils';
 
 const RegistrationPage = () => {
   const { user, isAuthenticated, isLoading } = useAuth();
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
   const [currentStep, setCurrentStep] = useState<'overview' | 'registration'>('overview');
   const [formData, setFormData] = useState({
     registrationType: '',
     organizationName: '',
     contactPerson: '',
-    email: '',
+    email: (user as any)?.email || '',
     phone: '',
     participantCount: '',
     boothRequirements: '',
@@ -30,10 +36,53 @@ const RegistrationPage = () => {
     }
   };
 
+  const registrationMutation = useMutation({
+    mutationFn: async (data: typeof formData) => {
+      const response = await apiRequest('POST', '/api/biew-registration', data);
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Registration Successful!",
+        description: `Your ${formData.registrationType} registration has been submitted successfully. You will receive a confirmation email shortly.`,
+      });
+      queryClient.invalidateQueries({ queryKey: ['/api/biew-registrations'] });
+      // Reset form and go back to overview
+      setFormData({
+        registrationType: '',
+        organizationName: '',
+        contactPerson: '',
+        email: (user as any)?.email || '',
+        phone: '',
+        participantCount: '',
+        boothRequirements: '',
+        specialRequirements: ''
+      });
+      setCurrentStep('overview');
+    },
+    onError: (error: Error) => {
+      if (isUnauthorizedError(error)) {
+        toast({
+          title: "Unauthorized",
+          description: "You are logged out. Logging in again...",
+          variant: "destructive",
+        });
+        setTimeout(() => {
+          window.location.href = "/api/login";
+        }, 500);
+        return;
+      }
+      toast({
+        title: "Registration Failed",
+        description: "There was an error submitting your registration. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Registration submitted:', formData);
+    registrationMutation.mutate(formData);
   };
 
   if (currentStep === 'registration') {
@@ -183,9 +232,10 @@ const RegistrationPage = () => {
                 <Button 
                   type="submit" 
                   className="w-full bg-secondary text-white py-3 text-lg"
-                  disabled={!formData.registrationType || !formData.organizationName}
+                  disabled={!formData.registrationType || !formData.organizationName || !formData.contactPerson || !formData.email || !formData.phone || registrationMutation.isPending}
+                  data-testid="button-submit-registration"
                 >
-                  Complete Registration
+                  {registrationMutation.isPending ? 'Submitting...' : 'Complete Registration'}
                 </Button>
               </div>
             </form>
