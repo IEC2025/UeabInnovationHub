@@ -15,6 +15,7 @@ import ContactPage from "@/pages/ContactPage";
 import BlogPage from "@/pages/BlogPage";
 import CalendarPage from "@/pages/CalendarPage";
 import RegistrationPage from "@/pages/RegistrationPage";
+import AdminPage from "@/pages/AdminPage";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -35,6 +36,7 @@ function Router() {
           <Route path="/calendar" component={CalendarPage} />
           <Route path="/contact" component={ContactPage} />
           <Route path="/registration" component={RegistrationPage} />
+          <Route path="/admin" component={AdminPage} />
           <Route component={NotFound} />
         </Switch>
       </main>

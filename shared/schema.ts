@@ -449,29 +449,28 @@ export type FileUpload = typeof fileUploads.$inferSelect;
 export type InsertSearchHistory = z.infer<typeof insertSearchHistorySchema>;
 export type SearchHistory = typeof searchHistory.$inferSelect;
 
-// BIEW 2025 Registration table
-export const biewRegistrations = pgTable("biew_registrations", {
+// Simplified BIEW registrations (no userId - public forms)
+export const simpleBiewRegistrations = pgTable("simple_biew_registrations", {
   id: serial("id").primaryKey(),
-  userId: varchar("user_id").notNull().references(() => users.id),
-  registrationType: varchar("registration_type").notNull(), // 'delegation' or 'exhibition'
+  registrationType: varchar("registration_type").notNull(),
+  fullName: text("full_name").notNull(),
   organizationName: text("organization_name").notNull(),
-  contactPerson: text("contact_person").notNull(),
+  position: text("position").notNull(),
   email: varchar("email").notNull(),
   phone: varchar("phone").notNull(),
-  participantCount: varchar("participant_count"), // for delegation
-  boothRequirements: text("booth_requirements"), // for exhibition
-  specialRequirements: text("special_requirements"),
-  paymentStatus: varchar("payment_status").default("pending"), // pending, confirmed, failed
-  amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
+  category: varchar("category").notNull(),
+  participantCount: varchar("participant_count"),
+  boothRequirements: text("booth_requirements"),
+  additionalInfo: text("additional_info"),
+  submittedAt: timestamp("submitted_at").defaultNow(),
+  status: varchar("status").default("pending"),
 });
 
-export const insertBiewRegistrationSchema = createInsertSchema(biewRegistrations).omit({
+export const insertBiewRegistrationSchema = createInsertSchema(simpleBiewRegistrations).omit({
   id: true,
-  createdAt: true,
-  updatedAt: true,
+  submittedAt: true,
+  status: true,
 });
 
 export type InsertBiewRegistration = z.infer<typeof insertBiewRegistrationSchema>;
-export type BiewRegistration = typeof biewRegistrations.$inferSelect;
+export type BiewRegistration = typeof simpleBiewRegistrations.$inferSelect;

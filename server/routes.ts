@@ -30,12 +30,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = biewRegistrationSchema.parse(req.body);
       
+      // Save to database
+      const savedRegistration = await storage.createBiewRegistration(validatedData);
+      
       // Create email content
       const emailSubject = `BIEW 2025 ${validatedData.registrationType} Registration - ${validatedData.fullName}`;
       const registrationFee = validatedData.registrationType === 'delegation' ? 'KSH 25,000' : 'KSH 15,000';
       
       const emailContent = `
-        <h2>New BIEW 2025 Registration Submission</h2>
+        <h2>New BIEW 2025 Registration Submission #${savedRegistration.id}</h2>
         
         <h3>Registration Type: ${validatedData.registrationType.toUpperCase()}</h3>
         <p><strong>Registration Fee:</strong> ${registrationFee}</p>
@@ -56,12 +59,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         
         ${validatedData.participantCount ? `<p><strong>Number of Participants:</strong> ${validatedData.participantCount}</p>` : ''}
         ${validatedData.boothRequirements ? `<p><strong>Booth Requirements:</strong> ${validatedData.boothRequirements}</p>` : ''}
-        ${validatedData.paymentPreference ? `<p><strong>Payment Preference:</strong> ${validatedData.paymentPreference}</p>` : ''}
         ${validatedData.additionalInfo ? `<p><strong>Additional Information:</strong> ${validatedData.additionalInfo}</p>` : ''}
         
         <hr>
         <p><em>Please contact this registrant within 24 hours with payment instructions and next steps.</em></p>
         <p><strong>Contact them at:</strong> ${validatedData.email} or ${validatedData.phone}</p>
+        <p><strong>Registration ID:</strong> ${savedRegistration.id}</p>
       `;
 
       // Send email to IEC team
@@ -73,17 +76,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         text: emailContent.replace(/<[^>]*>/g, '') // Strip HTML for text version
       });
 
-      if (emailSent) {
-        res.status(201).json({
-          message: "Registration submitted successfully! Our team will contact you within 24 hours.",
-          success: true
-        });
-      } else {
-        res.status(500).json({
-          message: "Registration submission failed. Please try again or contact us directly at iec@ueab.ac.ke.",
-          success: false
-        });
-      }
+      res.status(201).json({
+        message: "Registration submitted successfully! Our team will contact you within 24 hours.",
+        success: true,
+        registrationId: savedRegistration.id
+      });
     } catch (error) {
       if (error instanceof z.ZodError) {
         return res.status(400).json({
@@ -96,6 +93,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({
         message: "Failed to submit registration. Please try again later or contact iec@ueab.ac.ke directly."
       });
+    }
+  });
+
+  // Admin endpoint to view all registrations
+  app.get("/api/admin/biew-registrations", async (req, res) => {
+    try {
+      const registrations = await storage.getBiewRegistrations();
+      res.json(registrations);
+    } catch (error) {
+      console.error("Error fetching BIEW registrations:", error);
+      res.status(500).json({ message: "Failed to fetch registrations" });
+    }
+  });
+
+  // Admin endpoint to update registration status
+  app.patch("/api/admin/biew-registrations/:id/status", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { status } = req.body;
+      
+      const updatedRegistration = await storage.updateBiewRegistrationStatus(parseInt(id), status);
+      if (updatedRegistration) {
+        res.json(updatedRegistration);
+      } else {
+        res.status(404).json({ message: "Registration not found" });
+      }
+    } catch (error) {
+      console.error("Error updating registration status:", error);
+      res.status(500).json({ message: "Failed to update registration status" });
     }
   });
 

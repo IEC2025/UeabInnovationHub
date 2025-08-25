@@ -41,7 +41,7 @@ import {
   newsletterCampaigns,
   type NewsletterCampaign,
   type InsertNewsletterCampaign,
-  biewRegistrations,
+  simpleBiewRegistrations,
   type BiewRegistration,
   type InsertBiewRegistration
 } from "@shared/schema";
@@ -54,11 +54,10 @@ export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
   upsertUser(user: UpsertUser): Promise<User>;
   
-  // BIEW Registration operations
+  // BIEW Registration operations (simplified)
   createBiewRegistration(registration: InsertBiewRegistration): Promise<BiewRegistration>;
   getBiewRegistrations(): Promise<BiewRegistration[]>;
-  getBiewRegistrationsByUser(userId: string): Promise<BiewRegistration[]>;
-  updateBiewRegistrationPaymentStatus(id: number, status: string): Promise<BiewRegistration | undefined>;
+  updateBiewRegistrationStatus(id: number, status: string): Promise<BiewRegistration | undefined>;
   
   // Contact message operations
   createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
@@ -575,31 +574,25 @@ export class DatabaseStorage implements IStorage {
       .orderBy(desc(newsletterCampaigns.createdAt));
   }
 
-  // BIEW Registration operations
+  // BIEW Registration operations (simplified)
   async createBiewRegistration(registration: InsertBiewRegistration): Promise<BiewRegistration> {
     const [newRegistration] = await db
-      .insert(biewRegistrations)
+      .insert(simpleBiewRegistrations)
       .values(registration)
       .returning();
     return newRegistration;
   }
 
   async getBiewRegistrations(): Promise<BiewRegistration[]> {
-    return await db.select().from(biewRegistrations)
-      .orderBy(desc(biewRegistrations.createdAt));
+    return await db.select().from(simpleBiewRegistrations)
+      .orderBy(desc(simpleBiewRegistrations.submittedAt));
   }
 
-  async getBiewRegistrationsByUser(userId: string): Promise<BiewRegistration[]> {
-    return await db.select().from(biewRegistrations)
-      .where(eq(biewRegistrations.userId, userId))
-      .orderBy(desc(biewRegistrations.createdAt));
-  }
-
-  async updateBiewRegistrationPaymentStatus(id: number, status: string): Promise<BiewRegistration | undefined> {
+  async updateBiewRegistrationStatus(id: number, status: string): Promise<BiewRegistration | undefined> {
     const [updatedRegistration] = await db
-      .update(biewRegistrations)
-      .set({ paymentStatus: status, updatedAt: new Date() })
-      .where(eq(biewRegistrations.id, id))
+      .update(simpleBiewRegistrations)
+      .set({ status: status })
+      .where(eq(simpleBiewRegistrations.id, id))
       .returning();
     return updatedRegistration;
   }
