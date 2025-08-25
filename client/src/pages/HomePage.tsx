@@ -301,8 +301,8 @@ const HomePage = () => {
               </div>
               <h3 className="text-xl font-bold mb-2">Email Us</h3>
               <p className="text-white/80">
-                info@ueab.ac.ke<br />
-                Director: Mr. Wakoli Albert
+                iec@ueab.ac.ke<br />
+                info@ueab.ac.ke
               </p>
             </div>
           </div>
