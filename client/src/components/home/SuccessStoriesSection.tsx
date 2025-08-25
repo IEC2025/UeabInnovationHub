@@ -24,7 +24,7 @@ const SuccessStoriesSection = () => {
           <div className="bg-white rounded-lg shadow-md overflow-hidden card-3d">
             <div className="h-48">
               <img
-                src="@assets/generated_images/African_mentorship_workspace_8e7b7b85.png"
+                src="/src/assets/images/BTV08784.JPG"
                 alt="Innovation Success"
                 className="w-full h-full object-cover"
               />
@@ -58,7 +58,7 @@ const SuccessStoriesSection = () => {
           <div className="bg-white rounded-lg shadow-md overflow-hidden card-3d">
             <div className="h-48">
               <img
-                src="@assets/generated_images/African_research_innovation_space_87e257ae.png"
+                src="/src/assets/images/BTV08418.JPG"
                 alt="Research Innovation"
                 className="w-full h-full object-cover"
               />
@@ -92,7 +92,7 @@ const SuccessStoriesSection = () => {
           <div className="bg-white rounded-lg shadow-md overflow-hidden card-3d">
             <div className="h-48">
               <img
-                src="@assets/generated_images/African_student_leadership_space_6547dcc9.png"
+                src="/src/assets/images/BTV08793.JPG"
                 alt="Student Leadership"
                 className="w-full h-full object-cover"
               />

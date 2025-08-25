@@ -41,7 +41,9 @@ const AboutPage = () => {
                 content: 'About Our Centre',
                 style: {
                   position: { x: 10, y: 20 },
-                  animation: { type: 'slideInLeft', direction: 'left', delay: 500, duration: 1000, easing: 'easeOut' },
+                  animation: 'slideInLeft',
+                  delay: 500,
+                  duration: 1000,
                 },
                 className: 'text-4xl md:text-6xl font-bold text-white'
               },
@@ -50,7 +52,9 @@ const AboutPage = () => {
                 content: 'Innovation & Entrepreneurship Centre',
                 style: {
                   position: { x: 10, y: 35 },
-                  animation: { type: 'slideInRight', direction: 'right', delay: 1000, duration: 1000, easing: 'easeOut' },
+                  animation: 'slideInRight',
+                  delay: 1000,
+                  duration: 1000,
                 },
                 className: 'text-xl text-white/90'
               },
@@ -59,12 +63,13 @@ const AboutPage = () => {
                 content: 'Learn More',
                 style: {
                   position: { x: 10, y: 55 },
-                  animation: { type: 'fadeIn', direction: 'up', delay: 1500, duration: 1000, easing: 'easeOut' },
+                  animation: 'fadeIn',
+                  delay: 1500,
+                  duration: 1000,
                 },
                 className: 'bg-secondary hover:bg-secondary/90 text-white px-6 py-3 rounded-full'
               }
-            ],
-            transition: { type: 'fade', duration: 800 }
+            ]
           }
         ]}
         height="500px"
@@ -162,7 +167,7 @@ const AboutPage = () => {
             <div className="lg:w-1/2">
               <div className="relative">
                 <img 
-                  src="@assets/generated_images/African_university_leadership_meeting_1531ef94.png" 
+                  src="/src/assets/images/BTV08418.JPG" 
                   alt="African leadership team at UEAB" 
                   className="rounded-lg shadow-lg w-full"
                 />
@@ -401,7 +406,7 @@ const AboutPage = () => {
               </p>
               <div className="mt-8">
                 <img 
-                  src="@assets/generated_images/African_students_innovation_presentation_9ca1053e.png" 
+                  src="/src/assets/images/BTV08784.JPG" 
                   alt="African students presenting innovation projects at UEAB" 
                   className="rounded-lg shadow-lg w-full max-w-2xl mx-auto"
                 />
@@ -485,7 +490,7 @@ const AboutPage = () => {
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="absolute inset-0">
           <img 
-            src="@assets/generated_images/African_entrepreneurs_startup_workspace_eb0f122f.png" 
+            src="/src/assets/images/BTV08785.JPG" 
             alt="African entrepreneurs working in startup workspace" 
             className="w-full h-full object-cover opacity-30"
           />

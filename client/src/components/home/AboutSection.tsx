@@ -12,7 +12,7 @@ const AboutSection = () => {
           <div className="md:w-1/2 flex justify-center md:justify-end">
             <div className="relative">
               <img
-                src="@assets/448210884_938755978049185_4727530625639529934_n (1)_1756133531727.jpg"
+                src="/src/assets/images/448210884_938755978049185_4727530625639529934_n (1)_1756133531727.jpg"
                 alt="Innovation Hub Space"
                 className="rounded-lg shadow-lg object-cover h-[450px]"
               />

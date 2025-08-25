@@ -210,7 +210,7 @@ const ProgramsPage = () => {
               <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-md p-6">
                 <div className="md:w-1/2">
                   <img
-                    src="@assets/456214878_980492593875523_3420111680875412655_n_1756133531726.jpg"
+                    src="/src/assets/images/456214878_980492593875523_3420111680875412655_n_1756133729214.jpg"
                     alt="Startup Incubation"
                     className="rounded-lg shadow-md"
                   />
@@ -273,7 +273,7 @@ const ProgramsPage = () => {
               <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-md p-6">
                 <div className="md:w-1/2">
                   <img
-                    src="@assets/generated_images/African_mentorship_meeting_room_6c5d68f0.png"
+                    src="/src/assets/images/BTV08240.JPG"
                     alt="Mentorship Program"
                     className="rounded-lg shadow-md"
                   />
@@ -343,7 +343,7 @@ const ProgramsPage = () => {
               <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-md p-6">
                 <div className="md:w-1/2">
                   <img
-                    src="@assets/generated_images/Kenyan_students_classroom_back_view_58719d19.png"
+                    src="/src/assets/images/BTV08426.JPG"
                     alt="Workshops & Training"
                     className="rounded-lg shadow-md"
                   />
@@ -421,7 +421,7 @@ const ProgramsPage = () => {
               <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-md p-6">
                 <div className="md:w-1/2">
                   <img
-                    src="@assets/generated_images/African_startup_incubation_space_197eb2cf.png"
+                    src="/src/assets/images/BTV08537.JPG"
                     alt="Funding Opportunities"
                     className="rounded-lg shadow-md"
                   />
@@ -519,10 +519,8 @@ const ProgramsPage = () => {
                   <span className="bg-secondary/10 text-secondary text-xs py-1 px-2 rounded-full">
                     Quarterly Cohorts
                   </span>
-                  <Link href="/programs/women-entrepreneurship">
-                    <a className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors">
-                      Learn more <ArrowRight className="ml-1 h-4 w-4" />
-                    </a>
+                  <Link href="/programs/women-entrepreneurship" className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors">
+                    Learn more <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
                 </div>
               </CardContent>
@@ -544,10 +542,8 @@ const ProgramsPage = () => {
                   <span className="bg-primary/10 text-primary text-xs py-1 px-2 rounded-full">
                     Year-round
                   </span>
-                  <Link href="/programs/social-innovation">
-                    <a className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors">
-                      Learn more <ArrowRight className="ml-1 h-4 w-4" />
-                    </a>
+                  <Link href="/programs/social-innovation" className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors">
+                    Learn more <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
                 </div>
               </CardContent>
@@ -569,10 +565,8 @@ const ProgramsPage = () => {
                   <span className="bg-secondary/10 text-secondary text-xs py-1 px-2 rounded-full">
                     Annual Event
                   </span>
-                  <Link href="/programs/student-challenge">
-                    <a className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors">
-                      Learn more <ArrowRight className="ml-1 h-4 w-4" />
-                    </a>
+                  <Link href="/programs/student-challenge" className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors">
+                    Learn more <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
                 </div>
               </CardContent>
@@ -594,10 +588,8 @@ const ProgramsPage = () => {
                   <span className="bg-primary/10 text-primary text-xs py-1 px-2 rounded-full">
                     Custom Programs
                   </span>
-                  <Link href="/programs/corporate-partnerships">
-                    <a className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors">
-                      Learn more <ArrowRight className="ml-1 h-4 w-4" />
-                    </a>
+                  <Link href="/programs/corporate-partnerships" className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors">
+                    Learn more <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
                 </div>
               </CardContent>
@@ -619,10 +611,8 @@ const ProgramsPage = () => {
                   <span className="bg-secondary/10 text-secondary text-xs py-1 px-2 rounded-full">
                     Ongoing Support
                   </span>
-                  <Link href="/programs/tech-commercialization">
-                    <a className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors">
-                      Learn more <ArrowRight className="ml-1 h-4 w-4" />
-                    </a>
+                  <Link href="/programs/tech-commercialization" className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors">
+                    Learn more <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
                 </div>
               </CardContent>
@@ -644,10 +634,8 @@ const ProgramsPage = () => {
                   <span className="bg-primary/10 text-primary text-xs py-1 px-2 rounded-full">
                     Biannual Cohorts
                   </span>
-                  <Link href="/programs/international-exchange">
-                    <a className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors">
-                      Learn more <ArrowRight className="ml-1 h-4 w-4" />
-                    </a>
+                  <Link href="/programs/international-exchange" className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors">
+                    Learn more <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
                 </div>
               </CardContent>

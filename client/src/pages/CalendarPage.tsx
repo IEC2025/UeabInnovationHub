@@ -37,7 +37,7 @@ const CalendarPage = () => {
       endDate: new Date("2025-02-20T17:00:00"),
       location: "IEC Innovation Hub",
       eventType: "Competition",
-      imageUrl: "@assets/456214878_980492593875523_3420111680875412655_n_1756133531726.jpg",
+      imageUrl: "/src/assets/images/456214878_980492593875523_3420111680875412655_n_1756133729214.jpg",
       registrationUrl: "https://docs.google.com/forms/d/e/startup-pitch-feb",
       maxAttendees: 100,
       currentAttendees: 67,
@@ -53,7 +53,7 @@ const CalendarPage = () => {
       endDate: new Date("2025-02-28T15:00:00"),
       location: "IEC Conference Room",
       eventType: "Workshop",
-      imageUrl: "@assets/448210884_938755978049185_4727530625639529934_n (1)_1756133531727.jpg",
+      imageUrl: "/src/assets/images/448210884_938755978049185_4727530625639529934_n (1)_1756133531727.jpg",
       registrationUrl: "https://docs.google.com/forms/d/e/digital-marketing-workshop",
       maxAttendees: 50,
       currentAttendees: 23,
@@ -199,7 +199,7 @@ const CalendarPage = () => {
                           <Badge className={getEventTypeColor(event.eventType)}>
                             {event.eventType}
                           </Badge>
-                          {event.currentAttendees >= (event.maxAttendees! * 0.8) && (
+                          {event.currentAttendees && event.currentAttendees >= (event.maxAttendees! * 0.8) && (
                             <Badge variant="outline" className="text-orange-600 border-orange-600">
                               Almost Full
                             </Badge>

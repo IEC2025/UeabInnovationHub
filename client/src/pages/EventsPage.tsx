@@ -198,7 +198,7 @@ const EventsPage = () => {
             <Card className="overflow-hidden card-3d" id="innovation-week-2025">
               <div className="relative h-60">
                 <img
-                  src="@assets/Screenshot 2024-12-16 220332_1756133531727.png"
+                  src="/src/assets/images/Screenshot 2024-12-16 220332_1756133531727.png"
                   alt="2nd Innovation and Entrepreneurship Week"
                   className="w-full h-full object-cover"
                 />
@@ -278,7 +278,7 @@ const EventsPage = () => {
             <Card className="overflow-hidden card-3d" id="nacosti-conference-2025">
               <div className="relative h-60">
                 <img
-                  src="@assets/BTV03925_1756133531727.jpg"
+                  src="/src/assets/images/BTV03925_1756133531727.jpg"
                   alt="NACOSTI Multisectoral Conference"
                   className="w-full h-full object-cover"
                 />

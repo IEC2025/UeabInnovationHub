@@ -37,7 +37,7 @@ const BlogPage = () => {
       slug: "building-sustainable-startups",
       content: "Full article content here...",
       excerpt: "Key insights and practical strategies for creating environmentally conscious and financially sustainable startups.",
-      imageUrl: "@assets/BTV03925_1756133531727.jpg",
+      imageUrl: "/src/assets/images/BTV03925_1756133531727.jpg",
       authorName: "Mr. Andrew Omambia",
       authorImage: "/src/assets/images/BTV08426.JPG",
       category: "Entrepreneurship",
