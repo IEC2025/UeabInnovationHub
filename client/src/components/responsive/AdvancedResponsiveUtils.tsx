@@ -111,10 +111,10 @@ export const useAdvancedDeviceDetection = () => {
     const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
     let gpu: 'integrated' | 'dedicated' | 'unknown' = 'unknown';
     
-    if (gl) {
-      const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+    if (gl && 'getExtension' in gl) {
+      const debugInfo = (gl as WebGLRenderingContext).getExtension('WEBGL_debug_renderer_info');
       if (debugInfo) {
-        const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+        const renderer = (gl as WebGLRenderingContext).getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
         gpu = renderer.toLowerCase().includes('nvidia') || 
               renderer.toLowerCase().includes('amd') ? 'dedicated' : 'integrated';
       }
@@ -233,6 +233,7 @@ export const useAdvancedIntersectionObserver = (
   const [isIntersecting, setIsIntersecting] = useState(false);
   const [intersectionRatio, setIntersectionRatio] = useState(0);
   const [ref, setRef] = useState<Element | null>(null);
+  const [prevIntersecting, setPrevIntersecting] = useState(false);
 
   useEffect(() => {
     if (!ref) return;
@@ -249,6 +250,8 @@ export const useAdvancedIntersectionObserver = (
         } else if (!isIntersecting && prevIntersecting) {
           options.onExit?.();
         }
+        
+        setPrevIntersecting(isIntersecting);
         
         options.onProgress?.(intersectionRatio);
       },

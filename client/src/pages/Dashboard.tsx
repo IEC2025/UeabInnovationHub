@@ -9,21 +9,21 @@ import { Link } from "wouter";
 export default function Dashboard() {
   const { user, isLoading } = useAuth();
 
-  const { data: upcomingEvents } = useQuery({
+  const { data: upcomingEvents = [] } = useQuery({
     queryKey: ["/api/events/upcoming"],
   });
 
-  const { data: notifications } = useQuery({
+  const { data: notifications = [] } = useQuery({
     queryKey: ["/api/my/notifications"],
     enabled: !!user,
   });
 
-  const { data: mentorshipSessions } = useQuery({
+  const { data: mentorshipSessions = [] } = useQuery({
     queryKey: ["/api/my/mentorship-sessions"],
     enabled: !!user,
   });
 
-  const { data: eventRegistrations } = useQuery({
+  const { data: eventRegistrations = [] } = useQuery({
     queryKey: ["/api/my/event-registrations"],
     enabled: !!user,
   });

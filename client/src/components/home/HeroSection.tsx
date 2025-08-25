@@ -139,7 +139,7 @@ const HeroSection = () => {
       },
       contentPosition: "center" as const,
       textAlign: "center" as const,
-      specialContent: "countdown"
+      specialContent: "countdown" as const
     },
     {
       id: 6,
