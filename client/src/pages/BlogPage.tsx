@@ -162,7 +162,7 @@ const BlogPage = () => {
                     </Badge>
                     <h3 className="text-xl font-bold line-clamp-2 hover:text-primary transition-colors">
                       <Link href={`/blog/${post.slug}`}>
-                        <a>{post.title}</a>
+                        {post.title}
                       </Link>
                     </h3>
                   </CardHeader>

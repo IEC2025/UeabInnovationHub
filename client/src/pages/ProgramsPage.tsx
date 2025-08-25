@@ -740,7 +740,7 @@ const ProgramsPage = () => {
             </p>
             <Button asChild>
               <Link href="/contact">
-                <a>Contact Us</a>
+                Contact Us
               </Link>
             </Button>
           </div>
@@ -769,7 +769,7 @@ const ProgramsPage = () => {
               className="border-white text-white hover:bg-white/20"
             >
               <Link href="/contact">
-                <a>Apply for Programs</a>
+                Apply for Programs
               </Link>
             </Button>
             <Button
@@ -778,7 +778,7 @@ const ProgramsPage = () => {
               className="border-white text-white hover:bg-white/20"
             >
               <Link href="/events">
-                <a>Upcoming Events</a>
+                Upcoming Events
               </Link>
             </Button>
           </div>
