@@ -469,4 +469,39 @@
     filter: saturate(1.2) contrast(1.1);
     transform: scale(1.03) translateY(-5px);
   }
+
+  /* Ticker/Scrolling Animation */
+  .ticker-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-track {
+    display: inline-flex;
+    animation: ticker-scroll 30s linear infinite;
+    align-items: center;
+  }
+
+  .ticker-item {
+    flex-shrink: 0;
+    display: inline-flex;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @keyframes ticker-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Pause animation on hover */
+  .ticker-container:hover .ticker-track {
+    animation-play-state: paused;
+  }
 }
