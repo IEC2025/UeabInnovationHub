@@ -98,16 +98,6 @@ const HomePage = () => {
                 className="text-white"
               />
             </div>
-            <div className="mt-6">
-              <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-secondary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center"
-              >
-                Register for 2nd Baraton Innovation Week <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
-            </div>
           </div>
         </div>
       </section>
