@@ -335,36 +335,6 @@ const RegistrationPage = () => {
                 </div>
               )}
 
-              {/* Payment Preference */}
-              <div className="mb-8">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                  <Award className="h-5 w-5 mr-2 text-primary" />
-                  Payment Preference
-                </h3>
-                <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg mb-4">
-                  <div className="text-2xl font-bold text-green-600">
-                    {type === 'delegation' ? 'KSH 25,000' : 'KSH 15,000'}
-                  </div>
-                  <div className="text-sm text-gray-600">Registration Fee</div>
-                </div>
-                <RadioGroup 
-                  value={formData.paymentPreference} 
-                  onValueChange={(value) => setFormData({...formData, paymentPreference: value})}
-                >
-                  <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
-                    <RadioGroupItem value="mpesa" id="mpesa" />
-                    <Label htmlFor="mpesa">M-Pesa Payment (Preferred)</Label>
-                  </div>
-                  <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
-                    <RadioGroupItem value="bank" id="bank" />
-                    <Label htmlFor="bank">Bank Transfer</Label>
-                  </div>
-                  <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
-                    <RadioGroupItem value="cash" id="cash" />
-                    <Label htmlFor="cash">Cash Payment at Event</Label>
-                  </div>
-                </RadioGroup>
-              </div>
 
               {/* Additional Information */}
               <div className="mb-8">
