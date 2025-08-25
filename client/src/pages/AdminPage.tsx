@@ -45,7 +45,7 @@ const AdminPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
 
-  const { data: registrations = [], isLoading } = useQuery({
+  const { data: registrations = [], isLoading } = useQuery<Registration[]>({
     queryKey: ['/api/admin/biew-registrations'],
   });
 
@@ -63,7 +63,7 @@ const AdminPage = () => {
     },
   });
 
-  const filteredRegistrations = registrations.filter((reg: Registration) => {
+  const filteredRegistrations = (registrations as Registration[]).filter((reg: Registration) => {
     const matchesSearch = reg.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          reg.organizationName.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          reg.email.toLowerCase().includes(searchTerm.toLowerCase());
@@ -184,7 +184,7 @@ const AdminPage = () => {
     const fullContent = [
       ...letterhead,
       headers.map(header => `"${header}"`).join(','),
-      ...csvData.map(row => row.map(field => `"${String(field).replace(/"/g, '""')}"`).join(',')),
+      ...csvData.map((row: any[]) => row.map((field: any) => `"${String(field).replace(/"/g, '""')}"`).join(',')),
       ...footer
     ].join('\n');
     
@@ -197,9 +197,9 @@ const AdminPage = () => {
     window.URL.revokeObjectURL(url);
   };
 
-  const delegationCount = registrations.filter((r: Registration) => r.registrationType === 'delegation').length;
-  const exhibitionCount = registrations.filter((r: Registration) => r.registrationType === 'exhibition').length;
-  const pendingCount = registrations.filter((r: Registration) => r.status === 'pending').length;
+  const delegationCount = (registrations as Registration[]).filter((r: Registration) => r.registrationType === 'delegation').length;
+  const exhibitionCount = (registrations as Registration[]).filter((r: Registration) => r.registrationType === 'exhibition').length;
+  const pendingCount = (registrations as Registration[]).filter((r: Registration) => r.status === 'pending').length;
 
   if (isLoading) {
     return (
@@ -248,7 +248,7 @@ const AdminPage = () => {
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-gray-600">Total Registrations</p>
-                  <p className="text-2xl font-bold text-gray-900">{registrations.length}</p>
+                  <p className="text-2xl font-bold text-gray-900">{(registrations as Registration[]).length}</p>
                 </div>
               </div>
             </CardContent>
