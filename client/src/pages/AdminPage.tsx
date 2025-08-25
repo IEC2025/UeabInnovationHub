@@ -32,6 +32,8 @@ interface Registration {
   category: string;
   participantCount?: string;
   boothRequirements?: string;
+  specialRequirements?: string;
+  paymentPreference?: string;
   additionalInfo?: string;
   submittedAt: string;
   status: string;
@@ -83,7 +85,7 @@ const AdminPage = () => {
   };
 
   const exportToCSV = () => {
-    const headers = ['ID', 'Type', 'Name', 'Organization', 'Position', 'Email', 'Phone', 'Category', 'Participants', 'Status', 'Submitted'];
+    const headers = ['ID', 'Type', 'Name', 'Organization', 'Position', 'Email', 'Phone', 'Category', 'Participants', 'Special Requirements', 'Payment Preference', 'Additional Info', 'Status', 'Submitted'];
     const csvData = filteredRegistrations.map((reg: Registration) => [
       reg.id,
       reg.registrationType,
@@ -94,6 +96,9 @@ const AdminPage = () => {
       reg.phone,
       reg.category,
       reg.participantCount || '',
+      reg.specialRequirements || '',
+      reg.paymentPreference || '',
+      reg.additionalInfo || '',
       reg.status,
       new Date(reg.submittedAt).toLocaleDateString()
     ]);
@@ -303,6 +308,12 @@ const AdminPage = () => {
                           )}
                           {registration.boothRequirements && (
                             <div><strong>Booth Requirements:</strong> {registration.boothRequirements}</div>
+                          )}
+                          {registration.specialRequirements && (
+                            <div><strong>Special Requirements:</strong> {registration.specialRequirements}</div>
+                          )}
+                          {registration.paymentPreference && (
+                            <div><strong>Payment Preference:</strong> {registration.paymentPreference}</div>
                           )}
                           {registration.additionalInfo && (
                             <div><strong>Additional Info:</strong> {registration.additionalInfo}</div>
