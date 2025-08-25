@@ -32,12 +32,8 @@ export function getSession() {
     tableName: "sessions",
   });
   
-  // Use environment secret or generate a development fallback
-  const sessionSecret = process.env.SESSION_SECRET || 
-    'dev-secret-key-change-in-production-' + Math.random().toString(36).substring(2, 15);
-  
   return session({
-    secret: sessionSecret,
+    secret: process.env.SESSION_SECRET!,
     store: sessionStore,
     resave: false,
     saveUninitialized: false,
@@ -89,8 +85,7 @@ export async function setupAuth(app: Express) {
     verified(null, user);
   };
 
-  for (const domain of process.env
-    .REPLIT_DOMAINS!.split(",")) {
+  for (const domain of process.env.REPLIT_DOMAINS!.split(",")) {
     const strategy = new Strategy(
       {
         name: `replitauth:${domain}`,
