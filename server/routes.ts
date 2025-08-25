@@ -205,6 +205,63 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Missing API routes that the frontend expects
+  app.get("/api/contact-messages", async (req, res) => {
+    try {
+      const messages = await storage.getContactMessages();
+      res.json(messages);
+    } catch (error) {
+      console.error("Error fetching contact messages:", error);
+      res.status(500).json({ message: "Failed to fetch contact messages" });
+    }
+  });
+
+  app.get("/api/events", async (req, res) => {
+    try {
+      const events = await storage.getEvents();
+      res.json(events);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+      res.status(500).json({ message: "Failed to fetch events" });
+    }
+  });
+
+  app.get("/api/newsletter-subscriptions", async (req, res) => {
+    try {
+      const subscriptions = await storage.getNewsletterSubscriptions();
+      res.json(subscriptions);
+    } catch (error) {
+      console.error("Error fetching newsletter subscriptions:", error);
+      res.status(500).json({ message: "Failed to fetch newsletter subscriptions" });
+    }
+  });
+
+  app.get("/api/admin/newsletter-campaigns", async (req, res) => {
+    try {
+      const campaigns = await storage.getNewsletterCampaigns();
+      res.json(campaigns);
+    } catch (error) {
+      console.error("Error fetching newsletter campaigns:", error);
+      res.status(500).json({ message: "Failed to fetch newsletter campaigns" });
+    }
+  });
+
+  // Admin routes for contact messages
+  app.patch("/api/admin/contact-messages/:id/read", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updatedMessage = await storage.markContactMessageAsRead(parseInt(id));
+      if (updatedMessage) {
+        res.json(updatedMessage);
+      } else {
+        res.status(404).json({ message: "Contact message not found" });
+      }
+    } catch (error) {
+      console.error("Error marking contact message as read:", error);
+      res.status(500).json({ message: "Failed to mark message as read" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

@@ -36,16 +36,26 @@ export default function AdminDashboard() {
 
   // Simple admin access - no authentication required for now
 
-  // Update to use working BIEW registration endpoint
-  const { data: biewRegistrations } = useQuery({
+  // API queries for all data
+  const { data: biewRegistrations = [] } = useQuery({
     queryKey: ["/api/admin/biew-registrations"],
   });
 
-  // Mock data for non-implemented features
-  const contactMessages = [];
-  const events = [];
-  const newsletterSubscriptions = [];
-  const newsletterCampaigns = [];
+  const { data: contactMessages = [] } = useQuery<any[]>({
+    queryKey: ["/api/contact-messages"],
+  });
+
+  const { data: events = [] } = useQuery<any[]>({
+    queryKey: ["/api/events"],
+  });
+
+  const { data: newsletterSubscriptions = [] } = useQuery<any[]>({
+    queryKey: ["/api/newsletter-subscriptions"],
+  });
+
+  const { data: newsletterCampaigns = [] } = useQuery<any[]>({
+    queryKey: ["/api/admin/newsletter-campaigns"],
+  });
 
   // Event form
   const eventForm = useForm();
@@ -225,7 +235,7 @@ export default function AdminDashboard() {
                           </Button>
                         </TableCell>
                       </TableRow>
-                    )) || (
+                    )) : (
                       <TableRow>
                         <TableCell colSpan={8} className="text-center text-muted-foreground">
                           No BIEW registrations yet
@@ -258,7 +268,7 @@ export default function AdminDashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {contactMessages.length > 0 ? contactMessages.map((message: any) => (
+                    {contactMessages?.length > 0 ? contactMessages.map((message: any) => (
                       <TableRow key={message.id}>
                         <TableCell>{message.name}</TableCell>
                         <TableCell>{message.email}</TableCell>
