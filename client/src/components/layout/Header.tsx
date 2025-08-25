@@ -45,12 +45,12 @@ const Header = () => {
               >
                 Submit Innovation
               </a>
-              <a
-                href="#events"
+              <Link
+                href="/registration"
                 className="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary/90 transition-colors text-center text-sm"
               >
                 Register for Event
-              </a>
+              </Link>
             </div>
           </div>
         </div>
