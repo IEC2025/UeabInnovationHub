@@ -670,7 +670,7 @@ const RegistrationPage = () => {
                 role: "CHIEF GUEST", 
                 icon: Crown, 
                 gradient: "from-yellow-400 to-orange-500",
-                image: "@assets/download_1756126399763.jpeg"
+image: "/src/assets/images/dr-tony-omwansa.jpeg"
               },
               { 
                 name: "Prof. Msafiri Jackson", 
@@ -678,7 +678,7 @@ const RegistrationPage = () => {
                 role: "HOST", 
                 icon: Users, 
                 gradient: "from-blue-500 to-indigo-500",
-                image: "@assets/download (1)_1756126419609.jpeg"
+image: "/src/assets/images/prof-msafiri-jackson.jpeg"
               },
               { 
                 name: "Ms. Esther Masese", 
@@ -686,7 +686,7 @@ const RegistrationPage = () => {
                 role: "KEYNOTE", 
                 icon: Building, 
                 gradient: "from-green-500 to-teal-500",
-                image: "@assets/1683649767501_1756126425349.jpeg"
+image: "/src/assets/images/ms-esther-masese.jpeg"
               },
               { 
                 name: "Dr. Benard Chitunga", 
@@ -694,7 +694,7 @@ const RegistrationPage = () => {
                 role: "SPEAKER", 
                 icon: Award, 
                 gradient: "from-purple-500 to-pink-500",
-                image: "@assets/images_1756126430834.jpeg"
+image: "/src/assets/images/dr-benard-chitunga.jpeg"
               }
             ].map((speaker, index) => (
               <motion.div 
@@ -712,6 +712,10 @@ const RegistrationPage = () => {
                       src={speaker.image} 
                       alt={speaker.name}
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        console.log('Image failed to load:', speaker.image);
+                        e.currentTarget.src = '/src/assets/images/BTV08418.JPG';
+                      }}
                     />
                   </div>
                   
