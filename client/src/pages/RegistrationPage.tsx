@@ -792,7 +792,16 @@ image: "/src/assets/images/dr-benard-chitunga.jpeg"
                 <div className="p-8">
                   <h3 className="text-3xl font-bold text-primary mb-4">Delegation Registration</h3>
                   <div className="flex items-baseline mb-6">
-                    <span className="text-5xl font-bold text-green-600">KSH 25,000</span>
+                    <div className="flip-card-price h-16 cursor-pointer">
+                      <div className="flip-card-inner h-full relative">
+                        <div className="flip-card-front absolute inset-0 flex items-center">
+                          <span className="text-5xl font-bold text-green-600">KSH 10,000</span>
+                        </div>
+                        <div className="flip-card-back absolute inset-0 flex items-center bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2 rounded-lg">
+                          <span className="text-3xl font-bold">$75 USD</span>
+                        </div>
+                      </div>
+                    </div>
                     <span className="text-gray-500 ml-2">per delegation</span>
                   </div>
                   
@@ -862,7 +871,16 @@ image: "/src/assets/images/dr-benard-chitunga.jpeg"
                 <div className="p-8">
                   <h3 className="text-3xl font-bold text-primary mb-4">Exhibition Registration</h3>
                   <div className="flex items-baseline mb-6">
-                    <span className="text-5xl font-bold text-green-600">KSH 15,000</span>
+                    <div className="flip-card-price h-16 cursor-pointer">
+                      <div className="flip-card-inner h-full relative">
+                        <div className="flip-card-front absolute inset-0 flex items-center">
+                          <span className="text-5xl font-bold text-green-600">KSH 100,000</span>
+                        </div>
+                        <div className="flip-card-back absolute inset-0 flex items-center bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg">
+                          <span className="text-3xl font-bold">$750 USD</span>
+                        </div>
+                      </div>
+                    </div>
                     <span className="text-gray-500 ml-2">per booth</span>
                   </div>
                   
