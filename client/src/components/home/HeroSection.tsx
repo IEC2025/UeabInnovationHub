@@ -1,7 +1,9 @@
 import { Link } from "wouter";
-import { useCallback, useEffect, useState, useRef } from "react";
-import FullPageAnimatedSlider from '@/components/sliders/FullPageAnimatedSlider';
+import { useCallback, useEffect, useState, useRef, Suspense, lazy } from "react";
 import { CountdownTimer } from '@/components/ui/countdown-timer';
+
+// Lazy load the heavy FullPageAnimatedSlider component
+const FullPageAnimatedSlider = lazy(() => import('@/components/sliders/FullPageAnimatedSlider'));
 
 const HeroSection = () => {
   // Full-page animated slider data with advanced features
@@ -171,17 +173,26 @@ const HeroSection = () => {
   ];
 
   return (
-    <FullPageAnimatedSlider 
-      slides={fullPageSlides}
-      autoPlay={true}
-      autoPlayInterval={7000}
-      showControls={true}
-      showPagination={true}
-      enableKeyboard={true}
-      enableTouch={true}
-      enableParallax={true}
-      className="fullpage-hero-slider"
-    />
+    <Suspense fallback={
+      <div className="h-screen bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
+        <div className="text-white text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-6"></div>
+          <p className="text-xl">Loading hero section...</p>
+        </div>
+      </div>
+    }>
+      <FullPageAnimatedSlider 
+        slides={fullPageSlides}
+        autoPlay={true}
+        autoPlayInterval={7000}
+        showControls={true}
+        showPagination={true}
+        enableKeyboard={true}
+        enableTouch={true}
+        enableParallax={true}
+        className="fullpage-hero-slider"
+      />
+    </Suspense>
   );
 };
 

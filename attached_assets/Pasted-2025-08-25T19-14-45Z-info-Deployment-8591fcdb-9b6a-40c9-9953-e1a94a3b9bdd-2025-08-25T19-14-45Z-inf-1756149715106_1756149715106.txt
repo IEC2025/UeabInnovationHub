@@ -1,0 +1,297 @@
+2025-08-25T19:14:45Z info: Deployment: 8591fcdb-9b6a-40c9-9953-e1a94a3b9bdd
+2025-08-25T19:14:45Z info: Build: eddecdd9-314b-4e10-929e-6d0d21543ab4
+2025-08-25T19:14:50Z info: Preparing development database data
+2025-08-25T19:15:12Z info: Successfully copied development database data to production database
+2025-08-25T19:15:12Z info: Connecting to builder
+2025-08-25T19:15:13Z info: Builder connected
+2025-08-25T19:15:13Z info: Installing packages
+--> bun install
+
+--> bun install
+
+--> bun install
+
+--> bun install
+
+--> bun install
+
+--> bun install
+
+--> bun install
+
+--> bun install
+
+bun install v1.2.18 (0d4089ea)
+
+bun install v1.2.18 (0d4089ea)
+
+bun install v1.2.18 (0d4089ea)
+
+bun install v1.2.18 (0d4089ea)
+
+bun install v1.2.18 (0d4089ea)
+
+bun install v1.2.18 (0d4089ea)
+
+bun install v1.2.18 (0d4089ea)
+
+bun install v1.2.18 (0d4089ea)
+
+[231.14ms] migrated lockfile from package-lock.json
+
+[231.14ms] migrated lockfile from package-lock.json
+
+[231.14ms] migrated lockfile from package-lock.json
+
+[231.14ms] migrated lockfile from package-lock.json
+
+[231.14ms] migrated lockfile from package-lock.json
+
+[231.14ms] migrated lockfile from package-lock.json
+
+[231.14ms] migrated lockfile from package-lock.json
+
+[231.14ms] migrated lockfile from package-lock.json
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+2025-08-25T19:15:22Z info: Starting Build
+
+> rest-express@1.0.0 build
+> vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+
+
+vite v5.4.19 building for production...
+
+transforming...
+
+✓ 2113 modules transformed.
+
+rendering chunks...
+
+computing gzip size...
+
+../dist/public/index.html                             2.44 kB │ gzip:   0.98 kB
+
+../dist/public/assets/NACOSTI-Logo--H9cLmzAk.webp     7.01 kB
+
+../dist/public/assets/kenia-logo-DXTbyOt1.webp       10.75 kB
+../dist/public/assets/factory-logo-B0U55Nxo.jpeg     12.39 kB
+
+../dist/public/assets/kipi-logo-DLS50fRI.webp        15.56 kB
+
+../dist/public/assets/university-logo-BFLSmuXy.png   35.76 kB
+
+../dist/public/assets/huawei-logo-DaaIBUVy.jpg       56.57 kB
+../dist/public/assets/iec-logo-CLUIlLAi.png          97.78 kB
+../dist/public/assets/index-CnoLs15R.css            103.03 kB │ gzip:  16.48 kB
+../dist/public/assets/index-BPgMbrDT.js             846.45 kB │ gzip: 236.48 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 9.30s
+
+
+  dist/index.js  40.3kb
+
+⚡ Done in 114ms
+
+npm notice
+npm notice New major version of npm available! 10.8.2 -> 11.5.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.5.2
+npm notice To update run: npm install -g npm@11.5.2
+npm notice
+
+2025-08-25T19:15:36Z info: Pushing pid1 binary layer...
+2025-08-25T19:15:38Z info: Created pid1 binary layer
+2025-08-25T19:15:50Z info: Pushing Repl layer...
+2025-08-25T19:15:50Z info: Pushing hosting layer...
+2025-08-25T19:15:50Z info: Retrieved cached nix layer
+2025-08-25T19:15:50Z info: Nix layers for this Repl are uncached.
+2025-08-25T19:15:50Z info: Pushing nix-0 layer...
+2025-08-25T19:15:50Z info: Created hosting layer
+2025-08-25T19:16:21Z info: Created Repl layer
+2025-08-25T19:14:45Z info: Deployment: 8591fcdb-9b6a-40c9-9953-e1a94a3b9bdd
+2025-08-25T19:14:45Z info: Build: eddecdd9-314b-4e10-929e-6d0d21543ab4
+2025-08-25T19:14:50Z info: Preparing development database data
+2025-08-25T19:15:12Z info: Successfully copied development database data to production database
+2025-08-25T19:15:12Z info: Connecting to builder
+2025-08-25T19:15:13Z info: Builder connected
+2025-08-25T19:15:13Z info: Installing packages
+--> bun install
+
+--> bun install
+
+--> bun install
+
+--> bun install
+
+--> bun install
+
+--> bun install
+
+--> bun install
+
+--> bun install
+
+bun install v1.2.18 (0d4089ea)
+
+bun install v1.2.18 (0d4089ea)
+
+bun install v1.2.18 (0d4089ea)
+
+bun install v1.2.18 (0d4089ea)
+
+bun install v1.2.18 (0d4089ea)
+
+bun install v1.2.18 (0d4089ea)
+
+bun install v1.2.18 (0d4089ea)
+
+bun install v1.2.18 (0d4089ea)
+
+[231.14ms] migrated lockfile from package-lock.json
+
+[231.14ms] migrated lockfile from package-lock.json
+
+[231.14ms] migrated lockfile from package-lock.json
+
+[231.14ms] migrated lockfile from package-lock.json
+
+[231.14ms] migrated lockfile from package-lock.json
+
+[231.14ms] migrated lockfile from package-lock.json
+
+[231.14ms] migrated lockfile from package-lock.json
+
+[231.14ms] migrated lockfile from package-lock.json
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+Saved lockfile
+
+33 packages installed [7.41s]
+
+2025-08-25T19:15:22Z info: Starting Build
+
+> rest-express@1.0.0 build
+> vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+
+
+vite v5.4.19 building for production...
+
+transforming...
+
+✓ 2113 modules transformed.
+
+rendering chunks...
+
+computing gzip size...
+
+../dist/public/index.html                             2.44 kB │ gzip:   0.98 kB
+
+../dist/public/assets/NACOSTI-Logo--H9cLmzAk.webp     7.01 kB
+
+../dist/public/assets/kenia-logo-DXTbyOt1.webp       10.75 kB
+../dist/public/assets/factory-logo-B0U55Nxo.jpeg     12.39 kB
+
+../dist/public/assets/kipi-logo-DLS50fRI.webp        15.56 kB
+
+../dist/public/assets/university-logo-BFLSmuXy.png   35.76 kB
+
+../dist/public/assets/huawei-logo-DaaIBUVy.jpg       56.57 kB
+../dist/public/assets/iec-logo-CLUIlLAi.png          97.78 kB
+../dist/public/assets/index-CnoLs15R.css            103.03 kB │ gzip:  16.48 kB
+../dist/public/assets/index-BPgMbrDT.js             846.45 kB │ gzip: 236.48 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 9.30s
+
+
+  dist/index.js  40.3kb
+
+⚡ Done in 114ms
+
+npm notice
+npm notice New major version of npm available! 10.8.2 -> 11.5.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.5.2
+npm notice To update run: npm install -g npm@11.5.2
+npm notice
+
+2025-08-25T19:15:36Z info: Pushing pid1 binary layer...
+2025-08-25T19:15:38Z info: Created pid1 binary layer
+2025-08-25T19:15:50Z info: Pushing Repl layer...
+2025-08-25T19:15:50Z info: Pushing hosting layer...
+2025-08-25T19:15:50Z info: Retrieved cached nix layer
+2025-08-25T19:15:50Z info: Nix layers for this Repl are uncached.
+2025-08-25T19:15:50Z info: Pushing nix-0 layer...
+2025-08-25T19:15:50Z info: Created hosting layer
+2025-08-25T19:16:21Z info: Created Repl layer
+2025-08-25T19:20:42Z info: Created nix-0 layer
+2025-08-25T19:20:42Z info: uploading image for cached layer
+2025-08-25T19:20:43Z info: pushed cache image manifest
+2025-08-25T19:20:43Z info: pushed cache soci index manifest
+2025-08-25T19:20:43Z info: uploading cached layer
+2025-08-25T19:20:43Z info: successfully uploaded cached layer
+2025-08-25T19:20:43Z error: image size is over the limit of 8 GiB

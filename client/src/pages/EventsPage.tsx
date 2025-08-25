@@ -1,5 +1,7 @@
-import { useEffect } from "react";
-import LayerSlider from '@/components/sliders/LayerSlider';
+import { useEffect, Suspense, lazy } from "react";
+
+// Lazy load the LayerSlider to reduce bundle size
+const LayerSlider = lazy(() => import('@/components/sliders/LayerSlider'));
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import {
@@ -38,9 +40,17 @@ const EventsPage = () => {
 
   return (
     <div>
-      {/* Layer Slider */}
-      <LayerSlider 
-        slides={[
+      {/* Layer Slider with lazy loading */}
+      <Suspense fallback={
+        <div className="h-[500px] bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center">
+          <div className="text-white text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+            <p>Loading slider...</p>
+          </div>
+        </div>
+      }>
+        <LayerSlider 
+          slides={[
           {
             id: 1,
             name: "Events & Workshops",
@@ -104,6 +114,7 @@ const EventsPage = () => {
         showTimeline={true}
         showControls={true}
       />
+      </Suspense>
       
       {/* Page Banner - Hidden now */}
       <div className="bg-primary py-16 md:py-24 relative" style={{display: 'none'}}>
