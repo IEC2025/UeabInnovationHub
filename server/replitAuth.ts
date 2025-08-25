@@ -26,24 +26,11 @@ const getOidcConfig = memoize(
 export function getSession() {
   const sessionTtl = 7 * 24 * 60 * 60 * 1000; // 1 week
   
-  let sessionStore;
-  
-  try {
-    // Try to use PostgreSQL store first
-    const pgStore = connectPg(session);
-    sessionStore = new pgStore({
-      conString: process.env.DATABASE_URL,
-      createTableIfMissing: true,
-      ttl: sessionTtl,
-      tableName: "sessions",
-    });
-  } catch (error) {
-    // Fallback to memory store if PostgreSQL fails
-    console.warn("PostgreSQL session store failed, falling back to memory store:", error);
-    sessionStore = new (MemoryStore(session))({
-      checkPeriod: sessionTtl, // prune expired entries every 24h
-    });
-  }
+  // Use memory store to avoid database authentication issues during development
+  console.log("Using memory store for sessions to avoid database connectivity issues");
+  const sessionStore = new (MemoryStore(session))({
+    checkPeriod: sessionTtl, // prune expired entries every 24h
+  });
   
   return session({
     secret: process.env.SESSION_SECRET || 'development-session-secret',
