@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ScrollProgress } from "@/components/ui/micro-interactions";
 import NotFound from "@/pages/not-found";
-import CeilStyleHomePage from "@/pages/CeilStyleHomePage";
+import HomePage from "@/pages/HomePage";
 import AboutPage from "@/pages/AboutPage";
 import ProgramsPage from "@/pages/ProgramsPage";
 import EventsPage from "@/pages/EventsPage";
@@ -25,7 +25,7 @@ function Router() {
       <Header />
       <main className="flex-grow">
         <Switch>
-          <Route path="/" component={CeilStyleHomePage} />
+          <Route path="/" component={HomePage} />
           <Route path="/about" component={AboutPage} />
           <Route path="/programs" component={ProgramsPage} />
           <Route path="/events" component={EventsPage} />
