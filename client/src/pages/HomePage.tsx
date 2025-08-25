@@ -13,22 +13,6 @@ const HomePage = () => {
 
   return (
     <div className="relative">
-      {/* Partner Logos Header */}
-      <div className="bg-gray-50 py-4">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-center items-center space-x-8">
-            <div className="text-sm text-gray-600">Hosted By:</div>
-            <div className="flex items-center space-x-6">
-              <span className="font-semibold text-primary">University of Eastern Africa, Baraton (UEAB)</span>
-              <span className="text-gray-400">|</span>
-              <span className="font-semibold text-secondary">College of Business, Arts & Social Sciences (CBAAS)</span>
-              <span className="text-gray-400">|</span>
-              <span className="font-semibold text-primary">KeNIA</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Hero Section - CEIL Style */}
       <div className="relative bg-gradient-to-br from-primary via-primary/90 to-secondary min-h-[600px] flex items-center">
         <div className="absolute inset-0">
