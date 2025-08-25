@@ -91,7 +91,8 @@ const TeamSection = () => {
           {teamMembers.map((member) => (
             <div 
               key={member.id} 
-              className="flip-card h-80 cursor-pointer"
+              className="flip-card h-80 cursor-pointer rounded-none"
+              style={{ borderRadius: '0px' }}
               data-testid={`speaker-card-${member.id}`}
             >
               <div className="flip-card-inner h-full relative">
@@ -100,7 +101,8 @@ const TeamSection = () => {
                   <img 
                     src={member.imageUrl} 
                     alt={member.name} 
-                    className="w-full h-full object-cover object-center"
+                    className="w-full h-full object-cover object-center rounded-none border-none"
+                    style={{ borderRadius: '0px' }}
                     data-testid={`speaker-image-${member.id}`}
                   />
                 </div>
