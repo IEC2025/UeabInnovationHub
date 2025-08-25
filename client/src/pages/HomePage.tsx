@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { Link } from "wouter";
-import { ArrowRight, Target, Users, Lightbulb, Award, Calendar, MapPin, Mail, Phone } from "lucide-react";
+import { ArrowRight, Target, Users, Lightbulb, Award, Calendar, MapPin, Mail, Phone, Clock } from "lucide-react";
 import MasterSlider from "@/components/sliders/MasterSlider";
+import { CountdownTimer } from "@/components/ui/countdown-timer";
 import PartnersSection from "@/components/home/PartnersSection";
 import TeamSection from "@/components/home/TeamSection";
 import ContactSection from "@/components/home/ContactSection";
@@ -73,12 +74,43 @@ const HomePage = () => {
         <MasterSlider 
           slides={heroSlides}
           autoPlay={true}
-          autoPlayInterval={7000}
+          autoPlayInterval={30000}
           showControls={true}
           showBullets={true}
           transitionDuration={1000}
         />
       </div>
+
+      {/* Innovation Week Countdown Section */}
+      <section className="py-8 bg-secondary text-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <div className="flex items-center justify-center mb-4">
+              <Clock className="h-6 w-6 mr-2" />
+              <h2 className="text-2xl font-bold">Innovation Week 2025 Countdown</h2>
+            </div>
+            <p className="text-white/90 mb-6">Don't miss the biggest innovation event of the year!</p>
+            <div className="flex justify-center">
+              <CountdownTimer
+                targetDate="2025-08-28T09:00:00"
+                showLabels={true}
+                size="large"
+                className="text-white"
+              />
+            </div>
+            <div className="mt-6">
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-secondary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center"
+              >
+                Register for Innovation Week <ArrowRight className="ml-2 h-5 w-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Content sections positioned below the full-page slider */}
       <div className="relative z-20 bg-white">
