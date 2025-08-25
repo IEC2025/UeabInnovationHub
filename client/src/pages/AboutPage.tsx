@@ -33,7 +33,7 @@ const AboutPage = () => {
         slides={[
           {
             id: 1,
-            backgroundImage: "/src/assets/images/BTV08785.JPG",
+            backgroundImage: "@assets/456214878_980492593875523_3420111680875412655_n_1756133729214.jpg",
             duration: 5000,
             layers: [
               {
