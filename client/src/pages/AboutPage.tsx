@@ -408,11 +408,73 @@ const AboutPage = () => {
               </div>
             </div>
 
-            {/* History content will be added based on concept note */}
-            <div className="text-center py-8">
-              <p className="text-neutral-600 italic">
-                History content to be updated based on concept note
-              </p>
+            <div className="relative border-l-2 border-primary pl-8 ml-4 space-y-10">
+              {/* Timeline Item 1 - 2022 */}
+              <div className="relative">
+                <div className="absolute -left-10 top-0 h-6 w-6 bg-primary rounded-full border-4 border-white"></div>
+                <div className="text-lg font-bold text-primary mb-1">2022</div>
+                <div className="text-sm text-neutral-500 mb-2">Laying the Foundation</div>
+                <p className="text-neutral-700 mb-3">
+                  Formation of the Innovation Committee to spearhead innovation efforts at UEAB. 
+                  The center marked its first major achievement by participating in Kenya Innovation Week (KIW) 2022, 
+                  where IEC was awarded in the Affordable Healthcare Category.
+                </p>
+              </div>
+
+              {/* Timeline Item 2 - 2023 */}
+              <div className="relative">
+                <div className="absolute -left-10 top-0 h-6 w-6 bg-primary rounded-full border-4 border-white"></div>
+                <div className="text-lg font-bold text-primary mb-1">2023</div>
+                <div className="text-sm text-neutral-500 mb-2">Strengthening National Presence</div>
+                <p className="text-neutral-700 mb-3">
+                  Continued engagement in Kenya Innovation Week (KIW) 2023, reinforcing our presence 
+                  in the national innovation ecosystem. Active participation in global platforms including 
+                  HULT Prize, Tony Elumelu Foundation (TEF), Global Student Entrepreneur Awards (GSEA), 
+                  and Entrepreneurship World Cup.
+                </p>
+              </div>
+
+              {/* Timeline Item 3 - 2024 */}
+              <div className="relative">
+                <div className="absolute -left-10 top-0 h-6 w-6 bg-primary rounded-full border-4 border-white"></div>
+                <div className="text-lg font-bold text-primary mb-1">2024</div>
+                <div className="text-sm text-neutral-500 mb-2">Scaling Up & Institutional Integration</div>
+                <p className="text-neutral-700 mb-3">
+                  Formation of the Baraton Innovation and Entrepreneurship Centre (BIEC). 
+                  Successfully hosted the 1st Annual Baraton Innovation and Entrepreneurship Week (BIEW) 
+                  in November, featuring collaboration with Microsoft and generating 8 innovative ideas 
+                  and 16 prototypes. Participated in the Fourth Annual ACPK Conference at Sarova Nakuru, 
+                  one of only two universities selected alongside Kabarak University.
+                </p>
+              </div>
+
+              {/* Timeline Item 4 - 2025 */}
+              <div className="relative">
+                <div className="absolute -left-10 top-0 h-6 w-6 bg-secondary rounded-full border-4 border-white"></div>
+                <div className="text-lg font-bold text-primary mb-1">2025</div>
+                <div className="text-sm text-neutral-500 mb-2">Strategic Partnerships & Recognition</div>
+                <p className="text-neutral-700 mb-3">
+                  Signed a transformative Memorandum of Understanding (MOU) with CBaaS to strengthen 
+                  student entrepreneurship and startup support. A group of IEC students were shortlisted 
+                  for the 2024/2025 Presidential Innovation Award, marking significant national recognition. 
+                  Planning the 2nd Annual BIEW (October 6-10, 2025) with expanded participation and 
+                  funding opportunities.
+                </p>
+              </div>
+
+              {/* Future Vision */}
+              <div className="relative">
+                <div className="absolute -left-10 top-0 h-6 w-6 bg-gradient-to-r from-primary to-secondary rounded-full border-4 border-white"></div>
+                <div className="text-lg font-bold text-primary mb-1">Future Vision</div>
+                <div className="text-sm text-neutral-500 mb-2">Innovation Hub Development</div>
+                <p className="text-neutral-700">
+                  Establishing a dedicated Innovation Hub for prototyping and startup incubation. 
+                  Expanding strategic partnerships with Microsoft, CBaaS, and venture capital firms. 
+                  Developing structured mentorship programs and connecting UEAB students to global 
+                  innovation ecosystems including Y Combinator, Microsoft Imagine Cup, and other 
+                  leading accelerators.
+                </p>
+              </div>
             </div>
           </div>
         </div>
