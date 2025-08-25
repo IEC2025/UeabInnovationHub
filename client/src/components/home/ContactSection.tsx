@@ -207,9 +207,9 @@ const ContactSection = () => {
                   <div>
                     <h4 className="font-bold text-lg mb-1">Call Us</h4>
                     <p className="text-neutral-600">
-                      +254 123 456 789
+                      +254 714 333 111
                       <br />
-                      +254 123 456 780
+                      +254 721 995729
                     </p>
                   </div>
                 </div>

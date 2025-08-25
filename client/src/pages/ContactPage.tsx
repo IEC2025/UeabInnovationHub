@@ -200,17 +200,17 @@ const ContactPage = () => {
                     <h4 className="font-bold text-lg mb-1">Call Us</h4>
                     <p className="text-neutral-600">
                       <a 
-                        href="tel:+254123456789" 
+                        href="tel:+254714333111" 
                         className="hover:text-secondary transition-colors"
                       >
-                        +254 123 456 789
+                        +254 714 333 111
                       </a>
                       <br />
                       <a 
-                        href="tel:+254123456780" 
+                        href="tel:+254721995729" 
                         className="hover:text-secondary transition-colors"
                       >
-                        +254 123 456 780
+                        +254 721 995729
                       </a>
                     </p>
                   </div>

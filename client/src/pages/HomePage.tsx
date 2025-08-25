@@ -291,8 +291,8 @@ const HomePage = () => {
               </div>
               <h3 className="text-xl font-bold mb-2">Call Us</h3>
               <p className="text-white/80">
-                +254 123 456 789<br />
-                +254 987 654 321
+                +254 714 333 111<br />
+                +254 721 995729
               </p>
             </div>
             <div className="text-center">

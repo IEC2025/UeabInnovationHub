@@ -60,9 +60,9 @@ const Header = () => {
       <div className="bg-primary text-white py-2">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="text-sm hidden sm:flex">
-            <a href="tel:+254123456789" className="mr-4 hover:text-secondary transition-colors flex items-center">
+            <a href="tel:+254714333111" className="mr-4 hover:text-secondary transition-colors flex items-center">
               <Phone className="h-4 w-4 mr-2" />
-              +254 123 456 789
+              +254 714 333 111
             </a>
             <a href="mailto:info@ueab.ac.ke" className="hover:text-secondary transition-colors flex items-center">
               <Mail className="h-4 w-4 mr-2" />
