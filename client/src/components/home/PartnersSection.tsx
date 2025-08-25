@@ -1,6 +1,5 @@
 // Import partner logos
 import universityLogo from "/src/assets/images/logos/university-logo.png";
-import keniaImage from "/src/assets/images/20241127_112142.jpg";
 import huaweiLogo from "/src/assets/images/logos/huawei-logo.jpg";
 import factoryLogo from "/src/assets/images/logos/factory-logo.jpeg";
 import microsoftLogo from "/src/assets/images/logos/microsoft-logo.png";
@@ -43,14 +42,6 @@ const PartnersSection = () => {
             />
           </div>
           
-          {/* Partner: KeNIA */}
-          <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
-            <img
-              src={keniaImage}
-              alt="Kenya National Innovation Agency"
-              className="max-h-16 object-contain"
-            />
-          </div>
         </div>
       </div>
     </section>
