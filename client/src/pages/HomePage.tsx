@@ -151,8 +151,8 @@ const HomePage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <img 
-                src="@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png" 
-                alt="Innovation Centre" 
+                src="@assets/generated_images/African_students_innovation_lab_79c63275.png" 
+                alt="African students collaborating in innovation lab at UEAB" 
                 className="rounded-lg shadow-lg w-full"
               />
             </div>

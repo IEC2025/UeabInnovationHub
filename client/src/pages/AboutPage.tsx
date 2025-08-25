@@ -157,8 +157,8 @@ const AboutPage = () => {
             <div className="lg:w-1/2">
               <div className="relative">
                 <img 
-                  src="@assets/generated_images/Kenyan_campus_students_walking_83f72c3e.png" 
-                  alt="Students collaborating" 
+                  src="@assets/generated_images/African_university_leadership_meeting_1531ef94.png" 
+                  alt="African leadership team at UEAB" 
                   className="rounded-lg shadow-lg w-full"
                 />
                 <div className="absolute inset-0 bg-primary/10 rounded-lg"></div>
@@ -409,6 +409,13 @@ const AboutPage = () => {
               <p className="text-neutral-700">
                 From humble beginnings to becoming a leading innovation hub in Kenya.
               </p>
+              <div className="mt-8">
+                <img 
+                  src="@assets/generated_images/African_students_innovation_presentation_9ca1053e.png" 
+                  alt="African students presenting innovation projects at UEAB" 
+                  className="rounded-lg shadow-lg w-full max-w-2xl mx-auto"
+                />
+              </div>
             </div>
 
             <div className="relative border-l-2 border-primary pl-8 ml-4 space-y-10">
@@ -467,12 +474,20 @@ const AboutPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary">
-        <div className="container mx-auto px-4 text-center">
+      <section className="py-16 bg-primary relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0">
+          <img 
+            src="@assets/generated_images/African_entrepreneurs_startup_workspace_eb0f122f.png" 
+            alt="African entrepreneurs working in startup workspace" 
+            className="w-full h-full object-cover opacity-30"
+          />
+        </div>
+        <div className="container mx-auto px-4 text-center relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
             Join Our Innovation Community
           </h2>
-          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
             Whether you're a student, faculty member, or external partner, there are many ways to get involved with the Innovation & Entrepreneurship Centre.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
