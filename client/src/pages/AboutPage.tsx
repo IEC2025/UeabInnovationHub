@@ -157,7 +157,7 @@ const AboutPage = () => {
             <div className="lg:w-1/2">
               <div className="relative">
                 <img 
-                  src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                  src="https://images.unsplash.com/photo-1586227740560-8cf2732c1531?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
                   alt="Students collaborating" 
                   className="rounded-lg shadow-lg w-full"
                 />
@@ -168,7 +168,7 @@ const AboutPage = () => {
                     "Our goal is to create an environment where innovation thrives and entrepreneurs can turn their ideas into reality."
                   </p>
                   <div className="mt-4 font-bold">
-                    Dr. Sarah Kimani, Director
+                    Mr. Wakoli Albert, Director
                   </div>
                 </div>
               </div>
@@ -201,7 +201,7 @@ const AboutPage = () => {
                 className="w-full h-64 object-cover object-center"
               />
               <div className="p-5">
-                <h3 className="text-xl font-bold text-primary">Dr. Jade Abuga</h3>
+                <h3 className="text-xl font-bold text-primary">Mr. Wakoli Albert</h3>
                 <p className="text-secondary font-medium mb-3">Director, Innovation & Entrepreneurship Centre</p>
                 <p className="text-neutral-600 text-sm mb-4">
                   Leading the innovation and entrepreneurship initiatives at UEAB with a focus on student development and industry partnerships.
@@ -332,7 +332,7 @@ const AboutPage = () => {
             
             <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 card-3d">
               <div className="p-5">
-                <h3 className="text-xl font-bold text-primary">Mrs. Esther Ateka</h3>
+                <h3 className="text-xl font-bold text-primary">Ms. Ester Ateka</h3>
                 <p className="text-secondary font-medium mb-3">Student Mentorship Coordinator</p>
                 <p className="text-neutral-600 text-sm">
                   Providing guidance and support for student entrepreneurs and innovators.

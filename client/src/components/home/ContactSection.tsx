@@ -223,7 +223,7 @@ const ContactSection = () => {
                     <p className="text-neutral-600">
                       iec@ueab.ac.ke
                       <br />
-                      info@iec.ueab.ac.ke
+                      info@ueab.ac.ke
                     </p>
                   </div>
                 </div>

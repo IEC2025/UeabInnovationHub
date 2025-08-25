@@ -12,7 +12,7 @@ const AboutSection = () => {
           <div className="md:w-1/2 flex justify-center md:justify-end">
             <div className="relative">
               <img
-                src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=700&q=80"
+                src="https://images.unsplash.com/photo-1586227740560-8cf2732c1531?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=700&q=80"
                 alt="Innovation Hub Space"
                 className="rounded-lg shadow-lg object-cover h-[450px]"
               />

@@ -28,8 +28,8 @@ const EventsSection = () => {
             <div className="p-6">
               <div className="flex items-center mb-4">
                 <div className="bg-secondary text-white text-center rounded p-2 mr-4">
-                  <div className="text-xl font-bold">25-29</div>
-                  <div className="text-xs uppercase">Sept</div>
+                  <div className="text-xl font-bold">28</div>
+                  <div className="text-xs uppercase">Aug</div>
                 </div>
                 <div>
                   <span className="bg-primary text-white text-xs py-1 px-2 rounded-full">
@@ -41,11 +41,11 @@ const EventsSection = () => {
                 </div>
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">
-                2nd Innovation and Entrepreneurship Week
+                Second Baraton Innovation & Entrepreneurship Week
               </h3>
               <p className="text-neutral-600 mb-4">
                 Join us for a week of innovation showcases, workshops, and networking 
-                opportunities with industry experts and fellow entrepreneurs.
+                opportunities with industry experts and fellow entrepreneurs. (28th Aug – 3rd Sept 2025)
               </p>
               <div className="flex items-center text-neutral-500 text-sm mb-4">
                 <MapPin className="h-4 w-4 mr-2" /> Innovation Hub, UEAB Main
@@ -67,8 +67,8 @@ const EventsSection = () => {
             <div className="p-6">
               <div className="flex items-center mb-4">
                 <div className="bg-secondary text-white text-center rounded p-2 mr-4">
-                  <div className="text-xl font-bold">19-22</div>
-                  <div className="text-xs uppercase">May</div>
+                  <div className="text-xl font-bold">11-12</div>
+                  <div className="text-xs uppercase">Sept</div>
                 </div>
                 <div>
                   <span className="bg-primary text-white text-xs py-1 px-2 rounded-full">
@@ -80,18 +80,18 @@ const EventsSection = () => {
                 </div>
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">
-                NACOSTI Multisectoral Conference and Exhibition
+                CIEL Summit 2025
               </h3>
               <p className="text-neutral-600 mb-4">
                 Connect with researchers, innovators, and policymakers at this 
-                major national exhibition showcasing innovations across sectors.
+                major national summit showcasing innovations and entrepreneurship.
               </p>
               <div className="flex items-center text-neutral-500 text-sm mb-4">
-                <MapPin className="h-4 w-4 mr-2" /> Nairobi, Kenya
+                <MapPin className="h-4 w-4 mr-2" /> Kenya
               </div>
-              <Link href="/events#nacosti-conference-2025" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
+              <a href="https://ceil.kenia.go.ke/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center font-semibold text-secondary hover:text-secondary/80 transition-colors">
                 Learn More <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
+              </a>
             </div>
           </div>
 

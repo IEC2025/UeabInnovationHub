@@ -24,7 +24,7 @@ const PartnersSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
           {/* Partner: UEAB */}
           <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
             <img
@@ -34,25 +34,7 @@ const PartnersSection = () => {
             />
           </div>
           
-          {/* Partner: KeNIA */}
-          <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
-            <img
-              src={keniaImage}
-              alt="Kenya National Innovation Agency"
-              className="max-h-16 object-contain"
-            />
-          </div>
-          
-          {/* Partner: Huawei */}
-          <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
-            <img
-              src={huaweiLogo}
-              alt="Huawei"
-              className="max-h-16 object-contain"
-            />
-          </div>
-          
-          {/* Partner: Factor-Y */}
+          {/* Partner: CBAAS */}
           <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
             <img
               src={factoryLogo}
@@ -61,29 +43,11 @@ const PartnersSection = () => {
             />
           </div>
           
-          {/* Partner: Microsoft */}
+          {/* Partner: KeNIA */}
           <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
             <img
-              src={microsoftLogo}
-              alt="Microsoft"
-              className="max-h-16 object-contain"
-            />
-          </div>
-          
-          {/* Partner: KIPI */}
-          <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
-            <img
-              src={kipiLogo}
-              alt="Kenya Industrial Property Institute"
-              className="max-h-16 object-contain"
-            />
-          </div>
-          
-          {/* Partner: NACOSTI */}
-          <div className="flex items-center justify-center p-4 hover:scale-110 transition-all duration-300 card-3d">
-            <img
-              src={nacostiImage}
-              alt="National Commission for Science, Technology and Innovation"
+              src={keniaImage}
+              alt="Kenya National Innovation Agency"
               className="max-h-16 object-contain"
             />
           </div>
