@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Users, Building, Award, MapPin, Calendar, CheckCircle, Globe, Lightbulb, Target, Shield, Crown, Medal, Star, Sprout, Phone, Mail, User, Download, Clock, FileText, GraduationCap, Briefcase, Camera } from 'lucide-react';
+import { ArrowRight, Users, Building, Award, MapPin, Calendar, CheckCircle, Globe, Lightbulb, Target, Crown, Medal, Star, Sprout, Phone, Mail, User, Download, Clock, FileText, GraduationCap, Briefcase, Camera, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useAuth } from '@/hooks/useAuth';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
-import { isUnauthorizedError } from '@/lib/authUtils';
 import { motion, useAnimation, useInView } from 'framer-motion';
 
 // Animated Counter Component
@@ -58,32 +56,22 @@ const FloatingShape = ({ children, delay = 0 }: { children: React.ReactNode, del
 );
 
 const RegistrationPage = () => {
-  const { user, isAuthenticated, isLoading } = useAuth();
   const { toast } = useToast();
-  const queryClient = useQueryClient();
   const [currentStep, setCurrentStep] = useState<'overview' | 'delegation' | 'exhibition'>('overview');
   const [formData, setFormData] = useState({
     registrationType: '',
+    fullName: '',
     organizationName: '',
-    contactPerson: '',
     position: '',
-    email: (user as any)?.email || '',
+    email: '',
     phone: '',
     category: '',
     participantCount: '',
     boothRequirements: '',
     specialRequirements: '',
-    paymentOption: ''
+    paymentPreference: '',
+    additionalInfo: ''
   });
-
-  const handleRegistrationClick = (type: 'delegation' | 'exhibition') => {
-    if (!isAuthenticated) {
-      window.location.href = '/api/login';
-    } else {
-      setFormData(prev => ({ ...prev, registrationType: type }));
-      setCurrentStep(type);
-    }
-  };
 
   const registrationMutation = useMutation({
     mutationFn: async (data: typeof formData) => {
@@ -92,31 +80,39 @@ const RegistrationPage = () => {
     },
     onSuccess: (data) => {
       toast({
-        title: "Registration Successful!",
-        description: `Your ${formData.registrationType} registration has been submitted successfully. You will receive a confirmation email shortly.`,
+        title: "Registration Submitted Successfully!",
+        description: `Your ${formData.registrationType} registration has been sent to our team. We'll contact you within 24 hours with next steps.`,
       });
-      queryClient.invalidateQueries({ queryKey: ['/api/biew-registrations'] });
+      // Reset form and go back to overview
+      setFormData({
+        registrationType: '',
+        fullName: '',
+        organizationName: '',
+        position: '',
+        email: '',
+        phone: '',
+        category: '',
+        participantCount: '',
+        boothRequirements: '',
+        specialRequirements: '',
+        paymentPreference: '',
+        additionalInfo: ''
+      });
       setCurrentStep('overview');
     },
     onError: (error: Error) => {
-      if (isUnauthorizedError(error)) {
-        toast({
-          title: "Unauthorized",
-          description: "You are logged out. Logging in again...",
-          variant: "destructive",
-        });
-        setTimeout(() => {
-          window.location.href = "/api/login";
-        }, 500);
-        return;
-      }
       toast({
         title: "Registration Failed",
-        description: "There was an error submitting your registration. Please try again.",
+        description: "There was an error submitting your registration. Please try again or contact us directly at iec@ueab.ac.ke.",
         variant: "destructive",
       });
     },
   });
+
+  const handleRegistrationClick = (type: 'delegation' | 'exhibition') => {
+    setFormData(prev => ({ ...prev, registrationType: type }));
+    setCurrentStep(type);
+  };
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -158,7 +154,7 @@ const RegistrationPage = () => {
               />
               <div>
                 <h1 className="text-3xl font-bold">{type === 'delegation' ? 'Delegation' : 'Exhibition'} Registration</h1>
-                <p className="text-blue-100">BIEW 2025 - Complete your registration below</p>
+                <p className="text-blue-100">BIEW 2025 - Submit your registration below</p>
               </div>
             </div>
             <Button
@@ -189,12 +185,12 @@ const RegistrationPage = () => {
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold text-gray-800">
-                    {type === 'delegation' ? 'Delegation Registration' : 'Exhibition Registration'} Details
+                    {type === 'delegation' ? 'Delegation Registration' : 'Exhibition Registration'} Form
                   </h2>
                   <p className="text-gray-600">
                     {type === 'delegation' 
-                      ? 'Join as a delegate to access all sessions and networking opportunities' 
-                      : 'Showcase your innovations and connect with potential partners'
+                      ? 'Join as a delegate to access all sessions and networking opportunities (KSH 25,000)' 
+                      : 'Showcase your innovations and connect with potential partners (KSH 15,000)'
                     }
                   </p>
                 </div>
@@ -208,13 +204,14 @@ const RegistrationPage = () => {
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <Label htmlFor="contactPerson">Full Name *</Label>
+                    <Label htmlFor="fullName">Full Name *</Label>
                     <Input
-                      id="contactPerson"
-                      value={formData.contactPerson}
-                      onChange={(e) => setFormData({...formData, contactPerson: e.target.value})}
+                      id="fullName"
+                      value={formData.fullName}
+                      onChange={(e) => setFormData({...formData, fullName: e.target.value})}
                       className="mt-1"
                       required
+                      data-testid="input-full-name"
                     />
                   </div>
                   <div>
@@ -225,6 +222,7 @@ const RegistrationPage = () => {
                       onChange={(e) => setFormData({...formData, position: e.target.value})}
                       className="mt-1"
                       required
+                      data-testid="input-position"
                     />
                   </div>
                   <div>
@@ -236,6 +234,7 @@ const RegistrationPage = () => {
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
                       className="mt-1"
                       required
+                      data-testid="input-email"
                     />
                   </div>
                   <div>
@@ -246,6 +245,7 @@ const RegistrationPage = () => {
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
                       className="mt-1"
                       required
+                      data-testid="input-phone"
                     />
                   </div>
                 </div>
@@ -266,12 +266,13 @@ const RegistrationPage = () => {
                       onChange={(e) => setFormData({...formData, organizationName: e.target.value})}
                       className="mt-1"
                       required
+                      data-testid="input-organization"
                     />
                   </div>
                   <div>
                     <Label htmlFor="category">Category *</Label>
                     <Select value={formData.category} onValueChange={(value) => setFormData({...formData, category: value})}>
-                      <SelectTrigger className="mt-1">
+                      <SelectTrigger className="mt-1" data-testid="select-category">
                         <SelectValue placeholder="Select category" />
                       </SelectTrigger>
                       <SelectContent>
@@ -298,7 +299,7 @@ const RegistrationPage = () => {
                   <div>
                     <Label htmlFor="participantCount">Number of Participants</Label>
                     <Select value={formData.participantCount} onValueChange={(value) => setFormData({...formData, participantCount: value})}>
-                      <SelectTrigger className="mt-1">
+                      <SelectTrigger className="mt-1" data-testid="select-participants">
                         <SelectValue placeholder="Select number of participants" />
                       </SelectTrigger>
                       <SelectContent>
@@ -328,16 +329,17 @@ const RegistrationPage = () => {
                       className="mt-1"
                       rows={4}
                       placeholder="Describe your booth setup requirements, display needs, power requirements, etc."
+                      data-testid="textarea-booth-requirements"
                     />
                   </div>
                 </div>
               )}
 
-              {/* Payment Options */}
+              {/* Payment Preference */}
               <div className="mb-8">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                   <Award className="h-5 w-5 mr-2 text-primary" />
-                  Payment Options
+                  Payment Preference
                 </h3>
                 <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg mb-4">
                   <div className="text-2xl font-bold text-green-600">
@@ -346,34 +348,35 @@ const RegistrationPage = () => {
                   <div className="text-sm text-gray-600">Registration Fee</div>
                 </div>
                 <RadioGroup 
-                  value={formData.paymentOption} 
-                  onValueChange={(value) => setFormData({...formData, paymentOption: value})}
+                  value={formData.paymentPreference} 
+                  onValueChange={(value) => setFormData({...formData, paymentPreference: value})}
                 >
                   <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
                     <RadioGroupItem value="mpesa" id="mpesa" />
-                    <Label htmlFor="mpesa">M-Pesa Payment</Label>
+                    <Label htmlFor="mpesa">M-Pesa Payment (Preferred)</Label>
                   </div>
                   <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
                     <RadioGroupItem value="bank" id="bank" />
                     <Label htmlFor="bank">Bank Transfer</Label>
                   </div>
                   <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
-                    <RadioGroupItem value="card" id="card" />
-                    <Label htmlFor="card">Credit/Debit Card</Label>
+                    <RadioGroupItem value="cash" id="cash" />
+                    <Label htmlFor="cash">Cash Payment at Event</Label>
                   </div>
                 </RadioGroup>
               </div>
 
-              {/* Special Requirements */}
+              {/* Additional Information */}
               <div className="mb-8">
-                <Label htmlFor="specialRequirements">Special Requirements (Optional)</Label>
+                <Label htmlFor="additionalInfo">Additional Information or Special Requirements</Label>
                 <Textarea
-                  id="specialRequirements"
-                  value={formData.specialRequirements}
-                  onChange={(e) => setFormData({...formData, specialRequirements: e.target.value})}
+                  id="additionalInfo"
+                  value={formData.additionalInfo}
+                  onChange={(e) => setFormData({...formData, additionalInfo: e.target.value})}
                   className="mt-1"
                   rows={3}
-                  placeholder="Any dietary restrictions, accessibility needs, or other special requirements..."
+                  placeholder="Any dietary restrictions, accessibility needs, questions, or other information you'd like us to know..."
+                  data-testid="textarea-additional-info"
                 />
               </div>
 
@@ -384,22 +387,27 @@ const RegistrationPage = () => {
                 <Button 
                   type="submit" 
                   className="w-full bg-gradient-to-r from-primary to-secondary text-white py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                  disabled={!formData.contactPerson || !formData.organizationName || !formData.position || !formData.email || !formData.phone || !formData.category || registrationMutation.isPending}
+                  disabled={!formData.fullName || !formData.organizationName || !formData.position || !formData.email || !formData.phone || !formData.category || registrationMutation.isPending}
                   data-testid="button-submit-registration"
                 >
                   {registrationMutation.isPending ? (
                     <>
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                      Processing Registration...
+                      Sending Registration...
                     </>
                   ) : (
                     <>
-                      Complete Registration
-                      <ArrowRight className="ml-2 h-5 w-5" />
+                      <Send className="mr-2 h-5 w-5" />
+                      Submit Registration
                     </>
                   )}
                 </Button>
               </motion.div>
+              
+              <div className="mt-4 text-center text-sm text-gray-600">
+                <p>📧 Your registration will be sent directly to our team at <strong>iec@ueab.ac.ke</strong></p>
+                <p>We'll contact you within 24 hours with payment instructions and next steps.</p>
+              </div>
             </div>
           </motion.form>
         </div>
@@ -524,6 +532,7 @@ const RegistrationPage = () => {
                 size="lg"
                 className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-8 py-4 text-lg font-bold rounded-full shadow-2xl hover:shadow-yellow-400/25 transition-all duration-300 transform hover:scale-105"
                 onClick={() => document.getElementById('registration-section')?.scrollIntoView({ behavior: 'smooth' })}
+                data-testid="button-register-now"
               >
                 Register Now
                 <ArrowRight className="ml-2 h-6 w-6" />
@@ -689,7 +698,7 @@ const RegistrationPage = () => {
             <h2 className="text-5xl font-bold text-primary mb-6">Choose Your Registration Plan</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
               Join us for the most comprehensive innovation and entrepreneurship gathering in East Africa. 
-              Register now to secure your spot and be part of the transformation.
+              Submit your registration form and our team will contact you with payment details within 24 hours.
             </p>
           </motion.div>
           
@@ -755,7 +764,7 @@ const RegistrationPage = () => {
                       data-testid="button-register-delegation"
                     >
                       <span className="group-hover:mr-1 transition-all">
-                        {isAuthenticated ? 'Register as Delegate' : 'Login to Register'}
+                        Register as Delegate
                       </span>
                       <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                     </Button>
@@ -825,7 +834,7 @@ const RegistrationPage = () => {
                       data-testid="button-register-exhibition"
                     >
                       <span className="group-hover:mr-1 transition-all">
-                        {isAuthenticated ? 'Register for Exhibition' : 'Login to Register'}
+                        Register for Exhibition
                       </span>
                       <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                     </Button>
@@ -835,34 +844,28 @@ const RegistrationPage = () => {
             </motion.div>
           </div>
           
-          {/* Login Prompt */}
-          {!isAuthenticated && !isLoading && (
-            <motion.div 
-              className="text-center mt-12"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-100 rounded-3xl p-8 max-w-2xl mx-auto">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <User className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-3">Ready to Join BIEW 2025?</h3>
-                <p className="text-gray-600 mb-6">
-                  Please log in to your account to complete the registration process and secure your spot at East Africa's premier innovation event.
-                </p>
-                <Button
-                  onClick={() => window.location.href = '/api/login'}
-                  className="bg-gradient-to-r from-primary to-secondary text-white px-8 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300"
-                  data-testid="button-login"
-                >
-                  <User className="mr-2 h-5 w-5" />
-                  Login to Continue
-                </Button>
+          {/* Email Contact Info */}
+          <motion.div 
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-100 rounded-3xl p-8 max-w-2xl mx-auto">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Mail className="h-8 w-8 text-white" />
               </div>
-            </motion.div>
-          )}
+              <h3 className="text-2xl font-bold text-gray-800 mb-3">Simple Registration Process</h3>
+              <p className="text-gray-600 mb-6">
+                Fill out the registration form above and we'll send your details directly to our team at <strong>iec@ueab.ac.ke</strong>. 
+                Our staff will contact you within 24 hours with payment instructions and next steps.
+              </p>
+              <div className="text-sm text-gray-500">
+                Questions? Contact us directly at <strong>iec@ueab.ac.ke</strong> or call our office.
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -906,6 +909,7 @@ const RegistrationPage = () => {
               <Button 
                 className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-3 rounded-xl group"
                 onClick={() => window.open('#', '_blank')}
+                data-testid="button-download-concept"
               >
                 <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
                 Download Concept Note
@@ -932,6 +936,7 @@ const RegistrationPage = () => {
               <Button 
                 className="w-full bg-gradient-to-r from-green-500 to-teal-500 text-white py-3 rounded-xl group"
                 onClick={() => window.open('#', '_blank')}
+                data-testid="button-download-case"
               >
                 <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
                 Download Case for Support
@@ -1035,6 +1040,7 @@ const RegistrationPage = () => {
                 variant="outline" 
                 className="border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-xl"
                 onClick={() => window.open('#', '_blank')}
+                data-testid="button-download-program"
               >
                 <Download className="mr-2 h-4 w-4" />
                 Download Full Program
@@ -1130,7 +1136,8 @@ const RegistrationPage = () => {
                   
                   <Button
                     className="w-full bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold py-4 text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
-                    onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Title Sponsor Package - BIEW 2025', '_blank')}
+                    onClick={() => window.open('mailto:iec@ueab.ac.ke?subject=Title Sponsor Package - BIEW 2025', '_blank')}
+                    data-testid="button-sponsor-title"
                   >
                     Become Title Sponsor
                   </Button>
@@ -1229,7 +1236,8 @@ const RegistrationPage = () => {
                 
                 <Button
                   className={`w-full bg-gradient-to-r ${pkg.gradient} text-white font-semibold py-2 rounded-xl hover:shadow-lg transition-all duration-300`}
-                  onClick={() => window.open(`mailto:info@ueab.ac.ke?subject=${pkg.title.split(' ')[1]} Sponsor Package - BIEW 2025`, '_blank')}
+                  onClick={() => window.open(`mailto:iec@ueab.ac.ke?subject=${pkg.title.split(' ')[1]} Sponsor Package - BIEW 2025`, '_blank')}
+                  data-testid={`button-sponsor-${pkg.title.split(' ')[1].toLowerCase()}`}
                 >
                   Get Package
                 </Button>
@@ -1270,14 +1278,14 @@ const RegistrationPage = () => {
             viewport={{ once: true }}
           >
             Join us for the most comprehensive innovation and entrepreneurship gathering in East Africa. 
-            Be part of the change, connect with visionaries, and shape the future of innovation.
+            Submit your registration form and our team will contact you within 24 hours with next steps.
           </motion.p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto">
             {[
-              { icon: MapPin, title: "Venue", desc: "Innovation Arena\nUEAB Main Campus\nKeny" },
+              { icon: MapPin, title: "Venue", desc: "Innovation Arena\nUEAB Main Campus\nEldoret, Kenya" },
               { icon: Calendar, title: "Duration", desc: "September 29 - October 2, 2025\n4 Days of Innovation\nFull Schedule Available" },
-              { icon: Phone, title: "Contact", desc: "info@ueab.ac.ke\nDirector: Mr. Albert Wakoli\nInnovation & Entrepreneurship Centre" }
+              { icon: Phone, title: "Contact", desc: "iec@ueab.ac.ke\nDirector: Mr. Albert Wakoli\nInnovation & Entrepreneurship Centre" }
             ].map((item, idx) => (
               <motion.div 
                 key={idx}
@@ -1309,6 +1317,7 @@ const RegistrationPage = () => {
                   size="lg"
                   className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-10 py-4 text-lg font-bold rounded-2xl shadow-2xl hover:shadow-yellow-400/25 transition-all duration-300"
                   onClick={() => document.getElementById('registration-section')?.scrollIntoView({ behavior: 'smooth' })}
+                  data-testid="button-register-final"
                 >
                   Register Now
                   <ArrowRight className="ml-2 h-6 w-6" />
@@ -1319,7 +1328,8 @@ const RegistrationPage = () => {
                   size="lg"
                   variant="outline"
                   className="bg-white/10 backdrop-blur-sm border-white/30 text-white px-10 py-4 text-lg font-semibold rounded-2xl hover:bg-white/20 transition-all duration-300"
-                  onClick={() => window.open('mailto:info@ueab.ac.ke?subject=BIEW 2025 Inquiry', '_blank')}
+                  onClick={() => window.open('mailto:iec@ueab.ac.ke?subject=BIEW 2025 Inquiry', '_blank')}
+                  data-testid="button-contact-final"
                 >
                   Contact Us
                 </Button>
