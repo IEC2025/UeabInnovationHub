@@ -690,7 +690,7 @@ image: "/src/assets/images/ms-esther-masese.jpeg"
               },
               { 
                 name: "Dr. Benard Chitunga", 
-                title: "Innovation Expert", 
+                title: "Chancellor, Cooperative University of Kenya", 
                 role: "SPEAKER", 
                 icon: Award, 
                 gradient: "from-purple-500 to-pink-500",
@@ -706,11 +706,12 @@ image: "/src/assets/images/dr-benard-chitunga.jpeg"
                 viewport={{ once: true }}
               >
                 <div className="relative mb-6">
-                  <div className="w-48 h-48 rounded-full mx-auto overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-300">
+                  <div className="w-48 h-48 mx-auto overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-300 rounded-none" style={{ borderRadius: '0px' }}>
                     <img 
                       src={speaker.image} 
                       alt={speaker.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-none"
+                      style={{ borderRadius: '0px' }}
                       onError={(e) => {
                         console.log('Image failed to load:', speaker.image);
                         e.currentTarget.src = '/src/assets/images/BTV08418.JPG';
@@ -719,7 +720,7 @@ image: "/src/assets/images/dr-benard-chitunga.jpeg"
                   </div>
                   
                   {/* Name overlay effect on hover */}
-                  <div className="absolute inset-0 w-48 h-48 rounded-full mx-auto bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
+                  <div className="absolute inset-0 w-48 h-48 mx-auto bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center rounded-none" style={{ borderRadius: '0px' }}>
                     <div className="text-white text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-100 scale-95">
                       <div className={`bg-gradient-to-r ${speaker.gradient} text-white px-3 py-1 rounded-full text-xs font-bold mb-2 inline-block`}>
                         {speaker.role}
