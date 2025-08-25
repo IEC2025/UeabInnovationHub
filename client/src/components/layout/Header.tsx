@@ -28,6 +28,34 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-md">
+      {/* Innovation Week & Submission Banner */}
+      <div className="bg-secondary text-white py-3">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-center md:text-left">
+              <span className="font-semibold text-lg">🚀 Innovation Week 2025 | Aug 28 - Sept 3</span>
+              <span className="ml-2 text-sm opacity-90">Join us for workshops, showcases & networking!</span>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-secondary px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-center text-sm"
+              >
+                Submit Innovation
+              </a>
+              <a
+                href="#events"
+                className="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary/90 transition-colors text-center text-sm"
+              >
+                Register for Week
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Top Bar */}
       <div className="bg-primary text-white py-2">
         <div className="container mx-auto px-4 flex justify-between items-center">
@@ -36,9 +64,9 @@ const Header = () => {
               <Phone className="h-4 w-4 mr-2" />
               +254 123 456 789
             </a>
-            <a href="mailto:iec@ueab.ac.ke" className="hover:text-secondary transition-colors flex items-center">
+            <a href="mailto:info@ueab.ac.ke" className="hover:text-secondary transition-colors flex items-center">
               <Mail className="h-4 w-4 mr-2" />
-              iec@ueab.ac.ke
+              info@ueab.ac.ke
             </a>
           </div>
           <div className="flex space-x-3">
