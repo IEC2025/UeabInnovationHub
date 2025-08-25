@@ -35,7 +35,7 @@ export async function exportFormSubmissions(): Promise<void> {
       reg.boothRequirements || '',
       reg.additionalInfo || '',
       reg.status,
-      new Date(reg.submittedAt).toLocaleString()
+      reg.submittedAt ? new Date(reg.submittedAt).toLocaleString() : 'N/A'
     ]);
     
     const csvContent = [csvHeaders, ...csvRows]
@@ -68,7 +68,7 @@ export async function exportFormSubmissions(): Promise<void> {
       console.log(`   Email: ${reg.email}`);
       console.log(`   Phone: ${reg.phone}`);
       console.log(`   Status: ${reg.status}`);
-      console.log(`   Submitted: ${new Date(reg.submittedAt).toLocaleString()}`);
+      console.log(`   Submitted: ${reg.submittedAt ? new Date(reg.submittedAt).toLocaleString() : 'N/A'}`);
       if (reg.boothRequirements) {
         console.log(`   Booth Requirements: ${reg.boothRequirements}`);
       }
@@ -88,5 +88,3 @@ export async function exportFormSubmissions(): Promise<void> {
 setTimeout(() => {
   exportFormSubmissions();
 }, 3000); // Wait 3 seconds for database to be ready
-
-export { exportFormSubmissions };
