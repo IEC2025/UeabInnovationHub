@@ -93,8 +93,6 @@ const HomePage = () => {
             <div className="flex justify-center">
               <CountdownTimer
                 targetDate="2025-09-28T09:00:00"
-                showLabels={true}
-                size="large"
                 className="text-white"
               />
             </div>
