@@ -210,7 +210,7 @@ const ProgramsPage = () => {
               <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-md p-6">
                 <div className="md:w-1/2">
                   <img
-                    src="@assets/generated_images/Kenyan_students_group_study_session_2878ae7b.png"
+                    src="@assets/456214878_980492593875523_3420111680875412655_n_1756133531726.jpg"
                     alt="Startup Incubation"
                     className="rounded-lg shadow-md"
                   />
