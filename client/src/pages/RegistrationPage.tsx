@@ -658,7 +658,7 @@ const RegistrationPage = () => {
             <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
               🎤 Distinguished Speakers
             </div>
-            <h2 className="text-5xl font-bold text-primary mb-6">Meet Our Event Guests</h2>
+            <h2 className="text-5xl font-bold text-primary mb-6">Let's Meet with Our Speakers</h2>
             <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
           </motion.div>
           
@@ -699,19 +699,18 @@ image: "/src/assets/images/dr-benard-chitunga.jpeg"
             ].map((speaker, index) => (
               <motion.div 
                 key={index}
-                className="text-center bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden group hover:shadow-2xl transition-all duration-500"
-                initial={{ opacity: 0, y: 50 }}
+                className="text-center group"
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -10, scale: 1.05 }}
               >
-                <div className="p-8">
-                  <div className="w-32 h-32 rounded-full mx-auto mb-6 overflow-hidden transform group-hover:scale-110 transition-transform duration-500 border-4 border-white shadow-lg">
+                <div className="relative mb-6">
+                  <div className="w-48 h-48 rounded-full mx-auto overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-300">
                     <img 
                       src={speaker.image} 
                       alt={speaker.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       onError={(e) => {
                         console.log('Image failed to load:', speaker.image);
                         e.currentTarget.src = '/src/assets/images/BTV08418.JPG';
@@ -719,15 +718,24 @@ image: "/src/assets/images/dr-benard-chitunga.jpeg"
                     />
                   </div>
                   
-                  <div className={`bg-gradient-to-r ${speaker.gradient} text-white px-4 py-2 rounded-full text-sm font-bold mb-4 inline-block`}>
-                    {speaker.role}
+                  {/* Name overlay effect on hover */}
+                  <div className="absolute inset-0 w-48 h-48 rounded-full mx-auto bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
+                    <div className="text-white text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-100 scale-95">
+                      <div className={`bg-gradient-to-r ${speaker.gradient} text-white px-3 py-1 rounded-full text-xs font-bold mb-2 inline-block`}>
+                        {speaker.role}
+                      </div>
+                      <h4 className="font-bold text-lg">
+                        {speaker.name}
+                      </h4>
+                    </div>
                   </div>
-                  
-                  <h4 className="font-bold text-primary text-xl mb-2 group-hover:text-secondary transition-colors">
+                </div>
+                
+                <div className="mt-4">
+                  <h4 className="font-bold text-gray-800 text-xl mb-1">
                     {speaker.name}
                   </h4>
-                  <p className="text-gray-600 font-medium mb-2">{speaker.title}</p>
-                  <div className="text-xs text-gray-500">Innovation & Leadership</div>
+                  <p className="text-gray-600 font-medium">{speaker.title}</p>
                 </div>
               </motion.div>
             ))}
