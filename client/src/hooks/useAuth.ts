@@ -1,14 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-
+// Simplified auth hook - no authentication required
 export function useAuth() {
-  const { data: user, isLoading } = useQuery({
-    queryKey: ["/api/auth/user"],
-    retry: false,
-  });
+  // Return a mock admin user for dashboard access
+  const user = {
+    role: 'admin',
+    email: 'admin@ueab.ac.ke',
+    firstName: 'Admin',
+    lastName: 'User'
+  };
 
   return {
     user,
-    isLoading,
-    isAuthenticated: !!user,
+    isLoading: false,
+    isAuthenticated: true,
   };
 }
