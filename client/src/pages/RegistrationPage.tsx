@@ -6,10 +6,14 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import { motion, useAnimation, useInView } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
 // Animated Counter Component
 const AnimatedCounter = ({ end, duration = 2, suffix = "" }: { end: number, duration?: number, suffix?: string }) => {
@@ -55,48 +59,37 @@ const FloatingShape = ({ children, delay = 0 }: { children: React.ReactNode, del
   </motion.div>
 );
 
+// Form validation schema
+const registrationFormSchema = z.object({
+  registrationType: z.string().min(1, "Registration type is required"),
+  fullName: z.string().min(1, "Full name is required"),
+  organizationName: z.string().min(1, "Organization name is required"),
+  position: z.string().min(1, "Position is required"),
+  email: z.string().email("Please enter a valid email address"),
+  phone: z.string().min(1, "Phone number is required"),
+  category: z.string().min(1, "Please select a category"),
+  participantCount: z.string().optional(),
+  boothRequirements: z.string().optional(),
+  specialRequirements: z.string().optional(),
+  paymentPreference: z.string().optional(),
+  additionalInfo: z.string().optional(),
+});
+
+type RegistrationFormData = z.infer<typeof registrationFormSchema>;
+
 const RegistrationPage = () => {
   const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState<'overview' | 'delegation' | 'exhibition'>('overview');
-  const [formData, setFormData] = useState({
-    registrationType: '',
-    fullName: '',
-    organizationName: '',
-    position: '',
-    email: '',
-    phone: '',
-    category: '',
-    participantCount: '',
-    boothRequirements: '',
-    specialRequirements: '',
-    paymentPreference: '',
-    additionalInfo: ''
-  });
 
   const registrationMutation = useMutation({
-    mutationFn: async (data: typeof formData) => {
+    mutationFn: async (data: RegistrationFormData) => {
       const response = await apiRequest('POST', '/api/biew-registration', data);
       return response.json();
     },
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
       toast({
         title: "Registration Submitted Successfully!",
-        description: `Your ${formData.registrationType} registration has been sent to our team. We'll contact you within 24 hours with next steps.`,
-      });
-      // Reset form and go back to overview
-      setFormData({
-        registrationType: '',
-        fullName: '',
-        organizationName: '',
-        position: '',
-        email: '',
-        phone: '',
-        category: '',
-        participantCount: '',
-        boothRequirements: '',
-        specialRequirements: '',
-        paymentPreference: '',
-        additionalInfo: ''
+        description: `Your ${variables.registrationType} registration has been sent to our team. We'll contact you within 24 hours with next steps.`,
       });
       setCurrentStep('overview');
     },
@@ -110,17 +103,34 @@ const RegistrationPage = () => {
   });
 
   const handleRegistrationClick = (type: 'delegation' | 'exhibition') => {
-    setFormData(prev => ({ ...prev, registrationType: type }));
     setCurrentStep(type);
   };
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    registrationMutation.mutate(formData);
-  };
-
   // Registration Form Component
-  const RegistrationForm = ({ type }: { type: 'delegation' | 'exhibition' }) => (
+  const RegistrationForm = ({ type }: { type: 'delegation' | 'exhibition' }) => {
+    const form = useForm<RegistrationFormData>({
+      resolver: zodResolver(registrationFormSchema),
+      defaultValues: {
+        registrationType: type,
+        fullName: '',
+        organizationName: '',
+        position: '',
+        email: '',
+        phone: '',
+        category: '',
+        participantCount: '',
+        boothRequirements: '',
+        specialRequirements: '',
+        paymentPreference: '',
+        additionalInfo: '',
+      },
+    });
+
+    const onSubmit = (data: RegistrationFormData) => {
+      registrationMutation.mutate(data);
+    };
+
+    return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       {/* Static Background Elements - No Animation */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -165,13 +175,14 @@ const RegistrationPage = () => {
       {/* Form Section */}
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-3xl">
-          <motion.form 
-            onSubmit={handleFormSubmit} 
-            className="space-y-8"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <Form {...form}>
+            <motion.form 
+              onSubmit={form.handleSubmit(onSubmit)} 
+              className="space-y-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
             <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-white/20">
               <div className="flex items-center mb-8">
                 <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mr-4">
@@ -197,51 +208,71 @@ const RegistrationPage = () => {
                   Personal Information
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <Label htmlFor="fullName">Full Name *</Label>
-                    <Input
-                      id="fullName"
-                      value={formData.fullName}
-                      onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                      className="mt-1"
-                      required
-                      data-testid="input-full-name"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="position">Position/Title *</Label>
-                    <Input
-                      id="position"
-                      value={formData.position}
-                      onChange={(e) => setFormData({...formData, position: e.target.value})}
-                      className="mt-1"
-                      required
-                      data-testid="input-position"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="mt-1"
-                      required
-                      data-testid="input-email"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="phone">Phone Number *</Label>
-                    <Input
-                      id="phone"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className="mt-1"
-                      required
-                      data-testid="input-phone"
-                    />
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="fullName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Full Name *</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            data-testid="input-full-name"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="position"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Position/Title *</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            data-testid="input-position"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email Address *</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            type="email"
+                            data-testid="input-email"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Phone Number *</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            data-testid="input-phone"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
               </div>
 
@@ -252,34 +283,48 @@ const RegistrationPage = () => {
                   Organization Information
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <Label htmlFor="organizationName">Institution/Organization *</Label>
-                    <Input
-                      id="organizationName"
-                      value={formData.organizationName}
-                      onChange={(e) => setFormData({...formData, organizationName: e.target.value})}
-                      className="mt-1"
-                      required
-                      data-testid="input-organization"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="category">Category *</Label>
-                    <Select value={formData.category} onValueChange={(value) => setFormData({...formData, category: value})}>
-                      <SelectTrigger className="mt-1" data-testid="select-category">
-                        <SelectValue placeholder="Select category" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="university">University/Academic Institution</SelectItem>
-                        <SelectItem value="startup">Startup/SME</SelectItem>
-                        <SelectItem value="corporate">Corporate Organization</SelectItem>
-                        <SelectItem value="government">Government Agency</SelectItem>
-                        <SelectItem value="ngo">NGO/Non-Profit</SelectItem>
-                        <SelectItem value="student">Student</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="organizationName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Institution/Organization *</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            data-testid="input-organization"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="category"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Category *</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger data-testid="select-category">
+                              <SelectValue placeholder="Select category" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="university">University/Academic Institution</SelectItem>
+                            <SelectItem value="startup">Startup/SME</SelectItem>
+                            <SelectItem value="corporate">Corporate Organization</SelectItem>
+                            <SelectItem value="government">Government Agency</SelectItem>
+                            <SelectItem value="ngo">NGO/Non-Profit</SelectItem>
+                            <SelectItem value="student">Student</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
               </div>
 
@@ -290,21 +335,30 @@ const RegistrationPage = () => {
                     <Users className="h-5 w-5 mr-2 text-primary" />
                     Delegation Details
                   </h3>
-                  <div>
-                    <Label htmlFor="participantCount">Number of Participants</Label>
-                    <Select value={formData.participantCount} onValueChange={(value) => setFormData({...formData, participantCount: value})}>
-                      <SelectTrigger className="mt-1" data-testid="select-participants">
-                        <SelectValue placeholder="Select number of participants" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="1">1 participant</SelectItem>
-                        <SelectItem value="2-5">2-5 participants</SelectItem>
-                        <SelectItem value="6-10">6-10 participants</SelectItem>
-                        <SelectItem value="11-20">11-20 participants</SelectItem>
-                        <SelectItem value="21+">21+ participants</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="participantCount"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Number of Participants</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger data-testid="select-participants">
+                              <SelectValue placeholder="Select number of participants" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="1">1 participant</SelectItem>
+                            <SelectItem value="2-5">2-5 participants</SelectItem>
+                            <SelectItem value="6-10">6-10 participants</SelectItem>
+                            <SelectItem value="11-20">11-20 participants</SelectItem>
+                            <SelectItem value="21+">21+ participants</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
               )}
 
@@ -314,35 +368,47 @@ const RegistrationPage = () => {
                     <Target className="h-5 w-5 mr-2 text-primary" />
                     Exhibition Details
                   </h3>
-                  <div>
-                    <Label htmlFor="boothRequirements">Booth Requirements & Setup Details</Label>
-                    <Textarea
-                      id="boothRequirements"
-                      value={formData.boothRequirements}
-                      onChange={(e) => setFormData({...formData, boothRequirements: e.target.value})}
-                      className="mt-1"
-                      rows={4}
-                      placeholder="Describe your booth setup requirements, display needs, power requirements, etc."
-                      data-testid="textarea-booth-requirements"
-                    />
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="boothRequirements"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Booth Requirements & Setup Details</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            {...field}
+                            rows={4}
+                            placeholder="Describe your booth setup requirements, display needs, power requirements, etc."
+                            data-testid="textarea-booth-requirements"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
               )}
 
 
               {/* Additional Information */}
-              <div className="mb-8">
-                <Label htmlFor="additionalInfo">Additional Information or Special Requirements</Label>
-                <Textarea
-                  id="additionalInfo"
-                  value={formData.additionalInfo}
-                  onChange={(e) => setFormData({...formData, additionalInfo: e.target.value})}
-                  className="mt-1"
-                  rows={3}
-                  placeholder="Any dietary restrictions, accessibility needs, questions, or other information you'd like us to know..."
-                  data-testid="textarea-additional-info"
-                />
-              </div>
+              <FormField
+                control={form.control}
+                name="additionalInfo"
+                render={({ field }) => (
+                  <FormItem className="mb-8">
+                    <FormLabel>Additional Information or Special Requirements</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        rows={3}
+                        placeholder="Any dietary restrictions, accessibility needs, questions, or other information you'd like us to know..."
+                        data-testid="textarea-additional-info"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               <motion.div
                 whileHover={{ scale: 1.02 }}
@@ -351,7 +417,7 @@ const RegistrationPage = () => {
                 <Button 
                   type="submit" 
                   className="w-full bg-gradient-to-r from-primary to-secondary text-white py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                  disabled={!formData.fullName || !formData.organizationName || !formData.position || !formData.email || !formData.phone || !formData.category || registrationMutation.isPending}
+                  disabled={registrationMutation.isPending}
                   data-testid="button-submit-registration"
                 >
                   {registrationMutation.isPending ? (
@@ -374,10 +440,12 @@ const RegistrationPage = () => {
               </div>
             </div>
           </motion.form>
+          </Form>
         </div>
       </section>
     </div>
   );
+  }
 
   if (currentStep === 'delegation') {
     return <RegistrationForm type="delegation" />;

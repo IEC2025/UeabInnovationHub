@@ -461,6 +461,8 @@ export const simpleBiewRegistrations = pgTable("simple_biew_registrations", {
   category: varchar("category").notNull(),
   participantCount: varchar("participant_count"),
   boothRequirements: text("booth_requirements"),
+  specialRequirements: text("special_requirements"),
+  paymentPreference: varchar("payment_preference"),
   additionalInfo: text("additional_info"),
   submittedAt: timestamp("submitted_at").defaultNow(),
   status: varchar("status").default("pending"),
