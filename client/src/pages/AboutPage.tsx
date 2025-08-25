@@ -157,7 +157,7 @@ const AboutPage = () => {
             <div className="lg:w-1/2">
               <div className="relative">
                 <img 
-                  src="@assets/generated_images/African_university_campus_view_d5e6ad2a.png" 
+                  src="@assets/generated_images/Kenyan_campus_students_walking_83f72c3e.png" 
                   alt="Students collaborating" 
                   className="rounded-lg shadow-lg w-full"
                 />

@@ -210,7 +210,7 @@ const ProgramsPage = () => {
               <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-md p-6">
                 <div className="md:w-1/2">
                   <img
-                    src="@assets/generated_images/African_startup_incubation_space_197eb2cf.png"
+                    src="@assets/generated_images/Kenyan_students_group_study_session_2878ae7b.png"
                     alt="Startup Incubation"
                     className="rounded-lg shadow-md"
                   />
@@ -343,7 +343,7 @@ const ProgramsPage = () => {
               <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-md p-6">
                 <div className="md:w-1/2">
                   <img
-                    src="@assets/generated_images/African_innovation_workspace_scene_e35a2446.png"
+                    src="@assets/generated_images/Kenyan_students_classroom_back_view_58719d19.png"
                     alt="Workshops & Training"
                     className="rounded-lg shadow-md"
                   />
