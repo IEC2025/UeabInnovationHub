@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowRight, Target, Users, Lightbulb, Award, Calendar, MapPin, Mail, Phone } from "lucide-react";
-import FullPageAnimatedSlider from "@/components/sliders/FullPageAnimatedSlider";
+import MasterSlider from "@/components/sliders/MasterSlider";
 import PartnersSection from "@/components/home/PartnersSection";
 import TeamSection from "@/components/home/TeamSection";
 import ContactSection from "@/components/home/ContactSection";
@@ -12,115 +12,57 @@ const HomePage = () => {
     document.title = "Innovation & Entrepreneurship Centre | UEAB";
   }, []);
 
-  // Slider data with Innovation Week as the main featured slide
+  // Master Slider data with Innovation Week as the main featured slide
   const heroSlides = [
     {
       id: 1,
       title: "Innovation Week 2025",
-      subtitle: "August 28 - September 3, 2025",
-      description: "Join us for the biggest innovation event of the year! Experience cutting-edge showcases, workshops, networking sessions, and discover groundbreaking solutions from UEAB's brightest minds. Don't miss this opportunity to connect with industry leaders and fellow innovators.",
-      image: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      mobileImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      tabletImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      desktopImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      cta: {
-        text: "Register for Innovation Week",
-        link: "https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header",
-        variant: "primary" as const
-      },
-      overlay: {
-        opacity: 0.4,
-        color: "rgba(0,0,0,0.3)",
-        gradient: "linear-gradient(135deg, rgba(30,64,175,0.7) 0%, rgba(59,130,246,0.5) 50%, rgba(147,51,234,0.8) 100%)"
-      },
-      animation: {
-        type: "parallax" as const,
-        direction: "up" as const,
-        duration: 1500
-      },
-      contentPosition: "center" as const,
-      textAlign: "center" as const,
-      specialContent: "countdown" as const
+      subtitle: "Featured Event",
+      description: "Join us for the biggest innovation event of the year! August 28 - September 3, 2025. Experience cutting-edge showcases, workshops, networking sessions, and discover groundbreaking solutions from UEAB's brightest minds.",
+      image: "/src/assets/images/innovation-week-banner.jpg",
+      buttonText: "Register Now",
+      buttonLink: "https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header",
+      overlay: true
     },
     {
       id: 2,
       title: "Innovation & Entrepreneurship Centre",
-      subtitle: "Catalysing Innovation and Entrepreneurial Ecosystems",
-      description: "Transform your ideas into impactful ventures through comprehensive startup incubation, mentorship, and cutting-edge resources at the University of Eastern Africa, Baraton. Join a community of innovators and entrepreneurs.",
-      image: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      mobileImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      tabletImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      desktopImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      cta: {
-        text: "Submit Your Innovation",
-        link: "https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header",
-        variant: "secondary" as const
-      },
-      overlay: {
-        opacity: 0.4,
-        color: "rgba(0,0,0,0.2)",
-        gradient: "linear-gradient(135deg, rgba(30,64,175,0.6) 0%, rgba(59,130,246,0.4) 50%, rgba(30,64,175,0.7) 100%)"
-      },
-      animation: {
-        type: "slide" as const,
-        direction: "right" as const,
-        duration: 1200
-      },
-      contentPosition: "left" as const,
-      textAlign: "left" as const
+      subtitle: "Welcome to IEC",
+      description: "Transform your ideas into impactful ventures through comprehensive startup incubation, mentorship, and cutting-edge resources at the University of Eastern Africa, Baraton.",
+      image: "/src/assets/images/BTV08785.JPG",
+      buttonText: "Submit Innovation",
+      buttonLink: "https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header",
+      overlay: true
     },
     {
       id: 3,
       title: "Student Innovation Hub",
       subtitle: "Where Ideas Come to Life",
-      description: "Access state-of-the-art facilities, receive guidance from industry experts, and join a vibrant community of innovators to turn your entrepreneurial dreams into reality. Build the future of Africa through innovation.",
-      image: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      mobileImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      tabletImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      desktopImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      cta: {
-        text: "Explore Programs",
-        link: "/programs",
-        variant: "outline" as const
-      },
-      overlay: {
-        opacity: 0.4,
-        color: "rgba(0,0,0,0.2)",
-        gradient: "linear-gradient(135deg, rgba(147,51,234,0.6) 0%, rgba(59,130,246,0.4) 50%, rgba(30,64,175,0.7) 100%)"
-      },
-      animation: {
-        type: "zoom" as const,
-        direction: "up" as const,
-        duration: 1400
-      },
-      contentPosition: "center" as const,
-      textAlign: "center" as const
+      description: "Access state-of-the-art facilities, receive guidance from industry experts, and join a vibrant community of innovators to turn your entrepreneurial dreams into reality.",
+      image: "/src/assets/images/BTV08537.JPG",
+      buttonText: "Explore Programs",
+      buttonLink: "/programs",
+      overlay: true
     },
     {
       id: 4,
-      title: "Partnership & Collaboration",
-      subtitle: "Building Bridges to Success",
-      description: "Connect with industry partners, investors, and global networks to accelerate innovation and create sustainable business solutions for Africa and beyond. Be part of a transformative ecosystem.",
-      image: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      mobileImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      tabletImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      desktopImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
-      cta: {
-        text: "Join Our Network",
-        link: "/about",
-        variant: "primary" as const
-      },
-      overlay: {
-        opacity: 0.4,
-        color: "rgba(0,0,0,0.2)",
-        gradient: "linear-gradient(135deg, rgba(16,185,129,0.6) 0%, rgba(59,130,246,0.4) 50%, rgba(30,64,175,0.7) 100%)"
-      },
-      animation: {
-        type: "fade" as const,
-        duration: 1100
-      },
-      contentPosition: "right" as const,
-      textAlign: "right" as const
+      title: "Innovation Showcase",
+      subtitle: "Student Excellence",
+      description: "Witness groundbreaking innovations from UEAB students. Our annual showcase highlights the most promising solutions addressing real-world challenges across Africa and beyond.",
+      image: "/src/assets/images/kiw-presentation.jpg",
+      buttonText: "View Projects",
+      buttonLink: "/events",
+      overlay: true
+    },
+    {
+      id: 5,
+      title: "UEAB Campus Innovation",
+      subtitle: "Our Heritage",
+      description: "Building on years of academic excellence, UEAB continues to lead in fostering innovation and entrepreneurship across East Africa. Join our legacy of transformation.",
+      image: "/src/assets/images/ueab-campus-flags.jpg",
+      buttonText: "About UEAB",
+      buttonLink: "/about",
+      overlay: true
     }
   ];
 
@@ -128,16 +70,13 @@ const HomePage = () => {
     <div className="relative">
       {/* Hero Slider with Innovation Week Featured */}
       <div className="relative w-full h-screen overflow-hidden">
-        <FullPageAnimatedSlider 
+        <MasterSlider 
           slides={heroSlides}
           autoPlay={true}
-          autoPlayInterval={8000}
+          autoPlayInterval={7000}
           showControls={true}
-          showPagination={true}
-          enableKeyboard={true}
-          enableTouch={true}
-          enableParallax={true}
-          className="fullpage-hero-slider"
+          showBullets={true}
+          transitionDuration={1000}
         />
       </div>
 
