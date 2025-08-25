@@ -5,7 +5,7 @@ import factoryLogo from "/src/assets/images/logos/factory-logo.jpeg";
 import microsoftLogo from "/src/assets/images/logos/microsoft-logo.png";
 import kipiLogo from "/src/assets/images/logos/kipi-logo.webp";
 import nacostiImage from "/src/assets/images/NACOSTI-Logo-.webp";
-import keniaLogo from "@assets/final-kenia-logo.jpg_1756132535703.jpeg";
+import keniaLogo from "/src/assets/images/logos/kenia-logo.webp";
 
 const PartnersSection = () => {
   const partners = [

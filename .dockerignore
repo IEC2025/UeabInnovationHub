@@ -48,6 +48,13 @@ README.md
 *.md
 *.pdf
 
+# Large image files (keep only essential ones)
+*.HEIC
+*BTV08*.JPG
+*20241127*.jpg
+*INNOVATION*.jpg
+generated-icon.png
+
 # Log files
 *.log
 logs

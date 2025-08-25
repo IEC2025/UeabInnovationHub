@@ -1,3 +1,3 @@
-import innovationBanner from '@assets/INNOVATION WEEK ROLL UP 1.jpg';
+import innovationBanner from '@assets/images/innovation-week-banner.jpg';
 
 export default innovationBanner;
