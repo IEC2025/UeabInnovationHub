@@ -11,7 +11,12 @@ import {
   GraduationCap,
   BarChart,
   Globe,
-  HandHeart 
+  HandHeart,
+  Calendar,
+  DollarSign,
+  Megaphone,
+  Wrench,
+  Rocket
 } from "lucide-react";
 import RevolutionSlider from '@/components/sliders/RevolutionSlider';
 
@@ -177,6 +182,208 @@ const AboutPage = () => {
         </div>
       </section>
 
+      {/* Innovation & Entrepreneurship Key Pillars Section */}
+      <section className="py-16 bg-gradient-to-br from-neutral-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <div className="text-sm font-semibold text-secondary uppercase tracking-wider">
+              Our Foundation
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mt-2 mb-4">
+              Innovation & Entrepreneurship Key Pillars
+            </h2>
+            <p className="text-neutral-700 max-w-3xl mx-auto">
+              Our centre is built on five fundamental pillars that guide our mission to foster innovation and entrepreneurship excellence.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Pillar 1: Innovation and Entrepreneurship Events */}
+            <div className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-neutral-100">
+              <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg">
+                <Calendar className="w-6 h-6 text-white" />
+              </div>
+              <div className="pt-4">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span className="text-sm font-semibold text-secondary uppercase tracking-wider">Pillar 01</span>
+                </div>
+                <h3 className="text-2xl font-bold text-primary mb-4">Innovation and Entrepreneurship Events</h3>
+                <p className="text-neutral-600 mb-6">
+                  This pillar focuses on all aspects of organizing and planning innovation and entrepreneurship activities, providing practical platforms for innovators to showcase their ideas.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">Training sessions and workshops</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">Product launches and demonstrations</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">Baraton Innovation and Entrepreneurship Weeks</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">External exposure opportunities</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Pillar 2: Mentorship and Training */}
+            <div className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-neutral-100">
+              <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-secondary to-primary rounded-xl flex items-center justify-center shadow-lg">
+                <Users className="w-6 h-6 text-white" />
+              </div>
+              <div className="pt-4">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                  <span className="text-sm font-semibold text-primary uppercase tracking-wider">Pillar 02</span>
+                </div>
+                <h3 className="text-2xl font-bold text-primary mb-4">Mentorship and Training</h3>
+                <p className="text-neutral-600 mb-6">
+                  This pillar emphasizes the relationship between academia and innovation projects, guiding participants from early-stage ideation to certification.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">Capacity building through workshops and webinars</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">Mentorship sessions for students and faculty</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">Ethical review of strategies</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Pillar 3: Innovation and Entrepreneurial Projects */}
+            <div className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-neutral-100">
+              <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center shadow-lg">
+                <Rocket className="w-6 h-6 text-white" />
+              </div>
+              <div className="pt-4">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-2 h-2 bg-primary rounded-full"></div>
+                  <span className="text-sm font-semibold text-secondary uppercase tracking-wider">Pillar 03</span>
+                </div>
+                <h3 className="text-2xl font-bold text-primary mb-4">Innovation and Entrepreneurial Projects</h3>
+                <p className="text-neutral-600 mb-6">
+                  Projects developed through mentorship programs produce tangible outputs, covering the full process from research to commercialization.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">Minimum Viable Products (MVPs)</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">Prototypes and pilot deployments</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">Intellectual property support</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-secondary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">Grant applications and proposal writing</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Pillar 4: Resource Mobilization and Linkages */}
+            <div className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-neutral-100">
+              <div className="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-br from-secondary to-primary rounded-xl flex items-center justify-center shadow-lg">
+                <DollarSign className="w-6 h-6 text-white" />
+              </div>
+              <div className="pt-4">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-2 h-2 bg-secondary rounded-full"></div>
+                  <span className="text-sm font-semibold text-primary uppercase tracking-wider">Pillar 04</span>
+                </div>
+                <h3 className="text-2xl font-bold text-primary mb-4">Resource Mobilization and Linkages</h3>
+                <p className="text-neutral-600 mb-6">
+                  This pillar focuses on securing and managing human, technical, and financial resources through strategic partnerships and sustainable funding.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">Industry partnerships and linkages</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">Government and agency support</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">Grants and corporate funding</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-neutral-700">Monitoring and evaluation systems</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Pillar 5: Media and Marketing - Full Width */}
+          <div className="mt-8 max-w-4xl mx-auto">
+            <div className="group relative bg-gradient-to-r from-primary to-secondary rounded-2xl p-8 text-white shadow-xl hover:shadow-2xl transition-all duration-300">
+              <div className="absolute -top-4 -left-4 w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
+                <Megaphone className="w-6 h-6 text-primary" />
+              </div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center pt-4">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                    <span className="text-sm font-semibold text-white/80 uppercase tracking-wider">Pillar 05</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4">Media and Marketing</h3>
+                  <p className="text-white/90 mb-6">
+                    This pillar ensures visibility and engagement through digital and multimedia content creation, amplifying our innovation initiatives across broader networks.
+                  </p>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-white/90">Social media campaigns and digital presence</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-white/90">Branding of events and products</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-white/90">Videography and photography</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-white/90">Strategic marketing initiatives</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Visual Connection Elements */}
+          <div className="mt-16 text-center">
+            <div className="inline-flex items-center gap-4 px-8 py-4 bg-white rounded-full shadow-lg border border-neutral-100">
+              <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+              <span className="text-neutral-700 font-medium">Building Innovation Excellence Together</span>
+              <div className="w-3 h-3 bg-secondary rounded-full animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* History Section */}
       <section id="history" className="py-16 bg-white">
