@@ -81,22 +81,29 @@ const HomePage = () => {
         />
       </div>
 
-      {/* Innovation Week Countdown Section */}
-      <section className="py-8 bg-secondary text-white">
+      {/* Innovation Week & Submission Banner */}
+      <section className="bg-secondary text-white py-3">
         <div className="container mx-auto px-4">
-          <div className="text-center">
-            <div className="flex items-center justify-center mb-4">
-              <Clock className="h-6 w-6 mr-2" />
-              <h2 className="text-2xl font-bold">2nd Baraton Innovation & Entrepreneurship Week 2025</h2>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-center md:text-left">
+              <span className="font-semibold text-lg">🚀 2nd Baraton Innovation & Entrepreneurship Week 2025 | Sept 28 - Oct 3</span>
+              <span className="ml-2 text-sm opacity-90">Join us for workshops, showcases & networking!</span>
             </div>
-            <p className="text-white/90 mb-6">September 28 - October 3, 2025 | Don't miss the biggest innovation event of the year!</p>
-            <div className="flex justify-center">
-              <CountdownTimer
-                targetDate="2025-09-28T09:00:00"
-                showLabels={true}
-                size="large"
-                className="text-white"
-              />
+            <div className="flex flex-col sm:flex-row gap-2">
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-secondary px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-center text-sm"
+              >
+                Submit Innovation
+              </a>
+              <Link
+                href="/registration"
+                className="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary/90 transition-colors text-center text-sm"
+              >
+                Register for Event
+              </Link>
             </div>
           </div>
         </div>
