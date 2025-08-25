@@ -151,7 +151,7 @@ const HomePage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <img 
-                src="@assets/436262061_122113417196287779_1943619290000443532_n_1756132823357.jpg" 
+                src="/src/assets/images/ueab-campus-flags.jpg" 
                 alt="University of Eastern Africa, Baraton campus entrance with international flags" 
                 className="rounded-lg shadow-lg w-full"
               />
