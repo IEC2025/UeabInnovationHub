@@ -51,11 +51,11 @@ const TeamSection = () => {
     {
       id: 5,
       name: "Dr. Bernard Chitunga",
-      title: "Business Development Manager",
-      bio: "Coordinating business relationships and partnerships that enhance the innovation ecosystem.",
+      title: "Chancellor, Cooperative University of Kenya",
+      bio: "Leading academic excellence and fostering innovation in cooperative education and research initiatives.",
       imageUrl: "/src/assets/images/dr-benard-chitunga.jpeg",
       socialMedia: {
-        email: "business.iec@ueab.ac.ke",
+        email: "chancellor@cuk.ac.ke",
         linkedin: "#"
       }
     },
@@ -91,37 +91,41 @@ const TeamSection = () => {
           {teamMembers.map((member) => (
             <div 
               key={member.id} 
-              className="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer transform transition-transform duration-300 hover:scale-105"
+              className="flip-card h-80 cursor-pointer"
               data-testid={`speaker-card-${member.id}`}
             >
-              <div className="relative h-80 overflow-hidden">
-                <img 
-                  src={member.imageUrl} 
-                  alt={member.name} 
-                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
-                  data-testid={`speaker-image-${member.id}`}
-                />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="flip-card-inner h-full relative">
+                {/* Front of card - Photo only */}
+                <div className="flip-card-front absolute inset-0">
+                  <img 
+                    src={member.imageUrl} 
+                    alt={member.name} 
+                    className="w-full h-full object-cover object-center"
+                    data-testid={`speaker-image-${member.id}`}
+                  />
+                </div>
                 
-                {/* Name overlay that appears on hover */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
-                  <h3 className="text-xl font-bold mb-2" data-testid={`speaker-name-${member.id}`}>
+                {/* Back of card - Name and info */}
+                <div className="flip-card-back absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-secondary text-white flex flex-col justify-center items-center p-6 text-center">
+                  <h3 className="text-xl font-bold mb-3 animate-fade-in-up" data-testid={`speaker-name-${member.id}`}>
                     {member.name}
                   </h3>
-                  <p className="text-sm font-medium opacity-90" data-testid={`speaker-title-${member.id}`}>
+                  <p className="text-sm font-medium mb-4 opacity-90 animate-fade-in-up animation-delay-200" data-testid={`speaker-title-${member.id}`}>
                     {member.title}
+                  </p>
+                  <p className="text-xs opacity-80 mb-4 animate-fade-in-up animation-delay-400">
+                    {member.bio}
                   </p>
                   
                   {/* Social media icons */}
-                  <div className="flex space-x-3 mt-4">
+                  <div className="flex space-x-4 animate-fade-in-up animation-delay-600">
                     {member.socialMedia.email && (
                       <a 
                         href={`mailto:${member.socialMedia.email}`} 
-                        className="text-white/80 hover:text-white transition-colors"
+                        className="text-white/80 hover:text-white transition-colors transform hover:scale-110"
                         data-testid={`speaker-email-${member.id}`}
                       >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                           <polyline points="22,6 12,13 2,6"></polyline>
                         </svg>
@@ -130,10 +134,10 @@ const TeamSection = () => {
                     {member.socialMedia.linkedin && (
                       <a 
                         href={member.socialMedia.linkedin} 
-                        className="text-white/80 hover:text-white transition-colors"
+                        className="text-white/80 hover:text-white transition-colors transform hover:scale-110"
                         data-testid={`speaker-linkedin-${member.id}`}
                       >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                           <rect x="2" y="9" width="4" height="12"></rect>
                           <circle cx="4" cy="4" r="2"></circle>
