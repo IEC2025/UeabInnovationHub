@@ -408,56 +408,11 @@ const AboutPage = () => {
               </div>
             </div>
 
-            <div className="relative border-l-2 border-primary pl-8 ml-4 space-y-10">
-              {/* Timeline Item 1 */}
-              <div className="relative">
-                <div className="absolute -left-10 top-0 h-6 w-6 bg-primary rounded-full border-4 border-white"></div>
-                <div className="text-lg font-bold text-primary mb-1">2010</div>
-                <div className="text-sm text-neutral-500 mb-2">The Foundation</div>
-                <p className="text-neutral-700">
-                  The Innovation & Entrepreneurship Centre was established as a small initiative within the Business School to promote entrepreneurial thinking among students.
-                </p>
-              </div>
-
-              {/* Timeline Item 2 */}
-              <div className="relative">
-                <div className="absolute -left-10 top-0 h-6 w-6 bg-primary rounded-full border-4 border-white"></div>
-                <div className="text-lg font-bold text-primary mb-1">2013</div>
-                <div className="text-sm text-neutral-500 mb-2">Growth & Expansion</div>
-                <p className="text-neutral-700">
-                  With growing interest and support from the university administration, the centre expanded its facilities and programs, including the launch of the first startup incubation program.
-                </p>
-              </div>
-
-              {/* Timeline Item 3 */}
-              <div className="relative">
-                <div className="absolute -left-10 top-0 h-6 w-6 bg-primary rounded-full border-4 border-white"></div>
-                <div className="text-lg font-bold text-primary mb-1">2016</div>
-                <div className="text-sm text-neutral-500 mb-2">National Recognition</div>
-                <p className="text-neutral-700">
-                  The centre received national recognition for its work in promoting innovation and entrepreneurship, winning the "Innovation Hub of the Year" award from the Kenya National Innovation Agency.
-                </p>
-              </div>
-
-              {/* Timeline Item 4 */}
-              <div className="relative">
-                <div className="absolute -left-10 top-0 h-6 w-6 bg-primary rounded-full border-4 border-white"></div>
-                <div className="text-lg font-bold text-primary mb-1">2019</div>
-                <div className="text-sm text-neutral-500 mb-2">International Partnerships</div>
-                <p className="text-neutral-700">
-                  Established partnerships with international organizations and universities, including MIT, Stanford, and the World Bank, to enhance entrepreneurship education and research.
-                </p>
-              </div>
-
-              {/* Timeline Item 5 */}
-              <div className="relative">
-                <div className="absolute -left-10 top-0 h-6 w-6 bg-secondary rounded-full border-4 border-white"></div>
-                <div className="text-lg font-bold text-primary mb-1">Today</div>
-                <div className="text-sm text-neutral-500 mb-2">Leading Innovation Hub</div>
-                <p className="text-neutral-700">
-                  Today, the Innovation & Entrepreneurship Centre stands as a leading hub for innovation and entrepreneurship in East Africa, supporting hundreds of startups and fostering a culture of innovation throughout the university and beyond.
-                </p>
-              </div>
+            {/* History content will be added based on concept note */}
+            <div className="text-center py-8">
+              <p className="text-neutral-600 italic">
+                History content to be updated based on concept note
+              </p>
             </div>
           </div>
         </div>
