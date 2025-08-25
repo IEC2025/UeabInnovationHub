@@ -8,7 +8,8 @@ packages = ["imagemagick", "poppler"]
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["sh", "-c", "npm run build "]
+run = ["sh", "-c", "npm start"]
+build = ["sh", "-c", "npm run build"]
 
 [[ports]]
 localPort = 5000
