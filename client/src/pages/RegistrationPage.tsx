@@ -15,6 +15,11 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
+// Import PDF documents
+import conceptNotePdf from '@assets/2025 CONCEPT NOTE (1).pdf';
+import caseForSupportPdf from '@assets/IEC CASE FOR SUPPORT (1)_1756109949196.pdf';
+import programPdf from '@assets/BIEW EVENT PROGRAM 2nd Edition (1) (1)_1756109949195.pdf';
+
 // Animated Counter Component
 const AnimatedCounter = ({ end, duration = 2, suffix = "" }: { end: number, duration?: number, suffix?: string }) => {
   const [count, setCount] = useState(0);
@@ -995,7 +1000,14 @@ image: "/src/assets/images/dr-benard-chitunga.jpeg"
               </div>
               <Button 
                 className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-3 rounded-xl group"
-                onClick={() => window.open('#', '_blank')}
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = conceptNotePdf;
+                  link.download = '2025 CONCEPT NOTE.pdf';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
                 data-testid="button-download-concept"
               >
                 <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
@@ -1022,7 +1034,14 @@ image: "/src/assets/images/dr-benard-chitunga.jpeg"
               </div>
               <Button 
                 className="w-full bg-gradient-to-r from-green-500 to-teal-500 text-white py-3 rounded-xl group"
-                onClick={() => window.open('#', '_blank')}
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = caseForSupportPdf;
+                  link.download = 'IEC CASE FOR SUPPORT.pdf';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
                 data-testid="button-download-case"
               >
                 <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
@@ -1126,7 +1145,14 @@ image: "/src/assets/images/dr-benard-chitunga.jpeg"
               <Button 
                 variant="outline" 
                 className="border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-xl"
-                onClick={() => window.open('#', '_blank')}
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = programPdf;
+                  link.download = 'BIEW EVENT PROGRAM 2025.pdf';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
                 data-testid="button-download-program"
               >
                 <Download className="mr-2 h-4 w-4" />
