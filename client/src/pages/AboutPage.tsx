@@ -193,15 +193,15 @@ const AboutPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 perspective-container">
-            {/* Team Member 1 - Dr. Tony Omwansa */}
+            {/* Team Member 1 */}
             <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 card-3d">
               <img
-                src="@assets/download_1756126399763.jpeg"
-                alt="Dr. Tony Omwansa"
+                src="/src/assets/images/BTV08418.JPG"
+                alt="Dr. Jade Abuga"
                 className="w-full h-64 object-cover object-center"
               />
               <div className="p-5">
-                <h3 className="text-xl font-bold text-primary">Dr. Tony Omwansa</h3>
+                <h3 className="text-xl font-bold text-primary">Mr. Wakoli Albert</h3>
                 <p className="text-secondary font-medium mb-3">Director, Innovation & Entrepreneurship Centre</p>
                 <p className="text-neutral-600 text-sm mb-4">
                   Leading the innovation and entrepreneurship initiatives at UEAB with a focus on student development and industry partnerships.
@@ -224,15 +224,15 @@ const AboutPage = () => {
               </div>
             </div>
 
-            {/* Team Member 2 - Prof. Msafiri Jackson */}
+            {/* Team Member 2 */}
             <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 card-3d">
               <img
-                src="@assets/download (1)_1756126419609.jpeg"
-                alt="Prof. Msafiri Jackson"
+                src="/src/assets/images/BTV08426.JPG"
+                alt="Mr. Andrew Omambia"
                 className="w-full h-64 object-cover object-center"
               />
               <div className="p-5">
-                <h3 className="text-xl font-bold text-primary">Prof. Msafiri Jackson</h3>
+                <h3 className="text-xl font-bold text-primary">Mr. Andrew Omambia</h3>
                 <p className="text-secondary font-medium mb-3">Deputy Director</p>
                 <p className="text-neutral-600 text-sm mb-4">
                   Supporting innovation strategy and entrepreneurship development within the university community.
@@ -255,15 +255,15 @@ const AboutPage = () => {
               </div>
             </div>
 
-            {/* Team Member 3 - Ms. Esther Masese */}
+            {/* Team Member 3 */}
             <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 card-3d">
               <img
-                src="@assets/1683649767501_1756126425349.jpeg"
-                alt="Ms. Esther Masese"
+                src="/src/assets/images/BTV08793.JPG"
+                alt="Mr. Boagoli Arizona"
                 className="w-full h-64 object-cover object-center"
               />
               <div className="p-5">
-                <h3 className="text-xl font-bold text-primary">Ms. Esther Masese</h3>
+                <h3 className="text-xl font-bold text-primary">Mr. Boagoli Arizona</h3>
                 <p className="text-secondary font-medium mb-3">Innovation Programs Coordinator</p>
                 <p className="text-neutral-600 text-sm mb-4">
                   Coordinating innovation initiatives and programs to foster student entrepreneurship.
@@ -286,15 +286,15 @@ const AboutPage = () => {
               </div>
             </div>
 
-            {/* Team Member 4 - Dr. Benard Chitunga */}
+            {/* Team Member 4 */}
             <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 card-3d">
               <img
-                src="@assets/images_1756126430834.jpeg"
-                alt="Dr. Benard Chitunga"
+                src="/src/assets/images/BTV08537.JPG"
+                alt="Prof. Francis Ramesh"
                 className="w-full h-64 object-cover object-center"
               />
               <div className="p-5">
-                <h3 className="text-xl font-bold text-primary">Dr. Benard Chitunga</h3>
+                <h3 className="text-xl font-bold text-primary">Prof. Francis Ramesh</h3>
                 <p className="text-secondary font-medium mb-3">Research & Development Lead</p>
                 <p className="text-neutral-600 text-sm mb-4">
                   Overseeing research initiatives and guiding students in developing innovative solutions to real-world problems.

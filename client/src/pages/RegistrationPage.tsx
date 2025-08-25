@@ -664,10 +664,38 @@ const RegistrationPage = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { name: "Prof. Tony Omwansa", title: "CEO, KeNIA", role: "CHIEF GUEST", icon: Crown, gradient: "from-yellow-400 to-orange-500" },
-              { name: "Prof. Msafiri Jackson", title: "Vice Chancellor, UEAB", role: "HOST", icon: Users, gradient: "from-blue-500 to-indigo-500" },
-              { name: "Esther Masese", title: "CFO, Safaricom", role: "KEYNOTE", icon: Building, gradient: "from-green-500 to-teal-500" },
-              { name: "Dr. Benard Chitunga", title: "Innovation Expert", role: "SPEAKER", icon: Award, gradient: "from-purple-500 to-pink-500" }
+              { 
+                name: "Dr. Tony Omwansa", 
+                title: "CEO, KeNIA", 
+                role: "CHIEF GUEST", 
+                icon: Crown, 
+                gradient: "from-yellow-400 to-orange-500",
+                image: "@assets/download_1756126399763.jpeg"
+              },
+              { 
+                name: "Prof. Msafiri Jackson", 
+                title: "Vice Chancellor, UEAB", 
+                role: "HOST", 
+                icon: Users, 
+                gradient: "from-blue-500 to-indigo-500",
+                image: "@assets/download (1)_1756126419609.jpeg"
+              },
+              { 
+                name: "Ms. Esther Masese", 
+                title: "CFO, Safaricom", 
+                role: "KEYNOTE", 
+                icon: Building, 
+                gradient: "from-green-500 to-teal-500",
+                image: "@assets/1683649767501_1756126425349.jpeg"
+              },
+              { 
+                name: "Dr. Benard Chitunga", 
+                title: "Innovation Expert", 
+                role: "SPEAKER", 
+                icon: Award, 
+                gradient: "from-purple-500 to-pink-500",
+                image: "@assets/images_1756126430834.jpeg"
+              }
             ].map((speaker, index) => (
               <motion.div 
                 key={index}
@@ -679,12 +707,12 @@ const RegistrationPage = () => {
                 whileHover={{ y: -10, scale: 1.05 }}
               >
                 <div className="p-8">
-                  <div className={`w-32 h-32 bg-gradient-to-br ${speaker.gradient} rounded-full mx-auto mb-6 flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-500`}>
-                    {speaker.role === "CHIEF GUEST" ? (
-                      <Crown className="h-16 w-16 text-white" />
-                    ) : (
-                      <speaker.icon className="h-16 w-16 text-white" />
-                    )}
+                  <div className="w-32 h-32 rounded-full mx-auto mb-6 overflow-hidden transform group-hover:scale-110 transition-transform duration-500 border-4 border-white shadow-lg">
+                    <img 
+                      src={speaker.image} 
+                      alt={speaker.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   
                   <div className={`bg-gradient-to-r ${speaker.gradient} text-white px-4 py-2 rounded-full text-sm font-bold mb-4 inline-block`}>
