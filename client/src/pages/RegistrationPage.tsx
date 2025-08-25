@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ArrowRight, Users, Building, Award, MapPin, Calendar, CheckCircle, Globe, Lightbulb, Target, Shield, Crown, Medal, Star, Sprout, Phone, Mail, User } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ArrowRight, Users, Building, Award, MapPin, Calendar, CheckCircle, Globe, Lightbulb, Target, Shield, Crown, Medal, Star, Sprout, Phone, Mail, User, Download, Clock, FileText, GraduationCap, Briefcase, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
 import { Input } from '@/components/ui/input';
@@ -11,28 +11,77 @@ import { useToast } from '@/hooks/use-toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import { isUnauthorizedError } from '@/lib/authUtils';
+import { motion, useAnimation, useInView } from 'framer-motion';
+
+// Animated Counter Component
+const AnimatedCounter = ({ end, duration = 2, suffix = "" }: { end: number, duration?: number, suffix?: string }) => {
+  const [count, setCount] = useState(0);
+  const controls = useAnimation();
+  const ref = React.useRef(null);
+  const inView = useInView(ref);
+
+  useEffect(() => {
+    if (inView) {
+      let startTime: number;
+      const animateCount = (timestamp: number) => {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
+        setCount(Math.floor(progress * end));
+        if (progress < 1) {
+          requestAnimationFrame(animateCount);
+        }
+      };
+      requestAnimationFrame(animateCount);
+    }
+  }, [inView, end, duration]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+};
+
+// Floating Shape Component
+const FloatingShape = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => (
+  <motion.div
+    className="absolute pointer-events-none"
+    animate={{
+      y: [-20, 20, -20],
+      rotate: [0, 5, -5, 0],
+    }}
+    transition={{
+      duration: 6,
+      repeat: Infinity,
+      delay: delay,
+      ease: "easeInOut"
+    }}
+  >
+    {children}
+  </motion.div>
+);
 
 const RegistrationPage = () => {
   const { user, isAuthenticated, isLoading } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const [currentStep, setCurrentStep] = useState<'overview' | 'registration'>('overview');
+  const [currentStep, setCurrentStep] = useState<'overview' | 'delegation' | 'exhibition'>('overview');
   const [formData, setFormData] = useState({
     registrationType: '',
     organizationName: '',
     contactPerson: '',
+    position: '',
     email: (user as any)?.email || '',
     phone: '',
+    category: '',
     participantCount: '',
     boothRequirements: '',
-    specialRequirements: ''
+    specialRequirements: '',
+    paymentOption: ''
   });
 
-  const handleRegistrationClick = () => {
+  const handleRegistrationClick = (type: 'delegation' | 'exhibition') => {
     if (!isAuthenticated) {
       window.location.href = '/api/login';
     } else {
-      setCurrentStep('registration');
+      setFormData(prev => ({ ...prev, registrationType: type }));
+      setCurrentStep(type);
     }
   };
 
@@ -47,17 +96,6 @@ const RegistrationPage = () => {
         description: `Your ${formData.registrationType} registration has been submitted successfully. You will receive a confirmation email shortly.`,
       });
       queryClient.invalidateQueries({ queryKey: ['/api/biew-registrations'] });
-      // Reset form and go back to overview
-      setFormData({
-        registrationType: '',
-        organizationName: '',
-        contactPerson: '',
-        email: (user as any)?.email || '',
-        phone: '',
-        participantCount: '',
-        boothRequirements: '',
-        specialRequirements: ''
-      });
       setCurrentStep('overview');
     },
     onError: (error: Error) => {
@@ -85,83 +123,107 @@ const RegistrationPage = () => {
     registrationMutation.mutate(formData);
   };
 
-  if (currentStep === 'registration') {
-    return (
-      <div className="min-h-screen bg-white">
-        {/* Header */}
-        <section className="bg-primary text-white py-8">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <img
-                  src="/src/assets/images/iec-logo.png"
-                  alt="IEC Logo"
-                  className="h-12"
-                />
+  // Registration Form Component
+  const RegistrationForm = ({ type }: { type: 'delegation' | 'exhibition' }) => (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+      {/* Floating Background Elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <FloatingShape delay={0}>
+          <div className="w-32 h-32 bg-gradient-to-br from-blue-400/20 to-indigo-400/20 rounded-full blur-xl top-20 left-10" />
+        </FloatingShape>
+        <FloatingShape delay={2}>
+          <div className="w-40 h-40 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-xl top-40 right-20" />
+        </FloatingShape>
+        <FloatingShape delay={4}>
+          <div className="w-24 h-24 bg-gradient-to-br from-green-400/20 to-blue-400/20 rounded-full blur-xl bottom-40 left-20" />
+        </FloatingShape>
+      </div>
+
+      {/* Header */}
+      <motion.section 
+        className="relative bg-gradient-to-r from-primary via-blue-600 to-secondary text-white py-12 overflow-hidden"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <motion.img
+                src="/src/assets/images/iec-logo.png"
+                alt="IEC Logo"
+                className="h-16"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              />
+              <div>
+                <h1 className="text-3xl font-bold">{type === 'delegation' ? 'Delegation' : 'Exhibition'} Registration</h1>
+                <p className="text-blue-100">BIEW 2025 - Complete your registration below</p>
+              </div>
+            </div>
+            <Button
+              variant="outline"
+              className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
+              onClick={() => setCurrentStep('overview')}
+            >
+              ← Back to Overview
+            </Button>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Form Section */}
+      <section className="py-16">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <motion.form 
+            onSubmit={handleFormSubmit} 
+            className="space-y-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-white/20">
+              <div className="flex items-center mb-8">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mr-4">
+                  {type === 'delegation' ? <Users className="h-6 w-6 text-white" /> : <Building className="h-6 w-6 text-white" />}
+                </div>
                 <div>
-                  <h1 className="text-2xl font-bold">BIEW 2025 Registration</h1>
-                  <p className="text-primary-50">Complete your registration to join us</p>
+                  <h2 className="text-2xl font-bold text-gray-800">
+                    {type === 'delegation' ? 'Delegation Registration' : 'Exhibition Registration'} Details
+                  </h2>
+                  <p className="text-gray-600">
+                    {type === 'delegation' 
+                      ? 'Join as a delegate to access all sessions and networking opportunities' 
+                      : 'Showcase your innovations and connect with potential partners'
+                    }
+                  </p>
                 </div>
               </div>
-              <Button
-                variant="outline"
-                className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
-                onClick={() => setCurrentStep('overview')}
-              >
-                Back to Overview
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Registration Form */}
-        <section className="py-16">
-          <div className="container mx-auto px-4 max-w-2xl">
-            <form onSubmit={handleFormSubmit} className="space-y-8">
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <h2 className="text-2xl font-bold text-primary mb-6">Registration Details</h2>
-                
-                {/* Registration Type */}
-                <div className="space-y-4 mb-6">
-                  <Label className="text-lg font-semibold">Select Registration Type</Label>
-                  <RadioGroup 
-                    value={formData.registrationType} 
-                    onValueChange={(value) => setFormData({...formData, registrationType: value})}
-                  >
-                    <div className="flex items-center space-x-2 p-4 border rounded-lg">
-                      <RadioGroupItem value="delegation" id="delegation" />
-                      <Label htmlFor="delegation" className="flex-1">
-                        <div className="font-semibold">Delegation Registration - KSH 25,000</div>
-                        <div className="text-sm text-gray-600">Full 4-day access to all sessions, VIP networking, meals & delegate kit</div>
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2 p-4 border rounded-lg">
-                      <RadioGroupItem value="exhibition" id="exhibition" />
-                      <Label htmlFor="exhibition" className="flex-1">
-                        <div className="font-semibold">Exhibition Registration - KSH 15,000</div>
-                        <div className="text-sm text-gray-600">Dedicated exhibition space, setup support, branding opportunities</div>
-                      </Label>
-                    </div>
-                  </RadioGroup>
-                </div>
-
-                {/* Organization Details */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              
+              {/* Personal Information */}
+              <div className="mb-8">
+                <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                  <User className="h-5 w-5 mr-2 text-primary" />
+                  Personal Information
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <Label htmlFor="organizationName">Organization Name *</Label>
-                    <Input
-                      id="organizationName"
-                      value={formData.organizationName}
-                      onChange={(e) => setFormData({...formData, organizationName: e.target.value})}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="contactPerson">Contact Person *</Label>
+                    <Label htmlFor="contactPerson">Full Name *</Label>
                     <Input
                       id="contactPerson"
                       value={formData.contactPerson}
                       onChange={(e) => setFormData({...formData, contactPerson: e.target.value})}
+                      className="mt-1"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="position">Position/Title *</Label>
+                    <Input
+                      id="position"
+                      value={formData.position}
+                      onChange={(e) => setFormData({...formData, position: e.target.value})}
+                      className="mt-1"
                       required
                     />
                   </div>
@@ -172,6 +234,7 @@ const RegistrationPage = () => {
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      className="mt-1"
                       required
                     />
                   </div>
@@ -181,500 +244,1125 @@ const RegistrationPage = () => {
                       id="phone"
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      className="mt-1"
                       required
                     />
                   </div>
                 </div>
+              </div>
 
-                {/* Delegation Specific */}
-                {formData.registrationType === 'delegation' && (
-                  <div className="mb-6">
-                    <Label htmlFor="participantCount">Number of Participants</Label>
-                    <Select value={formData.participantCount} onValueChange={(value) => setFormData({...formData, participantCount: value})}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select number of participants" />
+              {/* Organization Information */}
+              <div className="mb-8">
+                <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                  <Building className="h-5 w-5 mr-2 text-primary" />
+                  Organization Information
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <Label htmlFor="organizationName">Institution/Organization *</Label>
+                    <Input
+                      id="organizationName"
+                      value={formData.organizationName}
+                      onChange={(e) => setFormData({...formData, organizationName: e.target.value})}
+                      className="mt-1"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="category">Category *</Label>
+                    <Select value={formData.category} onValueChange={(value) => setFormData({...formData, category: value})}>
+                      <SelectTrigger className="mt-1">
+                        <SelectValue placeholder="Select category" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="1-5">1-5 participants</SelectItem>
-                        <SelectItem value="6-10">6-10 participants</SelectItem>
-                        <SelectItem value="11-20">11-20 participants</SelectItem>
-                        <SelectItem value="21-50">21-50 participants</SelectItem>
-                        <SelectItem value="50+">50+ participants</SelectItem>
+                        <SelectItem value="university">University/Academic Institution</SelectItem>
+                        <SelectItem value="startup">Startup/SME</SelectItem>
+                        <SelectItem value="corporate">Corporate Organization</SelectItem>
+                        <SelectItem value="government">Government Agency</SelectItem>
+                        <SelectItem value="ngo">NGO/Non-Profit</SelectItem>
+                        <SelectItem value="student">Student</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
-                )}
+                </div>
+              </div>
 
-                {/* Exhibition Specific */}
-                {formData.registrationType === 'exhibition' && (
-                  <div className="mb-6">
-                    <Label htmlFor="boothRequirements">Booth Requirements</Label>
+              {/* Type-specific fields */}
+              {type === 'delegation' && (
+                <div className="mb-8">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                    <Users className="h-5 w-5 mr-2 text-primary" />
+                    Delegation Details
+                  </h3>
+                  <div>
+                    <Label htmlFor="participantCount">Number of Participants</Label>
+                    <Select value={formData.participantCount} onValueChange={(value) => setFormData({...formData, participantCount: value})}>
+                      <SelectTrigger className="mt-1">
+                        <SelectValue placeholder="Select number of participants" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="1">1 participant</SelectItem>
+                        <SelectItem value="2-5">2-5 participants</SelectItem>
+                        <SelectItem value="6-10">6-10 participants</SelectItem>
+                        <SelectItem value="11-20">11-20 participants</SelectItem>
+                        <SelectItem value="21+">21+ participants</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              )}
+
+              {type === 'exhibition' && (
+                <div className="mb-8">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                    <Target className="h-5 w-5 mr-2 text-primary" />
+                    Exhibition Details
+                  </h3>
+                  <div>
+                    <Label htmlFor="boothRequirements">Booth Requirements & Setup Details</Label>
                     <Textarea
                       id="boothRequirements"
                       value={formData.boothRequirements}
                       onChange={(e) => setFormData({...formData, boothRequirements: e.target.value})}
-                      placeholder="Describe your booth setup requirements..."
+                      className="mt-1"
+                      rows={4}
+                      placeholder="Describe your booth setup requirements, display needs, power requirements, etc."
                     />
                   </div>
-                )}
-
-                {/* Special Requirements */}
-                <div className="mb-6">
-                  <Label htmlFor="specialRequirements">Special Requirements (Optional)</Label>
-                  <Textarea
-                    id="specialRequirements"
-                    value={formData.specialRequirements}
-                    onChange={(e) => setFormData({...formData, specialRequirements: e.target.value})}
-                    placeholder="Any special requirements or dietary restrictions..."
-                  />
                 </div>
+              )}
 
+              {/* Payment Options */}
+              <div className="mb-8">
+                <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                  <Award className="h-5 w-5 mr-2 text-primary" />
+                  Payment Options
+                </h3>
+                <div className="bg-gradient-to-r from-green-50 to-blue-50 p-4 rounded-lg mb-4">
+                  <div className="text-2xl font-bold text-green-600">
+                    {type === 'delegation' ? 'KSH 25,000' : 'KSH 15,000'}
+                  </div>
+                  <div className="text-sm text-gray-600">Registration Fee</div>
+                </div>
+                <RadioGroup 
+                  value={formData.paymentOption} 
+                  onValueChange={(value) => setFormData({...formData, paymentOption: value})}
+                >
+                  <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
+                    <RadioGroupItem value="mpesa" id="mpesa" />
+                    <Label htmlFor="mpesa">M-Pesa Payment</Label>
+                  </div>
+                  <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
+                    <RadioGroupItem value="bank" id="bank" />
+                    <Label htmlFor="bank">Bank Transfer</Label>
+                  </div>
+                  <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-gray-50">
+                    <RadioGroupItem value="card" id="card" />
+                    <Label htmlFor="card">Credit/Debit Card</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
+              {/* Special Requirements */}
+              <div className="mb-8">
+                <Label htmlFor="specialRequirements">Special Requirements (Optional)</Label>
+                <Textarea
+                  id="specialRequirements"
+                  value={formData.specialRequirements}
+                  onChange={(e) => setFormData({...formData, specialRequirements: e.target.value})}
+                  className="mt-1"
+                  rows={3}
+                  placeholder="Any dietary restrictions, accessibility needs, or other special requirements..."
+                />
+              </div>
+
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
                 <Button 
                   type="submit" 
-                  className="w-full bg-secondary text-white py-3 text-lg"
-                  disabled={!formData.registrationType || !formData.organizationName || !formData.contactPerson || !formData.email || !formData.phone || registrationMutation.isPending}
+                  className="w-full bg-gradient-to-r from-primary to-secondary text-white py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                  disabled={!formData.contactPerson || !formData.organizationName || !formData.position || !formData.email || !formData.phone || !formData.category || registrationMutation.isPending}
                   data-testid="button-submit-registration"
                 >
-                  {registrationMutation.isPending ? 'Submitting...' : 'Complete Registration'}
+                  {registrationMutation.isPending ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      Processing Registration...
+                    </>
+                  ) : (
+                    <>
+                      Complete Registration
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </>
+                  )}
                 </Button>
-              </div>
-            </form>
-          </div>
-        </section>
-      </div>
-    );
+              </motion.div>
+            </div>
+          </motion.form>
+        </div>
+      </section>
+    </div>
+  );
+
+  if (currentStep === 'delegation') {
+    return <RegistrationForm type="delegation" />;
   }
 
+  if (currentStep === 'exhibition') {
+    return <RegistrationForm type="exhibition" />;
+  }
+
+  // Main Overview Page
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section - CEIL Style */}
-      <section className="relative py-20 bg-gradient-to-r from-primary to-secondary text-white overflow-hidden">
-        <div className="absolute inset-0 bg-black/10"></div>
+    <div className="min-h-screen bg-white relative overflow-hidden">
+      {/* Floating Background Elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <FloatingShape delay={0}>
+          <div className="w-64 h-64 bg-gradient-to-br from-blue-400/10 to-indigo-400/10 rounded-full blur-3xl -top-32 -left-32" />
+        </FloatingShape>
+        <FloatingShape delay={3}>
+          <div className="w-96 h-96 bg-gradient-to-br from-purple-400/10 to-pink-400/10 rounded-full blur-3xl -top-48 -right-48" />
+        </FloatingShape>
+        <FloatingShape delay={6}>
+          <div className="w-80 h-80 bg-gradient-to-br from-green-400/10 to-blue-400/10 rounded-full blur-3xl -bottom-40 -left-40" />
+        </FloatingShape>
+      </div>
+
+      {/* Hero Section */}
+      <motion.section 
+        className="relative py-24 bg-gradient-to-br from-primary via-blue-600 to-secondary text-white overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        {/* Hero Background Pattern */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+        </div>
+        
+        {/* Floating Elements */}
+        <FloatingShape delay={1}>
+          <div className="absolute top-20 right-20 w-16 h-16 border-2 border-white/30 rounded-full"></div>
+        </FloatingShape>
+        <FloatingShape delay={4}>
+          <div className="absolute bottom-20 left-20 w-12 h-12 bg-white/20 rounded-lg rotate-45"></div>
+        </FloatingShape>
+        
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="flex justify-center mb-6">
+          <div className="text-center max-w-5xl mx-auto">
+            <motion.div 
+              className="flex justify-center mb-8"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               <img
                 src="/src/assets/images/iec-logo.png"
                 alt="IEC Logo"
-                className="h-20"
+                className="h-24 drop-shadow-2xl"
               />
-            </div>
-            <div className="text-sm font-semibold uppercase tracking-wider mb-4 opacity-90">
-              Welcome! to BIEW 2025
-            </div>
-            <h1 className="text-5xl font-bold mb-6">
-              2nd Annual Baraton Innovation & Entrepreneurship Week
-            </h1>
-            <p className="text-xl mb-4 opacity-90">
+            </motion.div>
+            
+            <motion.div 
+              className="text-sm font-semibold uppercase tracking-wider mb-4 opacity-90"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              🎉 Welcome to BIEW 2025
+            </motion.div>
+            
+            <motion.h1 
+              className="text-6xl md:text-7xl font-bold mb-8 leading-tight"
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              2nd Annual Baraton Innovation & 
+              <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+                {" "}Entrepreneurship Week
+              </span>
+            </motion.h1>
+            
+            <motion.p 
+              className="text-2xl mb-6 opacity-90 max-w-4xl mx-auto"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
               "Blueprints for Tomorrow: Advancing Learning, Innovation & Enterprise through Design Thinking and Cognitive Mastery"
-            </p>
-            <div className="flex flex-col md:flex-row justify-center items-center gap-6 text-lg">
-              <div className="flex items-center">
-                <Calendar className="h-6 w-6 mr-2" />
+            </motion.p>
+            
+            <motion.div 
+              className="flex flex-col md:flex-row justify-center items-center gap-8 text-lg mb-12"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1 }}
+            >
+              <div className="flex items-center bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full">
+                <Calendar className="h-6 w-6 mr-3" />
                 September 29 - October 2, 2025
               </div>
-              <div className="flex items-center">
-                <MapPin className="h-6 w-6 mr-2" />
+              <div className="flex items-center bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full">
+                <MapPin className="h-6 w-6 mr-3" />
                 Innovation Arena, UEAB Campus
               </div>
-            </div>
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+            >
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-8 py-4 text-lg font-bold rounded-full shadow-2xl hover:shadow-yellow-400/25 transition-all duration-300 transform hover:scale-105"
+                onClick={() => document.getElementById('registration-section')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Register Now
+                <ArrowRight className="ml-2 h-6 w-6" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="bg-white/10 backdrop-blur-sm border-white/30 text-white px-8 py-4 text-lg font-semibold rounded-full hover:bg-white/20 transition-all duration-300"
+                onClick={() => document.getElementById('program-section')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                View Program
+              </Button>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Event Guests Section - CEIL Style */}
-      <section className="py-16 bg-gray-50">
+      {/* Animated Stats Section */}
+      <motion.section 
+        className="py-16 bg-gradient-to-r from-gray-50 to-blue-50 relative"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
-              Distinguished Speakers
-            </div>
-            <h2 className="text-4xl font-bold text-primary mb-6">Meet Our Event Guests</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center bg-white p-6 rounded-lg shadow-lg">
-              <div className="w-32 h-32 bg-gradient-to-br from-primary to-secondary rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Crown className="h-16 w-16 text-white" />
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+            <motion.div 
+              className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-white/20"
+              whileHover={{ scale: 1.05, y: -10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="h-8 w-8 text-white" />
               </div>
-              <div className="bg-gradient-to-r from-primary to-secondary text-white px-3 py-1 rounded-full text-sm font-semibold mb-2">
-                CHIEF GUEST
+              <div className="text-4xl font-bold text-gray-800 mb-2">
+                <AnimatedCounter end={1500} suffix="+" />
               </div>
-              <h4 className="font-bold text-primary text-lg">Prof. Tony Omwansa</h4>
-              <p className="text-sm text-gray-600 mb-2">CEO, KeNIA</p>
-              <p className="text-xs text-gray-500">Innovation Policy & Strategy</p>
-            </div>
-            <div className="text-center bg-white p-6 rounded-lg shadow-lg">
-              <div className="w-32 h-32 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Users className="h-16 w-16 text-primary" />
-              </div>
-              <h4 className="font-bold text-primary text-lg">Prof. Msafiri Jackson</h4>
-              <p className="text-sm text-gray-600 mb-2">Vice Chancellor, UEAB</p>
-              <p className="text-xs text-gray-500">Academic Leadership</p>
-            </div>
-            <div className="text-center bg-white p-6 rounded-lg shadow-lg">
-              <div className="w-32 h-32 bg-secondary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Building className="h-16 w-16 text-secondary" />
-              </div>
-              <h4 className="font-bold text-primary text-lg">Esther Masese</h4>
-              <p className="text-sm text-gray-600 mb-2">CFO, Safaricom</p>
-              <p className="text-xs text-gray-500">Corporate Finance & Strategy</p>
-            </div>
-            <div className="text-center bg-white p-6 rounded-lg shadow-lg">
-              <div className="w-32 h-32 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Award className="h-16 w-16 text-primary" />
-              </div>
-              <h4 className="font-bold text-primary text-lg">Dr. Benard Chitunga</h4>
-              <p className="text-sm text-gray-600 mb-2">Innovation Expert</p>
-              <p className="text-xs text-gray-500">Research & Development</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Registration Options - CEIL Style */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
-              Registration
-            </div>
-            <h2 className="text-4xl font-bold text-primary mb-6">Choose Your Registration Plan</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Join us for the most comprehensive innovation and entrepreneurship gathering in East Africa. Register now to secure your spot.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <div className="text-gray-600 font-semibold">Expected Attendees</div>
+            </motion.div>
             
-            {/* Delegation Registration */}
-            <div className="bg-white border-2 border-gray-200 rounded-lg overflow-hidden hover:border-primary transition-colors">
-              <div className="p-8 text-center">
-                <img 
-                  src="/src/assets/images/ueab-campus-flags.jpg" 
-                  alt="Delegation Registration" 
-                  className="w-full h-32 object-cover rounded-lg mb-6"
-                />
-                <h3 className="text-2xl font-bold text-primary mb-4">Delegation Registration</h3>
-                <div className="text-4xl font-bold text-secondary mb-6">KSH 25,000</div>
-                <div className="text-sm text-gray-500 mb-6">per delegation</div>
-                <ul className="text-left space-y-3 mb-8">
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span><strong>Full 4-day access</strong> to all sessions</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span>VIP networking sessions</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span>Exhibition booth visits</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span>Meals, refreshments & delegate kit</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span>Panel discussion participation</span>
-                  </li>
-                </ul>
-                <Button
-                  className="w-full bg-secondary text-white py-3 px-6 rounded-lg font-semibold hover:bg-secondary/90 transition-colors"
-                  onClick={handleRegistrationClick}
-                  data-testid="button-register-delegation"
-                >
-                  {isAuthenticated ? 'Register Now' : 'Login to Register'}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+            <motion.div 
+              className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-white/20"
+              whileHover={{ scale: 1.05, y: -10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <GraduationCap className="h-8 w-8 text-white" />
               </div>
+              <div className="text-4xl font-bold text-gray-800 mb-2">
+                <AnimatedCounter end={50} suffix="+" />
+              </div>
+              <div className="text-gray-600 font-semibold">Universities</div>
+            </motion.div>
+            
+            <motion.div 
+              className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-white/20"
+              whileHover={{ scale: 1.05, y: -10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Building className="h-8 w-8 text-white" />
+              </div>
+              <div className="text-4xl font-bold text-gray-800 mb-2">
+                <AnimatedCounter end={200} suffix="+" />
+              </div>
+              <div className="text-gray-600 font-semibold">Organizations</div>
+            </motion.div>
+            
+            <motion.div 
+              className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-white/20"
+              whileHover={{ scale: 1.05, y: -10 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Lightbulb className="h-8 w-8 text-white" />
+              </div>
+              <div className="text-4xl font-bold text-gray-800 mb-2">
+                <AnimatedCounter end={100} suffix="+" />
+              </div>
+              <div className="text-gray-600 font-semibold">Innovation Projects</div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Distinguished Speakers */}
+      <section className="py-20 bg-white relative">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
+              🎤 Distinguished Speakers
             </div>
+            <h2 className="text-5xl font-bold text-primary mb-6">Meet Our Event Guests</h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto"></div>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { name: "Prof. Tony Omwansa", title: "CEO, KeNIA", role: "CHIEF GUEST", icon: Crown, gradient: "from-yellow-400 to-orange-500" },
+              { name: "Prof. Msafiri Jackson", title: "Vice Chancellor, UEAB", role: "HOST", icon: Users, gradient: "from-blue-500 to-indigo-500" },
+              { name: "Esther Masese", title: "CFO, Safaricom", role: "KEYNOTE", icon: Building, gradient: "from-green-500 to-teal-500" },
+              { name: "Dr. Benard Chitunga", title: "Innovation Expert", role: "SPEAKER", icon: Award, gradient: "from-purple-500 to-pink-500" }
+            ].map((speaker, index) => (
+              <motion.div 
+                key={index}
+                className="text-center bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden group hover:shadow-2xl transition-all duration-500"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10, scale: 1.05 }}
+              >
+                <div className="p-8">
+                  <div className={`w-32 h-32 bg-gradient-to-br ${speaker.gradient} rounded-full mx-auto mb-6 flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-500`}>
+                    {speaker.role === "CHIEF GUEST" ? (
+                      <Crown className="h-16 w-16 text-white" />
+                    ) : (
+                      <speaker.icon className="h-16 w-16 text-white" />
+                    )}
+                  </div>
+                  
+                  <div className={`bg-gradient-to-r ${speaker.gradient} text-white px-4 py-2 rounded-full text-sm font-bold mb-4 inline-block`}>
+                    {speaker.role}
+                  </div>
+                  
+                  <h4 className="font-bold text-primary text-xl mb-2 group-hover:text-secondary transition-colors">
+                    {speaker.name}
+                  </h4>
+                  <p className="text-gray-600 font-medium mb-2">{speaker.title}</p>
+                  <div className="text-xs text-gray-500">Innovation & Leadership</div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Registration Section */}
+      <section id="registration-section" className="py-20 bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-grid-pattern"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
+              🎫 Registration
+            </div>
+            <h2 className="text-5xl font-bold text-primary mb-6">Choose Your Registration Plan</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              Join us for the most comprehensive innovation and entrepreneurship gathering in East Africa. 
+              Register now to secure your spot and be part of the transformation.
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            {/* Delegation Registration */}
+            <motion.div 
+              className="bg-white rounded-3xl overflow-hidden shadow-2xl border border-gray-100 group hover:shadow-3xl transition-all duration-500"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -10, scale: 1.02 }}
+            >
+              <div className="relative">
+                <div className="h-48 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center relative overflow-hidden">
+                  <div className="absolute inset-0 bg-pattern opacity-20"></div>
+                  <Users className="h-24 w-24 text-white/90 relative z-10" />
+                  <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-white text-sm font-semibold">
+                    PREMIUM
+                  </div>
+                </div>
+                <div className="p-8">
+                  <h3 className="text-3xl font-bold text-primary mb-4">Delegation Registration</h3>
+                  <div className="flex items-baseline mb-6">
+                    <span className="text-5xl font-bold text-green-600">KSH 25,000</span>
+                    <span className="text-gray-500 ml-2">per delegation</span>
+                  </div>
+                  
+                  <ul className="space-y-4 mb-8">
+                    {[
+                      "Full 4-day access to all sessions",
+                      "VIP networking opportunities", 
+                      "Premium delegate kit & materials",
+                      "Access to all exhibition booths",
+                      "Meals & refreshments included",
+                      "Panel discussion participation",
+                      "Certificate of participation",
+                      "Post-event resources access"
+                    ].map((feature, idx) => (
+                      <motion.li 
+                        key={idx}
+                        className="flex items-start group"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: idx * 0.1 }}
+                        viewport={{ once: true }}
+                      >
+                        <CheckCircle className="h-6 w-6 text-green-500 mr-3 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                        <span className="text-gray-700 group-hover:text-gray-900 transition-colors">
+                          {idx < 2 ? <strong>{feature}</strong> : feature}
+                        </span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                  
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button
+                      className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-4 text-lg font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+                      onClick={() => handleRegistrationClick('delegation')}
+                      data-testid="button-register-delegation"
+                    >
+                      <span className="group-hover:mr-1 transition-all">
+                        {isAuthenticated ? 'Register as Delegate' : 'Login to Register'}
+                      </span>
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Exhibition Registration */}
-            <div className="bg-white border-2 border-gray-200 rounded-lg overflow-hidden hover:border-primary transition-colors">
-              <div className="p-8 text-center">
-                <img 
-                  src="/src/assets/images/innovation-week-group.jpg" 
-                  alt="Exhibition Registration" 
-                  className="w-full h-32 object-cover rounded-lg mb-6"
-                />
-                <h3 className="text-2xl font-bold text-primary mb-4">Exhibition Registration</h3>
-                <div className="text-4xl font-bold text-secondary mb-6">KSH 15,000</div>
-                <div className="text-sm text-gray-500 mb-6">per booth</div>
-                <ul className="text-left space-y-3 mb-8">
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span><strong>Dedicated exhibition</strong> space</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span>Setup & teardown support</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span>Branding opportunities</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span>2 complimentary passes</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span>Digital marketing inclusion</span>
-                  </li>
-                </ul>
-                <Button
-                  className="w-full bg-secondary text-white py-3 px-6 rounded-lg font-semibold hover:bg-secondary/90 transition-colors"
-                  onClick={handleRegistrationClick}
-                  data-testid="button-register-exhibition"
-                >
-                  {isAuthenticated ? 'Register Now' : 'Login to Register'}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+            <motion.div 
+              className="bg-white rounded-3xl overflow-hidden shadow-2xl border border-gray-100 group hover:shadow-3xl transition-all duration-500"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -10, scale: 1.02 }}
+            >
+              <div className="relative">
+                <div className="h-48 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center relative overflow-hidden">
+                  <div className="absolute inset-0 bg-pattern opacity-20"></div>
+                  <Building className="h-24 w-24 text-white/90 relative z-10" />
+                  <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-white text-sm font-semibold">
+                    SHOWCASE
+                  </div>
+                </div>
+                <div className="p-8">
+                  <h3 className="text-3xl font-bold text-primary mb-4">Exhibition Registration</h3>
+                  <div className="flex items-baseline mb-6">
+                    <span className="text-5xl font-bold text-green-600">KSH 15,000</span>
+                    <span className="text-gray-500 ml-2">per booth</span>
+                  </div>
+                  
+                  <ul className="space-y-4 mb-8">
+                    {[
+                      "Dedicated exhibition space",
+                      "Professional setup support",
+                      "Prime location branding opportunities",
+                      "2 complimentary delegate passes",
+                      "Digital marketing inclusion",
+                      "Lead generation support",
+                      "Networking session access",
+                      "Post-event exhibition report"
+                    ].map((feature, idx) => (
+                      <motion.li 
+                        key={idx}
+                        className="flex items-start group"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: idx * 0.1 }}
+                        viewport={{ once: true }}
+                      >
+                        <CheckCircle className="h-6 w-6 text-green-500 mr-3 mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                        <span className="text-gray-700 group-hover:text-gray-900 transition-colors">
+                          {idx < 2 ? <strong>{feature}</strong> : feature}
+                        </span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                  
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button
+                      className="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white py-4 text-lg font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group"
+                      onClick={() => handleRegistrationClick('exhibition')}
+                      data-testid="button-register-exhibition"
+                    >
+                      <span className="group-hover:mr-1 transition-all">
+                        {isAuthenticated ? 'Register for Exhibition' : 'Login to Register'}
+                      </span>
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </motion.div>
+                </div>
               </div>
-            </div>
+            </motion.div>
           </div>
           
           {/* Login Prompt */}
           {!isAuthenticated && !isLoading && (
-            <div className="text-center mt-8 p-4 bg-blue-50 rounded-lg max-w-2xl mx-auto">
-              <User className="h-8 w-8 text-primary mx-auto mb-2" />
-              <p className="text-gray-700 mb-3">
-                Please log in to your account to complete the registration process
-              </p>
-              <Button
-                onClick={() => window.location.href = '/api/login'}
-                className="bg-primary text-white px-6 py-2"
-                data-testid="button-login"
-              >
-                Login to Continue
-              </Button>
-            </div>
+            <motion.div 
+              className="text-center mt-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-100 rounded-3xl p-8 max-w-2xl mx-auto">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <User className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-800 mb-3">Ready to Join BIEW 2025?</h3>
+                <p className="text-gray-600 mb-6">
+                  Please log in to your account to complete the registration process and secure your spot at East Africa's premier innovation event.
+                </p>
+                <Button
+                  onClick={() => window.location.href = '/api/login'}
+                  className="bg-gradient-to-r from-primary to-secondary text-white px-8 py-3 rounded-2xl font-semibold hover:shadow-lg transition-all duration-300"
+                  data-testid="button-login"
+                >
+                  <User className="mr-2 h-5 w-5" />
+                  Login to Continue
+                </Button>
+              </div>
+            </motion.div>
           )}
         </div>
       </section>
 
-      {/* Sponsorship Packages - CEIL Style */}
-      <section className="py-16 bg-gray-50">
+      {/* Downloadable Documents */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
             <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
-              Partnership Opportunities
+              📋 Event Resources
             </div>
-            <h2 className="text-4xl font-bold text-primary mb-6">Sponsorship Packages</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Partner with us to drive innovation and entrepreneurship across Africa. Choose the sponsorship package that aligns with your organization's goals.
+            <h2 className="text-5xl font-bold text-primary mb-6">Download Event Documents</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Access important event documents to better understand BIEW 2025 and prepare for your participation.
             </p>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <motion.div 
+              className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-100 group hover:shadow-xl transition-all duration-500"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5, scale: 1.02 }}
+            >
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mr-4 group-hover:rotate-12 transition-transform duration-500">
+                  <FileText className="h-8 w-8 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-primary mb-2">Concept Note</h3>
+                  <p className="text-gray-600">Detailed overview of BIEW 2025 objectives and themes</p>
+                </div>
+              </div>
+              <Button 
+                className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-3 rounded-xl group"
+                onClick={() => window.open('#', '_blank')}
+              >
+                <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+                Download Concept Note
+              </Button>
+            </motion.div>
             
-            {/* Title Sponsor */}
-            <div className="bg-gradient-to-br from-yellow-400 to-yellow-600 text-white rounded-lg p-8 relative overflow-hidden transform hover:scale-105 transition-transform">
-              <div className="absolute top-4 right-4">
-                <Crown className="h-8 w-8 text-yellow-200" />
-              </div>
-              <div className="mb-4">
-                <Shield className="h-12 w-12 mb-4" />
-                <h3 className="text-2xl font-bold mb-2">🏆 Title Sponsor</h3>
-                <div className="text-3xl font-bold mb-2">KSH 3,000,000</div>
-              </div>
-              <ul className="space-y-2 text-sm mb-6">
-                <li>• Exclusive naming rights</li>
-                <li>• Premium logo placement</li>
-                <li>• Keynote speaking slot</li>
-                <li>• 2 prime exhibition booths</li>
-                <li>• 10 complimentary delegate passes</li>
-                <li>• Recognition as sole Title Sponsor</li>
-              </ul>
-              <Button
-                className="w-full bg-white text-yellow-600 font-semibold hover:bg-yellow-50"
-                onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Title Sponsor Package - BIEW 2025', '_blank')}
-                data-testid="button-sponsor-title"
-              >
-                Become Title Sponsor
-              </Button>
-            </div>
-
-            {/* Platinum Sponsor */}
-            <div className="bg-gradient-to-br from-gray-300 to-gray-500 text-white rounded-lg p-8 relative overflow-hidden transform hover:scale-105 transition-transform">
-              <div className="absolute top-4 right-4">
-                <Medal className="h-8 w-8 text-gray-200" />
-              </div>
-              <div className="mb-4">
-                <Award className="h-12 w-12 mb-4" />
-                <h3 className="text-2xl font-bold mb-2">🥇 Platinum Sponsor</h3>
-                <div className="text-3xl font-bold mb-2">KSH 2,000,000</div>
-              </div>
-              <ul className="space-y-2 text-sm mb-6">
-                <li>• Prominent logo placement</li>
-                <li>• Panel speaking opportunity</li>
-                <li>• 1 prime exhibition booth</li>
-                <li>• 7 complimentary passes</li>
-                <li>• Opening/closing recognition</li>
-                <li>• Press release inclusion</li>
-              </ul>
-              <Button
-                className="w-full bg-white text-gray-600 font-semibold hover:bg-gray-50"
-                onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Platinum Sponsor Package - BIEW 2025', '_blank')}
-                data-testid="button-sponsor-platinum"
-              >
-                Become Platinum Sponsor
-              </Button>
-            </div>
-
-            {/* Gold Sponsor */}
-            <div className="bg-gradient-to-br from-yellow-500 to-yellow-700 text-white rounded-lg p-8 relative overflow-hidden transform hover:scale-105 transition-transform">
-              <div className="absolute top-4 right-4">
-                <Star className="h-8 w-8 text-yellow-200" />
-              </div>
-              <div className="mb-4">
-                <Target className="h-12 w-12 mb-4" />
-                <h3 className="text-2xl font-bold mb-2">🥈 Gold Sponsor</h3>
-                <div className="text-3xl font-bold mb-2">KSH 1,000,000</div>
-              </div>
-              <ul className="space-y-2 text-sm mb-6">
-                <li>• Logo on website & program</li>
-                <li>• 1 exhibition booth</li>
-                <li>• 5 complimentary passes</li>
-                <li>• Media mentions</li>
-                <li>• Closing ceremony mention</li>
-                <li>• Digital marketing inclusion</li>
-              </ul>
-              <Button
-                className="w-full bg-white text-yellow-600 font-semibold hover:bg-yellow-50"
-                onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Gold Sponsor Package - BIEW 2025', '_blank')}
-                data-testid="button-sponsor-gold"
-              >
-                Become Gold Sponsor
-              </Button>
-            </div>
-          </div>
-
-          {/* Silver & Bronze Sponsors */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 max-w-4xl mx-auto">
-            <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
-              <div className="flex items-center mb-4">
-                <Medal className="h-8 w-8 text-gray-400 mr-3" />
+            <motion.div 
+              className="bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl p-8 border border-green-100 group hover:shadow-xl transition-all duration-500"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5, scale: 1.02 }}
+            >
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl flex items-center justify-center mr-4 group-hover:rotate-12 transition-transform duration-500">
+                  <Award className="h-8 w-8 text-white" />
+                </div>
                 <div>
-                  <h3 className="text-xl font-bold text-primary">🥉 Silver Sponsor</h3>
-                  <div className="text-2xl font-bold text-secondary">KSH 750,000</div>
+                  <h3 className="text-2xl font-bold text-primary mb-2">Case for Support</h3>
+                  <p className="text-gray-600">Comprehensive sponsorship and partnership information</p>
                 </div>
               </div>
-              <ul className="space-y-2 text-sm text-gray-600 mb-4">
-                <li>• Logo on website and banners</li>
-                <li>• 1 standard exhibition booth</li>
-                <li>• 3 complimentary passes</li>
-                <li>• Program booklet recognition</li>
-                <li>• Side session mentions</li>
-              </ul>
-              <Button
-                className="w-full bg-secondary text-white"
-                onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Silver Sponsor Package - BIEW 2025', '_blank')}
-                data-testid="button-sponsor-silver"
+              <Button 
+                className="w-full bg-gradient-to-r from-green-500 to-teal-500 text-white py-3 rounded-xl group"
+                onClick={() => window.open('#', '_blank')}
               >
-                Become Silver Sponsor
+                <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+                Download Case for Support
               </Button>
-            </div>
-
-            <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
-              <div className="flex items-center mb-4">
-                <Sprout className="h-8 w-8 text-green-500 mr-3" />
-                <div>
-                  <h3 className="text-xl font-bold text-primary">🌱 Bronze Sponsor</h3>
-                  <div className="text-2xl font-bold text-secondary">KSH 500,000</div>
-                </div>
-              </div>
-              <ul className="space-y-2 text-sm text-gray-600 mb-4">
-                <li>• Logo on sponsors page</li>
-                <li>• 2 complimentary passes</li>
-                <li>• Closing remarks recognition</li>
-                <li>• Digital acknowledgment</li>
-                <li>• Certificate of partnership</li>
-              </ul>
-              <Button
-                className="w-full bg-primary text-white"
-                onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Bronze Sponsor Package - BIEW 2025', '_blank')}
-                data-testid="button-sponsor-bronze"
-              >
-                Become Bronze Sponsor
-              </Button>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Contact and Final CTA */}
-      <section className="py-16 bg-primary text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Transform Africa's Innovation Landscape?</h2>
-          <p className="text-white/90 text-lg max-w-2xl mx-auto mb-8">
-            Join us for the most comprehensive innovation and entrepreneurship gathering in East Africa
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Venue</h3>
-              <p className="text-white/80">
-                Innovation Arena<br />
-                UEAB Main Campus<br />
-                Kenya
-              </p>
+      {/* Draft Timetable */}
+      <section id="program-section" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
+              📅 Event Schedule
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Calendar className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Duration</h3>
-              <p className="text-white/80">
-                September 29 - October 2, 2025<br />
-                4 Days of Innovation<br />
-                Full Schedule Available
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Contact</h3>
-              <p className="text-white/80">
-                <Mail className="inline h-4 w-4 mr-1" />
-                info@ueab.ac.ke<br />
-                Director: Mr. Albert Wakoli<br />
-                Innovation & Entrepreneurship Centre
-              </p>
-            </div>
-          </div>
-          <div className="space-y-4">
-            <Button
-              size="lg"
-              className="bg-secondary text-white px-8 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors mr-4"
-              onClick={handleRegistrationClick}
-              data-testid="button-register-main"
+            <h2 className="text-5xl font-bold text-primary mb-6">Draft Timetable</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Here's a preview of what to expect during the 4-day innovation and entrepreneurship week.
+            </p>
+          </motion.div>
+          
+          <div className="max-w-6xl mx-auto">
+            <motion.div 
+              className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/20 overflow-hidden"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
             >
-              {isAuthenticated ? 'Register Now' : 'Login to Register'} <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <div className="text-sm text-white/70 mt-4">
-              <a 
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gradient-to-r from-primary to-secondary text-white">
+                    <tr>
+                      <th className="px-6 py-4 text-left font-bold">Day</th>
+                      <th className="px-6 py-4 text-left font-bold">Date</th>
+                      <th className="px-6 py-4 text-left font-bold">Time</th>
+                      <th className="px-6 py-4 text-left font-bold">Activity</th>
+                      <th className="px-6 py-4 text-left font-bold">Venue</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    {[
+                      { day: "Day 1", date: "Sep 29", time: "08:00 - 09:00", activity: "Registration & Welcome Coffee", venue: "Innovation Arena Lobby" },
+                      { day: "", date: "", time: "09:00 - 10:30", activity: "Opening Ceremony & Keynote", venue: "Main Auditorium" },
+                      { day: "", date: "", time: "11:00 - 12:30", activity: "Panel: Innovation Ecosystem in East Africa", venue: "Main Auditorium" },
+                      { day: "", date: "", time: "14:00 - 17:00", activity: "Innovation Exhibition Opens", venue: "Exhibition Hall" },
+                      
+                      { day: "Day 2", date: "Sep 30", time: "09:00 - 10:30", activity: "Design Thinking Masterclass", venue: "Workshop Room A" },
+                      { day: "", date: "", time: "11:00 - 12:30", activity: "Startup Pitch Competition", venue: "Main Auditorium" },
+                      { day: "", date: "", time: "14:00 - 15:30", activity: "Corporate Innovation Sessions", venue: "Conference Room B" },
+                      { day: "", date: "", time: "16:00 - 17:30", activity: "Networking & Mentorship Hub", venue: "Innovation Arena" },
+                      
+                      { day: "Day 3", date: "Oct 1", time: "09:00 - 10:30", activity: "Cognitive Mastery Workshop", venue: "Workshop Room A" },
+                      { day: "", date: "", time: "11:00 - 12:30", activity: "Tech Innovation Showcase", venue: "Exhibition Hall" },
+                      { day: "", date: "", time: "14:00 - 15:30", activity: "Entrepreneurship Bootcamp", venue: "Conference Room B" },
+                      { day: "", date: "", time: "16:00 - 17:00", activity: "Innovation Awards Ceremony", venue: "Main Auditorium" },
+                      
+                      { day: "Day 4", date: "Oct 2", time: "09:00 - 10:30", activity: "Future of Innovation Panel", venue: "Main Auditorium" },
+                      { day: "", date: "", time: "11:00 - 12:30", activity: "Partnership & Collaboration Forum", venue: "Conference Room A" },
+                      { day: "", date: "", time: "14:00 - 15:00", activity: "Closing Ceremony", venue: "Main Auditorium" },
+                      { day: "", date: "", time: "15:00 - 16:00", activity: "Farewell Lunch", venue: "Innovation Arena" }
+                    ].map((item, index) => (
+                      <motion.tr 
+                        key={index}
+                        className="hover:bg-blue-50 transition-colors duration-200"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.05 }}
+                        viewport={{ once: true }}
+                      >
+                        <td className="px-6 py-4 font-semibold text-primary">{item.day}</td>
+                        <td className="px-6 py-4 text-gray-600">{item.date}</td>
+                        <td className="px-6 py-4 text-gray-600 font-mono text-sm">{item.time}</td>
+                        <td className="px-6 py-4 font-medium text-gray-800">{item.activity}</td>
+                        <td className="px-6 py-4 text-gray-600">{item.venue}</td>
+                      </motion.tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </motion.div>
+            
+            <motion.div 
+              className="text-center mt-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <p className="text-gray-600 text-sm mb-4">
+                * This is a draft timetable and is subject to changes. Final program will be shared with registered participants.
+              </p>
+              <Button 
+                variant="outline" 
+                className="border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 rounded-xl"
+                onClick={() => window.open('#', '_blank')}
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Download Full Program
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sponsorship Packages */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        {/* Background Elements */}
+        <FloatingShape delay={2}>
+          <div className="absolute top-20 right-20 w-32 h-32 border-2 border-primary/20 rounded-full"></div>
+        </FloatingShape>
+        <FloatingShape delay={5}>
+          <div className="absolute bottom-20 left-20 w-24 h-24 bg-secondary/10 rounded-lg rotate-45"></div>
+        </FloatingShape>
+        
+        <div className="container mx-auto px-4 relative">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="text-sm font-semibold text-secondary uppercase tracking-wider mb-4">
+              🤝 Partnership Opportunities
+            </div>
+            <h2 className="text-5xl font-bold text-primary mb-6">Sponsorship Packages</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Partner with us to drive innovation and entrepreneurship across Africa. Choose the sponsorship package that aligns with your organization's goals and make a lasting impact.
+            </p>
+          </motion.div>
+          
+          {/* Title Sponsor - Featured */}
+          <motion.div 
+            className="max-w-4xl mx-auto mb-12"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 p-1 rounded-3xl">
+              <div className="bg-white rounded-3xl p-8 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-300/20 to-orange-300/20 rounded-full -mr-16 -mt-16"></div>
+                <div className="relative">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center">
+                      <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mr-4">
+                        <Crown className="h-8 w-8 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-3xl font-bold text-gray-800">🏆 Title Sponsor</h3>
+                        <p className="text-gray-600">Exclusive naming rights and premium visibility</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-4xl font-bold text-green-600">KSH 3,000,000</div>
+                      <div className="text-sm text-gray-500">Exclusive Package</div>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <ul className="space-y-3">
+                      {[
+                        "Exclusive naming rights to the event",
+                        "Premium logo placement on all materials",
+                        "Keynote speaking opportunity",
+                        "2 prime exhibition booths"
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start">
+                          <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                          <span className="text-gray-700 font-medium">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <ul className="space-y-3">
+                      {[
+                        "10 complimentary delegate passes",
+                        "VIP hospitality and networking",
+                        "Extensive media coverage",
+                        "Recognition as sole Title Sponsor"
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start">
+                          <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                          <span className="text-gray-700 font-medium">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <Button
+                    className="w-full bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-bold py-4 text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                    onClick={() => window.open('mailto:info@ueab.ac.ke?subject=Title Sponsor Package - BIEW 2025', '_blank')}
+                  >
+                    Become Title Sponsor
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+          
+          {/* Other Sponsorship Packages */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { 
+                title: "🥇 Platinum Sponsor", 
+                price: "KSH 2,000,000", 
+                gradient: "from-gray-300 to-gray-500",
+                bgGradient: "from-gray-50 to-gray-100",
+                icon: Medal,
+                features: [
+                  "Prominent logo placement",
+                  "Panel speaking opportunity", 
+                  "1 prime exhibition booth",
+                  "7 complimentary passes",
+                  "Opening/closing recognition",
+                  "Press release inclusion"
+                ]
+              },
+              { 
+                title: "🥈 Gold Sponsor", 
+                price: "KSH 1,000,000", 
+                gradient: "from-yellow-400 to-yellow-600",
+                bgGradient: "from-yellow-50 to-orange-50",
+                icon: Star,
+                features: [
+                  "Logo on website & program",
+                  "1 exhibition booth",
+                  "5 complimentary passes", 
+                  "Media mentions",
+                  "Closing ceremony mention",
+                  "Digital marketing inclusion"
+                ]
+              },
+              { 
+                title: "🥉 Silver Sponsor", 
+                price: "KSH 750,000", 
+                gradient: "from-blue-400 to-indigo-500",
+                bgGradient: "from-blue-50 to-indigo-50",
+                icon: Award,
+                features: [
+                  "Logo on website and banners",
+                  "1 standard exhibition booth",
+                  "3 complimentary passes",
+                  "Program booklet recognition", 
+                  "Side session mentions"
+                ]
+              },
+              { 
+                title: "🌱 Bronze Sponsor", 
+                price: "KSH 500,000", 
+                gradient: "from-green-400 to-teal-500",
+                bgGradient: "from-green-50 to-teal-50",
+                icon: Sprout,
+                features: [
+                  "Logo on sponsors page",
+                  "2 complimentary passes",
+                  "Closing remarks recognition",
+                  "Digital acknowledgment",
+                  "Certificate of partnership"
+                ]
+              }
+            ].map((pkg, index) => (
+              <motion.div 
+                key={index}
+                className={`bg-gradient-to-br ${pkg.bgGradient} rounded-2xl p-6 shadow-lg border border-white/50 group hover:shadow-2xl transition-all duration-500`}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10, scale: 1.05 }}
+              >
+                <div className="text-center mb-6">
+                  <div className={`w-16 h-16 bg-gradient-to-br ${pkg.gradient} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:rotate-12 transition-transform duration-500`}>
+                    <pkg.icon className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">{pkg.title}</h3>
+                  <div className="text-2xl font-bold text-green-600 mb-1">{pkg.price}</div>
+                </div>
+                
+                <ul className="space-y-2 mb-6">
+                  {pkg.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start text-sm">
+                      <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                
+                <Button
+                  className={`w-full bg-gradient-to-r ${pkg.gradient} text-white font-semibold py-2 rounded-xl hover:shadow-lg transition-all duration-300`}
+                  onClick={() => window.open(`mailto:info@ueab.ac.ke?subject=${pkg.title.split(' ')[1]} Sponsor Package - BIEW 2025`, '_blank')}
+                >
+                  Get Package
+                </Button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <motion.section 
+        className="py-20 bg-gradient-to-r from-primary via-blue-600 to-secondary text-white relative overflow-hidden"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+      >
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-grid-pattern"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 text-center relative">
+          <motion.h2 
+            className="text-5xl font-bold mb-6"
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            Ready to Transform Africa's Innovation Landscape?
+          </motion.h2>
+          <motion.p 
+            className="text-xl mb-12 max-w-3xl mx-auto opacity-90"
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            Join us for the most comprehensive innovation and entrepreneurship gathering in East Africa. 
+            Be part of the change, connect with visionaries, and shape the future of innovation.
+          </motion.p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto">
+            {[
+              { icon: MapPin, title: "Venue", desc: "Innovation Arena\nUEAB Main Campus\nKeny" },
+              { icon: Calendar, title: "Duration", desc: "September 29 - October 2, 2025\n4 Days of Innovation\nFull Schedule Available" },
+              { icon: Phone, title: "Contact", desc: "info@ueab.ac.ke\nDirector: Mr. Albert Wakoli\nInnovation & Entrepreneurship Centre" }
+            ].map((item, idx) => (
+              <motion.div 
+                key={idx}
+                className="text-center"
+                initial={{ y: 30, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.3 + idx * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <item.icon className="h-10 w-10 text-white" />
+                </div>
+                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                <p className="text-white/80 text-sm whitespace-pre-line">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+          
+          <motion.div 
+            className="space-y-6"
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-10 py-4 text-lg font-bold rounded-2xl shadow-2xl hover:shadow-yellow-400/25 transition-all duration-300"
+                  onClick={() => document.getElementById('registration-section')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  Register Now
+                  <ArrowRight className="ml-2 h-6 w-6" />
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="bg-white/10 backdrop-blur-sm border-white/30 text-white px-10 py-4 text-lg font-semibold rounded-2xl hover:bg-white/20 transition-all duration-300"
+                  onClick={() => window.open('mailto:info@ueab.ac.ke?subject=BIEW 2025 Inquiry', '_blank')}
+                >
+                  Contact Us
+                </Button>
+              </motion.div>
+            </div>
+            
+            <div className="text-sm text-white/70 mt-8">
+              <motion.a 
                 href="https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-secondary hover:text-secondary/80 underline"
+                className="inline-flex items-center text-yellow-300 hover:text-yellow-200 underline transition-colors duration-300"
                 data-testid="link-innovation-submission"
+                whileHover={{ scale: 1.05 }}
               >
+                <Lightbulb className="h-4 w-4 mr-2" />
                 Have an innovation to showcase? Submit your innovation here
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-400">
-            © 2025 BIEW all rights reserved. Designed by Innovation & Entrepreneurship Centre, UEAB.
-          </p>
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <motion.img
+              src="/src/assets/images/iec-logo.png"
+              alt="IEC Logo"
+              className="h-16 mx-auto mb-6 opacity-80"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 0.8, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            />
+            <p className="text-gray-400 text-lg mb-4">
+              © 2025 BIEW - All rights reserved
+            </p>
+            <p className="text-gray-500 text-sm">
+              Designed by Innovation & Entrepreneurship Centre, University of Eastern Africa, Baraton
+            </p>
+          </div>
         </div>
       </footer>
     </div>
