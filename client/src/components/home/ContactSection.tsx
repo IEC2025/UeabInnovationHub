@@ -221,9 +221,9 @@ const ContactSection = () => {
                   <div>
                     <h4 className="font-bold text-lg mb-1">Email Us</h4>
                     <p className="text-neutral-600">
-                      iec@ueab.ac.ke
-                      <br />
                       info@ueab.ac.ke
+                      <br />
+                      innovation@ueab.ac.ke
                     </p>
                   </div>
                 </div>
@@ -246,6 +246,17 @@ const ContactSection = () => {
               </div>
 
               <div className="mt-8">
+                <h4 className="font-bold text-lg mb-4">Submit Innovation</h4>
+                <div className="mb-6">
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-colors duration-300 inline-flex items-center"
+                  >
+                    Submit Your Innovation Idea
+                  </a>
+                </div>
                 <h4 className="font-bold text-lg mb-4">Connect With Us</h4>
                 <div className="flex space-x-4">
                   <a

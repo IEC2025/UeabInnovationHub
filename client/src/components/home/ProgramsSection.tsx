@@ -134,13 +134,24 @@ const ProgramsSection = () => {
         </div>
 
         <div className="text-center mt-12">
-          <Button
-            variant="default"
-            className="bg-primary hover:bg-primary/90"
-            asChild
-          >
-            <Link href="/programs">View All Programs</Link>
-          </Button>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Button
+              variant="default"
+              className="bg-primary hover:bg-primary/90"
+              asChild
+            >
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">
+                Submit Your Innovation
+              </a>
+            </Button>
+            <Button
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary hover:text-white"
+              asChild
+            >
+              <Link href="/programs">View All Programs</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </section>

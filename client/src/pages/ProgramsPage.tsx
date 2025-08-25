@@ -771,8 +771,17 @@ const ProgramsPage = () => {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button asChild className="bg-white text-primary hover:bg-white/90">
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">
+                Submit Innovation
+              </a>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="border-white text-white hover:bg-white/20"
+            >
               <Link href="/contact">
-                <a>Apply Now</a>
+                <a>Apply for Programs</a>
               </Link>
             </Button>
             <Button
