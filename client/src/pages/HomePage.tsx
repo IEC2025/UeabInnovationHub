@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowRight, Target, Users, Lightbulb, Award, Calendar, MapPin, Mail, Phone } from "lucide-react";
+import FullPageAnimatedSlider from "@/components/sliders/FullPageAnimatedSlider";
 import PartnersSection from "@/components/home/PartnersSection";
 import TeamSection from "@/components/home/TeamSection";
 import ContactSection from "@/components/home/ContactSection";
@@ -11,59 +12,139 @@ const HomePage = () => {
     document.title = "Innovation & Entrepreneurship Centre | UEAB";
   }, []);
 
+  // Slider data with Innovation Week as the main featured slide
+  const heroSlides = [
+    {
+      id: 1,
+      title: "Innovation Week 2025",
+      subtitle: "August 28 - September 3, 2025",
+      description: "Join us for the biggest innovation event of the year! Experience cutting-edge showcases, workshops, networking sessions, and discover groundbreaking solutions from UEAB's brightest minds. Don't miss this opportunity to connect with industry leaders and fellow innovators.",
+      image: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      mobileImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      tabletImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      desktopImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      cta: {
+        text: "Register for Innovation Week",
+        link: "https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header",
+        variant: "primary" as const
+      },
+      overlay: {
+        opacity: 0.4,
+        color: "rgba(0,0,0,0.3)",
+        gradient: "linear-gradient(135deg, rgba(30,64,175,0.7) 0%, rgba(59,130,246,0.5) 50%, rgba(147,51,234,0.8) 100%)"
+      },
+      animation: {
+        type: "parallax" as const,
+        direction: "up" as const,
+        duration: 1500
+      },
+      contentPosition: "center" as const,
+      textAlign: "center" as const,
+      specialContent: "countdown" as const
+    },
+    {
+      id: 2,
+      title: "Innovation & Entrepreneurship Centre",
+      subtitle: "Catalysing Innovation and Entrepreneurial Ecosystems",
+      description: "Transform your ideas into impactful ventures through comprehensive startup incubation, mentorship, and cutting-edge resources at the University of Eastern Africa, Baraton. Join a community of innovators and entrepreneurs.",
+      image: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      mobileImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      tabletImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      desktopImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      cta: {
+        text: "Submit Your Innovation",
+        link: "https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header",
+        variant: "secondary" as const
+      },
+      overlay: {
+        opacity: 0.4,
+        color: "rgba(0,0,0,0.2)",
+        gradient: "linear-gradient(135deg, rgba(30,64,175,0.6) 0%, rgba(59,130,246,0.4) 50%, rgba(30,64,175,0.7) 100%)"
+      },
+      animation: {
+        type: "slide" as const,
+        direction: "right" as const,
+        duration: 1200
+      },
+      contentPosition: "left" as const,
+      textAlign: "left" as const
+    },
+    {
+      id: 3,
+      title: "Student Innovation Hub",
+      subtitle: "Where Ideas Come to Life",
+      description: "Access state-of-the-art facilities, receive guidance from industry experts, and join a vibrant community of innovators to turn your entrepreneurial dreams into reality. Build the future of Africa through innovation.",
+      image: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      mobileImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      tabletImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      desktopImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      cta: {
+        text: "Explore Programs",
+        link: "/programs",
+        variant: "outline" as const
+      },
+      overlay: {
+        opacity: 0.4,
+        color: "rgba(0,0,0,0.2)",
+        gradient: "linear-gradient(135deg, rgba(147,51,234,0.6) 0%, rgba(59,130,246,0.4) 50%, rgba(30,64,175,0.7) 100%)"
+      },
+      animation: {
+        type: "zoom" as const,
+        direction: "up" as const,
+        duration: 1400
+      },
+      contentPosition: "center" as const,
+      textAlign: "center" as const
+    },
+    {
+      id: 4,
+      title: "Partnership & Collaboration",
+      subtitle: "Building Bridges to Success",
+      description: "Connect with industry partners, investors, and global networks to accelerate innovation and create sustainable business solutions for Africa and beyond. Be part of a transformative ecosystem.",
+      image: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      mobileImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      tabletImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      desktopImage: "@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png",
+      cta: {
+        text: "Join Our Network",
+        link: "/about",
+        variant: "primary" as const
+      },
+      overlay: {
+        opacity: 0.4,
+        color: "rgba(0,0,0,0.2)",
+        gradient: "linear-gradient(135deg, rgba(16,185,129,0.6) 0%, rgba(59,130,246,0.4) 50%, rgba(30,64,175,0.7) 100%)"
+      },
+      animation: {
+        type: "fade" as const,
+        duration: 1100
+      },
+      contentPosition: "right" as const,
+      textAlign: "right" as const
+    }
+  ];
+
   return (
     <div className="relative">
-      {/* Hero Section - CEIL Style */}
-      <div className="relative bg-gradient-to-br from-primary via-primary/90 to-secondary min-h-[600px] flex items-center">
-        <div className="absolute inset-0">
-          <img 
-            src="@assets/generated_images/Kenyan_innovation_lab_students_6fdd30ee.png" 
-            alt="Innovation Centre Background" 
-            className="w-full h-full object-cover opacity-20"
-          />
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <div className="text-sm font-semibold uppercase tracking-wider mb-4 opacity-90">
-              Welcome to IEC
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Innovation & Entrepreneurship Centre
-            </h1>
-            <h2 className="text-2xl md:text-3xl font-light mb-8">
-              Catalysing Innovation and Entrepreneurial Ecosystems
-            </h2>
-            <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-8">
-              <div className="text-xl font-semibold">📍 UEAB Main Campus, Kenya</div>
-              <div className="text-xl font-semibold">📅 Innovation Week: Aug 28 - Sept 3, 2025</div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-secondary text-white px-8 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors inline-flex items-center justify-center"
-              >
-                Submit Innovation <ArrowRight className="ml-2 h-5 w-5" />
-              </a>
-              <Link
-                href="/programs"
-                className="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
-              >
-                Explore Programs <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" className="w-full h-auto">
-            <path fill="white" d="M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,120 L0,120 Z"></path>
-          </svg>
-        </div>
+      {/* Hero Slider with Innovation Week Featured */}
+      <div className="relative w-full h-screen overflow-hidden">
+        <FullPageAnimatedSlider 
+          slides={heroSlides}
+          autoPlay={true}
+          autoPlayInterval={8000}
+          showControls={true}
+          showPagination={true}
+          enableKeyboard={true}
+          enableTouch={true}
+          enableParallax={true}
+          className="fullpage-hero-slider"
+        />
       </div>
 
-      {/* Research Development Section */}
-      <section className="py-16 bg-white">
+      {/* Content sections positioned below the full-page slider */}
+      <div className="relative z-20 bg-white">
+        {/* Research Development Section */}
+        <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div className="text-center">
@@ -347,12 +428,12 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Team and Partners Sections */}
-      <TeamSection />
-      <PartnersSection />
-      
-      {/* Contact Section */}
-      <section className="py-16 bg-primary text-white">
+        {/* Team and Partners Sections */}
+        <TeamSection />
+        <PartnersSection />
+        
+        {/* Contact Section */}
+        <section className="py-16 bg-primary text-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
@@ -398,7 +479,8 @@ const HomePage = () => {
             </a>
           </div>
         </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 };
