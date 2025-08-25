@@ -32,8 +32,8 @@ export default function Dashboard() {
     return <div className="flex justify-center items-center h-64">Loading...</div>;
   }
 
-  const unreadNotifications = notifications?.filter((n: any) => !n.isRead) || [];
-  const upcomingSessions = mentorshipSessions?.filter((s: any) => 
+  const unreadNotifications = (notifications as any[])?.filter((n: any) => !n.isRead) || [];
+  const upcomingSessions = (mentorshipSessions as any[])?.filter((s: any) => 
     new Date(s.sessionDate) > new Date() && s.status === 'scheduled'
   ) || [];
 
@@ -43,7 +43,7 @@ export default function Dashboard() {
         {/* Welcome Section */}
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold">Welcome back, {user?.firstName || 'User'}!</h1>
+            <h1 className="text-3xl font-bold">Welcome back, {(user as any)?.firstName || 'User'}!</h1>
             <p className="text-gray-600">Here's what's happening in your innovation journey</p>
           </div>
           <Button onClick={() => window.location.href = '/api/logout'}>
@@ -59,7 +59,7 @@ export default function Dashboard() {
               <Calendar className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{upcomingEvents?.length || 0}</div>
+              <div className="text-2xl font-bold">{(upcomingEvents as any[])?.length || 0}</div>
               <p className="text-xs text-muted-foreground">
                 events this month
               </p>
@@ -98,7 +98,7 @@ export default function Dashboard() {
               <TrendingUp className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{eventRegistrations?.length || 0}</div>
+              <div className="text-2xl font-bold">{(eventRegistrations as any[])?.length || 0}</div>
               <p className="text-xs text-muted-foreground">
                 registered events
               </p>
@@ -117,7 +117,7 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {upcomingEvents?.slice(0, 3).map((event: any) => (
+                {(upcomingEvents as any[])?.slice(0, 3).map((event: any) => (
                   <div key={event.id} className="flex justify-between items-center">
                     <div>
                       <p className="font-medium">{event.title}</p>
@@ -147,7 +147,7 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {notifications?.slice(0, 3).map((notification: any) => (
+                {(notifications as any[])?.slice(0, 3).map((notification: any) => (
                   <div key={notification.id} className="flex justify-between items-start">
                     <div className="flex-1">
                       <p className="font-medium">{notification.title}</p>

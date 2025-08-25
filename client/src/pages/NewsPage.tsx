@@ -362,10 +362,8 @@ const NewsPage = () => {
                 </p>
               </CardContent>
               <CardFooter className="pt-0">
-                <Link href="/news/safaricom-partnership">
-                  <a className="text-secondary font-semibold text-sm hover:text-secondary/80 transition-colors inline-flex items-center">
+                <Link href="/news/safaricom-partnership" className="text-secondary font-semibold text-sm hover:text-secondary/80 transition-colors inline-flex items-center">
                     Read More <ArrowRight className="ml-1 h-4 w-4" />
-                  </a>
                 </Link>
               </CardFooter>
             </Card>
