@@ -4,3 +4,11 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# Language server and cache directories (prevents deployment language detection issues)
+.mix/
+.hex/
+.clj-kondo/
+.lsp/
+.cache/
+docs/
