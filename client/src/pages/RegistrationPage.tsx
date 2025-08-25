@@ -14,7 +14,7 @@ const RegistrationPage = () => {
               <img
                 src="/src/assets/images/iec-logo.png"
                 alt="IEC Logo"
-                className="h-20 filter brightness-0 invert"
+                className="h-20"
               />
             </div>
             <div className="text-sm font-semibold uppercase tracking-wider mb-4 opacity-90">
