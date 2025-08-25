@@ -30,19 +30,19 @@ const Header = () => {
   return (
     <header className="bg-white shadow-md">
       {/* Innovation Week Countdown Section */}
-      <div className="py-8 bg-secondary text-white">
+      <div className="py-4 bg-secondary text-white">
         <div className="container mx-auto px-4">
           <div className="text-center">
-            <div className="flex items-center justify-center mb-4">
-              <Clock className="h-6 w-6 mr-2" />
-              <h2 className="text-2xl font-bold">2nd Baraton Innovation & Entrepreneurship Week 2025</h2>
+            <div className="flex items-center justify-center mb-2">
+              <Clock className="h-5 w-5 mr-2" />
+              <h2 className="text-lg font-bold">2nd Baraton Innovation & Entrepreneurship Week 2025</h2>
             </div>
-            <p className="text-white/90 mb-6">September 28 - October 3, 2025 | Don't miss the biggest innovation event of the year!</p>
+            <p className="text-white/90 text-sm mb-3">September 28 - October 3, 2025 | Don't miss the biggest innovation event!</p>
             <div className="flex justify-center">
               <CountdownTimer
                 targetDate="2025-09-28T09:00:00"
                 showLabels={true}
-                size="large"
+                size="medium"
                 className="text-white"
               />
             </div>
