@@ -17,9 +17,9 @@ const HomePage = () => {
   const heroSlides = [
     {
       id: 1,
-      title: "Innovation Week 2025",
+      title: "2nd Baraton Innovation and Entrepreneurship Week 2025",
       subtitle: "Featured Event",
-      description: "Join us for the biggest innovation event of the year! August 28 - September 3, 2025. Experience cutting-edge showcases, workshops, networking sessions, and discover groundbreaking solutions from UEAB's brightest minds.",
+      description: "Join us for the biggest innovation event of the year! September 28 - October 3, 2025. Experience cutting-edge showcases, workshops, networking sessions, and discover groundbreaking solutions from UEAB's brightest minds.",
       image: "/src/assets/images/innovation-week-banner.jpg",
       buttonText: "Register Now",
       buttonLink: "https://docs.google.com/forms/d/e/1FAIpQLSftPLH7DM49ihEbADqU3kIVhuSJ94IMPO-ptZVhFO9E5awfLQ/viewform?usp=header",
@@ -87,12 +87,12 @@ const HomePage = () => {
           <div className="text-center">
             <div className="flex items-center justify-center mb-4">
               <Clock className="h-6 w-6 mr-2" />
-              <h2 className="text-2xl font-bold">Innovation Week 2025 Countdown</h2>
+              <h2 className="text-2xl font-bold">2nd Baraton Innovation & Entrepreneurship Week 2025</h2>
             </div>
-            <p className="text-white/90 mb-6">Don't miss the biggest innovation event of the year!</p>
+            <p className="text-white/90 mb-6">September 28 - October 3, 2025 | Don't miss the biggest innovation event of the year!</p>
             <div className="flex justify-center">
               <CountdownTimer
-                targetDate="2025-08-28T09:00:00"
+                targetDate="2025-09-28T09:00:00"
                 showLabels={true}
                 size="large"
                 className="text-white"
@@ -105,7 +105,7 @@ const HomePage = () => {
                 rel="noopener noreferrer"
                 className="bg-white text-secondary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center"
               >
-                Register for Innovation Week <ArrowRight className="ml-2 h-5 w-5" />
+                Register for 2nd Baraton Innovation Week <ArrowRight className="ml-2 h-5 w-5" />
               </a>
             </div>
           </div>
