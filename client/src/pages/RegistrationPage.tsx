@@ -699,19 +699,22 @@ image: "/src/assets/images/dr-benard-chitunga.jpeg"
             ].map((speaker, index) => (
               <motion.div 
                 key={index}
-                className="text-center group"
+                className="flip-card h-80 cursor-pointer"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
+                data-testid={`speaker-card-${index}`}
               >
-                <div className="relative mb-6">
-                  <div className="w-48 h-48 mx-auto overflow-hidden shadow-lg group-hover:shadow-xl transition-all duration-300 rounded-none" style={{ borderRadius: '0px' }}>
+                <div className="flip-card-inner h-full relative">
+                  {/* Front of card - Photo only */}
+                  <div className="flip-card-front absolute inset-0">
                     <img 
                       src={speaker.image} 
                       alt={speaker.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-none"
+                      className="w-full h-full object-cover object-center rounded-none"
                       style={{ borderRadius: '0px' }}
+                      data-testid={`speaker-image-${index}`}
                       onError={(e) => {
                         console.log('Image failed to load:', speaker.image);
                         e.currentTarget.src = '/src/assets/images/BTV08418.JPG';
@@ -719,24 +722,23 @@ image: "/src/assets/images/dr-benard-chitunga.jpeg"
                     />
                   </div>
                   
-                  {/* Name overlay effect on hover */}
-                  <div className="absolute inset-0 w-48 h-48 mx-auto bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center rounded-none" style={{ borderRadius: '0px' }}>
-                    <div className="text-white text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-100 scale-95">
-                      <div className={`bg-gradient-to-r ${speaker.gradient} text-white px-3 py-1 rounded-full text-xs font-bold mb-2 inline-block`}>
-                        {speaker.role}
-                      </div>
-                      <h4 className="font-bold text-lg">
-                        {speaker.name}
-                      </h4>
+                  {/* Back of card - Name and info */}
+                  <div className={`flip-card-back absolute inset-0 bg-gradient-to-br ${speaker.gradient} text-white flex flex-col justify-center items-center p-6 text-center`}>
+                    <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm font-bold mb-4 animate-fade-in-up">
+                      {speaker.role}
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3 animate-fade-in-up animation-delay-200" data-testid={`speaker-name-${index}`}>
+                      {speaker.name}
+                    </h3>
+                    <p className="text-lg font-medium opacity-90 animate-fade-in-up animation-delay-400" data-testid={`speaker-title-${index}`}>
+                      {speaker.title}
+                    </p>
+                    
+                    {/* Icon */}
+                    <div className="mt-4 animate-fade-in-up animation-delay-600">
+                      <speaker.icon className="h-12 w-12 text-white/80" />
                     </div>
                   </div>
-                </div>
-                
-                <div className="mt-4">
-                  <h4 className="font-bold text-gray-800 text-xl mb-1">
-                    {speaker.name}
-                  </h4>
-                  <p className="text-gray-600 font-medium">{speaker.title}</p>
                 </div>
               </motion.div>
             ))}
