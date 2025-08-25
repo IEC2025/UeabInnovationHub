@@ -33,7 +33,7 @@ const Header = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-center md:text-left">
-              <span className="font-semibold text-lg">🚀 Innovation Week 2025 | Aug 28 - Sept 3</span>
+              <span className="font-semibold text-lg">🚀 2nd Baraton Innovation & Entrepreneurship Week 2025 | Sept 28 - Oct 3</span>
               <span className="ml-2 text-sm opacity-90">Join us for workshops, showcases & networking!</span>
             </div>
             <div className="flex flex-col sm:flex-row gap-2">
@@ -49,7 +49,7 @@ const Header = () => {
                 href="#events"
                 className="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary/90 transition-colors text-center text-sm"
               >
-                Register for Week
+                Register for Event
               </a>
             </div>
           </div>
