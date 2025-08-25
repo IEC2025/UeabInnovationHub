@@ -152,28 +152,6 @@ const MasterSlider: React.FC<MasterSliderProps> = ({
                     </p>
                   </div>
                   
-                  {/* CTA Button */}
-                  {slide.buttonText && (
-                    <div className="overflow-hidden">
-                      <div
-                        className={`transform transition-all duration-1000 delay-800 ${
-                          index === currentSlide 
-                            ? 'translate-y-0 opacity-100 scale-100' 
-                            : 'translate-y-8 opacity-0 scale-95'
-                        }`}
-                      >
-                        <Button 
-                          size="lg" 
-                          className="bg-secondary hover:bg-secondary/90 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                          asChild
-                        >
-                          <a href={slide.buttonLink || '#'}>
-                            {slide.buttonText}
-                          </a>
-                        </Button>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
