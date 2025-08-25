@@ -85,31 +85,116 @@ const AdminPage = () => {
   };
 
   const exportToCSV = () => {
-    const headers = ['ID', 'Type', 'Name', 'Organization', 'Position', 'Email', 'Phone', 'Category', 'Participants', 'Special Requirements', 'Payment Preference', 'Additional Info', 'Status', 'Submitted'];
-    const csvData = filteredRegistrations.map((reg: Registration) => [
-      reg.id,
-      reg.registrationType,
-      reg.fullName,
-      reg.organizationName,
-      reg.position,
-      reg.email,
-      reg.phone,
-      reg.category,
-      reg.participantCount || '',
-      reg.specialRequirements || '',
-      reg.paymentPreference || '',
-      reg.additionalInfo || '',
-      reg.status,
-      new Date(reg.submittedAt).toLocaleDateString()
-    ]);
+    const currentDate = new Date().toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+    const currentTime = new Date().toLocaleTimeString('en-US', { 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    });
     
-    const csvContent = [headers, ...csvData].map(row => row.map(field => `"${field}"`).join(',')).join('\n');
-    const blob = new Blob([csvContent], { type: 'text/csv' });
+    // Professional letterhead and header
+    const letterhead = [
+      '='.repeat(120),
+      '                    UNIVERSITY OF EASTERN AFRICA, BARATON (UEAB)',
+      '                       INNOVATION & ENTREPRENEURSHIP CENTRE',
+      '                     BARATON INNOVATION & ENTREPRENEURSHIP WEEK 2025',
+      '                               OFFICIAL REGISTRATION REPORT',
+      '',
+      `Report Generated: ${currentDate} at ${currentTime}`,
+      `Total Registrations: ${filteredRegistrations.length}`,
+      `Delegations: ${filteredRegistrations.filter(r => r.registrationType === 'delegation').length} | Exhibitions: ${filteredRegistrations.filter(r => r.registrationType === 'exhibition').length}`,
+      '='.repeat(120),
+      '',
+      'REGISTRATION DETAILS:',
+      '-'.repeat(120),
+      ''
+    ];
+    
+    // Professional column headers
+    const headers = [
+      'Registration ID',
+      'Registration Type', 
+      'Full Name',
+      'Organization/Company',
+      'Position/Title',
+      'Email Address',
+      'Phone Number',
+      'Category',
+      'Participant Count',
+      'Booth Requirements',
+      'Special Requirements',
+      'Payment Preference',
+      'Additional Information',
+      'Current Status',
+      'Registration Date',
+      'Registration Time'
+    ];
+    
+    // Format registration data professionally
+    const csvData = filteredRegistrations.map((reg: Registration) => {
+      const submissionDate = new Date(reg.submittedAt);
+      return [
+        `REG-${String(reg.id).padStart(4, '0')}`,
+        reg.registrationType.toUpperCase(),
+        reg.fullName,
+        reg.organizationName,
+        reg.position,
+        reg.email,
+        reg.phone,
+        reg.category.toUpperCase(),
+        reg.participantCount || 'N/A',
+        reg.boothRequirements || 'N/A',
+        reg.specialRequirements || 'None',
+        reg.paymentPreference || 'Not Specified',
+        reg.additionalInfo || 'None',
+        reg.status.toUpperCase(),
+        submissionDate.toLocaleDateString('en-US'),
+        submissionDate.toLocaleTimeString('en-US')
+      ];
+    });
+    
+    // Professional footer
+    const footer = [
+      '',
+      '-'.repeat(120),
+      'SUMMARY STATISTICS:',
+      `• Total Registrations: ${filteredRegistrations.length}`,
+      `• Delegation Registrations: ${filteredRegistrations.filter(r => r.registrationType === 'delegation').length} (Fee: KSH 25,000 each)`,
+      `• Exhibition Registrations: ${filteredRegistrations.filter(r => r.registrationType === 'exhibition').length} (Fee: KSH 15,000 each)`,
+      `• Pending Reviews: ${filteredRegistrations.filter(r => r.status === 'pending').length}`,
+      `• Contacted: ${filteredRegistrations.filter(r => r.status === 'contacted').length}`,
+      `• Completed: ${filteredRegistrations.filter(r => r.status === 'completed').length}`,
+      '',
+      'CONTACT INFORMATION:',
+      '• Email: iec@ueab.ac.ke',
+      '• Phone: +254 [Contact Number]',
+      '• Website: https://ueab.ac.ke',
+      '',
+      '='.repeat(120),
+      '                    © 2025 University of Eastern Africa, Baraton',
+      '                        Innovation & Entrepreneurship Centre',
+      '                              CONFIDENTIAL DOCUMENT',
+      '='.repeat(120)
+    ];
+    
+    // Combine all parts
+    const fullContent = [
+      ...letterhead,
+      headers.map(header => `"${header}"`).join(','),
+      ...csvData.map(row => row.map(field => `"${String(field).replace(/"/g, '""')}"`).join(',')),
+      ...footer
+    ].join('\n');
+    
+    const blob = new Blob([fullContent], { type: 'text/csv;charset=utf-8' });
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `biew-registrations-${new Date().toISOString().split('T')[0]}.csv`;
+    link.download = `BIEW2025_Official_Registration_Report_${new Date().toISOString().split('T')[0]}.csv`;
     link.click();
+    window.URL.revokeObjectURL(url);
   };
 
   const delegationCount = registrations.filter((r: Registration) => r.registrationType === 'delegation').length;

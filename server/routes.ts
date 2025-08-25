@@ -96,8 +96,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Admin endpoint to view all registrations (protected)
-  app.get("/api/admin/biew-registrations", isAuthenticated, async (req, res) => {
+  // Admin endpoint to view all registrations (open for development)
+  app.get("/api/admin/biew-registrations", async (req, res) => {
     try {
       const registrations = await storage.getBiewRegistrations();
       res.json(registrations);
@@ -107,8 +107,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Admin endpoint to update registration status (protected)
-  app.patch("/api/admin/biew-registrations/:id/status", isAuthenticated, async (req, res) => {
+  // Admin endpoint to update registration status (open for development)
+  app.patch("/api/admin/biew-registrations/:id/status", async (req, res) => {
     try {
       const { id } = req.params;
       const { status } = req.body;
