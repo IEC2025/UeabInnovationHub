@@ -24,7 +24,7 @@ const SuccessStoriesSection = () => {
           <div className="bg-white rounded-lg shadow-md overflow-hidden card-3d">
             <div className="h-48">
               <img
-                src="https://images.unsplash.com/photo-1586227740560-8cf2732c1531?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80"
+                src="@assets/generated_images/African_mentorship_workspace_8e7b7b85.png"
                 alt="Innovation Success"
                 className="w-full h-full object-cover"
               />
@@ -58,7 +58,7 @@ const SuccessStoriesSection = () => {
           <div className="bg-white rounded-lg shadow-md overflow-hidden card-3d">
             <div className="h-48">
               <img
-                src="https://images.unsplash.com/photo-1586227740628-bc085f9b7a59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80"
+                src="@assets/generated_images/African_research_innovation_space_87e257ae.png"
                 alt="Research Innovation"
                 className="w-full h-full object-cover"
               />
@@ -92,7 +92,7 @@ const SuccessStoriesSection = () => {
           <div className="bg-white rounded-lg shadow-md overflow-hidden card-3d">
             <div className="h-48">
               <img
-                src="https://images.unsplash.com/photo-1586227740560-8cf2732c1531?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80"
+                src="@assets/generated_images/African_student_leadership_space_6547dcc9.png"
                 alt="Student Leadership"
                 className="w-full h-full object-cover"
               />

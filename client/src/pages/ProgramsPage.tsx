@@ -210,7 +210,7 @@ const ProgramsPage = () => {
               <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-md p-6">
                 <div className="md:w-1/2">
                   <img
-                    src="https://images.unsplash.com/photo-1586227740560-8cf2732c1531?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+                    src="@assets/generated_images/African_startup_incubation_space_197eb2cf.png"
                     alt="Startup Incubation"
                     className="rounded-lg shadow-md"
                   />
@@ -273,7 +273,7 @@ const ProgramsPage = () => {
               <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-md p-6">
                 <div className="md:w-1/2">
                   <img
-                    src="https://images.unsplash.com/photo-1586227740628-bc085f9b7a59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+                    src="@assets/generated_images/African_mentorship_meeting_room_6c5d68f0.png"
                     alt="Mentorship Program"
                     className="rounded-lg shadow-md"
                   />
@@ -343,7 +343,7 @@ const ProgramsPage = () => {
               <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-md p-6">
                 <div className="md:w-1/2">
                   <img
-                    src="https://images.unsplash.com/photo-1586227740560-8cf2732c1531?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+                    src="@assets/generated_images/African_innovation_workspace_scene_e35a2446.png"
                     alt="Workshops & Training"
                     className="rounded-lg shadow-md"
                   />
@@ -421,7 +421,7 @@ const ProgramsPage = () => {
               <div className="flex flex-col md:flex-row gap-8 items-center bg-white rounded-lg shadow-md p-6">
                 <div className="md:w-1/2">
                   <img
-                    src="https://images.unsplash.com/photo-1586227740628-bc085f9b7a59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
+                    src="@assets/generated_images/African_startup_incubation_space_197eb2cf.png"
                     alt="Funding Opportunities"
                     className="rounded-lg shadow-md"
                   />

@@ -17,7 +17,7 @@ const StatsSection = () => {
           </div>
           <div className="animate-in slide-in-from-bottom-4 duration-700 delay-500">
             <div className="text-4xl font-bold mb-2">$1M+</div>
-            <div className="text-lg">Funding Pool Target</div>
+            <div className="text-lg">Future Funding Target</div>
           </div>
         </div>
       </div>
