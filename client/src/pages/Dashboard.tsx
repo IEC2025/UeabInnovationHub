@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-// Dashboard simplified - no authentication required
+import { useAuth } from "@/hooks/useAuth";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -7,14 +7,35 @@ import { Calendar, Bell, BookOpen, Users, TrendingUp } from "lucide-react";
 import { Link } from "wouter";
 
 export default function Dashboard() {
-  // Simplified dashboard - mock data for demonstration
-  const upcomingEvents = [];
-  const notifications = [];
-  const mentorshipSessions = [];
-  const eventRegistrations = [];
+  const { user, isLoading } = useAuth();
 
-  const unreadNotifications = [];
-  const upcomingSessions = [];
+  const { data: upcomingEvents = [] } = useQuery({
+    queryKey: ["/api/events/upcoming"],
+  });
+
+  const { data: notifications = [] } = useQuery({
+    queryKey: ["/api/my/notifications"],
+    enabled: !!user,
+  });
+
+  const { data: mentorshipSessions = [] } = useQuery({
+    queryKey: ["/api/my/mentorship-sessions"],
+    enabled: !!user,
+  });
+
+  const { data: eventRegistrations = [] } = useQuery({
+    queryKey: ["/api/my/event-registrations"],
+    enabled: !!user,
+  });
+
+  if (isLoading) {
+    return <div className="flex justify-center items-center h-64">Loading...</div>;
+  }
+
+  const unreadNotifications = (notifications as any[])?.filter((n: any) => !n.isRead) || [];
+  const upcomingSessions = (mentorshipSessions as any[])?.filter((s: any) => 
+    new Date(s.sessionDate) > new Date() && s.status === 'scheduled'
+  ) || [];
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -22,9 +43,12 @@ export default function Dashboard() {
         {/* Welcome Section */}
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold">Welcome to IEC Dashboard!</h1>
-            <p className="text-gray-600">Innovation & Entrepreneurship Centre</p>
+            <h1 className="text-3xl font-bold">Welcome back, {(user as any)?.firstName || 'User'}!</h1>
+            <p className="text-gray-600">Here's what's happening in your innovation journey</p>
           </div>
+          <Button onClick={() => window.location.href = '/api/logout'}>
+            Sign Out
+          </Button>
         </div>
 
         {/* Quick Stats */}
@@ -35,7 +59,7 @@ export default function Dashboard() {
               <Calendar className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{upcomingEvents.length || 0}</div>
+              <div className="text-2xl font-bold">{(upcomingEvents as any[])?.length || 0}</div>
               <p className="text-xs text-muted-foreground">
                 events this month
               </p>
