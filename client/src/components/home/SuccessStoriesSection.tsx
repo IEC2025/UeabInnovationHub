@@ -19,42 +19,106 @@ const SuccessStoriesSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-1 max-w-3xl mx-auto gap-8">
-          {/* Success Story - M-Kiondo ChapChap */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row card-3d">
-            <div className="md:w-2/5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* Success Story 1 - Ms. Ester Ateka */}
+          <div className="bg-white rounded-lg shadow-md overflow-hidden card-3d">
+            <div className="h-48">
               <img
-                src="/src/assets/images/Screenshot 2025-03-23 110152.png"
-                alt="M-Kiondo ChapChap Innovation"
+                src="https://images.unsplash.com/photo-1586227740560-8cf2732c1531?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80"
+                alt="Innovation Success"
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="md:w-3/5 p-6">
+            <div className="p-6">
               <span className="bg-secondary text-white text-xs py-1 px-2 rounded-full">
-                E-Commerce Innovation
+                Leadership Excellence
               </span>
               <h3 className="text-xl font-bold text-primary mt-3 mb-2">
-                M-Kiondo ChapChap
+                Mentorship Impact
               </h3>
               <p className="text-neutral-600 mb-4">
-                A groundbreaking innovation developed by UEAB students that has been shortlisted for the 
-                Presidential Innovation Award. M-Kiondo ChapChap is a digital marketplace designed to 
-                connect buyers and sellers, streamlining the shopping experience for essential goods.
+                Through dedicated mentorship and leadership programs, fostering the next generation 
+                of innovators and entrepreneurs at UEAB.
               </p>
               <div className="flex items-center mb-4">
                 <div className="w-10 h-10 rounded-full mr-3 bg-primary flex items-center justify-center text-white font-bold">
-                  IEC
+                  EA
                 </div>
                 <div>
-                  <div className="font-semibold text-primary">UEAB Innovation Team</div>
+                  <div className="font-semibold text-primary">Ms. Ester Ateka</div>
                   <div className="text-sm text-neutral-500">
-                    Innovation & Entrepreneurship Centre
+                    Student Mentorship Coordinator
                   </div>
                 </div>
               </div>
-              <a href="https://ueab.ac.ke/ueab-students-groundbreaking-m-kiondo-chapchap-innovation-shortlisted-for-presidential-innovation-award/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-secondary font-semibold hover:text-secondary/80 transition-colors">
-                Read Their Story <ArrowRight className="ml-1 h-4 w-4" />
-              </a>
+            </div>
+          </div>
+
+          {/* Success Story 2 - Dr. Otengo Antoney */}
+          <div className="bg-white rounded-lg shadow-md overflow-hidden card-3d">
+            <div className="h-48">
+              <img
+                src="https://images.unsplash.com/photo-1586227740628-bc085f9b7a59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80"
+                alt="Research Innovation"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="p-6">
+              <span className="bg-secondary text-white text-xs py-1 px-2 rounded-full">
+                Research Innovation
+              </span>
+              <h3 className="text-xl font-bold text-primary mt-3 mb-2">
+                Academic Excellence
+              </h3>
+              <p className="text-neutral-600 mb-4">
+                Leading groundbreaking research initiatives and contributing to innovation 
+                frameworks within the academic environment.
+              </p>
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 rounded-full mr-3 bg-primary flex items-center justify-center text-white font-bold">
+                  OA
+                </div>
+                <div>
+                  <div className="font-semibold text-primary">Dr. Otengo Antoney</div>
+                  <div className="text-sm text-neutral-500">
+                    Research & Innovation Lead
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Success Story 3 - Mr. Meule Wafula */}
+          <div className="bg-white rounded-lg shadow-md overflow-hidden card-3d">
+            <div className="h-48">
+              <img
+                src="https://images.unsplash.com/photo-1586227740560-8cf2732c1531?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=300&q=80"
+                alt="Student Leadership"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="p-6">
+              <span className="bg-secondary text-white text-xs py-1 px-2 rounded-full">
+                Student Leadership
+              </span>
+              <h3 className="text-xl font-bold text-primary mt-3 mb-2">
+                Innovation Advocacy
+              </h3>
+              <p className="text-neutral-600 mb-4">
+                Championing student innovation initiatives and building bridges between 
+                student entrepreneurs and industry partners.
+              </p>
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 rounded-full mr-3 bg-primary flex items-center justify-center text-white font-bold">
+                  MW
+                </div>
+                <div>
+                  <div className="font-semibold text-primary">Mr. Meule Wafula</div>
+                  <div className="text-sm text-neutral-500">
+                    Student Coordinator
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
