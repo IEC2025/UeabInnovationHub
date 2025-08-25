@@ -11,4 +11,21 @@ vite.config.ts.*
 .clj-kondo/
 .lsp/
 .cache/
+
+# Large files and documentation
 docs/
+*.pdf
+*.log
+
+# Temporary and cache files
+tmp/
+temp/
+*.tmp
+coverage/
+.nyc_output
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
