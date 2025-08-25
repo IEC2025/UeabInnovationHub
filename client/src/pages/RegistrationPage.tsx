@@ -122,17 +122,11 @@ const RegistrationPage = () => {
   // Registration Form Component
   const RegistrationForm = ({ type }: { type: 'delegation' | 'exhibition' }) => (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
-      {/* Floating Background Elements */}
+      {/* Static Background Elements - No Animation */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <FloatingShape delay={0}>
-          <div className="w-32 h-32 bg-gradient-to-br from-blue-400/20 to-indigo-400/20 rounded-full blur-xl top-20 left-10" />
-        </FloatingShape>
-        <FloatingShape delay={2}>
-          <div className="w-40 h-40 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-xl top-40 right-20" />
-        </FloatingShape>
-        <FloatingShape delay={4}>
-          <div className="w-24 h-24 bg-gradient-to-br from-green-400/20 to-blue-400/20 rounded-full blur-xl bottom-40 left-20" />
-        </FloatingShape>
+        <div className="w-32 h-32 bg-gradient-to-br from-blue-400/10 to-indigo-400/10 rounded-full blur-xl absolute top-20 left-10" />
+        <div className="w-40 h-40 bg-gradient-to-br from-purple-400/10 to-pink-400/10 rounded-full blur-xl absolute top-40 right-20" />
+        <div className="w-24 h-24 bg-gradient-to-br from-green-400/10 to-blue-400/10 rounded-full blur-xl absolute bottom-40 left-20" />
       </div>
 
       {/* Header */}
@@ -396,17 +390,11 @@ const RegistrationPage = () => {
   // Main Overview Page
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
-      {/* Floating Background Elements */}
+      {/* Static Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <FloatingShape delay={0}>
-          <div className="w-64 h-64 bg-gradient-to-br from-blue-400/10 to-indigo-400/10 rounded-full blur-3xl -top-32 -left-32" />
-        </FloatingShape>
-        <FloatingShape delay={3}>
-          <div className="w-96 h-96 bg-gradient-to-br from-purple-400/10 to-pink-400/10 rounded-full blur-3xl -top-48 -right-48" />
-        </FloatingShape>
-        <FloatingShape delay={6}>
-          <div className="w-80 h-80 bg-gradient-to-br from-green-400/10 to-blue-400/10 rounded-full blur-3xl -bottom-40 -left-40" />
-        </FloatingShape>
+        <div className="w-64 h-64 bg-gradient-to-br from-blue-400/5 to-indigo-400/5 rounded-full blur-3xl absolute -top-32 -left-32" />
+        <div className="w-96 h-96 bg-gradient-to-br from-purple-400/5 to-pink-400/5 rounded-full blur-3xl absolute -top-48 -right-48" />
+        <div className="w-80 h-80 bg-gradient-to-br from-green-400/5 to-blue-400/5 rounded-full blur-3xl absolute -bottom-40 -left-40" />
       </div>
 
       {/* Hero Section */}
